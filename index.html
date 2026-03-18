@@ -643,10 +643,10 @@
         <div class="spotlight">
             <div class="spotlight-grid" style="grid-template-columns: 3fr 2fr; gap:40px;">
                 <div class="spotlight-visual" style="border-radius:12px; overflow:hidden; position:relative;">
-                    <div class="slideshow" id="t2iSlideshow">
-                        <img src="demo t-i2i B1.jpg" alt="Text-to-Image Demo" class="slide active" loading="lazy" style="width:100%; display:block; border-radius:12px;">
-                        <img src="demo t-i2i B2.jpg" alt="Image-to-Image Demo" class="slide" loading="lazy" style="width:100%; display:none; border-radius:12px;">
-                        <img src="demo t-i2i B3 - manager.jpg" alt="Provider Manager" class="slide" loading="lazy" style="width:100%; display:none; border-radius:12px;">
+                    <div class="slideshow" id="t2iSlideshow" style="position:relative; width:100%; aspect-ratio:1440/800; background:var(--bg-main);">
+                        <img src="demo t-i2i B1.jpg" alt="Text-to-Image Demo" class="slide active" loading="lazy" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; border-radius:12px;">
+                        <img src="demo t-i2i B2.jpg" alt="Image-to-Image Demo" class="slide" loading="lazy" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; display:none; border-radius:12px;">
+                        <img src="demo t-i2i B3 - manager.jpg" alt="Provider Manager" class="slide" loading="lazy" style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:contain; display:none; border-radius:12px;">
                     </div>
                     <div style="position:absolute; bottom:12px; left:50%; transform:translateX(-50%); display:flex; gap:8px;">
                         <span class="slide-dot active" onclick="goSlide(0)" style="width:8px; height:8px; border-radius:50%; background:rgba(77,182,172,0.9); cursor:pointer; transition:all 0.3s;"></span>
