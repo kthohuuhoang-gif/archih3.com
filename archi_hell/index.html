@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- VIEWPORT (2026-05-17): viewport-fit=cover cho iPhone notch, user-scalable=no chống zoom khi double-tap -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>The Archi-Hell</title>
+
+    <!-- GAME_META_START
+    name: The Archi-Hell
+    icon: icon.png
+    description: Sinh tồn chốn văn phòng kiến trúc. Chạy ngay đi!
+    author: AH3 AI Studio
+    version: 1.1.0
+    GAME_META_END -->
+
+    <!-- PWA (2026-05-17): Add to Home Screen support cho iPad / mobile -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Archi-Hell">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="theme-color" content="#111111">
+
+    <!-- FONT-FIX (2026-05-17): Self-hosted Be Vietnam Pro để tránh lazy-load race condition trên Phaser Canvas.
+         JetBrains Mono vẫn dùng CDN vì chỉ 1 weight (clock counter, ít critical hơn). -->
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+            /* FONT-FIX (2026-05-17): Đặt 'Be Vietnam Pro' đầu chain để ép browser download ngay khi parse HTML.
+               Tránh lazy-load delay làm Phaser Canvas render với Segoe UI fallback (frozen pixel). */
+            font-family: 'VT323', 'Be Vietnam Pro', 'JetBrains Mono', 'Segoe UI', Tahoma, sans-serif;
+            /* iOS: Disable bounce scroll + double-tap zoom + text selection trên game canvas */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            overscroll-behavior: none;
+        }
+
+        #game-container {
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            border: 2px solid #333;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* ========== PORTRAIT ROTATE WARNING (mobile/tablet) ========== */
+        /* Hiện khi width < height + screen nhỏ hơn 1024px (mobile/tablet portrait) */
+        #rotate-warning {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #111;
+            z-index: 9999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+
+        #rotate-warning .icon {
+            font-size: 80px;
+            animation: rotate-hint 2s ease-in-out infinite;
+            margin-bottom: 24px;
+        }
+
+        #rotate-warning h2 {
+            font-size: 26px;
+            color: #f1c40f;
+            margin: 0 0 12px 0;
+            font-weight: 700;
+        }
+
+        #rotate-warning p {
+            font-size: 16px;
+            color: #bdc3c7;
+            line-height: 1.5;
+            max-width: 320px;
+            margin: 4px 0;
+        }
+
+        @keyframes rotate-hint {
+            0%, 100% { transform: rotate(-90deg); }
+            50% { transform: rotate(0deg); }
+        }
+
+        /* Trigger: portrait orientation AND viewport <= tablet size */
+        @media (orientation: portrait) and (max-width: 1024px) {
+            #rotate-warning {
+                display: flex;
+            }
+            #game-container {
+                display: none;
+            }
+        }
+
+        /* ========== VIRTUAL D-PAD (Audition Mode trên touch device) ========== */
+        /* POSITION (2026-05-17 v1.1.1): Dời sang góc TRÁI dưới để tránh đè lên nút "UỐNG CAFÊ"
+           và HUD cà phê/stress ở góc phải. Khu vực trái dưới trống, không có UI gì quan trọng. */
+        #vdpad {
+            display: none;
+            position: fixed;
+            left: 24px;
+            bottom: 24px;
+            z-index: 1000;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+        }
+
+        #vdpad.active {
+            display: block;
+        }
+
+        .vdpad-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 4px 0;
+        }
+
+        .vdpad-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            background: rgba(30, 30, 30, 0.65);
+            border: 2px solid rgba(241, 196, 15, 0.5);
+            color: rgba(241, 196, 15, 0.9);
+            font-size: 32px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            transition: transform 0.05s, background 0.1s, opacity 0.2s;
+            touch-action: none;
+        }
+
+        /* OPACITY (2026-05-17 v1.1.1): D-Pad trong suốt hơn mặc định để không che game.
+           Hover/active sáng lên cho feedback rõ. */
+        #vdpad {
+            opacity: 0.7;
+        }
+
+        #vdpad:hover, #vdpad:active {
+            opacity: 1;
+        }
+
+        .vdpad-btn.space {
+            width: 140px;
+        }
+
+        .vdpad-btn:active,
+        .vdpad-btn.pressed {
+            background: rgba(46, 204, 113, 0.9);
+            border-color: #fff;
+            color: #fff;
+            transform: scale(0.92);
+        }
+
+        .vdpad-btn.placeholder {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Portrait rotate warning (mobile/tablet) -->
+    <div id="rotate-warning">
+        <div class="icon">📱</div>
+        <h2>Xoay ngang máy</h2>
+        <p>Game được thiết kế cho màn hình ngang.</p>
+        <p>Vui lòng xoay iPad/điện thoại để chơi.</p>
+        <p style="margin-top:20px; font-size:14px; color:#7f8c8d;">Rotate your device to landscape mode</p>
+    </div>
+
+    <div id="game-container"></div>
+
+    <!-- Virtual D-Pad — chỉ hiện khi vào Audition Mode trên touch device (game.js điều khiển) -->
+    <div id="vdpad">
+        <div class="vdpad-row">
+            <div class="vdpad-btn placeholder"></div>
+            <div class="vdpad-btn" data-key="UP">▲</div>
+            <div class="vdpad-btn placeholder"></div>
+        </div>
+        <div class="vdpad-row">
+            <div class="vdpad-btn" data-key="LEFT">◀</div>
+            <div class="vdpad-btn" data-key="DOWN">▼</div>
+            <div class="vdpad-btn" data-key="RIGHT">▶</div>
+        </div>
+        <div class="vdpad-row">
+            <div class="vdpad-btn space" data-key="SPACE">SPACE</div>
+        </div>
+    </div>
+
+    <script src="assets.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>
