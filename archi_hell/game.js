@@ -619,6 +619,18 @@ class AH3_Scene1 extends Phaser.Scene {
         this.auditionBound = false;
         this.arrowLevel = 3; // BUG-008: Reset on scene restart
 
+        // BUG-FIX (2026-05-18): Scene instance properties persist across scene.restart()/start('Scene1').
+        // startAuditionMode() dùng `if (!this.auditionTitle)` để gate creation → sau retry, refs vẫn trỏ
+        // GameObject cũ (đã destroy) nên if=false → bỏ qua tạo mới → audition UI biến mất, người chơi
+        // bấm Phase 1 xong vào Phase 2 thấy maxWindow trống không có ô mũi tên để bấm.
+        // Fix: null các refs ở create() để startAuditionMode lần sau tạo lại sạch.
+        this.auditionTitle = null;
+        this.auditionDesc = null;
+        this.arrowContainer = null;
+        this.btnBigRender = null;
+        this.txtBigRender = null;
+        this.toolTween = null;
+
         this.startToolMode();
 
         // Timers
