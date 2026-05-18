@@ -1918,7 +1918,14 @@ class AH3_SceneRageMode extends Phaser.Scene {
 
     startTimer() {
         this.timerActive = true;
-        this.timerLastTick = this.time.now;
+        // BUG-FIX (2026-05-18): Trong create(), Phaser chưa fire preUpdate cho scene mới
+        // → this.time.now còn là giá trị stale (0 ở first entry, hoặc thời điểm shutdown cũ ở retry).
+        // Nếu seed timerLastTick bằng giá trị stale này, updateTimer fire lần đầu sẽ tính deltaMs
+        // = (loop time hiện tại) - (giá trị stale) = vài chục nghìn ms → timeLeft drain 60s ngay lập tức
+        // → trigger triggerTimeOut() trước khi người chơi click ô nào.
+        // Sentinel -1 để updateTimer tick đầu seed lại timerLastTick rồi return không decrement.
+        // Cùng pattern với fix lastBreakTime = -9999 ở line 1891.
+        this.timerLastTick = -1;
         // Tick mỗi 100ms (10 lần/giây) cho smooth — chỉ update text khi đổi sang giây mới
         this.timerEvent = this.time.addEvent({
             delay: 100,
@@ -1949,6 +1956,12 @@ class AH3_SceneRageMode extends Phaser.Scene {
         }
 
         let now = this.time.now;
+        // Sentinel: tick đầu sau startTimer — seed timerLastTick rồi bỏ qua, không decrement.
+        // Tránh deltaMs khổng lồ do this.time.now stale trong create() (xem comment ở startTimer).
+        if (this.timerLastTick === -1) {
+            this.timerLastTick = now;
+            return;
+        }
         let deltaMs = now - this.timerLastTick;
         this.timerLastTick = now;
 
