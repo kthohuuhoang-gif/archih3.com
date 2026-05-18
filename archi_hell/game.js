@@ -1383,7 +1383,10 @@ class AH3_Scene2 extends Phaser.Scene {
             // OPACITY-SYNC (2026-05-17): 0.7 → 0.3 để cân với BG dimmer nhánh chính (0.3)
             // Tránh nhánh Pinterest tối hơn nhánh chính. Watermark text giữ nguyên để vẫn lộ "lý do" mood
             let pinBox = this.add.rectangle(640, 360, 1280, 720, AH3_COLORS.bgDark.num, 0.3);
-            this.add.text(640, 470, 'ẢNH "MƯỢN" TRÊN PINTEREST', { fontFamily: FONT_TITLE, fontSize: '32px', fill: AH3_COLORS.danger.hex, fontStyle: 'bold', alpha: 0.2, stroke: AH3_COLORS.bgDarkest.hex, strokeThickness: 4 }).setOrigin(0.5);
+            // BUG-FIX (2026-05-18): `alpha: 0.2` trong style object là KHÔNG hợp lệ với Phaser Text
+            // (alpha không nằm trong TextStyle parseable keys → silent ignored, render alpha=1).
+            // Phải gọi .setAlpha(0.2) sau khi tạo để watermark mờ đúng intent ban đầu.
+            this.add.text(640, 470, 'ẢNH "MƯỢN" TRÊN PINTEREST', { fontFamily: FONT_TITLE, fontSize: '32px', fill: AH3_COLORS.danger.hex, fontStyle: 'bold', stroke: AH3_COLORS.bgDarkest.hex, strokeThickness: 4 }).setOrigin(0.5).setAlpha(0.2);
         }
 
         // --- TITLE ---
@@ -1418,6 +1421,15 @@ class AH3_Scene2 extends Phaser.Scene {
         this.btnC = this.createChoiceBtn(980, 560, '');
 
         this.currentTurn = 0;
+
+        // BUG-FIX (2026-05-18): Flag chống race khi patience về 0.
+        // updatePatience schedule deferred endScene 600ms; trong window đó nếu người chơi tap
+        // tiếp 1 lựa chọn khác (+patience + endReason hoặc rage, hoặc nhiều click patience≤0),
+        // sẽ trigger thêm endScene → 2-3 overlay chồng + sai narrative branch (vd. rage→DebtRunner
+        // thay vì RageMode). Flag bật ở updatePatience khi schedule, check ở handleChoice + endScene.
+        // Reset ở create() để scene.restart() chơi lại sạch — scene-instance prop persist qua restart.
+        this.ending = false;
+        this.endSceneFired = false;
 
         this.loadTurn(0);
     }
@@ -1458,7 +1470,11 @@ class AH3_Scene2 extends Phaser.Scene {
         if (this.txtPatience) this.txtPatience.setText(Math.floor(this.patience) + '%');
 
         if (this.patience <= 0) {
-            this.time.delayedCall(600, () => this.endScene("Khách hàng đã CẠN KIÊN NHẪN!\nHọ vác bản vẽ sang công ty đối thủ.\nCÔNG TY BẠN PHÁ SẢN NHƯNG VẪN PHẢI ĐI ĐÒI NỢ CŨ!", 'SceneDebtRunner'));
+            // Schedule chỉ 1 lần — flag chống click thêm trong window 600ms (xem this.ending ở create()).
+            if (!this.ending) {
+                this.ending = true;
+                this.time.delayedCall(600, () => this.endScene("Khách hàng đã CẠN KIÊN NHẪN!\nHọ vác bản vẽ sang công ty đối thủ.\nCÔNG TY BẠN PHÁ SẢN NHƯNG VẪN PHẢI ĐI ĐÒI NỢ CŨ!", 'SceneDebtRunner'));
+            }
             return false;
         }
         return true;
@@ -1495,6 +1511,10 @@ class AH3_Scene2 extends Phaser.Scene {
     }
 
     handleChoice(option) {
+        // Block input nếu đang trong endScene flow (patience đã về 0, deferred endScene pending,
+        // hoặc endScene đã chạy nhưng overlay chưa kịp đè btnA/B/C). Tránh race double-popup.
+        if (this.ending) return;
+
         if (option.rage) playSound(this, 'sfx_hit');
         else if (option.patience < 0) playSound(this, 'sfx_error');
         else playSound(this, 'sfx_click');
@@ -1640,6 +1660,12 @@ class AH3_Scene2 extends Phaser.Scene {
     }
 
     endScene(reason, nextScene) {
+        // Idempotent guard — nếu endScene đã chạy 1 lần (vd deferred từ updatePatience đã fire,
+        // hoặc handleChoice gọi sync), bỏ qua call thứ 2 để không stack overlay/buttons.
+        if (this.endSceneFired) return;
+        this.endSceneFired = true;
+        this.ending = true;
+
         let overlay = this.add.rectangle(640, 360, 1280, 720, AH3_COLORS.bgDarkest.num, 0.95).setInteractive();
 
         // OPACITY-SYNC (2026-05-17): Thêm container box cho reason text — đồng bộ pattern popup (tier 0.85 + stroke)
