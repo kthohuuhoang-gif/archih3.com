@@ -306,14 +306,46 @@
         }
     </style>
 
-    <!-- Google tag (gtag.js) - AH3 Analytics -->
+    <!-- Google tag (gtag.js) - AH3 Analytics (2026-05-19 upgraded) -->
+    <!--
+      UPGRADE NOTES:
+      1. Detect Hub WebView2 vs Public Web → custom dimension 'launch_context'
+         tránh inflate số liệu khi user mở từ Hub (1 user = 1 hit, không phải 2).
+      2. anonymize_ip: true — ẩn IP, tăng compliance với GDPR EU + Nghị định
+         13/2023/NĐ-CP về dữ liệu cá nhân (Vietnam).
+      3. allow_google_signals: false — tắt advertising features (đỡ phải xin
+         consent cookie banner riêng cho ads).
+      4. window.AH3_TRACK_CONTEXT exposed → game.js dùng cho event params.
+    -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-ECX49560RG"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-ECX49560RG');
+      // Detect launch context — Hub WebView2 vs public web browser
+      // WebView2 user agent có "Edg/" + có thể là file:// hoặc localhost
+      // Web archih3.com: https://archih3.com
+      (function() {
+        var ua = navigator.userAgent || '';
+        var host = location.hostname || '';
+        var proto = location.protocol || '';
+        var isWebView2 = /Edg\//.test(ua) && (
+          proto === 'file:' ||
+          host === 'localhost' ||
+          host === '127.0.0.1' ||
+          host === ''
+        );
+        // Expose cho game.js dùng làm event param
+        window.AH3_TRACK_CONTEXT = isWebView2 ? 'hub_webview2' : 'web_browser';
+      })();
+
+      gtag('config', 'G-ECX49560RG', {
+        'anonymize_ip': true,                 // Ẩn IP (compliance GDPR + VN)
+        'allow_google_signals': false,         // Tắt advertising features
+        'allow_ad_personalization_signals': false,
+        'launch_context': window.AH3_TRACK_CONTEXT  // Custom param đính kèm mọi event
+      });
     </script>
 </head>
 

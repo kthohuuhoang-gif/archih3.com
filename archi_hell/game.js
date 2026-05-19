@@ -44,6 +44,41 @@ const AH3_GAME_STATS = {
     usedPinterest: false
 };
 
+// ==========================================
+// AH3 ANALYTICS HELPER (2026-05-19)
+// ==========================================
+// Centralized GA4 event tracking — wrap mọi call gtag() trong try-catch
+// để game KHÔNG crash khi:
+//   - Adblock chặn googletagmanager.com (gtag undefined)
+//   - Offline mode / Hub WebView2 mất Internet tạm thời
+//   - User block cookies
+//
+// Tự động đính kèm 'launch_context' (hub_webview2 | web_browser) vào mọi event
+// → GA4 dashboard filter Hub vs Web rõ ràng. Cả Hub lẫn Web đều count = 1 user,
+//   nhưng custom dimension cho phép tách báo cáo khi cần.
+//
+// Build version từ AH3_BUILD_INFO (cuối file) — fallback 'unknown' nếu chưa load.
+//
+// Usage:
+//   ah3TrackEvent('scene_complete', { scene: 'scene1', duration_sec: 42 });
+//   ah3TrackEvent('game_over', { scene: 'debt_runner', reason: 'caught' });
+// ==========================================
+function ah3TrackEvent(eventName, params) {
+    if (typeof window.gtag !== 'function') return;
+    try {
+        params = params || {};
+        // Inject context + version vào mọi event
+        params.launch_context = window.AH3_TRACK_CONTEXT || 'unknown';
+        if (typeof AH3_BUILD_INFO !== 'undefined' && AH3_BUILD_INFO.version) {
+            params.game_version = AH3_BUILD_INFO.version;
+        }
+        window.gtag('event', eventName, params);
+    } catch (e) {
+        // Silent fail — không bao giờ ảnh hưởng gameplay
+        console.warn('[AH3_ANALYTICS] Track event failed:', e.message);
+    }
+}
+
 // Global SFX helper
 function playSound(scene, key, volume = 1.0) {
     if (scene.cache.audio.exists(key)) {
@@ -438,13 +473,11 @@ class AH3_SceneIntro extends Phaser.Scene {
             fontStyle: 'bold',
             onClick: () => {
                 // Tracking GA4
-                if (typeof window.gtag === 'function') {
-                    window.gtag('event', 'start_game', {
-                        'level_id': this.level,
-                        'level_name': sceneTitle
-                    });
-                }
-                
+                ah3TrackEvent('start_game', {
+                    level_id: this.level,
+                    level_name: sceneTitle
+                });
+
                 // Tăng biến đếm public
                 fetch('https://api.counterapi.dev/v1/archih3_studio/archi_hell_plays/up').catch(e=>{});
 
@@ -468,12 +501,10 @@ class AH3_SceneIntro extends Phaser.Scene {
                 fontColor: AH3_COLORS.textPrimary.hex,
                 onClick: () => {
                     // Tracking GA4
-                    if (typeof window.gtag === 'function') {
-                        window.gtag('event', 'quick_jump', {
-                            'target_level': lvl,
-                            'button_text': text
-                        });
-                    }
+                    ah3TrackEvent('quick_jump', {
+                        target_level: lvl,
+                        button_text: text
+                    });
 
                     AH3_GAME_STATS.progress = 0;
                     AH3_GAME_STATS.stressLevel = 50;
@@ -533,8 +564,9 @@ class AH3_SceneIntro extends Phaser.Scene {
                 }
             })
             .catch(e => {
-                counterTxt.setText('Lỗi đếm: ' + e.message);
-                console.error("Counter API Error:", e);
+                // Hiển thị rõ lỗi do bị chặn để user biết
+                counterTxt.setText('Số lượt trầm cảm: (Bị AdBlock chặn)');
+                console.warn("Counter API bị chặn (CORS/AdBlock):", e.message);
             });
 
         // --- FOOTER INTERACTION ---
@@ -2069,6 +2101,16 @@ class AH3_SceneRageMode extends Phaser.Scene {
         this.gameStarted = false;
         this.endGameCursor();
 
+        // GA4 tracking: hết giờ Màn 4 — biết user đập được bao nhiêu ô trước khi hết giờ
+        let total = this.gridCols * this.gridRows;
+        let broken = total - this.tilesLeft;
+        ah3TrackEvent('rage_mode_end', {
+            result: 'timeout',
+            tiles_broken: broken,
+            tiles_total: total,
+            completion_pct: Math.floor((broken / total) * 100)
+        });
+
         // Kill tween pulse timer
         this.tweens.killTweensOf(this.txtTimer);
 
@@ -2895,6 +2937,25 @@ class AH3_SceneRageMode extends Phaser.Scene {
     }
 
     winGame() {
+        // GA4 tracking: WIN Màn 4 — gửi cả achievement stats
+        let stats = this.stats || { hammer: 0, fire: 0, crane: 0, bonus: 0, quizFail: 0 };
+        let maxCombo = this.maxCombo || 0;
+        let total = this.gridCols * this.gridRows;
+        let timeUsed = this.timeLimit - Math.max(0, this.timeLeft);
+        let achievement = 'none';
+        if (maxCombo >= 10) achievement = 'rage_streak_master';
+        else if (stats.quizFail === 0 && (stats.fire + stats.crane) > 0) achievement = 'kts_tinh_tao';
+        ah3TrackEvent('rage_mode_end', {
+            result: 'win',
+            tiles_broken: total,
+            tiles_total: total,
+            completion_pct: 100,
+            max_combo: maxCombo,
+            quiz_fail: stats.quizFail,
+            time_used_sec: Math.floor(timeUsed),
+            achievement: achievement
+        });
+
         let overlay = this.add.rectangle(640, 360, 1280, 720, AH3_COLORS.bgDarkest.num, 0.95).setInteractive();
         this.add.text(640, 130, '🏢 VĂN PHÒNG ĐÃ THÀNH ĐỐNG TRO TÀN!', { fontFamily: FONT_MAIN, fontSize: '40px', fill: AH3_COLORS.danger.hex, align: 'center', fontStyle: 'bold', lineSpacing: 20 }).setOrigin(0.5);
         this.add.text(640, 180, 'Bạn đã được giải thoát khỏi kiếp làm thuê.', { fontFamily: FONT_MAIN, fontSize: '20px', fill: AH3_COLORS.textPrimary.hex, align: 'center' }).setOrigin(0.5);
@@ -4121,6 +4182,14 @@ class AH3_SceneDebtRunner extends Phaser.Scene {
         if (this.spawnTimer) this.spawnTimer.remove();
         if (this.coinTimer) this.coinTimer.remove();
 
+        // GA4 tracking: game over Màn 3 — biết user thua ở spawn thứ mấy, distance còn lại
+        ah3TrackEvent('debt_runner_end', {
+            result: 'caught',
+            spawn_count: this.spawnCount || 0,
+            distance_remaining: Math.floor(this.distance || 0),
+            game_speed: Math.floor(this.gameSpeed || 0)
+        });
+
         // CINEMATIC-LOSE (2026-05-17 v8): Đối xứng với triggerWin() — cutscene 3s trước popup.
         // KHÔNG pause physics ngay, reset player velocity + gravity để đứng yên cho cutscene.
         this.player.body.setVelocity(0, 0);
@@ -4289,6 +4358,14 @@ class AH3_SceneDebtRunner extends Phaser.Scene {
         this.isGameOver = true;
         if (this.spawnTimer) this.spawnTimer.remove();
         if (this.coinTimer) this.coinTimer.remove();
+
+        // GA4 tracking: win Màn 3 — biết user hoàn thành ở spawn thứ mấy
+        ah3TrackEvent('debt_runner_end', {
+            result: 'win',
+            spawn_count: this.spawnCount || 0,
+            distance_remaining: 0,
+            game_speed: Math.floor(this.gameSpeed || 0)
+        });
 
         // CINEMATIC-WIN (2026-05-17 v8): KHÔNG pause physics ngay — cần cutscene chạy tiếp.
         // Reset player velocity + tắt gravity để player đứng yên không rơi giữa không trung.
