@@ -1,0 +1,54 @@
+/* ================================================
+ * Be Vietnam Pro - Self-hosted fonts (FONT-FIX 2026-05-17)
+ * Reason: Lazy-load race condition with Google Fonts CDN
+ * → Phaser Canvas render frozen với fallback Segoe UI
+ * Solution: Self-host TTF + explicit FontFace.load() trong SceneBoot
+ * ================================================ */
+
+@font-face {
+    font-family: 'Be Vietnam Pro';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block; /* block: chờ font load max 3s, không swap ngay */
+    src: url('assets/fonts/BeVietnamPro-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Be Vietnam Pro';
+    font-style: normal;
+    font-weight: 500;
+    font-display: block;
+    src: url('assets/fonts/BeVietnamPro-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Be Vietnam Pro';
+    font-style: normal;
+    font-weight: 600;
+    font-display: block;
+    src: url('assets/fonts/BeVietnamPro-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Be Vietnam Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-display: block;
+    src: url('assets/fonts/BeVietnamPro-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Be Vietnam Pro';
+    font-style: normal;
+    font-weight: 900;
+    font-display: block;
+    src: url('assets/fonts/BeVietnamPro-Black.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'VT323';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url('assets/fonts/VT323-Regular.ttf') format('truetype');
+}
