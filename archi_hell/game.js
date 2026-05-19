@@ -409,7 +409,7 @@ class AH3_SceneIntro extends Phaser.Scene {
             sceneTitle = 'MÀN 4: RAGE MODE - TRẢ THÙ ĐỜI';
             instructions = [
                 "📜 LUẬT CHƠI ĐẬP PHÁ:",
-                "-> Văn phòng Shark Lươn chia thành 40 Ô. PHÁ SẠCH = THẮNG!",
+                "-> Văn phòng Shark Lươn chia thành 96 Ô. PHÁ SẠCH = THẮNG!",
                 "-> 🔨 CLICK Ô = Búa (1 ô) - vô hạn, không cần câu đố.",
                 "-> 🛢️ XĂNG (2x2) và 🏗️ CẨU (3x3) - trả câu đố KTS mới được dùng.",
                 "-> 🔥 Phá liên tục trong 2 giây = COMBO! Combo cao = trào phúng đỉnh!",
@@ -2068,7 +2068,7 @@ class AH3_SceneRageMode extends Phaser.Scene {
         // Narrative
         this.add.text(640, 290,
             'Vợ: "Anh ơi! Bỏ đập đó đi! Cơm nguội hết rồi!"\n' +
-            `KTS: đập được ${broken}/${total} ô thì hết giờ giờng.\n` +
+            `KTS: đập được ${broken}/${total} ô thì hết giờ rồi.\n` +
             'Mai dậy đi làm tiếp, kiếp KTS chưa thoát được...',
         {
             fontFamily: FONT_MAIN, fontSize: '22px', fill: AH3_COLORS.textPrimary.hex,
