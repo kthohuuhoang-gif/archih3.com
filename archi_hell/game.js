@@ -555,6 +555,10 @@ class AH3_SceneIntro extends Phaser.Scene {
         this.add.text(510, 679, '"Game cho KTS, mới chuẩn chứ"', { fontFamily: FONT_MAIN, fontSize: '12px', fill: AH3_COLORS.textMuted.hex, fontStyle: 'italic' }).setOrigin(0, 0.5);
 
         // --- PUBLIC PLAY COUNTER ---
+        // Endpoint: CounterAPI V1 (legacy, rate limit 30 req/min SHARED toàn user trên cùng URL path).
+        // Lỗi "Failed to fetch" thực tế là HTTP 429 khi peak traffic, KHÔNG phải AdBlock như comment cũ.
+        // Đã verify 2026-05-19: endpoint OK, count tăng đúng, 429 sau 30 req/min.
+        // Chấp nhận thỉnh thoảng lỗi (graceful degrade), hiển thị "--" lịch sự thay vì đổ cho user.
         let counterTxt = this.add.text(30, 680, 'Số lượt trầm cảm: Đang tải...', { fontFamily: FONT_MAIN, fontSize: '14px', fill: AH3_COLORS.textMuted.hex }).setOrigin(0, 0.5);
         fetch('https://api.counterapi.dev/v1/archih3_studio/archi_hell_plays')
             .then(res => res.json())
@@ -564,9 +568,10 @@ class AH3_SceneIntro extends Phaser.Scene {
                 }
             })
             .catch(e => {
-                // Hiển thị rõ lỗi do bị chặn để user biết
-                counterTxt.setText('Số lượt trầm cảm: (Bị AdBlock chặn)');
-                console.warn("Counter API bị chặn (CORS/AdBlock):", e.message);
+                // Graceful degrade: hiển thị "--" khi không tải được (rate limit 429, mạng yếu, CORS, v.v.)
+                // Không đổ lỗi cho user (AdBlock) vì root cause thường là rate limit phía server.
+                counterTxt.setText('Số lượt trầm cảm: --');
+                console.warn("[CounterAPI] Không tải được lượt chơi:", e.message);
             });
 
         // --- FOOTER INTERACTION ---
