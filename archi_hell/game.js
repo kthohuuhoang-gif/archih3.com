@@ -437,6 +437,17 @@ class AH3_SceneIntro extends Phaser.Scene {
             fontSize: '48px',
             fontStyle: 'bold',
             onClick: () => {
+                // Tracking GA4
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'start_game', {
+                        'level_id': this.level,
+                        'level_name': sceneTitle
+                    });
+                }
+                
+                // Tăng biến đếm public
+                fetch('https://api.counterapi.dev/v1/archih3_studio/archi_hell_plays/up').catch(e=>{});
+
                 if (onStartFn) onStartFn();
                 this.scene.start(targetScene);
             }
@@ -456,6 +467,14 @@ class AH3_SceneIntro extends Phaser.Scene {
                 fontStyle: '800',
                 fontColor: AH3_COLORS.textPrimary.hex,
                 onClick: () => {
+                    // Tracking GA4
+                    if (typeof window.gtag === 'function') {
+                        window.gtag('event', 'quick_jump', {
+                            'target_level': lvl,
+                            'button_text': text
+                        });
+                    }
+
                     AH3_GAME_STATS.progress = 0;
                     AH3_GAME_STATS.stressLevel = 50;
                     AH3_GAME_STATS.hasEduWatermark = false;
@@ -503,6 +522,19 @@ class AH3_SceneIntro extends Phaser.Scene {
         this.add.text(510, 645, 'ArchiH3 Studio', { fontFamily: FONT_TITLE, fontSize: '16px', fill: AH3_COLORS.danger.hex, fontStyle: 'bold' }).setOrigin(0, 0.5);
         this.add.text(510, 663, 'archih3.com  •  Arch. Ho Huu Hoang', { fontFamily: FONT_MAIN, fontSize: '13px', fill: AH3_COLORS.textMuted.hex }).setOrigin(0, 0.5);
         this.add.text(510, 679, '"Game cho KTS, mới chuẩn chứ"', { fontFamily: FONT_MAIN, fontSize: '12px', fill: AH3_COLORS.textMuted.hex, fontStyle: 'italic' }).setOrigin(0, 0.5);
+
+        // --- PUBLIC PLAY COUNTER ---
+        let counterTxt = this.add.text(30, 680, 'Số lượt trầm cảm: Đang tải...', { fontFamily: FONT_MAIN, fontSize: '14px', fill: AH3_COLORS.textMuted.hex }).setOrigin(0, 0.5);
+        fetch('https://api.counterapi.dev/v1/archih3_studio/archi_hell_plays')
+            .then(res => res.json())
+            .then(data => {
+                if(data && typeof data.count !== 'undefined') {
+                    counterTxt.setText('Số lượt trầm cảm (lượt chơi): ' + data.count);
+                }
+            })
+            .catch(e => {
+                counterTxt.setText('Số lượt trầm cảm (lượt chơi): N/A');
+            });
 
         // --- FOOTER INTERACTION ---
         let footerHitbox = this.add.rectangle(640, 660, 400, 60, 0x000000, 0).setInteractive({ useHandCursor: true });
