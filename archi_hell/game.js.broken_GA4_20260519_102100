@@ -2974,7 +2974,8 @@ class AH3_SceneRageMode extends Phaser.Scene {
         }).setOrigin(0.5);
 
         // Stats hiển thị 2 cột — cột trái: phá / cột phải: combo & sai
-        // (stats và maxCombo đã được khai báo ở đầu winGame() cho GA4 tracking — tái sử dụng tại đây)
+        let stats = this.stats || { hammer: 0, fire: 0, crane: 0, bonus: 0, quizFail: 0 };
+        let maxCombo = this.maxCombo || 0;
 
         // Cột trái: counts
         this.add.text(440, 275, `🔨 Búa: ${stats.hammer} ô`, { fontFamily: FONT_MAIN, fontSize: '16px', fill: AH3_COLORS.textPrimary.hex, fontStyle: 'bold' }).setOrigin(0, 0.5);
