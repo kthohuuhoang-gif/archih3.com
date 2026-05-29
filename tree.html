@@ -451,7 +451,7 @@
         <h2 class="section-title" data-vi="Chuyển động gió ngẫu nhiên tự nhiên" data-en="Natural & Organic Wind Movement"></h2>
         <p class="section-desc" data-vi="Biểu đồ trực quan cách Magic Tree mô phỏng cành lá đung đưa tự nhiên nhưng vẫn đảm bảo vòng lặp (loop) mượt mà cho các phần mềm render." data-en="Visual curves showing how Magic Tree creates organic randomized wind sways with loop-perfect rendering."></p>
 
-        <div class="physics-container" style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+        <div class="physics-container" style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px;">
             <!-- Chart 1: Sway Amplitude -->
             <div class="physics-card" style="background: var(--bg-surface); border: 1px solid rgba(85,85,85,0.3); border-radius: 12px; padding: 24px; position: relative;">
                 <div style="margin-bottom: 16px;">
@@ -639,10 +639,10 @@
             const w = rect.width;
             const h = rect.height;
             
-            const padLeft = 55;
+            const padLeft = 40;
             const padRight = 20;
-            const padTop = 20;
-            const padBottom = 30;
+            const padTop = 25;
+            const padBottom = 32;
             
             const chartW = w - padLeft - padRight;
             const chartH = h - padTop - padBottom;
@@ -687,16 +687,19 @@
                 ctx.fillText(val, x, padTop + chartH + 6);
             });
             
-            // Axes titles
-            ctx.save();
-            ctx.translate(14, padTop + chartH / 2);
-            ctx.rotate(-Math.PI / 2);
-            ctx.textAlign = 'center';
+            // Y-Axis Title (Horizontal at top-left)
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'bottom';
+            ctx.fillStyle = '#aaaaaa';
+            ctx.font = '11px "JetBrains Mono", monospace';
             const labelAmp = currentLang === 'vi' ? 'Biên độ' : 'Amplitude';
-            ctx.fillText(labelAmp, 0, 0);
-            ctx.restore();
+            ctx.fillText(labelAmp, padLeft, padTop - 6);
             
+            // X-Axis Title
             ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            ctx.fillStyle = '#888888';
+            ctx.font = '10px "JetBrains Mono", monospace';
             ctx.fillText('Frame', padLeft + chartW / 2, padTop + chartH + 18);
             
             // Reference Envelope (Dashed Line)
@@ -762,10 +765,10 @@
             const w = rect.width;
             const h = rect.height;
             
-            const padLeft = 55;
+            const padLeft = 40;
             const padRight = 20;
-            const padTop = 20;
-            const padBottom = 30;
+            const padTop = 25;
+            const padBottom = 32;
             
             const chartW = w - padLeft - padRight;
             const chartH = h - padTop - padBottom;
@@ -793,7 +796,7 @@
                 ctx.fillText(val + '°', padLeft - 8, y);
             });
             
-            // X Grid & Labels (0s to 16s)
+            // X Grid & Labels (0 to 16)
             const xLines = [0, 2, 4, 6, 8, 10, 12, 14, 16];
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top';
@@ -806,20 +809,23 @@
                 ctx.lineTo(x, padTop + chartH);
                 ctx.stroke();
                 
-                ctx.fillText(val + 's', x, padTop + chartH + 6);
+                ctx.fillText(val, x, padTop + chartH + 6);
             });
             
-            // Axes titles
-            ctx.save();
-            ctx.translate(14, padTop + chartH / 2);
-            ctx.rotate(-Math.PI / 2);
-            ctx.textAlign = 'center';
+            // Y-Axis Title (Horizontal at top-left)
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'bottom';
+            ctx.fillStyle = '#aaaaaa';
+            ctx.font = '11px "JetBrains Mono", monospace';
             const labelDeviation = currentLang === 'vi' ? 'Lệch hướng (độ)' : 'Deviation (deg)';
-            ctx.fillText(labelDeviation, 0, 0);
-            ctx.restore();
+            ctx.fillText(labelDeviation, padLeft, padTop - 6);
             
+            // X-Axis Title
             ctx.textAlign = 'center';
-            const labelTime = currentLang === 'vi' ? 'Thời gian' : 'Time';
+            ctx.textBaseline = 'top';
+            ctx.fillStyle = '#888888';
+            ctx.font = '10px "JetBrains Mono", monospace';
+            const labelTime = currentLang === 'vi' ? 'Thời gian (giây)' : 'Time (seconds)';
             ctx.fillText(labelTime, padLeft + chartW / 2, padTop + chartH + 18);
             
             function getJitterVal(t) {
@@ -890,10 +896,10 @@
             const w = rect.width;
             const h = rect.height;
             
-            const padLeft = 55;
+            const padLeft = 40;
             const padRight = 20;
-            const padTop = 20;
-            const padBottom = 30;
+            const padTop = 25;
+            const padBottom = 32;
             
             const chartW = w - padLeft - padRight;
             const chartH = h - padTop - padBottom;
@@ -920,7 +926,7 @@
                 ctx.fillText(val.toFixed(1), padLeft - 8, y);
             });
             
-            // X Grid & Labels (0 to 30 m/s)
+            // X Grid & Labels (0 to 30)
             const xLines = [0, 5, 10, 15, 20, 25, 30];
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top';
@@ -933,20 +939,23 @@
                 ctx.lineTo(x, padTop + chartH);
                 ctx.stroke();
                 
-                ctx.fillText(val + 'm/s', x, padTop + chartH + 6);
+                ctx.fillText(val, x, padTop + chartH + 6);
             });
             
-            // Axes titles
-            ctx.save();
-            ctx.translate(14, padTop + chartH / 2);
-            ctx.rotate(-Math.PI / 2);
-            ctx.textAlign = 'center';
+            // Y-Axis Title (Horizontal at top-left)
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'bottom';
+            ctx.fillStyle = '#aaaaaa';
+            ctx.font = '11px "JetBrains Mono", monospace';
             const labelDrag = currentLang === 'vi' ? 'Lực cản khí động' : 'Aerodynamic Drag';
-            ctx.fillText(labelDrag, 0, 0);
-            ctx.restore();
+            ctx.fillText(labelDrag, padLeft, padTop - 6);
             
+            // X-Axis Title
             ctx.textAlign = 'center';
-            const labelSpeed = currentLang === 'vi' ? 'Tốc độ gió' : 'Wind Speed';
+            ctx.textBaseline = 'top';
+            ctx.fillStyle = '#888888';
+            ctx.font = '10px "JetBrains Mono", monospace';
+            const labelSpeed = currentLang === 'vi' ? 'Tốc độ gió (m/s)' : 'Wind Speed (m/s)';
             ctx.fillText(labelSpeed, padLeft + chartW / 2, padTop + chartH + 18);
             
             // Red Line (Rigid object drag proportional to V^2)
