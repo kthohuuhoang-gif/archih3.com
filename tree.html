@@ -454,11 +454,11 @@
         <div class="physics-container" style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
             <!-- Chart 1: Sway Amplitude -->
             <div class="physics-card" style="background: var(--bg-surface); border: 1px solid rgba(85,85,85,0.3); border-radius: 12px; padding: 24px; position: relative;">
-                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
-                    <span data-vi="Biên độ dao động (150 Frames Loop)" data-en="Sway Amplitude (150f Loop)">Biên độ dao động (150 Frames Loop)</span>
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--primary); background: var(--primary-glow); padding: 2px 8px; border-radius: 4px;">Loop-Perfect ✅</span>
-                </h3>
-                <div style="position: relative; width: 100%; aspect-ratio: 2/1; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
+                <div style="margin-bottom: 16px;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: var(--primary); background: var(--primary-glow); padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px;">LOOP-PERFECT ✅</span>
+                    <h3 style="font-size: 18px; font-weight: 600; line-height: 1.3;" data-vi="Biên độ dao động (150f Loop)" data-en="Sway Amplitude (150f Loop)">Biên độ dao động (150f Loop)</h3>
+                </div>
+                <div style="position: relative; width: 100%; height: 220px; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
                     <canvas id="swayCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%;"></canvas>
                 </div>
                 <p style="font-size: 13px; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-vi="Biên độ uốn của cành lá biến thiên liên tục qua từng chu kỳ để tránh cảm giác lặp lại máy móc, nhưng vẫn khớp điểm đầu - cuối tại đúng frame 150 để tạo video loop hoàn hảo." data-en="Leaf and branch sway amplitudes vary dynamically across cycles to prevent robotic patterns, while locking perfectly at frame 150 for seamless video loops."></p>
@@ -466,11 +466,11 @@
 
             <!-- Chart 2: Direction Jitter -->
             <div class="physics-card" style="background: var(--bg-surface); border: 1px solid rgba(85,85,85,0.3); border-radius: 12px; padding: 24px; position: relative;">
-                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
-                    <span data-vi="Nhiễu động hướng gió (0s - 16s)" data-en="Wind Direction Jitter (0s - 16s)">Nhiễu động hướng gió (0s - 16s)</span>
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--warning); background: rgba(239, 108, 0, 0.15); padding: 2px 8px; border-radius: 4px;">Turbulence 🌪️</span>
-                </h3>
-                <div style="position: relative; width: 100%; aspect-ratio: 2/1; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
+                <div style="margin-bottom: 16px;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: var(--warning); background: rgba(239, 108, 0, 0.15); padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px;">TURBULENCE 🌪️</span>
+                    <h3 style="font-size: 18px; font-weight: 600; line-height: 1.3;" data-vi="Nhiễu động hướng gió" data-en="Wind Direction Jitter">Nhiễu động hướng gió</h3>
+                </div>
+                <div style="position: relative; width: 100%; height: 220px; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
                     <canvas id="jitterCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%;"></canvas>
                 </div>
                 <p style="font-size: 13px; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-vi="Hướng gió biến động ngẫu nhiên giúp cành lá lay động sole tự nhiên. Thuật toán tự động xử lý khớp nối chu kỳ (Bake Range) để tránh hiện tượng giật khung hình khi lặp lại video." data-en="Wind directions shift organically for realistic sways. The algorithm handles range-blending behind the scenes to avoid any visual pops during video loops."></p>
@@ -478,11 +478,11 @@
 
             <!-- Chart 3: Vogel Drag Reduction -->
             <div class="physics-card" style="background: var(--bg-surface); border: 1px solid rgba(85,85,85,0.3); border-radius: 12px; padding: 24px; position: relative;">
-                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
-                    <span data-vi="Kháng cản khí động học (Vogel Drag)" data-en="Aerodynamic Drag (Vogel Drag)">Kháng cản khí động học (Vogel Drag)</span>
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a278ff; background: rgba(162, 120, 255, 0.15); padding: 2px 8px; border-radius: 4px;">Reconfiguration 🍃</span>
-                </h3>
-                <div style="position: relative; width: 100%; aspect-ratio: 2/1; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
+                <div style="margin-bottom: 16px;">
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: #a278ff; background: rgba(162, 120, 255, 0.15); padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px;">RECONFIGURATION 🍃</span>
+                    <h3 style="font-size: 18px; font-weight: 600; line-height: 1.3;" data-vi="Kháng cản khí động học" data-en="Aerodynamic Drag">Kháng cản khí động học</h3>
+                </div>
+                <div style="position: relative; width: 100%; height: 220px; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
                     <canvas id="dragCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%;"></canvas>
                 </div>
                 <p style="font-size: 13px; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-vi="Đường nét đứt màu đỏ thể hiện lực cản vật thể cứng (tăng theo hàm mũ 2). Đường màu xanh lá là Magic Tree: lá tự co cụm bóp nhỏ tán dưới gió to để giảm cản gió tới 60%, bảo vệ mô hình khỏi biến dạng quá đà." data-en="Dashed red line represents rigid body drag (exponential increase). Solid green line shows Magic Tree: foliage streamlines under wind to reduce drag by up to 60%, preventing unnatural mesh distortion."></p>
@@ -639,7 +639,7 @@
             const w = rect.width;
             const h = rect.height;
             
-            const padLeft = 40;
+            const padLeft = 55;
             const padRight = 20;
             const padTop = 20;
             const padBottom = 30;
@@ -689,7 +689,7 @@
             
             // Axes titles
             ctx.save();
-            ctx.translate(12, padTop + chartH / 2);
+            ctx.translate(14, padTop + chartH / 2);
             ctx.rotate(-Math.PI / 2);
             ctx.textAlign = 'center';
             const labelAmp = currentLang === 'vi' ? 'Biên độ' : 'Amplitude';
@@ -762,7 +762,7 @@
             const w = rect.width;
             const h = rect.height;
             
-            const padLeft = 40;
+            const padLeft = 55;
             const padRight = 20;
             const padTop = 20;
             const padBottom = 30;
@@ -811,7 +811,7 @@
             
             // Axes titles
             ctx.save();
-            ctx.translate(12, padTop + chartH / 2);
+            ctx.translate(14, padTop + chartH / 2);
             ctx.rotate(-Math.PI / 2);
             ctx.textAlign = 'center';
             const labelDeviation = currentLang === 'vi' ? 'Lệch hướng (độ)' : 'Deviation (deg)';
@@ -890,7 +890,7 @@
             const w = rect.width;
             const h = rect.height;
             
-            const padLeft = 40;
+            const padLeft = 55;
             const padRight = 20;
             const padTop = 20;
             const padBottom = 30;
@@ -938,7 +938,7 @@
             
             // Axes titles
             ctx.save();
-            ctx.translate(12, padTop + chartH / 2);
+            ctx.translate(14, padTop + chartH / 2);
             ctx.rotate(-Math.PI / 2);
             ctx.textAlign = 'center';
             const labelDrag = currentLang === 'vi' ? 'Lực cản khí động' : 'Aerodynamic Drag';
