@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AH3 Magic Tree — Physics-Based Loop-Perfect Wind Animation for 3ds Max</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-page: #1a1a1a;
+            --bg-main: #242424;
+            --bg-surface: #2e2e2e;
+            --bg-light: #3a3a3a;
+            --primary: #66bb6a; /* Green theme for Magic Tree */
+            --primary-hover: #81c784;
+            --primary-glow: rgba(102, 187, 106, 0.15);
+            --primary-glow-strong: rgba(102, 187, 106, 0.3);
+            --text: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --border: #444444;
+            --destructive: #c62828;
+            --warning: #ef6c00;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-page);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* BACKGROUND EFFECTS */
+        .bg-glow {
+            position: absolute; top: 10%; left: 50%;
+            transform: translateX(-50%); width: 1000px; height: 1000px;
+            background: radial-gradient(circle, rgba(102,187,106,0.04) 0%, transparent 70%);
+            pointer-events: none; z-index: -1;
+        }
+        .bg-grid {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(102,187,106,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(102,187,106,0.015) 1px, transparent 1px);
+            background-size: 50px 50px; pointer-events: none; z-index: -1;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 16px 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(102, 187, 106, 0.1);
+        }
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px; font-weight: 600;
+            color: var(--primary); text-decoration: none; letter-spacing: -0.5px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .logo span { color: var(--text-secondary); font-weight: 400; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 14px; font-weight: 400; transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* LANG TOGGLE */
+        .lang-toggle {
+            display: inline-flex; align-items: center;
+            background: var(--bg-light); border-radius: 20px;
+            padding: 2px; cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; letter-spacing: 0.5px;
+        }
+        .lang-toggle button {
+            padding: 5px 12px; border: none; border-radius: 18px;
+            cursor: pointer; background: transparent;
+            color: var(--text-muted); font-family: inherit;
+            font-size: inherit; letter-spacing: inherit; transition: all 0.2s;
+        }
+        .lang-toggle button.active {
+            background: var(--primary); color: #121212; font-weight: 600;
+        }
+
+        /* BUTTONS */
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: var(--primary);
+            color: #121212; font-weight: 600; font-size: 14px;
+            border: none; border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover); transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(102, 187, 106, 0.3);
+        }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: transparent;
+            color: var(--text); font-weight: 400; font-size: 14px;
+            border: 1px solid var(--border); border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* HERO */
+        .hero {
+            padding: 140px 24px 60px;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; position: relative;
+        }
+        .hero-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; color: var(--primary);
+            border: 1px solid rgba(102,187,106,0.3);
+            padding: 6px 16px; border-radius: 20px;
+            margin-bottom: 24px; background: var(--primary-glow); letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+            line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px;
+        }
+        .hero h1 .green { color: var(--primary); }
+        .hero-sub {
+            font-size: 18px; color: var(--text-secondary);
+            max-width: 680px; margin: 0 auto 32px; font-weight: 300;
+        }
+        .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* VIDEO CONTAINER */
+        .video-section {
+            max-width: 800px; margin: 0 auto 80px; padding: 0 24px;
+        }
+        .video-box {
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(102,187,106,0.2); background: #000;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5); aspect-ratio: 16/9;
+            position: relative;
+        }
+
+        /* SECTIONS */
+        section { padding: 80px 24px; }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            color: var(--primary); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 12px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px); font-weight: 700;
+            letter-spacing: -1px; margin-bottom: 16px; text-align: center;
+        }
+        .section-desc {
+            font-size: 16px; color: var(--text-secondary);
+            max-width: 600px; font-weight: 300; margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        /* FEATURES */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; max-width: 1100px; margin: 0 auto;
+        }
+        .feature-card {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            border-radius: 12px; padding: 32px;
+            transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .feature-card:hover {
+            border-color: rgba(102,187,106,0.3); transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: var(--primary-glow); border: 1px solid rgba(102,187,106,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; margin-bottom: 20px;
+        }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 15px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        /* CATEGORIES SECTION */
+        .cat-table-container {
+            max-width: 900px; margin: 40px auto 0; overflow-x: auto;
+            border: 1px solid var(--border); border-radius: 8px; background: var(--bg-main);
+        }
+        table {
+            width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;
+        }
+        th, td {
+            padding: 14px 18px; border-bottom: 1px solid rgba(85,85,85,0.3);
+        }
+        th {
+            background: rgba(102, 187, 106, 0.08); color: var(--primary); font-weight: 600;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase;
+        }
+        tr:last-child td { border-bottom: none; }
+        .cat-badge {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+            padding: 2px 8px; border-radius: 4px; background: var(--primary-glow); color: var(--primary);
+        }
+
+        /* STEPS / WORKFLOW */
+        .steps-section {
+            background: var(--bg-surface);
+        }
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px; max-width: 900px; margin: 0 auto;
+        }
+        .step-item {
+            text-align: center; position: relative;
+        }
+        .step-num {
+            font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700;
+            color: var(--primary); margin-bottom: 12px; opacity: 0.8;
+        }
+        .step-item h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .step-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; }
+
+        /* PRICING */
+        .pricing-section { max-width: 600px; margin: 0 auto; }
+        .price-card {
+            background: var(--bg-main); border: 1px solid var(--primary);
+            border-radius: 16px; padding: 48px 32px;
+            text-align: center; position: relative;
+            background: linear-gradient(135deg, var(--bg-main), rgba(102,187,106,0.05));
+        }
+        .price-card::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 4px; background: var(--primary); border-radius: 16px 16px 0 0;
+        }
+        .price-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; padding: 4px 12px; border-radius: 12px;
+            margin-bottom: 20px; letter-spacing: 0.5px;
+            background: var(--primary-glow); color: var(--primary);
+        }
+        .price-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+        .price-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 40px; font-weight: 600; color: var(--primary);
+            margin-bottom: 4px; display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .price-amount del { font-size: 20px; color: var(--text-muted); font-weight: 400; }
+        .price-amount span { font-size: 16px; font-weight: 400; color: var(--text-muted); }
+        .price-period { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+        
+        .price-features {
+            list-style: none; text-align: left; max-width: 350px; margin: 0 auto 32px;
+        }
+        .price-features li {
+            padding: 8px 0; font-size: 15px; color: var(--text-secondary);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .price-features li::before {
+            content: '✓'; color: var(--primary); font-weight: 600;
+        }
+
+        /* FAQ */
+        .faq-section { max-width: 800px; margin: 0 auto; }
+        .faq-grid { display: flex; flex-direction: column; gap: 16px; }
+        .faq-item {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            border-radius: 8px; padding: 24px;
+        }
+        .faq-item h3 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .faq-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 24px; text-align: center;
+            border-top: 1px solid rgba(85,85,85,0.2);
+            background: var(--bg-dark);
+        }
+        footer p { font-size: 13px; color: var(--text-muted); }
+        footer a { color: var(--primary); text-decoration: none; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav { padding: 12px 20px; }
+            .mobile-menu-btn { display: block !important; }
+            .nav-links {
+                display: none !important; flex-direction: column;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(20px);
+                padding: 16px 20px; gap: 12px;
+                border-bottom: 1px solid rgba(102,187,106,0.1);
+            }
+            .nav-links.open { display: flex !important; }
+            .hero { padding: 100px 16px 40px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .steps-grid { grid-template-columns: 1fr; gap: 24px; }
+            section { padding: 60px 16px; }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero { animation: fadeUp 0.8s ease-out; }
+        .video-section { animation: fadeUp 0.8s ease-out both; animation-delay: 0.1s; }
+        .feature-card { animation: fadeUp 0.6s ease-out both; }
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="logo">
+            <span style="font-size: 22px; margin-right: 4px;">🌲</span> AH3<span> Magic Tree</span>
+        </a>
+        <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('open')" style="display:none; background:none; border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:var(--text); font-size:18px; cursor:pointer;">☰</button>
+        <div class="nav-links">
+            <a href="index.html" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
+            <a href="#features" data-vi="Tính năng" data-en="Features">Tính năng</a>
+            <a href="#categories" data-vi="Phân loại" data-en="Categories">Phân loại</a>
+            <a href="#workflow" data-vi="Sử dụng" data-en="Workflow">Sử dụng</a>
+            <a href="#pricing" data-vi="Bảng giá" data-en="Pricing">Bảng giá</a>
+            <a href="#faq" data-vi="FAQ" data-en="FAQ">FAQ</a>
+            <a href="https://youtube.com/@ArchiH3" target="_blank">YouTube</a>
+            <div class="lang-toggle">
+                <button class="active" onclick="setLang('vi')">VI</button>
+                <button onclick="setLang('en')">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge" data-vi="PHYSICS-BASED WIND SIMULATION FOR 3DS MAX" data-en="PHYSICS-BASED WIND SIMULATION FOR 3DS MAX">PHYSICS-BASED WIND SIMULATION FOR 3DS MAX</div>
+        <h1 data-vi="Thổi hồn vào cây cỏ.<br><span class='green'>Render nhẹ tênh.</span>" data-en="Breeze in your viewports.<br><span class='green'>Lightweight renders.</span>"></h1>
+        <p class="hero-sub" data-vi="Plugin chuyên biệt tạo chuyển động gió 4 lớp chân thực và tự động hóa tối ưu cho cây cối trong 3ds Max. Tương thích sâu với Corona/V-Ray Proxy, loại bỏ hoàn toàn lag giật viewport." data-en="Specialized plugin to generate realistic 4-layer wind simulations and automatic optimizations for 3ds Max vegetation. Deeply integrated with Corona/V-Ray proxies to completely eliminate viewport lag."></p>
+        <div class="hero-cta">
+            <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 350k" data-en="Get Pro Lifetime — $15">Mua bản quyền — 350k</a>
+            <a href="https://drive.google.com/drive/folders/117Px4PoFiVhwcB-5B8jgCD8m7mNLKAZ9?usp=drive_link" target="_blank" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+        </div>
+    </section>
+
+    <!-- VIDEO DEMO -->
+    <div class="video-section">
+        <div class="video-box" id="featured-video">
+            <!-- Iframe (works on hosted web) -->
+            <iframe id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/aMThqiNNoBQ?rel=0&modestbranding=1&color=white" title="AH3 Magic Tree Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0;"></iframe>
+            <!-- Thumbnail fallback (shown if iframe fails on local file://) -->
+            <a id="yt-fallback" href="https://www.youtube.com/watch?v=aMThqiNNoBQ" target="_blank" style="display:none; position:absolute; inset:0; text-decoration:none; cursor:pointer;">
+                <img src="https://img.youtube.com/vi/aMThqiNNoBQ/maxresdefault.jpg" alt="AH3 Magic Tree Demo" style="width:100%; height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'">
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:72px; height:72px; border-radius:50%; background:rgba(102, 187, 106, 0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,0,0,0.4);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#121212"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div style="position:absolute; bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube">▶ Xem demo trên YouTube</div>
+            </a>
+        </div>
+        <script>
+            // Detect local file:// or iframe load failure → show thumbnail fallback
+            (function(){
+                var iframe = document.getElementById('yt-iframe');
+                var fallback = document.getElementById('yt-fallback');
+                if (window.location.protocol === 'file:') {
+                    iframe.style.display = 'none';
+                    fallback.style.display = 'block';
+                } else {
+                    iframe.onerror = function() {
+                        iframe.style.display = 'none';
+                        fallback.style.display = 'block';
+                    };
+                }
+            })();
+        </script>
+    </div>
+
+    <!-- FEATURES -->
+    <section id="features">
+        <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="KEY FEATURES">TÍNH NĂNG NỔI BẬT</div>
+        <h2 class="section-title" data-vi="Mô phỏng gió tự nhiên chỉ với 1-Click" data-en="1-Click Natural Wind Simulation"></h2>
+        <p class="section-desc" data-vi="Biến rừng cây tĩnh lặng thành chuyển động tự nhiên trong gió chỉ với vài cú click chuột, siêu nhẹ và cực kỳ nhanh chóng." data-en="Turn static forests into natural sways with just a few clicks, lightweight and extremely fast."></p>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">🍃</div>
+                <h3 data-vi="Mô phỏng chuyển động gió 4 lớp" data-en="4-Layer Dynamic Sway">Mô phỏng gió 4 lớp</h3>
+                <p data-vi="Tác động đồng thời lên 4 cấp độ cành lá: chuyển động rung lá, độ xoắn tự nhiên của tán, độ uốn cong chân thực của thân cây và độ đung đưa nhẹ của hoa/quả giúp tạo cảm giác chuyển động đa chiều chân thực nhất." data-en="Simulates movements on 4 levels: leaf flutter, natural canopy twist, realistic trunk bending, and gentle fruit/flower swaying for the most realistic multi-dimensional motion."></p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">🌿</div>
+                <h3 data-vi="Hỗ trợ mọi thư viện cây lớn" data-en="Full Library Support">Hỗ trợ mọi thư viện cây lớn</h3>
+                <p data-vi="Tương thích hoàn hảo với các thư viện cây phổ biến nhất như Maxtree, Globe Plants, Chaos Cosmos và bất kỳ file Proxy nào của V-Ray, Corona, giúp bạn làm việc trực tiếp và nhanh chóng." data-en="Perfectly compatible with the most popular vegetation libraries such as Maxtree, Globe Plants, Chaos Cosmos, and any V-Ray or Corona proxies, allowing direct and fast workflows."></p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 data-vi="Tự động hóa & Thao tác cực nhanh" data-en="1-Click Auto Pipeline">Tự động hóa & Thao tác cực nhanh</h3>
+                <p data-vi="Không cần thiết lập thủ công tốn thời gian. Magic Tree tự động nhận diện chiều cao, tối ưu hóa proxy và gán các thông số gió phù hợp giúp bạn hoàn thành công việc chỉ trong vài giây." data-en="Zero manual setups required. Magic Tree automatically detects plant heights, optimizes proxies, and applies wind presets in seconds."></p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">🎲</div>
+                <h3 data-vi="Lệch pha tự nhiên & An toàn tuyệt đối" data-en="Randomized Phase & Safe Undo">Lệch pha tự nhiên & An toàn tuyệt đối</h3>
+                <p data-vi="Mỗi cây tự động lệch pha ngẫu nhiên để khi rải rừng cây lớn (Forest Pack, Chaos Scatter) không bị đồng điệu máy móc. Hỗ trợ Ctrl+Z hoàn tác 100% cực kỳ an tâm khi thiết kế." data-en="Generates unique random phase offsets per tree to avoid repetitive patterns in scattered forests. Fully supports clean Ctrl+Z undo actions to keep your scene completely safe."></p>
+            </div>
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3 data-vi="Tối ưu Render & Dung lượng" data-en="Optimized File Size & Render">Tối ưu Render & Dung lượng</h3>
+                <p data-vi="Cơ chế bake keyframe thông minh tự động tối ưu hóa số lượng keyframe của modifier, giữ cho file scene 3ds Max cực nhẹ và không làm tăng thời gian render khi chạy camera." data-en="Smart keyframe baking automatically optimizes modifier keyframes, keeping 3ds Max file sizes lightweight and maintaining fast render times."></p>
+            </div>
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">🎛️</div>
+                <h3 data-vi="Hệ thống Preset & Tùy biến" data-en="Wind Presets & Customization">Hệ thống Preset & Tùy biến</h3>
+                <p data-vi="Cung cấp sẵn các mẫu preset gió chuẩn (Nhẹ, Vừa, Bão) và hơn 13 thanh slider tinh chỉnh chuyên sâu giúp bạn dễ dàng lưu trữ, quản lý cấu hình gió cho từng loại dự án." data-en="Comes with built-in wind presets (Breeze, Medium, Storm) and 13+ advanced sliders to easily adjust, save, and manage custom wind behaviors."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WIND PHYSICS VISUALIZATION -->
+    <section id="wind-physics" style="background: var(--bg-main); border-top: 1px solid rgba(102, 187, 106, 0.1); border-bottom: 1px solid rgba(102, 187, 106, 0.1);">
+        <div class="section-label" data-vi="MÔ PHỎNG VẬT LÝ" data-en="PHYSICS SIMULATION">MÔ PHỎNG VẬT LÝ</div>
+        <h2 class="section-title" data-vi="Chuyển động gió ngẫu nhiên tự nhiên" data-en="Natural & Organic Wind Movement"></h2>
+        <p class="section-desc" data-vi="Biểu đồ trực quan cách Magic Tree mô phỏng cành lá đung đưa tự nhiên nhưng vẫn đảm bảo vòng lặp (loop) mượt mà cho các phần mềm render." data-en="Visual curves showing how Magic Tree creates organic randomized wind sways with loop-perfect rendering."></p>
+
+        <div class="physics-container" style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px;">
+            <!-- Chart 1: Sway Amplitude -->
+            <div class="physics-card" style="background: var(--bg-surface); border: 1px solid rgba(85,85,85,0.3); border-radius: 12px; padding: 24px; position: relative;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                    <span data-vi="Biên độ dao động (150 Frames Loop)" data-en="Sway Amplitude (150f Loop)">Biên độ dao động (150 Frames Loop)</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--primary); background: var(--primary-glow); padding: 2px 8px; border-radius: 4px;">Loop-Perfect ✅</span>
+                </h3>
+                <div style="position: relative; width: 100%; aspect-ratio: 2/1; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
+                    <canvas id="swayCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%;"></canvas>
+                </div>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-vi="Biên độ uốn của cành lá biến thiên liên tục qua từng chu kỳ để tránh cảm giác lặp lại máy móc, nhưng vẫn khớp điểm đầu - cuối tại đúng frame 150 để tạo video loop hoàn hảo." data-en="Leaf and branch sway amplitudes vary dynamically across cycles to prevent robotic patterns, while locking perfectly at frame 150 for seamless video loops."></p>
+            </div>
+
+            <!-- Chart 2: Direction Jitter -->
+            <div class="physics-card" style="background: var(--bg-surface); border: 1px solid rgba(85,85,85,0.3); border-radius: 12px; padding: 24px; position: relative;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                    <span data-vi="Nhiễu động hướng gió (0s - 16s)" data-en="Wind Direction Jitter (0s - 16s)">Nhiễu động hướng gió (0s - 16s)</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--warning); background: rgba(239, 108, 0, 0.15); padding: 2px 8px; border-radius: 4px;">Turbulence 🌪️</span>
+                </h3>
+                <div style="position: relative; width: 100%; aspect-ratio: 2/1; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
+                    <canvas id="jitterCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%;"></canvas>
+                </div>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-vi="Hướng gió biến động ngẫu nhiên giúp cành lá lay động sole tự nhiên. Thuật toán tự động xử lý khớp nối chu kỳ (Bake Range) để tránh hiện tượng giật khung hình khi lặp lại video." data-en="Wind directions shift organically for realistic sways. The algorithm handles range-blending behind the scenes to avoid any visual pops during video loops."></p>
+            </div>
+
+            <!-- Chart 3: Vogel Drag Reduction -->
+            <div class="physics-card" style="background: var(--bg-surface); border: 1px solid rgba(85,85,85,0.3); border-radius: 12px; padding: 24px; position: relative;">
+                <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                    <span data-vi="Kháng cản khí động học (Vogel Drag)" data-en="Aerodynamic Drag (Vogel Drag)">Kháng cản khí động học (Vogel Drag)</span>
+                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #a278ff; background: rgba(162, 120, 255, 0.15); padding: 2px 8px; border-radius: 4px;">Reconfiguration 🍃</span>
+                </h3>
+                <div style="position: relative; width: 100%; aspect-ratio: 2/1; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
+                    <canvas id="dragCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%;"></canvas>
+                </div>
+                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-vi="Đường nét đứt màu đỏ thể hiện lực cản vật thể cứng (tăng theo hàm mũ 2). Đường màu xanh lá là Magic Tree: lá tự co cụm bóp nhỏ tán dưới gió to để giảm cản gió tới 60%, bảo vệ mô hình khỏi biến dạng quá đà." data-en="Dashed red line represents rigid body drag (exponential increase). Solid green line shows Magic Tree: foliage streamlines under wind to reduce drag by up to 60%, preventing unnatural mesh distortion."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TREE CATEGORIES -->
+    <section id="categories" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="NHẬN DẠNG SINH HỌC" data-en="BIO-STRUCTURE DETECTION">NHẬN DẠNG SINH HỌC</div>
+        <h2 class="section-title" data-vi="Tự động nhận dạng 6 nhóm thực vật" data-en="Automatic detection of 6 plant types"></h2>
+        <p class="section-desc" data-vi="Hệ thống tự động phân tích cấu trúc cây và từ khóa vật liệu để áp dụng các thiết lập mô phỏng gió phù hợp nhất cho từng nhóm thực vật." data-en="Magic Tree automatically analyzes plant structures and materials to apply the most natural wind behavior for each category."></p>
+
+        <div class="cat-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th data-vi="Nhóm cây" data-en="Plant Class">Nhóm cây</th>
+                        <th data-vi="Thực vật tiêu biểu" data-en="Representative Species">Thực vật tiêu biểu</th>
+                        <th data-vi="Đặc tính chuyển động gió" data-en="Wind Sway Behavior">Đặc tính chuyển động gió</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="cat-badge">SMALL</span></td>
+                        <td data-vi="Cỏ nền, rêu bụi, hoa dại thấp sát đất" data-en="Lawn grass, moss, low groundcover wildflowers">Cỏ nền, rêu bụi, hoa dại thấp sát đất</td>
+                        <td data-vi="Dao động tần số cao cành lá sát đất, thân cỏ uốn cong mềm dẻo theo làn gió mặt đất." data-en="High-frequency leaf flutter close to ground, flexible grass blade bending."></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cat-badge">SHRUB</span></td>
+                        <td data-vi="Cây bụi tầm thấp, hoa hồng bụi, cây trang trí" data-en="Low shrubs, garden roses, ornamental low plants">Cây bụi tầm thấp, hoa hồng bụi, cây trang trí</td>
+                        <td data-vi="Rung lắc nhẹ nhàng phần cành ngọn tán bụi, neo giữ ổn định phần gốc gỗ sát mặt đất." data-en="Gentle upper branch sways, sturdy root anchoring near the soil line."></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cat-badge">TREE</span></td>
+                        <td data-vi="Cây đô thị tầm trung, cây bóng mát công cộng" data-en="Medium urban trees, public park shade trees">Cây đô thị tầm trung, cây bóng mát công cộng</td>
+                        <td data-vi="Cân bằng tự nhiên giữa độ uốn cong của thân chính và nhịp rung lắc của các tầng tán lá." data-en="Balanced natural sway between main trunk deflection and foliage vibration."></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cat-badge">BIG</span></td>
+                        <td data-vi="Cây cổ thụ lớn, xà cừ, bàng, đa cổ thụ" data-en="Large heritage trees, giant banyans, ancient maples">Cây cổ thụ lớn, xà cừ, bàng, đa cổ thụ</td>
+                        <td data-vi="Dao động chậm rãi và uy nghi của thân gỗ lớn, các cành nhánh nặng trĩu lay động biên độ lớn." data-en="Slow, majestic sways of heavy timber trunks, large branches waving."></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cat-badge">PALM</span></td>
+                        <td data-vi="Cọ cảnh, cau vua, các loài cây họ cau cảnh" data-en="Landscape palms, royal palms, cycads">Cọ cảnh, cau vua, các loài cây họ cau cảnh</td>
+                        <td data-vi="Thân sơ dẻo dai uốn nhẹ từ ngọn, lá tàu cọ vẩy động mạnh theo luồng khí nhưng cản xoắn thấp." data-en="Flexible fibrous trunk bending near the crown, long fronds whipping with low twisting."></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cat-badge">COCONUT</span></td>
+                        <td data-vi="Dừa xiêm, dừa cảnh cao, cọ dầu thân gỗ cao" data-en="Coconut palms, tall oil palms, coastal palms">Dừa xiêm, dừa cảnh cao, cọ dầu thân gỗ cao</td>
+                        <td data-vi="Thân dừa uốn gập gợn sóng đặc trưng dưới sức gió mạnh, các tàu lá dừa vẩy nhịp nhàng biên độ cao." data-en="Wavy trunk bending under heavy wind speeds, large palm fronds swaying rhythmically."></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- STEPS / WORKFLOW -->
+    <section class="steps-section" id="workflow">
+        <div class="section-label" data-vi="QUY TRÌNH" data-en="STEPS">QUY TRÌNH</div>
+        <h2 class="section-title" data-vi="3 bước biến cây tĩnh thành cây động" data-en="3 steps from static to dynamic"></h2>
+        <p class="section-desc" data-vi="Tự động hóa hoàn toàn các công đoạn phức tạp, tối ưu hóa tối đa thời gian thao tác scene." data-en="Fully automated pipelines to minimize manual tasks and maximize scene productivity."></p>
+
+        <div class="steps-grid">
+            <div class="step-item">
+                <div class="step-num">01</div>
+                <h3 data-vi="Chọn cây hoặc Proxy" data-en="Select Foliage/Proxy">Chọn cây hoặc Proxy</h3>
+                <p data-vi="Chọn các mô hình cây 3D hoặc file Proxy của Corona/V-Ray trực tiếp trong scene 3ds Max." data-en="Select any 3D plant models or V-Ray/Corona proxy objects directly in your 3ds Max viewports."></p>
+            </div>
+            <div class="step-item">
+                <div class="step-num">02</div>
+                <h3 data-vi="Baker gió 1-Click" data-en="1-Click Wind Bake">Baker gió 1-Click</h3>
+                <p data-vi="Nhấn nút gán gió. Magic Tree tự động quét chiều cao cây, convert proxy sang mesh và phân loại để áp hệ số gió tối ưu." data-en="Click apply. Magic Tree scans tree height, converts proxies, classifies types, and applies optimized wind presets."></p>
+            </div>
+            <div class="step-item">
+                <div class="step-num">03</div>
+                <h3 data-vi="Realtime Tweak & Render" data-en="Realtime Tweak & Render">Realtime Tweak & Render</h3>
+                <p data-vi="Tinh chỉnh hướng gió, chu kỳ lặp và 13 thông số gió trực tiếp thời gian thực, sau đó render chuỗi ảnh động." data-en="Fine-tune wind directions, loops, and 13 detailed parameters with realtime updates, then render your wind-swayed animations."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+        <div class="section-label" data-vi="BẢNG GIÁ" data-en="PRICING">BẢNG GIÁ</div>
+        <h2 class="section-title" data-vi="Mua một lần. Dùng trọn đời." data-en="Pay once. Use forever."></h2>
+        <p class="section-desc" data-vi="Một giấy phép kích hoạt duy nhất theo mã ID phần cứng máy tính (HWID), sử dụng không giới hạn." data-en="A single perpetual license tied securely to your computer hardware ID, providing unlimited usage."></p>
+
+        <div class="pricing-section">
+            <div class="price-card">
+                <div class="price-badge">LIFETIME LICENSE</div>
+                <h3 data-vi="Magic Tree Pro" data-en="Magic Tree Pro">Magic Tree Pro</h3>
+                <div class="price-amount" data-vi="<del>500.000đ</del> 350.000đ <span>/ vĩnh viễn</span>" data-en="<del>$19</del> $15 <span>/ lifetime</span>"></div>
+                <div class="price-period" data-vi="Giảm giá 30% · Không phí định kỳ thuê bao" data-en="30% off special offer · No subscription or recurring fees"></div>
+                
+                <ul class="price-features">
+                    <li data-vi="Mô phỏng gió chuyển động 4 lớp tự nhiên và siêu mượt" data-en="Natural and ultra-smooth 4-layer wind simulations"></li>
+                    <li data-vi="Tương thích hoàn toàn Chaos Cosmos, Proxy, Maxtree, Globe Plants" data-en="Fully supports Chaos Cosmos, proxies, Maxtree, and Globe Plants"></li>
+                    <li data-vi="Thao tác cực nhanh 1-Click, không lag giật viewport" data-en="1-Click fast workflow, zero viewport lag"></li>
+                    <li data-vi="Cập nhật phiên bản mới miễn phí trọn đời" data-en="Lifetime free updates (Supports Max 2022-2026+)"></li>
+                    <li data-vi="Hỗ trợ kỹ thuật trực tiếp 1-1 từ tác giả" data-en="Direct 1-on-1 developer support from the author"></li>
+                </ul>
+
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center;" data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="background: var(--bg-surface);">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title" data-vi="Giải đáp thắc mắc kỹ thuật" data-en="Technical Frequently Asked Questions"></h2>
+        <p class="section-desc" data-vi="Các thông tin kỹ thuật quan trọng giúp bạn an tâm sử dụng trong dự án thương mại." data-en="Essential technical details for implementing the tool in commercial production."></p>
+
+        <div class="faq-section">
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 data-vi="Plugin chạy trên những phiên bản 3ds Max và môi trường nào?" data-en="Which 3ds Max versions and runtimes are supported?"></h3>
+                    <p data-vi="Magic Tree hỗ trợ 3ds Max từ phiên bản 2022 đến 2026+. Plugin tự động biên dịch và tương thích đa nền tảng: chạy trên .NET Framework 4.8 (Max 2022-2025) và chuyển đổi sang .NET 8 mới nhất (cho Max 2026+)." data-en="The plugin supports 3ds Max 2022 up to 2026+. It automatically compiles and routes calls between .NET Framework 4.8 (for 3ds Max 2022-2025) and .NET 8 (for 3ds Max 2026+) based on host architecture."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Tôi dùng Chaos Scatter, Forest Pack để rải rừng cây có bị đập chuyển động giống nhau không?" data-en="If I use Chaos Scatter or Forest Pack, will the scattered trees look identical?"></h3>
+                    <p data-vi="Không. Magic Tree tự động áp dụng độ lệch pha ngẫu nhiên (Phase Offset) cho từng cây đơn lẻ trong cảnh. Khi bạn rải hàng ngàn cây bằng Forest Pack hay Chaos Scatter, chúng sẽ tự động lay động sole nhịp nhàng cực kỳ tự nhiên thay vì chuyển động đồng điệu cơ học." data-en="No. Magic Tree automatically applies unique random phase offsets to each individual tree in the scene. Even if you scatter thousands of plants using Forest Pack or Chaos Scatter, they will sway out-of-phase dynamically instead of looking synchronized."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Việc gán gió lên các đối tượng Proxy có làm mất file hay hỏng vật liệu gốc không?" data-en="Does applying wind to Proxy objects risk losing files or ruining materials?"></h3>
+                    <p data-vi="Hoàn toàn không. Magic Tree sử dụng cơ chế bảo toàn thông tin gốc: vật liệu Multi-Material và tọa độ tham chiếu của Proxy được giữ nguyên vẹn 100%. Mọi thao tác gán gió đều hỗ trợ phím Ctrl+Z hoàn tác cực kỳ an toàn, trả lại đúng trạng thái Proxy nguyên bản mà không làm thay đổi hay phân tách file gốc." data-en="Not at all. Magic Tree features a strict safety layer: Multi-Materials and original coordinates of the proxies are 100% preserved. All actions support standard Ctrl+Z undo keys, returning the objects to their original proxy state without modifying the source files."></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025–2026 <a href="index.html">archih3.com</a> · Magic Tree by Hồ Hữu Hoàng · Made in Vietnam 🇻🇳</p>
+    </footer>
+
+    <!-- LANGUAGE SWITCH & WIND CHART JS -->
+    <script>
+        let currentLang = 'vi';
+        
+        function drawSwayChart() {
+            const canvas = document.getElementById('swayCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            
+            const w = rect.width;
+            const h = rect.height;
+            
+            const padLeft = 40;
+            const padRight = 20;
+            const padTop = 20;
+            const padBottom = 30;
+            
+            const chartW = w - padLeft - padRight;
+            const chartH = h - padTop - padBottom;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            // Grid lines and style settings
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.lineWidth = 1;
+            ctx.fillStyle = '#888888';
+            ctx.font = '10px "JetBrains Mono", monospace';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            
+            // Y Grid & Labels (-0.1 to 1.1)
+            const yLines = [-0.1, 0.2, 0.4, 0.6, 0.8, 1.1];
+            yLines.forEach(val => {
+                const yRatio = (val - (-0.1)) / 1.2;
+                const y = padTop + chartH - yRatio * chartH;
+                
+                ctx.beginPath();
+                ctx.moveTo(padLeft, y);
+                ctx.lineTo(w - padRight, y);
+                ctx.stroke();
+                
+                ctx.fillText(val.toFixed(1), padLeft - 8, y);
+            });
+            
+            // X Grid & Labels (0 to 150 Frames)
+            const xLines = [0, 25, 50, 75, 100, 125, 150];
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            xLines.forEach(val => {
+                const xRatio = val / 150;
+                const x = padLeft + xRatio * chartW;
+                
+                ctx.beginPath();
+                ctx.moveTo(x, padTop);
+                ctx.lineTo(x, padTop + chartH);
+                ctx.stroke();
+                
+                ctx.fillText(val, x, padTop + chartH + 6);
+            });
+            
+            // Axes titles
+            ctx.save();
+            ctx.translate(12, padTop + chartH / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = 'center';
+            const labelAmp = currentLang === 'vi' ? 'Biên độ' : 'Amplitude';
+            ctx.fillText(labelAmp, 0, 0);
+            ctx.restore();
+            
+            ctx.textAlign = 'center';
+            ctx.fillText('Frame', padLeft + chartW / 2, padTop + chartH + 18);
+            
+            // Reference Envelope (Dashed Line)
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+            ctx.lineWidth = 1.2;
+            ctx.setLineDash([4, 4]);
+            for (let f = 0; f <= 150; f++) {
+                const xRatio = f / 150;
+                const x = padLeft + xRatio * chartW;
+                
+                const baseAmp = 0.42 + 0.12 * Math.cos(2 * Math.PI * xRatio) + 0.08 * Math.sin(4 * Math.PI * xRatio);
+                const offset = 0.42 + 0.05 * Math.sin(2 * Math.PI * xRatio);
+                const valUpper = baseAmp * 1.1 + offset;
+                
+                const yRatio = (valUpper - (-0.1)) / 1.2;
+                const y = padTop + chartH - yRatio * chartH;
+                
+                if (f === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            
+            // Solid Sway Wave (Green)
+            ctx.beginPath();
+            ctx.strokeStyle = '#66bb6a';
+            ctx.lineWidth = 2.2;
+            ctx.setLineDash([]);
+            ctx.shadowColor = 'rgba(102, 187, 106, 0.4)';
+            ctx.shadowBlur = 6;
+            
+            for (let f = 0; f <= 150; f++) {
+                const xRatio = f / 150;
+                const x = padLeft + xRatio * chartW;
+                
+                const baseSin = Math.sin(2 * Math.PI * 4.2 * xRatio + Math.PI / 4);
+                const ampMod = 0.42 + 0.12 * Math.cos(2 * Math.PI * xRatio) + 0.08 * Math.sin(4 * Math.PI * xRatio);
+                const offset = 0.42 + 0.05 * Math.sin(2 * Math.PI * xRatio);
+                const val = baseSin * ampMod + offset;
+                
+                const yRatio = (val - (-0.1)) / 1.2;
+                const y = padTop + chartH - yRatio * chartH;
+                
+                if (f === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+        }
+        
+        function drawJitterChart() {
+            const canvas = document.getElementById('jitterCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            
+            const w = rect.width;
+            const h = rect.height;
+            
+            const padLeft = 40;
+            const padRight = 20;
+            const padTop = 20;
+            const padBottom = 30;
+            
+            const chartW = w - padLeft - padRight;
+            const chartH = h - padTop - padBottom;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.lineWidth = 1;
+            ctx.fillStyle = '#888888';
+            ctx.font = '10px "JetBrains Mono", monospace';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            
+            // Y Grid & Labels (-6deg to 6deg)
+            const yLines = [-6, -4, -2, 0, 2, 4, 6];
+            yLines.forEach(val => {
+                const yRatio = (val - (-6)) / 12;
+                const y = padTop + chartH - yRatio * chartH;
+                
+                ctx.beginPath();
+                ctx.moveTo(padLeft, y);
+                ctx.lineTo(w - padRight, y);
+                ctx.stroke();
+                
+                ctx.fillText(val + '°', padLeft - 8, y);
+            });
+            
+            // X Grid & Labels (0s to 16s)
+            const xLines = [0, 2, 4, 6, 8, 10, 12, 14, 16];
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            xLines.forEach(val => {
+                const xRatio = val / 16;
+                const x = padLeft + xRatio * chartW;
+                
+                ctx.beginPath();
+                ctx.moveTo(x, padTop);
+                ctx.lineTo(x, padTop + chartH);
+                ctx.stroke();
+                
+                ctx.fillText(val + 's', x, padTop + chartH + 6);
+            });
+            
+            // Axes titles
+            ctx.save();
+            ctx.translate(12, padTop + chartH / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = 'center';
+            const labelDeviation = currentLang === 'vi' ? 'Lệch hướng (độ)' : 'Deviation (deg)';
+            ctx.fillText(labelDeviation, 0, 0);
+            ctx.restore();
+            
+            ctx.textAlign = 'center';
+            const labelTime = currentLang === 'vi' ? 'Thời gian' : 'Time';
+            ctx.fillText(labelTime, padLeft + chartW / 2, padTop + chartH + 18);
+            
+            function getJitterVal(t) {
+                return 2.2 * Math.sin(0.42 * t - 0.5) + 1.4 * Math.cos(0.85 * t + 0.8) + 0.5 * Math.sin(1.8 * t + 1.5);
+            }
+            
+            function getYCoord(val) {
+                const yRatio = (val - (-6)) / 12;
+                return padTop + chartH - yRatio * chartH;
+            }
+            
+            // Blue Line (Infinite Turbulence)
+            ctx.beginPath();
+            ctx.strokeStyle = '#29b6f6';
+            ctx.lineWidth = 1.8;
+            ctx.shadowColor = 'rgba(41, 182, 246, 0.3)';
+            ctx.shadowBlur = 4;
+            
+            for (let t = 0; t <= 16; t += 0.1) {
+                const x = padLeft + (t / 16) * chartW;
+                const y = getYCoord(getJitterVal(t));
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+            
+            // Orange Line (5-second baked loop)
+            ctx.beginPath();
+            ctx.strokeStyle = '#ef6c00';
+            ctx.lineWidth = 2.2;
+            ctx.shadowColor = 'rgba(239, 108, 0, 0.4)';
+            ctx.shadowBlur = 6;
+            
+            const startVal = getJitterVal(0);
+            for (let t = 0; t <= 5; t += 0.1) {
+                const x = padLeft + (t / 16) * chartW;
+                let val = getJitterVal(t);
+                
+                // Blend smoothly back to startVal towards the 5s mark
+                if (t > 3.0) {
+                    const blendRatio = (t - 3.0) / 2.0;
+                    const tSmooth = blendRatio * blendRatio * (3 - 2 * blendRatio);
+                    val = val * (1 - tSmooth) + startVal * tSmooth;
+                }
+                
+                const y = getYCoord(val);
+                if (t === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+        }
+
+        function drawDragChart() {
+            const canvas = document.getElementById('dragCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            
+            const w = rect.width;
+            const h = rect.height;
+            
+            const padLeft = 40;
+            const padRight = 20;
+            const padTop = 20;
+            const padBottom = 30;
+            
+            const chartW = w - padLeft - padRight;
+            const chartH = h - padTop - padBottom;
+            
+            ctx.clearRect(0, 0, w, h);
+            
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+            ctx.lineWidth = 1;
+            ctx.fillStyle = '#888888';
+            ctx.font = '10px "JetBrains Mono", monospace';
+            ctx.textAlign = 'right';
+            ctx.textBaseline = 'middle';
+            
+            // Y Grid & Labels (0.0 to 1.0)
+            const yLines = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0];
+            yLines.forEach(val => {
+                const y = padTop + chartH - val * chartH;
+                
+                ctx.beginPath();
+                ctx.moveTo(padLeft, y);
+                ctx.lineTo(w - padRight, y);
+                ctx.stroke();
+                
+                ctx.fillText(val.toFixed(1), padLeft - 8, y);
+            });
+            
+            // X Grid & Labels (0 to 30 m/s)
+            const xLines = [0, 5, 10, 15, 20, 25, 30];
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top';
+            xLines.forEach(val => {
+                const xRatio = val / 30;
+                const x = padLeft + xRatio * chartW;
+                
+                ctx.beginPath();
+                ctx.moveTo(x, padTop);
+                ctx.lineTo(x, padTop + chartH);
+                ctx.stroke();
+                
+                ctx.fillText(val + 'm/s', x, padTop + chartH + 6);
+            });
+            
+            // Axes titles
+            ctx.save();
+            ctx.translate(12, padTop + chartH / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = 'center';
+            const labelDrag = currentLang === 'vi' ? 'Lực cản khí động' : 'Aerodynamic Drag';
+            ctx.fillText(labelDrag, 0, 0);
+            ctx.restore();
+            
+            ctx.textAlign = 'center';
+            const labelSpeed = currentLang === 'vi' ? 'Tốc độ gió' : 'Wind Speed';
+            ctx.fillText(labelSpeed, padLeft + chartW / 2, padTop + chartH + 18);
+            
+            // Red Line (Rigid object drag proportional to V^2)
+            ctx.beginPath();
+            ctx.strokeStyle = '#ef5350';
+            ctx.lineWidth = 1.5;
+            ctx.setLineDash([3, 3]);
+            for (let v = 0; v <= 30; v += 0.5) {
+                const xRatio = v / 30;
+                const x = padLeft + xRatio * chartW;
+                const dragVal = Math.pow(xRatio, 2);
+                const y = padTop + chartH - dragVal * chartH;
+                
+                if (v === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            // Green Line (Flexible Reconfiguration proportional to V^1.3)
+            ctx.beginPath();
+            ctx.strokeStyle = '#66bb6a';
+            ctx.lineWidth = 2.2;
+            ctx.shadowColor = 'rgba(102, 187, 106, 0.4)';
+            ctx.shadowBlur = 6;
+            
+            for (let v = 0; v <= 30; v += 0.5) {
+                const xRatio = v / 30;
+                const x = padLeft + xRatio * chartW;
+                const dragVal = Math.pow(xRatio, 1.3) * 0.72;
+                const y = padTop + chartH - dragVal * chartH;
+                
+                if (v === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+            ctx.shadowColor = 'transparent';
+            ctx.shadowBlur = 0;
+        }
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = text;
+                } else {
+                    el.innerHTML = text;
+                }
+            });
+            
+            // Redraw charts with correct translations
+            drawSwayChart();
+            drawJitterChart();
+            drawDragChart();
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            setLang('vi');
+        });
+        
+        window.addEventListener('resize', () => {
+            drawSwayChart();
+            drawJitterChart();
+            drawDragChart();
+        });
+    </script>
+</body>
+</html>
