@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mục Lục - Thư Viện Phương Trình Kindle</title>
+    <style>
+        /* Khóa cứng layout vừa khung màn hình PPW5 */
+        body {
+            margin: 0;
+            padding: 5%;
+            width: 90vw;
+            height: 90vh;
+            overflow: hidden;
+            background-color: #ffffff;
+            color: #000000;
+            font-family: serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000000;
+            padding-bottom: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .menu-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .menu-title {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 20px;
+            border: 2px solid #000000;
+            text-decoration: none;
+            color: #000000;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-align: center;
+            background-color: #ffffff;
+        }
+
+        .menu-item:active {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Thanh điều hướng chân trang */
+        .footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 2px solid #000000;
+            padding-top: 15px;
+        }
+
+        .footer-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border: 2px solid #000000;
+            text-decoration: none;
+            color: #000000;
+            font-weight: bold;
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        THƯ VIỆN PHƯƠNG TRÌNH
+    </div>
+
+    <div class="menu-container">
+        <div class="menu-title">Danh sách bài đọc</div>
+        
+        <a href="pytago.html" class="menu-item">
+            1. Định lý Pytago (Hình học)
+        </a>
+        
+        <a href="emc2.html" class="menu-item">
+            2. Thuyết tương đối hẹp (Vật lý)
+        </a>
+    </div>
+
+    <div class="footer">
+        <a href="../index.html" class="footer-btn">← Về trang chủ AH3</a>
+    </div>
+
+</body>
+</html>
