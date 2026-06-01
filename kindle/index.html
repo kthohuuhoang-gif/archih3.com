@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mục Lục - Thư Viện Phương Trình Kindle</title>
     <style>
-        /* Khóa cứng layout vừa khung màn hình PPW5 */
-        body {
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* Đảm bảo khung HTML/Body chiếm chính xác 100% vùng nhìn thấy thực tế */
+        html, body {
+            height: 100%;
+            width: 100%;
             margin: 0;
-            padding: 5%;
-            width: 90vw;
-            height: 90vh;
+            padding: 0;
             overflow: hidden;
+        }
+
+        body {
+            padding: 4% 5%;
             background-color: #ffffff;
             color: #000000;
             font-family: serif;
@@ -23,8 +31,8 @@
         .header {
             text-align: center;
             border-bottom: 2px solid #000000;
-            padding-bottom: 10px;
-            font-size: 1.2rem;
+            padding-bottom: 8px;
+            font-size: 1.1rem;
             font-weight: bold;
         }
 
@@ -34,23 +42,25 @@
             flex-direction: column;
             justify-content: center;
             gap: 15px;
+            padding: 15px 0;
+            overflow: hidden;
         }
 
         .menu-title {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .menu-item {
             display: block;
-            padding: 20px;
+            padding: 15px;
             border: 2px solid #000000;
             text-decoration: none;
             color: #000000;
             font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1.15rem;
             text-align: center;
             background-color: #ffffff;
         }
@@ -66,17 +76,17 @@
             justify-content: center;
             align-items: center;
             border-top: 2px solid #000000;
-            padding-top: 15px;
+            padding-top: 10px;
         }
 
         .footer-btn {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border: 2px solid #000000;
             text-decoration: none;
             color: #000000;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.95rem;
             text-transform: uppercase;
         }
     </style>

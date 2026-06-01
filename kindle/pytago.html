@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Định lý Pytago - Trang 1</title>
     <style>
-        /* Khóa cứng layout vừa khung màn hình PPW5 */
-        body {
+        * {
+            box-sizing: border-box;
+        }
+        
+        /* Đảm bảo khung HTML/Body chiếm chính xác 100% vùng nhìn thấy thực tế */
+        html, body {
+            height: 100%;
+            width: 100%;
             margin: 0;
-            padding: 5%;
-            width: 90vw;
-            height: 90vh;
+            padding: 0;
             overflow: hidden;
+        }
+
+        body {
+            padding: 4% 5%;
             background-color: #ffffff;
             color: #000000;
             font-family: serif;
@@ -23,8 +31,8 @@
         .header {
             text-align: center;
             border-bottom: 2px solid #000000;
-            padding-bottom: 10px;
-            font-size: 1.2rem;
+            padding-bottom: 8px;
+            font-size: 1.1rem;
             font-weight: bold;
         }
 
@@ -35,19 +43,29 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            padding: 10px 0;
+            overflow: hidden; /* Khóa cứng không cho container phình ra */
         }
 
-        /* Khung chứa ảnh phương trình đã convert sang Base64 */
-        .equation-image {
-            width: 80%;
-            max-width: 400px;
-            margin-bottom: 30px;
+        /* Khung chứa phương trình Vector SVG */
+        .equation-svg {
+            max-width: 90%;
+            max-height: 15vh;
+            height: auto;
+            margin-bottom: 15px;
         }
 
+        /* Điều chỉnh cỡ chữ an toàn hơn, tránh tràn dòng trên màn hình nhỏ */
         .description {
-            font-size: 1.4rem;
-            line-height: 1.6;
+            font-size: 1.15rem;
+            line-height: 1.5;
             text-align: justify;
+            width: 100%;
+        }
+
+        /* Loại bỏ khoảng lề mặc định của trình duyệt để kiểm soát tốt chiều cao */
+        .description p {
+            margin: 6px 0;
         }
 
         /* Thanh điều hướng */
@@ -56,17 +74,17 @@
             justify-content: space-between;
             align-items: center;
             border-top: 2px solid #000000;
-            padding-top: 15px;
+            padding-top: 10px;
         }
 
         .nav-btn {
             display: inline-block;
-            padding: 15px 25px;
+            padding: 10px 20px;
             border: 2px solid #000000;
             text-decoration: none;
             color: #000000;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             text-transform: uppercase;
         }
         
@@ -84,7 +102,17 @@
     </div>
 
     <div class="equation-container">
-        <img class="equation-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" alt="a^2 + b^2 = c^2" />
+        <!-- Phương trình biểu diễn bằng SVG Vector thuần túy - sắc nét tuyệt đối, không cần JS -->
+        <svg class="equation-svg" viewBox="0 0 185 50" width="185" height="50">
+            <text x="10" y="38" font-family="serif" font-size="34" font-style="italic" fill="#000000">a</text>
+            <text x="28" y="22" font-family="serif" font-size="20" fill="#000000">2</text>
+            <text x="44" y="38" font-family="serif" font-size="34" fill="#000000"> + </text>
+            <text x="80" y="38" font-family="serif" font-size="34" font-style="italic" fill="#000000">b</text>
+            <text x="98" y="22" font-family="serif" font-size="20" fill="#000000">2</text>
+            <text x="114" y="38" font-family="serif" font-size="34" fill="#000000"> = </text>
+            <text x="150" y="38" font-family="serif" font-size="34" font-style="italic" fill="#000000">c</text>
+            <text x="168" y="22" font-family="serif" font-size="20" fill="#000000">2</text>
+        </svg>
         
         <div class="description">
             <p><strong>Lịch sử:</strong> Gắn liền với nhà toán học Hy Lạp Pythagoras, dù nền văn minh Babylon đã biết đến nó trước đó cả nghìn năm.</p>
