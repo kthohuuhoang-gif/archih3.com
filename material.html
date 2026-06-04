@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AH3 Magic Material — Standalone Offline PBR Material Generator for 3ds Max</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --bg-page: #1a1a1a;
+            --bg-main: #242424;
+            --bg-surface: #2e2e2e;
+            --bg-light: #3a3a3a;
+            --primary: #4db6ac; /* Teal theme for Magic Material */
+            --primary-hover: #5ec4ba;
+            --primary-glow: rgba(77, 182, 172, 0.15);
+            --primary-glow-strong: rgba(77, 182, 172, 0.3);
+            --text: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --border: #444444;
+            --destructive: #c62828;
+            --warning: #ef6c00;
+            --amber: #b48232;
+            --teal-deep: #10302d;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-page);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* BACKGROUND EFFECTS */
+        .bg-glow {
+            position: absolute; top: 10%; left: 50%;
+            transform: translateX(-50%); width: 1000px; height: 1000px;
+            background: radial-gradient(circle, rgba(77,182,172,0.04) 0%, transparent 70%);
+            pointer-events: none; z-index: -1;
+        }
+        .bg-grid {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(77,182,172,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(77,182,172,0.015) 1px, transparent 1px);
+            background-size: 50px 50px; pointer-events: none; z-index: -1;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            padding: 16px 40px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(26, 26, 26, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(77, 182, 172, 0.1);
+        }
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px; font-weight: 600;
+            color: var(--primary); text-decoration: none; letter-spacing: -0.5px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .logo span { color: var(--text-secondary); font-weight: 400; }
+        .nav-links { display: flex; gap: 24px; align-items: center; }
+        .nav-links a {
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 14px; font-weight: 400; transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* LANG TOGGLE */
+        .lang-toggle {
+            display: inline-flex; align-items: center;
+            background: var(--bg-light); border-radius: 20px;
+            padding: 2px; cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; letter-spacing: 0.5px;
+        }
+        .lang-toggle button {
+            padding: 5px 12px; border: none; border-radius: 18px;
+            cursor: pointer; background: transparent;
+            color: var(--text-muted); font-family: inherit;
+            font-size: inherit; letter-spacing: inherit; transition: all 0.2s;
+        }
+        .lang-toggle button.active {
+            background: var(--primary); color: #121212; font-weight: 600;
+        }
+
+        /* BUTTONS */
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: var(--primary);
+            color: #121212; font-weight: 600; font-size: 14px;
+            border: none; border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover); transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(77, 182, 172, 0.3);
+        }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: transparent;
+            color: var(--text); font-weight: 400; font-size: 14px;
+            border: 1px solid var(--border); border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* HERO */
+        .hero {
+            padding: 140px 24px 60px;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; position: relative;
+        }
+        .hero-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; color: var(--primary);
+            border: 1px solid rgba(77,182,172,0.3);
+            padding: 6px 16px; border-radius: 20px;
+            margin-bottom: 24px; background: var(--primary-glow); letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+            line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px;
+        }
+        .hero h1 .teal { color: var(--primary); }
+        .hero-sub {
+            font-size: 18px; color: var(--text-secondary);
+            max-width: 680px; margin: 0 auto 32px; font-weight: 300;
+        }
+        .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* VIDEO CONTAINER */
+        .video-section {
+            max-width: 800px; margin: 0 auto 80px; padding: 0 24px;
+        }
+        .video-box {
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(77,182,172,0.2); background: #000;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5); aspect-ratio: 16/9;
+            position: relative;
+        }
+
+        /* SECTIONS */
+        section { padding: 80px 24px; }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            color: var(--primary); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 12px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px); font-weight: 700;
+            letter-spacing: -1px; margin-bottom: 16px; text-align: center;
+        }
+        .section-desc {
+            font-size: 16px; color: var(--text-secondary);
+            max-width: 600px; font-weight: 300; margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        /* INTERACTIVE DEMO CONTAINER */
+        .interactive-section {
+            background: var(--bg-dark);
+            border-top: 1px solid rgba(77, 182, 172, 0.1);
+            border-bottom: 1px solid rgba(77, 182, 172, 0.1);
+        }
+        .app-demo-wrapper {
+            max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px;
+        }
+        .demo-bar {
+            display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+            background: #0d0d0d; padding: 10px 14px; border-radius: 8px; border: 1px solid #2a2a2a;
+        }
+        .demo-bar span { color: var(--text-secondary); font-size: 12px; margin-right: 4px; }
+        .demo-btn {
+            background: var(--bg-light); color: var(--text); border: 1px solid var(--border);
+            padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; transition: all 0.2s;
+        }
+        .demo-btn:hover { background: #484848; }
+        .demo-btn.active { background: var(--primary); color: var(--teal-deep); border-color: var(--primary); font-weight: 600; }
+
+        .app-window {
+            width: 100%; max-width: 780px; background: var(--bg-page); border-radius: 12px; overflow: hidden;
+            border: 1px solid #000; box-shadow: 0 10px 40px rgba(0,0,0,.5);
+        }
+
+        /* Mockup Header */
+        .mock-header {
+            padding: 16px 22px; background: linear-gradient(135deg,#242424,#191919);
+            border-bottom: 1px solid var(--border); position: relative;
+        }
+        .mock-header .accentbar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--primary); }
+        .mock-header .arch { font-size: 10.5px; font-weight: 800; letter-spacing: 3px; color: var(--primary); text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+        .mock-header .name { font-size: 25px; font-weight: 300; letter-spacing: .5px; margin-top: 2px; }
+        .mock-header .name b { font-weight: 700; }
+        .mock-header .meta { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); text-align: right; font-size: 10.5px; color: var(--text-secondary); line-height: 1.7; }
+        .mock-header .meta b { color: var(--text); }
+
+        .mock-body { display: flex; border-bottom: 1px solid var(--border); }
+        .mock-left { flex: 1.15; padding: 16px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--border); }
+        .mock-right { width: 300px; padding: 16px; display: flex; flex-direction: column; gap: 12px; background: #202020; }
+
+        /* big preview */
+        .preview-big {
+            height: 296px; border-radius: 10px; background: radial-gradient(circle at 50% 40%,#3a3a3a,#202020);
+            border: 1px solid var(--border); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+        }
+        .preview-big .swatch { width: 100%; height: 100%; }
+        .preview-big .lbl {
+            position: absolute; left: 12px; top: 10px; font-size: 12px; font-weight: 600;
+            background: rgba(0,0,0,.65); padding: 4px 10px; border-radius: 5px; color: var(--primary);
+        }
+        .preview-big .src {
+            position: absolute; right: 12px; bottom: 10px; font-size: 10.5px; color: var(--text-secondary);
+            background: rgba(0,0,0,.5); padding: 3px 9px; border-radius: 5px;
+        }
+
+        /* dropzone */
+        .dropzone {
+            flex: 1; min-height: 424px; border: 2px dashed var(--primary); border-radius: 12px;
+            background: rgba(77,182,172,.03); display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 16px; text-align: center; cursor: pointer; transition: .2s;
+        }
+        .dropzone:hover { background: rgba(77,182,172,.07); }
+        .dropzone .ic { font-size: 46px; opacity: .55; }
+        .dropzone h2 { font-size: 18px; }
+        .dropzone p { font-size: 12.5px; color: var(--text-secondary); max-width: 330px; line-height: 1.6; }
+        .dropzone .types { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
+        .dropzone .types span {
+            font-size: 10.5px; padding: 3px 9px; border-radius: 11px; background: var(--bg-surface);
+            color: var(--text-secondary); border: 1px solid var(--border);
+        }
+
+        /* thumbnails 3x2 */
+        .thumbs { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+        .thumb {
+            aspect-ratio: 1/1; border-radius: 8px; overflow: hidden; cursor: pointer;
+            border: 2px solid transparent; position: relative; background: var(--bg-surface); transition: .15s;
+        }
+        .thumb:hover { transform: translateY(-2px); }
+        .thumb.active { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+        .thumb .sw { width: 100%; height: 100%; }
+        .thumb .cap {
+            position: absolute; bottom: 0; left: 0; right: 0; font-size: 10.5px; text-align: center;
+            background: linear-gradient(transparent,rgba(0,0,0,.85)); color:#fff; padding: 9px 2px 3px; font-weight: 500;
+        }
+        .thumb .badge { position: absolute; top: 4px; right: 4px; font-size: 8.5px; padding: 1px 5px; border-radius: 3px; font-weight: 700; }
+        .badge.found { background: var(--primary); color: var(--teal-deep); }
+        .badge.gen { background: var(--amber); color: #1c1306; }
+
+        /* swatches gia lap */
+        .sw-sphere { background: radial-gradient(circle at 37% 28%, #eaeaea, #b0b0b0 22%, #6e6e6e 50%, #2c2c2c 78%, #141414); }
+        .sw-diffuse { background: repeating-linear-gradient(0deg,#7a4a32 0 13px,#693c27 13px 15px),repeating-linear-gradient(90deg,transparent 0 26px,#56331f 26px 28px); }
+        .sw-normal { background: #8a8fd8; background-image: radial-gradient(circle at 30% 30%,#9fa0ea,transparent 42%),radial-gradient(circle at 72% 70%,#6f7ad0,transparent 42%); }
+        .sw-rough { background: repeating-radial-gradient(circle at 50% 50%,#9a9a9a 0 3px,#767676 3px 7px); }
+        .sw-ao { background: radial-gradient(circle at 50% 42%,#d4d4d4,#4f4f4f 82%); }
+        .sw-disp { background: linear-gradient(135deg,#c4c4c4,#3e3e3e); }
+
+        /* right controls */
+        .mock-right h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; border-bottom: 1px solid var(--border); padding-bottom: 8px; color: var(--primary); }
+        .ctrl { margin-bottom: 10px; }
+        .ctrl label { display: block; font-size: 11px; color: var(--text-secondary); margin-bottom: 3px; }
+        .row { display: flex; align-items: center; gap: 8px; }
+        .slider { flex: 1; height: 4px; border-radius: 3px; background: var(--bg-surface); position: relative; }
+        .slider .fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--primary); border-radius: 3px; }
+        .slider .knob { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--primary); border: 2px solid #202020; }
+        .num { width: 48px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; color: var(--text); padding: 3px 4px; font-size: 11px; text-align: center; }
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-bottom: 10px; }
+        .toggle { width: 36px; height: 18px; border-radius: 9px; background: var(--primary); position: relative; cursor: pointer; transition: background 0.15s; }
+        .toggle.off { background: #555; }
+        .toggle .dot { position: absolute; top: 2px; left: 20px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: left 0.15s; }
+        .toggle.off .dot { left: 2px; }
+        .presets { display: flex; gap: 6px; }
+        .preset { flex: 1; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 5px; padding: 5px; font-size: 11px; text-align: center; cursor: pointer; }
+        .preset.on { border-color: var(--primary); color: var(--primary); background: rgba(77, 182, 172, 0.05); }
+        .preset:hover { background: #3a3a3a; }
+        .dropdown { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; font-size: 11px; color: var(--text); display: flex; justify-content: space-between; cursor: pointer; width: 100%; }
+        .dropdown .ar { color: var(--text-secondary); }
+        .divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+        .mock-footer { padding: 12px 16px; background: #191919; }
+        .gen-btn {
+            width: 100%; padding: 12px; border: none; border-radius: 6px; cursor: pointer;
+            background: linear-gradient(135deg,var(--primary),var(--primary-hover)); color: var(--teal-deep);
+            font-size: 14px; font-weight: 700; letter-spacing: .3px; box-shadow: 0 4px 14px rgba(77,182,172,.2);
+            transition: all 0.2s;
+        }
+        .gen-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+        .hidden { display: none !important; }
+        .note { font-size: 12px; color: var(--text-secondary); max-width: 780px; text-align: center; line-height: 1.6; margin-top: 14px; }
+        .note b { color: var(--primary); }
+
+        /* FEATURES */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; max-width: 1100px; margin: 0 auto;
+        }
+        .feature-card {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            border-radius: 12px; padding: 32px;
+            transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .feature-card:hover {
+            border-color: rgba(77,182,172,0.3); transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: var(--primary-glow); border: 1px solid rgba(77,182,172,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; margin-bottom: 20px;
+        }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 15px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        /* STEPS / WORKFLOW */
+        .steps-section {
+            background: var(--bg-main);
+        }
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px; max-width: 900px; margin: 0 auto;
+        }
+        .step-item {
+            text-align: center; position: relative;
+        }
+        .step-num {
+            font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700;
+            color: var(--primary); margin-bottom: 12px; opacity: 0.8;
+        }
+        .step-item h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .step-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; }
+
+        /* PRICING */
+        .pricing-section { max-width: 600px; margin: 0 auto; }
+        .price-card {
+            background: var(--bg-main); border: 1px solid var(--primary);
+            border-radius: 16px; padding: 48px 32px;
+            text-align: center; position: relative;
+            background: linear-gradient(135deg, var(--bg-main), rgba(77,182,172,0.05));
+        }
+        .price-card::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 4px; background: var(--primary); border-radius: 16px 16px 0 0;
+        }
+        .price-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; padding: 4px 12px; border-radius: 12px;
+            margin-bottom: 20px; letter-spacing: 0.5px;
+            background: var(--primary-glow); color: var(--primary);
+            font-weight: 600;
+        }
+        .price-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+        .price-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 36px; font-weight: 600; color: var(--primary);
+            margin-bottom: 4px; display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .price-amount del { font-size: 18px; color: var(--text-secondary); font-weight: 400; }
+        .price-amount span { font-size: 14px; font-weight: 400; color: var(--text-secondary); }
+        .price-period { font-size: 13px; color: var(--warning); margin-bottom: 32px; font-weight: 600; }
+        
+        .price-features {
+            list-style: none; text-align: left; max-width: 350px; margin: 0 auto 32px;
+        }
+        .price-features li {
+            padding: 8px 0; font-size: 15px; color: var(--text-secondary);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .price-features li::before {
+            content: '✓'; color: var(--primary); font-weight: 600;
+        }
+
+        /* FAQ */
+        .faq-section { max-width: 800px; margin: 0 auto; }
+        .faq-grid { display: flex; flex-direction: column; gap: 16px; }
+        .faq-item {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            border-radius: 8px; padding: 24px;
+        }
+        .faq-item h3 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .faq-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 24px; text-align: center;
+            border-top: 1px solid rgba(85,85,85,0.2);
+            background: var(--bg-dark);
+        }
+        footer p { font-size: 13px; color: var(--text-muted); }
+        footer a { color: var(--primary); text-decoration: none; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav { padding: 12px 20px; }
+            .mobile-menu-btn { display: block !important; }
+            .nav-links {
+                display: none !important; flex-direction: column;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(20px);
+                padding: 16px 20px; gap: 12px;
+                border-bottom: 1px solid rgba(77,182,172,0.1);
+            }
+            .nav-links.open { display: flex !important; }
+            .hero { padding: 100px 16px 40px; }
+            .mock-body { flex-direction: column; }
+            .mock-right { width: 100%; }
+            .features-grid { grid-template-columns: 1fr; }
+            .steps-grid { grid-template-columns: 1fr; gap: 24px; }
+            section { padding: 60px 16px; }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero { animation: fadeUp 0.8s ease-out; }
+        .video-section { animation: fadeUp 0.8s ease-out both; animation-delay: 0.1s; }
+        .feature-card { animation: fadeUp 0.6s ease-out both; }
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="logo">
+            <img src="magicmat_icon_48.png" alt="Magic Material" style="height:24px; vertical-align:middle; margin-right:6px; opacity:0.85;">AH3<span> Magic Material</span>
+        </a>
+        <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('open')" style="display:none; background:none; border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:var(--text); font-size:18px; cursor:pointer;">☰</button>
+        <div class="nav-links">
+            <a href="index.html" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
+            <a href="#features" data-vi="Tính năng" data-en="Features">Tính năng</a>
+            <a href="#demo" data-vi="Trải nghiệm" data-en="Interactive Demo">Trải nghiệm</a>
+            <a href="#workflow" data-vi="Sử dụng" data-en="Workflow">Sử dụng</a>
+            <a href="#pricing" data-vi="Bảng giá" data-en="Pricing">Bảng giá</a>
+            <a href="#faq" data-vi="FAQ" data-en="FAQ">FAQ</a>
+            <a href="https://youtube.com/@ArchiH3" target="_blank">YouTube</a>
+            <div class="lang-toggle">
+                <button class="active" onclick="setLang('vi')">VI</button>
+                <button onclick="setLang('en')">EN</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge" data-vi="100% OFFLINE PBR MATERIAL CREATOR" data-en="100% OFFLINE PBR MATERIAL CREATOR">100% OFFLINE PBR MATERIAL CREATOR</div>
+        <h1 data-vi="Khơi nguồn chất liệu.<br><span class='teal'>Tạo map siêu tốc.</span>" data-en="Unleash materials.<br><span class='teal'>Instant PBR setup.</span>"></h1>
+        <p class="hero-sub" data-vi="Plugin chuyên biệt tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement) từ ảnh 2D và thiết lập vật liệu thông minh cho 3ds Max. Tương thích sâu với V-Ray và Corona, giúp bạn bỏ qua các bước dựng map thủ công nhàm chán." data-en="Specialized plugin to automatically generate a complete set of PBR maps (Normal, Displacement, Roughness, AO) and set up material networks in 3ds Max. Deeply integrated with V-Ray and Corona to eliminate tedious manual workflows."></p>
+        <div class="hero-cta">
+            <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 200k" data-en="Get Lifetime — $9">Mua bản quyền — 200k</a>
+            <a href="https://drive.google.com/drive/folders/1QWiR367D6W229RLnVpZhB29-0uVSboBY?usp=drive_link" target="_blank" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+        </div>
+    </section>
+
+    <!-- VIDEO DEMO -->
+    <div class="video-section">
+        <div class="video-box" id="featured-video">
+            <iframe id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/Mv7O1F12D54?rel=0&modestbranding=1&color=white" title="AH3 Magic Material Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0;"></iframe>
+            <a id="yt-fallback" href="https://youtu.be/Mv7O1F12D54" target="_blank" style="display:none; position:absolute; inset:0; text-decoration:none; cursor:pointer;">
+                <img src="https://img.youtube.com/vi/Mv7O1F12D54/maxresdefault.jpg" alt="AH3 Magic Material Demo" style="width:100%; height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'">
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:72px; height:72px; border-radius:50%; background:rgba(77, 182, 172, 0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,0,0,0.4);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#121212"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div style="position:absolute; bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube">▶ Xem demo trên YouTube</div>
+            </a>
+        </div>
+        <script>
+            (function(){
+                var iframe = document.getElementById('yt-iframe');
+                var fallback = document.getElementById('yt-fallback');
+                if (window.location.protocol === 'file:') {
+                    iframe.style.display = 'none';
+                    fallback.style.display = 'block';
+                } else {
+                    iframe.onerror = function() {
+                        iframe.style.display = 'none';
+                        fallback.style.display = 'block';
+                    };
+                }
+            })();
+        </script>
+    </div>
+
+    <!-- INTERACTIVE DEMO (MOCKUP APP) -->
+    <section class="interactive-section" id="demo">
+        <div class="section-label" data-vi="TRẢI NGHIỆM GIAO DIỆN" data-en="INTERACTIVE DEMO">TRẢI NGHIỆM GIAO DIỆN</div>
+        <h2 class="section-title" data-vi="Trải nghiệm ứng dụng trực quan" data-en="Try the Plugin Interface"></h2>
+        <p class="section-desc" data-vi="Mô phỏng 100% cách hoạt động của plugin Magic Material Standalone trong 3ds Max. Nhấn vào các nút demo để xem các trạng thái." data-en="Simulates exactly how the Magic Material standalone plugin runs in 3ds Max. Click the demo buttons to switch states."></p>
+
+        <div class="app-demo-wrapper">
+            <div class="demo-bar">
+                <span data-vi="Trạng thái:" data-en="State:">Trạng thái:</span>
+                <button class="demo-btn" id="btnEmpty" onclick="setState('empty')" data-vi="① Chưa nạp (Kéo-Thả)" data-en="① Empty (Drag-Drop)">① Chưa nạp (Kéo-Thả)</button>
+                <button class="demo-btn active" id="btnLoaded" onclick="setState('loaded')" data-vi="② Đã nạp (Đầy đủ Map)" data-en="② Loaded (All Maps)">② Đã nạp (Đầy đủ Map)</button>
+            </div>
+
+            <div class="app-window">
+                <!-- HEADER -->
+                <div class="mock-header">
+                    <div class="accentbar"></div>
+                    <div class="arch">ArchiH3</div>
+                    <div class="name">Magic <b>Material</b></div>
+                    <div class="meta"><b>KTS. Hồ Hữu Hoàng</b><br>v1.0.0 · archih3.com</div>
+                </div>
+
+                <div class="mock-body">
+                    <div class="mock-left">
+                        <!-- EMPTY -->
+                        <div class="dropzone" id="dropzone">
+                            <div class="ic">⬇</div>
+                            <h2 data-vi="Kéo &amp; thả vào đây" data-en="Drag &amp; Drop here">Kéo &amp; thả vào đây</h2>
+                            <p data-vi="Thả ảnh Diffuse, cả folder texture, hoặc file nén — Magic Material tự nhận map có sẵn và sinh map còn thiếu." data-en="Drop a Diffuse map, a texture folder, or an archive — Magic Material detects existing maps and generates the missing ones."></p>
+                            <div class="types">
+                                <span>JPG / PNG / TGA</span><span>Folder vendor</span><span>.rar / .zip / .7z</span>
+                            </div>
+                        </div>
+
+                        <!-- LOADED -->
+                        <div id="loadedView" style="display:flex; flex-direction:column; gap:12px;">
+                            <div class="preview-big">
+                                <span class="lbl" id="bigLabel">Material</span>
+                                <div class="swatch sw-sphere" id="bigSwatch"></div>
+                                <span class="src" id="bigSrc">CGAxis · brick_wall_01 (.ah3prv)</span>
+                            </div>
+                            <div class="thumbs" id="thumbs"></div>
+                        </div>
+                    </div>
+
+                    <div class="mock-right">
+                        <h3 data-vi="Thiết lập vật liệu" data-en="Material Settings">Thiết lập vật liệu</h3>
+                        <div class="ctrl">
+                            <label data-vi="Tiling (Lặp map)" data-en="Tiling">Tiling</label>
+                            <div class="row">
+                                <div class="slider"><div class="fill" style="width:45%"></div><div class="knob" style="left:45%"></div></div>
+                                <input class="num" value="10" readonly>
+                            </div>
+                        </div>
+                        <div class="ctrl">
+                            <label data-vi="Rotation (Xoay)" data-en="Rotation">Rotation</label>
+                            <div class="row">
+                                <div class="slider"><div class="fill" style="width:0%"></div><div class="knob" style="left:0%"></div></div>
+                                <input class="num" value="0.0" readonly>
+                            </div>
+                        </div>
+                        <div class="ctrl">
+                            <label data-vi="Scale (Tỉ lệ)" data-en="Scale">Scale</label>
+                            <div class="row">
+                                <div class="slider"><div class="fill" style="width:30%"></div><div class="knob" style="left:30%"></div></div>
+                                <input class="num" value="30" readonly>
+                            </div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="toggle-row">
+                            <span data-vi="Tự động UVW" data-en="Auto UVW">Tự động UVW</span>
+                            <div class="toggle" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
+                        </div>
+                        <div class="toggle-row">
+                            <span data-vi="Vật liệu Seamless" data-en="Seamless (Gaussian)">Vật liệu Seamless</span>
+                            <div class="toggle off" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="ctrl">
+                            <label data-vi="Loại vật liệu render" data-en="Material Type">Loại vật liệu render</label>
+                            <div class="dropdown" data-vi="Tự phát hiện (V-Ray / Corona) ▾" data-en="Auto-detect (V-Ray / Corona) ▾">Tự phát hiện (V-Ray / Corona) ▾</div>
+                        </div>
+                        <div class="ctrl">
+                            <label data-vi="Độ bóng kim loại" data-en="Gloss / Metal">Độ bóng kim loại</label>
+                            <div class="presets">
+                                <div class="preset on" data-vi="Phi kim (Non-Metal)" data-en="Non-Metal">Phi kim (Non-Metal)</div>
+                                <div class="preset" data-vi="Kim loại (Metal)" data-en="Metal">Kim loại (Metal)</div>
+                            </div>
+                        </div>
+                        <div class="ctrl">
+                            <label data-vi="Kích thước ảnh xuất" data-en="Texture Size">Kích thước ảnh xuất</label>
+                            <div class="dropdown">2048 px <span class="ar">▾</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mock-footer">
+                    <button class="gen-btn" data-vi="Tạo &amp; Áp dụng Vật liệu" data-en="Generate &amp; Apply Material">Tạo &amp; Áp dụng Vật liệu</button>
+                </div>
+            </div>
+
+            <p class="note" data-vi="① Trạng thái chưa nạp: Vùng dropzone nhận ảnh hoặc file zip nén. ② Trạng thái đã nạp: lưới 6 ô hiển thị chi tiết các map vật liệu. Nhấp vào các ô nhỏ dưới để phóng lớn xem chi tiết. Nhãn <b style='color:#4db6ac'>FOUND</b> = map có sẵn, <b style='color:#b48232'>GEN</b> = map tự sinh thông minh." data-en="① Empty state: Drag-drop zone receives images or zip files. ② Loaded state: 3x2 grid displays textures. Click thumbnails to preview. <b style='color:#4db6ac'>FOUND</b> = vendor map, <b style='color:#b48232'>GEN</b> = generated by offline algorithm.">
+            </p>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+        <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="KEY FEATURES">TÍNH NĂNG NỔI BẬT</div>
+        <h2 class="section-title" data-vi="Tạo vật liệu PBR tự động chỉ với 1-Click" data-en="1-Click Automatic PBR Material Setup"></h2>
+        <p class="section-desc" data-vi="Biến bất kỳ ảnh texture đơn lẻ nào thành bộ vật liệu PBR hoàn chỉnh với đầy đủ các kênh phản xạ, độ gồ ghề và chiều sâu chỉ trong vài giây." data-en="Turn any single texture image into a complete PBR material set with reflections, roughness, and depth maps in seconds."></p>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">🧱</div>
+                <h3 data-vi="Tự động hóa 1-Click PBR" data-en="1-Click PBR Automation">Tự động hóa 1-Click PBR</h3>
+                <p data-vi="Kéo thả 1 ảnh diffuse duy nhất vào. Hệ thống tự động phân tích độ tương phản, sắc độ màu để dựng trọn bộ 4 bản đồ map chất lượng cao: Normal, Displacement, Roughness, AO." data-en="Drag and drop a single diffuse image. The system automatically analyzes contrast and chromatic ranges to generate 4 high-quality maps: Normal, Displacement, Roughness, and AO."></p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3 data-vi="Xử lý 100% Offline" data-en="100% Offline Engine">Xử lý 100% Offline</h3>
+                <p data-vi="Tốc độ xử lý siêu tốc ngay trên máy tính của bạn mà không cần kết nối internet hay máy chủ bên thứ ba. Bảo mật dữ liệu tuyệt đối, không tải ảnh lên đám mây." data-en="Unmatched processing speed running natively on your hardware without any internet or cloud servers. Keeps your project files completely private, zero cloud uploads."></p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3 data-vi="Nhận diện thư viện thông minh" data-en="Smart Library Detector">Nhận diện thư viện thông minh</h3>
+                <p data-vi="Tự động nhận diện cấu trúc tên của các nhà cung cấp texture lớn (CGAxis, Poliigon, Megascans, ambientCG, Poly Haven). Chỉ tự sinh những bản đồ map còn thiếu để tối ưu hóa thời gian." data-en="Auto-detects naming conventions of major texture vendors (CGAxis, Poliigon, Megascans, ambientCG, Poly Haven). Only generates missing maps to save processing time."></p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">🎛️</div>
+                <h3 data-vi="Khử vết ghép Seamless" data-en="Seamless Texture Blending">Khử vết ghép Seamless</h3>
+                <p data-vi="Xóa bỏ các đường phân tách phân mảnh lộ vân gạch, gỗ bằng bộ lọc mượt mà thông minh. Giúp bạn tạo ra những vật liệu lặp vô hạn (tileable) tự nhiên, chân thực nhất." data-en="Remove visible pattern seam lines using smart blending filters. Helps you create organic, highly realistic tileable materials with ease."></p>
+            </div>
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3 data-vi="Tự động dựng node V-Ray &amp; Corona" data-en="Auto V-Ray &amp; Corona Networks">Tự động dựng node V-Ray &amp; Corona</h3>
+                <p data-vi="Tự động nhận diện trình render hiện hành để thiết lập và kết nối mạng lưới node vật liệu vật lý tương ứng chuẩn xác chỉ trong nháy mắt, gán trực tiếp lên đối tượng." data-en="Automatically detects the active renderer to set up and connect physical material node networks accurately, assigning them directly to objects in viewport."></p>
+            </div>
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">📐</div>
+                <h3 data-vi="Auto UVW &amp; Điều khiển trực quan" data-en="Auto UVW &amp; Tiling Control">Auto UVW &amp; Điều khiển trực quan</h3>
+                <p data-vi="Tích hợp bộ áp nhanh tọa độ UVW Map và tinh chỉnh tỉ lệ lặp (tiling), xoay góc (rotation) vật liệu trực quan trực tiếp trên giao diện plugin mà không cần mở bảng Material Editor." data-en="Integrated quick UVW mapping and controls for tiling and rotation directly in the plugin window, bypassing the need to open the 3ds Max Material Editor."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEPS / WORKFLOW -->
+    <section class="steps-section" id="workflow">
+        <div class="section-label" data-vi="QUY TRÌNH" data-en="STEPS">QUY TRÌNH</div>
+        <h2 class="section-title" data-vi="Quy trình 3 bước tối giản" data-en="Simple 3-Step Workflow"></h2>
+        <p class="section-desc" data-vi="Tiết kiệm tới 95% thời gian tìm kiếm map và dựng vật liệu Corona/V-Ray." data-en="Save up to 95% of your time searching maps and building Corona/V-Ray materials."></p>
+
+        <div class="steps-grid">
+            <div class="step-item">
+                <div class="step-num">01</div>
+                <h3 data-vi="Kéo &amp; Thả Ảnh" data-en="Drag &amp; Drop Image">Kéo &amp; Thả Ảnh</h3>
+                <p data-vi="Kéo ảnh diffuse hoặc file nén zip/rar của vật liệu thả thẳng vào giao diện plugin." data-en="Drag your diffuse texture or a compressed zip/rar archive directly into the plugin window."></p>
+            </div>
+            <div class="step-item">
+                <div class="step-num">02</div>
+                <h3 data-vi="Tinh Chỉnh Cài Đặt" data-en="Adjust Parameters">Tinh Chỉnh Cài Đặt</h3>
+                <p data-vi="Bật/tắt chế độ Seamless Gaussian, Auto UVW, chọn loại vật liệu Render và tỉ lệ Tiling mong muốn." data-en="Toggle Seamless Gaussian, Auto UVW, select the rendering target, and adjust your tiling scale."></p>
+            </div>
+            <div class="step-item">
+                <div class="step-num">03</div>
+                <h3 data-vi="Áp dụng 1-Click" data-en="Apply Material">Áp dụng 1-Click</h3>
+                <p data-vi="Nhấn nút Generate &amp; Apply. Vật liệu được tự động tạo và gán thẳng lên đối tượng đang chọn." data-en="Click Generate &amp; Apply. The material is instantly built and assigned to the selected 3D object."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+        <div class="section-label" data-vi="BẢNG GIÁ KHUYẾN MÃI" data-en="LAUNCH PRICE">BẢNG GIÁ KHUYẾN MÃI</div>
+        <h2 class="section-title" data-vi="Sở hữu vĩnh viễn. Mua một lần." data-en="Perpetual Pro License. Pay once."></h2>
+        <p class="section-desc" data-vi="Cơ hội sở hữu bản quyền Magic Material vĩnh viễn với giá ưu đãi cực lớn nhân dịp mở bán." data-en="Special introductory pricing to own a perpetual license of Magic Material."></p>
+
+        <div class="pricing-section">
+            <div class="price-card">
+                <div class="price-badge">LAUNCH OFFER — LIFETIME KEY</div>
+                <h3 data-vi="Magic Material Standalone" data-en="Magic Material Standalone">Magic Material Standalone</h3>
+                <div class="price-amount" data-vi="<del>800.000đ</del> 200.000đ <span>/ vĩnh viễn</span>" data-en="<del>$35</del> $9 <span>/ lifetime</span>"></div>
+                <div class="price-period" data-vi="Khuyến mãi đặc biệt trong 3 ngày đầu mở bán" data-en="Special introductory discount valid for the first 3 days only">Khuyến mãi đặc biệt trong 3 ngày đầu mở bán</div>
+                
+                <ul class="price-features">
+                    <li data-vi="Tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement)" data-en="Auto generate full set of PBR maps (Normal, Roughness, AO, Displacement)"></li>
+                    <li data-vi="Nhận diện tự động thông minh các loại map có sẵn từ thư viện" data-en="Smart automatic detection of existing maps from vendor libraries"></li>
+                    <li data-vi="Thiết lập mạng lưới vật liệu Corona &amp; V-Ray tự động và chính xác" data-en="Automatic Corona &amp; V-Ray material network building and setup"></li>
+                    <li data-vi="Xử lý khuyết tật phân tách hoa văn (Seamless) nhanh chóng chỉ 1-Click" data-en="1-click seamless texture processing and edge blending"></li>
+                    <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật phiên bản mới miễn phí trọn đời" data-en="Perpetual license with lifetime free updates (Supports Max 2022-2027+)"></li >
+                </ul>
+
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center;" data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="background: var(--bg-dark);">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions"></h2>
+        <p class="section-desc" data-vi="Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Material." data-en="Core technical aspects about how Magic Material functions under the hood."></p>
+
+        <div class="faq-section">
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 data-vi="Plugin tương thích với những trình render và phiên bản 3ds Max nào?" data-en="Which 3ds Max versions and renderers are supported?"></h3>
+                    <p data-vi="Magic Material được tối ưu hóa và tương thích hoàn toàn với các phiên bản 3ds Max từ 2022 đến 2027+. Plugin tự động cấu hình và thiết lập mạng lưới node vật liệu chuẩn xác cho cả Corona Renderer (CoronaPhysicalMtl) và V-Ray (VRayMtl) dựa trên thiết lập render hiện tại của bạn." data-en="Magic Material is fully compatible with 3ds Max 2022 up to 2027+. The plugin auto-detects and sets up material networks for both Corona Renderer (CoronaPhysicalMtl) and V-Ray (VRayMtl) based on your active renderer."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Tôi có thể kéo thả những loại file nào vào plugin?" data-en="What files can I drag and drop into the plugin?"></h3>
+                    <p data-vi="Bạn có thể kéo thả trực tiếp các định dạng ảnh đơn lẻ (JPG, PNG, TGA), toàn bộ thư mục chứa map của dự án, hoặc thậm chí là các tệp nén (.zip, .rar, .7z). Plugin sẽ tự động phân tích cấu trúc, nhận dạng map có sẵn và trích xuất tài nguyên phù hợp." data-en="You can drag and drop single image formats (JPG, PNG, TGA), entire texture folders, or compressed archives (.zip, .rar, .7z) directly. The plugin automatically parses the files, reads existing maps, and extracts them."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Việc tạo và gán vật liệu có làm thay đổi hay làm hỏng mô hình gốc không?" data-en="Does applying materials risk modifying or ruining the original model?"></h3>
+                    <p data-vi="Hoàn toàn không. Magic Material hoạt động theo nguyên tắc an toàn tuyệt đối: bảo toàn nguyên vẹn tọa độ map (UVW coordinates) và cấu trúc lưới gốc của mô hình. Mọi thao tác gán vật liệu đều hỗ trợ hoàn tác 100% bằng phím Ctrl+Z để bạn yên tâm thiết kế." data-en="Not at all. Magic Material works with a strict safety-first approach: original mapping coordinates (UVW) and mesh geometry are 100% preserved. All material application actions support standard Ctrl+Z undo keys to keep your scene completely safe."></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025–2026 <a href="index.html">archih3.com</a> · Magic Material by Hồ Hữu Hoàng · Made in Vietnam 🇻🇳</p>
+    </footer>
+
+    <!-- LANGUAGE SWITCH & INTERACTIVE MOCKUP JS -->
+    <script>
+        let currentLang = 'vi';
+        
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = text;
+                } else {
+                    el.innerHTML = text;
+                }
+            });
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => setLang('vi'));
+
+        // Mockup interactive script
+        const maps = [
+            {key:'sphere', name:'Material',     sw:'sw-sphere',  badge:null,    src_vi:'CGAxis · brick_wall_01 (.ah3prv)', src_en:'CGAxis · brick_wall_01 (.ah3prv)'},
+            {key:'diffuse',name:'Diffuse',      sw:'sw-diffuse', badge:'found', src_vi:'brick_wall_01_diffuse.jpg (Tìm thấy)', src_en:'brick_wall_01_diffuse.jpg (Found)'},
+            {key:'normal', name:'Normal',       sw:'sw-normal',  badge:'found', src_vi:'brick_wall_01_normal.jpg (Tìm thấy)', src_en:'brick_wall_01_normal.jpg (Found)'},
+            {key:'rough',  name:'Roughness',    sw:'sw-rough',   badge:'gen',   src_vi:'tự động tính toán (Độ nhám / Roughness)', src_en:'auto-calculated (Roughness)'},
+            {key:'ao',     name:'AO',           sw:'sw-ao',      badge:'gen',   src_vi:'tự động tính toán (Đổ bóng kẽ khuất / AO)', src_en:'auto-calculated (AO)'},
+            {key:'disp',   name:'Displacement', sw:'sw-disp',    badge:'gen',   src_vi:'tự động tính toán (Độ lồi lõm / Displacement)', src_en:'auto-calculated (Displacement)'},
+        ];
+
+        const thumbsEl = document.getElementById('thumbs');
+        const bigSwatch = document.getElementById('bigSwatch');
+        const bigLabel = document.getElementById('bigLabel');
+        const bigSrc = document.getElementById('bigSrc');
+
+        function renderThumbs() {
+            thumbsEl.innerHTML = '';
+            maps.forEach((m, i) => {
+                const t = document.createElement('div');
+                t.className = 'thumb' + (i === 0 ? ' active' : '');
+                t.onclick = () => selectMap(i);
+                const badge = m.badge ? `<span class="badge ${m.badge}">${m.badge.toUpperCase()}</span>` : '';
+                t.innerHTML = `<div class="sw ${m.sw}"></div>${badge}<span class="cap">${m.name}</span>`;
+                thumbsEl.appendChild(t);
+            });
+        }
+
+        function selectMap(i) {
+            document.querySelectorAll('.thumb').forEach((t, idx) => t.classList.toggle('active', idx === i));
+            bigSwatch.className = 'swatch ' + maps[i].sw;
+            bigLabel.textContent = maps[i].name;
+            bigSrc.textContent = currentLang === 'vi' ? maps[i].src_vi : maps[i].src_en;
+        }
+
+        function setState(s) {
+            const empty = s === 'empty';
+            document.getElementById('dropzone').classList.toggle('hidden', !empty);
+            document.getElementById('loadedView').classList.toggle('hidden', empty);
+            document.getElementById('btnEmpty').classList.toggle('active', empty);
+            document.getElementById('btnLoaded').classList.toggle('active', !empty);
+        }
+
+        renderThumbs();
+        setState('loaded');
+        
+        // Update big preview source description if lang changes
+        const oldSetLang = setLang;
+        setLang = function(lang) {
+            oldSetLang(lang);
+            // Re-select active map to refresh labels based on lang
+            const activeThumb = document.querySelector('.thumb.active');
+            if (activeThumb) {
+                const index = Array.from(thumbsEl.children).indexOf(activeThumb);
+                if (index !== -1) {
+                    selectMap(index);
+                }
+            }
+        };
+    </script>
+</body>
+</html>
