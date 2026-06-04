@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        if (!/Kindle/i.test(navigator.userAgent)) {
+            window.location.href = '../index.html';
+        }
+    </script>
     <title>Thư Viện Kindle - AH3 Portal [Trang 1/4]</title>
     <style>
         * {
@@ -304,7 +309,7 @@
 
     <!-- 4. THANH PHÂN TRANG CHÂN TRANG -->
     <div class="footer-nav">
-        <a href="../index.html" class="nav-btn">← Portal</a>
+        <a href="../index.html?desktop=true" class="nav-btn">← Portal</a>
         
         <div class="page-indicator">
             Trang 1 / 4

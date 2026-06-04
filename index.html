@@ -3,6 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (function() {
+            // Cú pháp ES5 tương thích ngược tối đa cho trình duyệt cũ của các dòng Kindle Paperwhite (PPW)
+            var search = window.location.search;
+            var forceDesktop = false;
+            if (search.indexOf('desktop') !== -1) {
+                forceDesktop = true;
+                if (window.sessionStorage) {
+                    sessionStorage.setItem('forceDesktop', 'true');
+                }
+            }
+            var hasForceDesktop = window.sessionStorage ? sessionStorage.getItem('forceDesktop') === 'true' : forceDesktop;
+            var isKindleDevice = /Kindle/i.test(navigator.userAgent);
+            if (isKindleDevice) {
+                if (!hasForceDesktop) {
+                    window.location.href = 'kindle/';
+                } else {
+                    // Chờ DOM load xong rồi hiển thị link Kindle trên thanh điều hướng
+                    window.addEventListener('DOMContentLoaded', function() {
+                        var link = document.getElementById('kindle-nav-link');
+                        if (link) link.style.display = 'inline-block';
+                    });
+                }
+            }
+        })();
+    </script>
     <title>AH3 Portal — AI & Automation Tools by Hồ Hữu Hoàng</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -300,7 +326,7 @@
         <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('open')" style="display:none; background:none; border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:var(--text); font-size:18px; cursor:pointer;">☰</button>
         <div class="nav-links">
             <a href="#products" data-vi="Sản phẩm" data-en="Products">Sản phẩm</a>
-            <a href="kindle/" data-vi="Bản Kindle" data-en="Kindle Edition">Bản Kindle</a>
+            <a href="kindle/" data-vi="Bản Kindle" data-en="Kindle Edition" id="kindle-nav-link" style="display: none;">Bản Kindle</a>
             <a href="archi_hell/" target="_blank" data-vi="The Archi-Hell" data-en="The Archi-Hell">The Archi-Hell</a>
             <a href="#author" data-vi="Tác giả" data-en="Author">Tác giả</a>
             <a href="https://youtube.com/@ArchiH3" target="_blank">YouTube</a>
