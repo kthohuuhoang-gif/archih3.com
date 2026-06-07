@@ -660,10 +660,10 @@
         </div>
         <div id="featured-video" style="border-radius:12px; overflow:hidden; border:1px solid rgba(77,182,172,0.2); background:#000; box-shadow:0 8px 40px rgba(0,0,0,0.4); aspect-ratio:16/9; position:relative;">
             <!-- Iframe (works on hosted web) -->
-            <iframe id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/a3VRXUJ6n9Y?rel=0&modestbranding=1&color=white" title="AI i2Asset — AH3 Hub Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0;"></iframe>
+            <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/a3VRXUJ6n9Y?rel=0&modestbranding=1&color=white" title="AI i2Asset — AH3 Hub Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0;"></iframe>
             <!-- Thumbnail fallback (shown if iframe fails on local file://) -->
             <a id="yt-fallback" href="https://youtu.be/a3VRXUJ6n9Y" target="_blank" style="display:none; position:absolute; inset:0; text-decoration:none; cursor:pointer;">
-                <img src="https://img.youtube.com/vi/a3VRXUJ6n9Y/maxresdefault.jpg" alt="AI i2Asset Demo" style="width:100%; height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'">
+                <img loading="lazy" src="https://img.youtube.com/vi/a3VRXUJ6n9Y/maxresdefault.jpg" alt="AI i2Asset Demo" style="width:100%; height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'">
                 <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
                     <div style="width:72px; height:72px; border-radius:50%; background:rgba(77,182,172,0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,0,0,0.4);">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M8 5v14l11-7z"/></svg>
