@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AH3 Magic Material — Standalone Offline PBR Material Generator for 3ds Max</title>
+    <title>AH3 Magic Merger — Standalone Batch Model Importer & Smart Relinker for 3ds Max</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -13,7 +13,7 @@
             --bg-main: #242424;
             --bg-surface: #2e2e2e;
             --bg-light: #3a3a3a;
-            --primary: #4db6ac; /* Teal theme for Magic Material */
+            --primary: #4db6ac; /* Teal theme for Magic Merger */
             --primary-hover: #5ec4ba;
             --primary-glow: rgba(77, 182, 172, 0.15);
             --primary-glow-strong: rgba(77, 182, 172, 0.3);
@@ -197,7 +197,6 @@
             border: 1px solid #000; box-shadow: 0 10px 40px rgba(0,0,0,.5);
         }
 
-        /* Mockup Header */
         .mock-header {
             padding: 16px 22px; background: linear-gradient(135deg,#242424,#191919);
             border-bottom: 1px solid var(--border); position: relative;
@@ -218,7 +217,10 @@
             height: 296px; border-radius: 10px; background: radial-gradient(circle at 50% 40%,#3a3a3a,#202020);
             border: 1px solid var(--border); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
         }
-        .preview-big .swatch { width: 100%; height: 100%; }
+        .preview-big .swatch { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 24px; text-align: center; }
+        .preview-big .sw-name { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+        .preview-big .sw-info { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+        .preview-big .sw-status { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 4px 12px; border-radius: 4px; background: var(--primary-glow); color: var(--primary); font-weight: 600; }
         .preview-big .lbl {
             position: absolute; left: 12px; top: 10px; font-size: 12px; font-weight: 600;
             background: rgba(0,0,0,.65); padding: 4px 10px; border-radius: 5px; color: var(--primary);
@@ -247,27 +249,21 @@
         /* thumbnails 3x2 */
         .thumbs { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
         .thumb {
-            aspect-ratio: 1/1; border-radius: 8px; overflow: hidden; cursor: pointer;
+            aspect-ratio: 1.2/1; border-radius: 8px; overflow: hidden; cursor: pointer;
             border: 2px solid transparent; position: relative; background: var(--bg-surface); transition: .15s;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8px;
         }
         .thumb:hover { transform: translateY(-2px); }
         .thumb.active { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
-        .thumb .sw { width: 100%; height: 100%; }
+        .thumb .sw-ic { font-size: 24px; margin-bottom: 4px; }
         .thumb .cap {
-            position: absolute; bottom: 0; left: 0; right: 0; font-size: 10.5px; text-align: center;
-            background: linear-gradient(transparent,rgba(0,0,0,.85)); color:#fff; padding: 9px 2px 3px; font-weight: 500;
+            font-size: 9.5px; text-align: center;
+            color: var(--text); font-weight: 500;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;
         }
         .thumb .badge { position: absolute; top: 4px; right: 4px; font-size: 8.5px; padding: 1px 5px; border-radius: 3px; font-weight: 700; }
         .badge.found { background: var(--primary); color: var(--teal-deep); }
         .badge.gen { background: var(--amber); color: #1c1306; }
-
-        /* swatches gia lap */
-        .sw-sphere { background: radial-gradient(circle at 37% 28%, #eaeaea, #b0b0b0 22%, #6e6e6e 50%, #2c2c2c 78%, #141414); }
-        .sw-diffuse { background: repeating-linear-gradient(0deg,#7a4a32 0 13px,#693c27 13px 15px),repeating-linear-gradient(90deg,transparent 0 26px,#56331f 26px 28px); }
-        .sw-normal { background: #8a8fd8; background-image: radial-gradient(circle at 30% 30%,#9fa0ea,transparent 42%),radial-gradient(circle at 72% 70%,#6f7ad0,transparent 42%); }
-        .sw-rough { background: repeating-radial-gradient(circle at 50% 50%,#9a9a9a 0 3px,#767676 3px 7px); }
-        .sw-ao { background: radial-gradient(circle at 50% 42%,#d4d4d4,#4f4f4f 82%); }
-        .sw-disp { background: linear-gradient(135deg,#c4c4c4,#3e3e3e); }
 
         /* right controls */
         .mock-right h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; border-bottom: 1px solid var(--border); padding-bottom: 8px; color: var(--primary); }
@@ -277,7 +273,7 @@
         .slider { flex: 1; height: 4px; border-radius: 3px; background: var(--bg-surface); position: relative; }
         .slider .fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--primary); border-radius: 3px; }
         .slider .knob { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--primary); border: 2px solid #202020; }
-        .num { width: 48px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; color: var(--text); padding: 3px 4px; font-size: 11px; text-align: center; }
+        .num { width: 56px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; color: var(--text); padding: 3px 4px; font-size: 11px; text-align: center; }
         .toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-bottom: 10px; }
         .toggle { width: 36px; height: 18px; border-radius: 9px; background: var(--primary); position: relative; cursor: pointer; transition: background 0.15s; }
         .toggle.off { background: #555; }
@@ -450,7 +446,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .hero { animation: fadeUp 0.8s ease-out; }
-        .video-section { animation: fadeUp 0.8s ease-out both; animation-delay: 0.1s; }
         .feature-card { animation: fadeUp 0.6s ease-out both; }
         .feature-card:nth-child(1) { animation-delay: 0.1s; }
         .feature-card:nth-child(2) { animation-delay: 0.2s; }
@@ -467,7 +462,7 @@
     <!-- NAV -->
     <nav>
         <a href="index.html" class="logo">
-            <img src="magicmat_icon_48.png" alt="Magic Material" style="height:24px; vertical-align:middle; margin-right:6px; opacity:0.85;">AH3<span> Magic Material</span>
+            <img src="magicmerger_icon_1024.png" alt="Magic Merger" style="height:24px; vertical-align:middle; margin-right:6px; opacity:0.85;">AH3<span> Magic Merger</span>
         </a>
         <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('open')" style="display:none; background:none; border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:var(--text); font-size:18px; cursor:pointer;">☰</button>
         <div class="nav-links">
@@ -487,57 +482,26 @@
 
     <!-- HERO -->
     <section class="hero">
-        <div class="hero-badge" data-vi="100% OFFLINE PBR MATERIAL CREATOR" data-en="100% OFFLINE PBR MATERIAL CREATOR">100% OFFLINE PBR MATERIAL CREATOR</div>
-        <h1 data-vi="Khơi nguồn chất liệu.<br><span class='teal'>Tạo map siêu tốc.</span>" data-en="Unleash materials.<br><span class='teal'>Instant PBR setup.</span>"></h1>
-        <p class="hero-sub" data-vi="Plugin chuyên biệt tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement) từ ảnh 2D và thiết lập vật liệu thông minh cho 3ds Max. Tương thích sâu với V-Ray và Corona, giúp bạn bỏ qua các bước dựng map thủ công nhàm chán." data-en="Specialized plugin to automatically generate a complete set of PBR maps (Normal, Displacement, Roughness, AO) and set up material networks in 3ds Max. Deeply integrated with V-Ray and Corona to eliminate tedious manual workflows."></p>
+        <div class="hero-badge" data-vi="BATCH 3D MODEL IMPORTER &amp; SMART RELINKER" data-en="BATCH 3D MODEL IMPORTER &amp; SMART RELINKER">BATCH 3D MODEL IMPORTER &amp; SMART RELINKER</div>
+        <h1 data-vi="Nhập model hàng loạt.<br><span class='teal'>Tự động sửa map theo lô.</span>" data-en="Batch import models.<br><span class='teal'>Auto-relink textures.</span>"></h1>
+        <p class="hero-sub" data-vi="Plugin 3ds Max chuyên nghiệp để kéo thả file .max, file nén (.zip/.rar/.7z), thư mục hay ảnh preview vào scene. Tự động merge, tự động gán layer, tự động xếp lưới và smart-relink texture tức thì." data-en="Professional 3ds Max plugin to drag and drop .max files, compressed archives (.zip/.rar/.7z), folders, or preview images into your scene. Automatically merges, assigns layers, arranges in a grid, and relinks textures instantly."></p>
         <div class="hero-cta">
-            <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 350k" data-en="Get Lifetime — $15">Mua bản quyền — 350k</a>
-            <a href="https://drive.google.com/drive/folders/1QWiR367D6W229RLnVpZhB29-0uVSboBY?usp=drive_link" target="_blank" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+            <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 300k" data-en="Get Lifetime — $12">Mua bản quyền — 300k</a>
+            <a href="https://drive.google.com/drive/folders/1AvvBJZkgq7Xak4YuSv_HIltQkwOFUXoC?usp=drive_link" target="_blank" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
         </div>
     </section>
-
-    <!-- VIDEO DEMO -->
-    <div class="video-section">
-        <div class="video-box" id="featured-video">
-            <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/oa2y-5QDA7A?rel=0&modestbranding=1&color=white" title="AH3 Magic Material Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0;"></iframe>
-            <a id="yt-fallback" href="https://www.youtube.com/watch?v=oa2y-5QDA7A" target="_blank" style="display:none; position:absolute; inset:0; text-decoration:none; cursor:pointer;">
-                <img loading="lazy" src="https://img.youtube.com/vi/oa2y-5QDA7A/maxresdefault.jpg" alt="AH3 Magic Material Demo" style="width:100%; height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'">
-                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-                    <div style="width:72px; height:72px; border-radius:50%; background:rgba(77, 182, 172, 0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,0,0,0.4);">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#121212"><path d="M8 5v14l11-7z"/></svg>
-                    </div>
-                </div>
-                <div style="position:absolute; bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube">▶ Xem demo trên YouTube</div>
-            </a>
-        </div>
-        <script>
-            (function(){
-                var iframe = document.getElementById('yt-iframe');
-                var fallback = document.getElementById('yt-fallback');
-                if (window.location.protocol === 'file:') {
-                    iframe.style.display = 'none';
-                    fallback.style.display = 'block';
-                } else {
-                    iframe.onerror = function() {
-                        iframe.style.display = 'none';
-                        fallback.style.display = 'block';
-                    };
-                }
-            })();
-        </script>
-    </div>
 
     <!-- INTERACTIVE DEMO (MOCKUP APP) -->
     <section class="interactive-section" id="demo">
         <div class="section-label" data-vi="TRẢI NGHIỆM GIAO DIỆN" data-en="INTERACTIVE DEMO">TRẢI NGHIỆM GIAO DIỆN</div>
         <h2 class="section-title" data-vi="Trải nghiệm ứng dụng trực quan" data-en="Try the Plugin Interface"></h2>
-        <p class="section-desc" data-vi="Mô phỏng 100% cách hoạt động của plugin Magic Material Standalone trong 3ds Max. Nhấn vào các nút demo để xem các trạng thái." data-en="Simulates exactly how the Magic Material standalone plugin runs in 3ds Max. Click the demo buttons to switch states."></p>
+        <p class="section-desc" data-vi="Mô phỏng cách hoạt động của hàng đợi Magic Merger Standalone trong 3ds Max. Thử click các dòng model để xem trạng thái nạp." data-en="Simulates how the Magic Merger standalone queue works in 3ds Max. Click the model items to see loaded states."></p>
 
         <div class="app-demo-wrapper">
             <div class="demo-bar">
-                <span data-vi="Trạng thái:" data-en="State:">Trạng thái:</span>
-                <button class="demo-btn" id="btnEmpty" onclick="setState('empty')" data-vi="① Chưa nạp (Kéo-Thả)" data-en="① Empty (Drag-Drop)">① Chưa nạp (Kéo-Thả)</button>
-                <button class="demo-btn active" id="btnLoaded" onclick="setState('loaded')" data-vi="② Đã nạp (Đầy đủ Map)" data-en="② Loaded (All Maps)">② Đã nạp (Đầy đủ Map)</button>
+                <span data-vi="Trạng thái hàng đợi:" data-en="Queue State:">Trạng thái hàng đợi:</span>
+                <button class="demo-btn" id="btnEmpty" onclick="setState('empty')" data-vi="① Trống (Chờ kéo thả)" data-en="① Empty (Wait for drag-drop)">① Trống (Chờ kéo thả)</button>
+                <button class="demo-btn active" id="btnLoaded" onclick="setState('loaded')" data-vi="② Có hàng đợi" data-en="② Queue Populated">② Có hàng đợi</button>
             </div>
 
             <div class="app-window">
@@ -545,136 +509,130 @@
                 <div class="mock-header">
                     <div class="accentbar"></div>
                     <div class="arch">ArchiH3</div>
-                    <div class="name">Magic <b>Material</b></div>
-                    <div class="meta"><b>KTS. Hồ Hữu Hoàng</b><br>v1.0.0 · archih3.com</div>
+                    <div class="name">Magic <b>Merger</b></div>
+                    <div class="meta"><b>KTS. Hồ Hữu Hoàng</b><br>v1.1.5 · archih3.com</div>
                 </div>
 
                 <div class="mock-body">
                     <div class="mock-left">
                         <!-- EMPTY -->
                         <div class="dropzone" id="dropzone">
-                            <div class="ic">⬇</div>
-                            <h2 data-vi="Kéo &amp; thả vào đây" data-en="Drag &amp; Drop here">Kéo &amp; thả vào đây</h2>
-                            <p data-vi="Thả ảnh Diffuse, cả folder texture, hoặc file nén — Magic Material tự nhận map có sẵn và sinh map còn thiếu." data-en="Drop a Diffuse map, a texture folder, or an archive — Magic Material detects existing maps and generates the missing ones."></p>
+                            <div class="ic">📥</div>
+                            <h2 data-vi="Kéo &amp; thả file hoặc thư mục vào đây" data-en="Drag &amp; Drop files or folders here">Kéo &amp; thả file hoặc thư mục vào đây</h2>
+                            <p data-vi="Nhận file .max, file nén (.zip/.rar/.7z), thư mục chứa model, hoặc file ảnh xem trước (AI tự quét tìm model đi kèm)." data-en="Accepts .max files, compressed archives (.zip/.rar/.7z), folders, or preview images (AI auto-detects companion model files)."></p>
                             <div class="types">
-                                <span>JPG / PNG / TGA</span><span>Folder vendor</span><span>.rar / .zip / .7z</span>
+                                <span>.max</span><span>.zip / .rar / .7z</span><span>Folder</span><span>Image Preview</span>
                             </div>
                         </div>
 
                         <!-- LOADED -->
                         <div id="loadedView" style="display:flex; flex-direction:column; gap:12px;">
                             <div class="preview-big">
-                                <span class="lbl" id="bigLabel">Material</span>
-                                <div class="swatch sw-sphere" id="bigSwatch"></div>
-                                <span class="src" id="bigSrc">CGAxis · brick_wall_01 (.ah3prv)</span>
+                                <span class="lbl" data-vi="Thông tin hàng đợi" data-en="Queue Info">Thông tin hàng đợi</span>
+                                <div class="swatch" id="bigSwatch">
+                                    <!-- Dynamic content -->
+                                </div>
+                                <span class="src" id="bigSrc">Sẵn sàng Merge</span>
                             </div>
                             <div class="thumbs" id="thumbs"></div>
                         </div>
                     </div>
 
                     <div class="mock-right">
-                        <h3 data-vi="Thiết lập vật liệu" data-en="Material Settings">Thiết lập vật liệu</h3>
+                        <h3 data-vi="Thiết lập Merge &amp; Grid" data-en="Merge &amp; Grid Settings">Thiết lập Merge &amp; Grid</h3>
                         <div class="ctrl">
-                            <label data-vi="Tiling (Lặp map)" data-en="Tiling">Tiling</label>
+                            <label data-vi="Grid Spacing (Khoảng cách)" data-en="Grid Spacing">Grid Spacing</label>
                             <div class="row">
-                                <div class="slider"><div class="fill" style="width:45%"></div><div class="knob" style="left:45%"></div></div>
-                                <input class="num" value="10" readonly>
+                                <div class="slider"><div class="fill" style="width:50%"></div><div class="knob" style="left:50%"></div></div>
+                                <input class="num" value="1000 mm" readonly>
                             </div>
                         </div>
                         <div class="ctrl">
-                            <label data-vi="Rotation (Xoay)" data-en="Rotation">Rotation</label>
+                            <label data-vi="Độ sâu quét thư mục" data-en="Folder Search Depth">Folder Search Depth</label>
                             <div class="row">
-                                <div class="slider"><div class="fill" style="width:0%"></div><div class="knob" style="left:0%"></div></div>
-                                <input class="num" value="0.0" readonly>
-                            </div>
-                        </div>
-                        <div class="ctrl">
-                            <label data-vi="Scale (Tỉ lệ)" data-en="Scale">Scale</label>
-                            <div class="row">
-                                <div class="slider"><div class="fill" style="width:30%"></div><div class="knob" style="left:30%"></div></div>
-                                <input class="num" value="30" readonly>
+                                <div class="slider"><div class="fill" style="width:10%"></div><div class="knob" style="left:10%"></div></div>
+                                <input class="num" value="1" readonly>
                             </div>
                         </div>
                         <div class="divider"></div>
                         <div class="toggle-row">
-                            <span data-vi="Tự động UVW" data-en="Auto UVW">Tự động UVW</span>
-                            <div class="toggle" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
+                            <span data-vi="Xếp lưới tự động (Grid)" data-en="Auto Grid Layout">Xếp lưới tự động (Grid)</span>
+                            <div class="toggle" id="tgGrid" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
                         </div>
                         <div class="toggle-row">
-                            <span data-vi="Vật liệu Seamless" data-en="Seamless (Gaussian)">Vật liệu Seamless</span>
-                            <div class="toggle off" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
+                            <span data-vi="Gán Layer theo danh mục" data-en="Auto Category Layer">Gán Layer theo danh mục</span>
+                            <div class="toggle" id="tgLayer" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
+                        </div>
+                        <div class="toggle-row">
+                            <span data-vi="Thu gom map (Consolidate)" data-en="Consolidate Maps">Thu gom map (Consolidate)</span>
+                            <div class="toggle" id="tgConsolidate" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
+                        </div>
+                        <div class="toggle-row">
+                            <span data-vi="Sửa đường dẫn map dài" data-en="Fix Long Paths">Sửa đường dẫn map dài</span>
+                            <div class="toggle" id="tgPaths" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
+                        </div>
+                        <div class="toggle-row">
+                            <span data-vi="Xuất bản vẽ CAD 2D" data-en="Export CAD 2D Block">Xuất bản vẽ CAD 2D</span>
+                            <div class="toggle off" id="tgCad" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
                         </div>
                         <div class="divider"></div>
                         <div class="ctrl">
-                            <label data-vi="Loại vật liệu render" data-en="Material Type">Loại vật liệu render</label>
-                            <div class="dropdown" data-vi="Tự phát hiện (V-Ray / Corona) ▾" data-en="Auto-detect (V-Ray / Corona) ▾">Tự phát hiện (V-Ray / Corona) ▾</div>
-                        </div>
-                        <div class="ctrl">
-                            <label data-vi="Độ bóng kim loại" data-en="Gloss / Metal">Độ bóng kim loại</label>
-                            <div class="presets">
-                                <div class="preset on" data-vi="Phi kim (Non-Metal)" data-en="Non-Metal">Phi kim (Non-Metal)</div>
-                                <div class="preset" data-vi="Kim loại (Metal)" data-en="Metal">Kim loại (Metal)</div>
-                            </div>
-                        </div>
-                        <div class="ctrl">
-                            <label data-vi="Kích thước ảnh xuất" data-en="Texture Size">Kích thước ảnh xuất</label>
-                            <div class="dropdown">2048 px <span class="ar">▾</span></div>
+                            <label data-vi="Target Category (Mục tiêu)" data-en="Target Category">Target Category</label>
+                            <div class="dropdown"><span id="targetCat">Furniture (Đồ nội thất)</span> <span class="ar">▾</span></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="mock-footer">
-                    <button class="gen-btn" data-vi="Tạo &amp; Áp dụng Vật liệu" data-en="Generate &amp; Apply Material">Tạo &amp; Áp dụng Vật liệu</button>
+                    <button class="gen-btn" data-vi="Bắt đầu Merge Hàng loạt" data-en="Batch Merge &amp; Relink">Bắt đầu Merge Hàng loạt</button>
                 </div>
             </div>
-
-            <p class="note" data-vi="① Trạng thái chưa nạp: Vùng dropzone nhận ảnh hoặc file zip nén. ② Trạng thái đã nạp: lưới 6 ô hiển thị chi tiết các map vật liệu. Nhấp vào các ô nhỏ dưới để phóng lớn xem chi tiết. Nhãn <b style='color:#4db6ac'>FOUND</b> = map có sẵn, <b style='color:#b48232'>GEN</b> = map tự sinh thông minh." data-en="① Empty state: Drag-drop zone receives images or zip files. ② Loaded state: 3x2 grid displays textures. Click thumbnails to preview. <b style='color:#4db6ac'>FOUND</b> = vendor map, <b style='color:#b48232'>GEN</b> = generated by offline algorithm.">
-            </p>
+            <p class="note" data-vi="① Trạng thái chờ: Dropzone sẵn sàng nhận tệp tin hoặc thư mục. ② Trạng thái hoạt động: Hiển thị danh sách hàng đợi các model. Tích chọn hoặc bỏ tích để merge chọn lọc. Tính năng <b>Smart Relink</b> chạy ngầm tự động liên kết map của từng model sau khi nhập." data-en="① Empty state: Dropzone is ready to receive model files or archives. ② Active state: Displays queue list of models. Check/uncheck rows to selectively merge. <b>Smart Relink</b> runs in background to auto-locate textures immediately after importing."></p>
         </div>
     </section>
 
     <!-- FEATURES -->
     <section id="features">
         <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="KEY FEATURES">TÍNH NĂNG NỔI BẬT</div>
-        <h2 class="section-title" data-vi="Tạo vật liệu PBR tự động chỉ với 1-Click" data-en="1-Click Automatic PBR Material Setup"></h2>
-        <p class="section-desc" data-vi="Biến bất kỳ ảnh texture đơn lẻ nào thành bộ vật liệu PBR hoàn chỉnh với đầy đủ các kênh phản xạ, độ gồ ghề và chiều sâu chỉ trong vài giây." data-en="Turn any single texture image into a complete PBR material set with reflections, roughness, and depth maps in seconds."></p>
+        <h2 class="section-title" data-vi="Tối ưu hóa quy trình nhập thư viện 3D" data-en="Streamline your 3D Asset Imports"></h2>
+        <p class="section-desc" data-vi="Magic Merger giải quyết triệt để vấn đề mất mát đường dẫn map, tốn thời gian giải nén và bố trí mô hình thủ công." data-en="Magic Merger solves missing texture paths, manual zip extractions, and tedious model positioning."></p>
         
         <div class="features-grid">
             <!-- Feature 1 -->
             <div class="feature-card">
-                <div class="feature-icon">🧱</div>
-                <h3 data-vi="Tự động hóa 1-Click PBR" data-en="1-Click PBR Automation">Tự động hóa 1-Click PBR</h3>
-                <p data-vi="Kéo thả 1 ảnh diffuse duy nhất vào. Hệ thống tự động phân tích độ tương phản, sắc độ màu để dựng trọn bộ 4 bản đồ map chất lượng cao: Normal, Displacement, Roughness, AO." data-en="Drag and drop a single diffuse image. The system automatically analyzes contrast and chromatic ranges to generate 4 high-quality maps: Normal, Displacement, Roughness, and AO."></p>
+                <div class="feature-icon">📦</div>
+                <h3 data-vi="Nhập file nén hàng loạt" data-en="Batch Zip/Rar/7z Merging">Nhập file nén hàng loạt</h3>
+                <p data-vi="Không cần giải nén thủ công từng file. Chỉ cần kéo thả hàng loạt file nén .zip, .rar, .7z hay folder chứa model vào hàng đợi, plugin tự giải nén và nhập model vào cảnh." data-en="No manual zip extractions needed. Drag-drop multiple .zip, .rar, or .7z archives or asset folders directly into the queue, and watch them auto-merge into 3ds Max."></p>
             </div>
             <!-- Feature 2 -->
             <div class="feature-card">
-                <div class="feature-icon">🛡️</div>
-                <h3 data-vi="Xử lý 100% Offline" data-en="100% Offline Engine">Xử lý 100% Offline</h3>
-                <p data-vi="Tốc độ xử lý siêu tốc ngay trên máy tính của bạn mà không cần kết nối internet hay máy chủ bên thứ ba. Bảo mật dữ liệu tuyệt đối, không tải ảnh lên đám mây." data-en="Unmatched processing speed running natively on your hardware without any internet or cloud servers. Keeps your project files completely private, zero cloud uploads."></p>
+                <div class="feature-icon">🔗</div>
+                <h3 data-vi="Smart Relink thông minh" data-en="Batch Smart Relinker">Smart Relink thông minh</h3>
+                <p data-vi="Thuật toán tự động tìm và sửa đường dẫn bitmap bị mất của mô hình vừa nhập (hỗ trợ lưu trữ lên tới 50.000 file index). Dọn dẹp cấu trúc map, sửa lỗi đường dẫn quá dài." data-en="Automatically scans, matches, and relinks missing bitmap texture paths for all merged models (supports up to 50k file index storage). Corrects vendor folder layouts and fixes long paths."></p>
             </div>
             <!-- Feature 3 -->
             <div class="feature-card">
-                <div class="feature-icon">🔍</div>
-                <h3 data-vi="Nhận diện thư viện thông minh" data-en="Smart Library Detector">Nhận diện thư viện thông minh</h3>
-                <p data-vi="Tự động nhận diện cấu trúc tên của các nhà cung cấp texture lớn (CGAxis, Poliigon, Megascans, ambientCG, Poly Haven). Chỉ tự sinh những bản đồ map còn thiếu để tối ưu hóa thời gian." data-en="Auto-detects naming conventions of major texture vendors (CGAxis, Poliigon, Megascans, ambientCG, Poly Haven). Only generates missing maps to save processing time."></p>
+                <div class="feature-icon">📐</div>
+                <h3 data-vi="Xếp lưới tự động (Auto Grid)" data-en="Auto Grid Layout">Xếp lưới tự động (Auto Grid)</h3>
+                <p data-vi="Tự động sắp xếp các mô hình được merge vào cảnh theo dạng lưới (Grid) ngăn nắp với khoảng cách tùy chỉnh linh hoạt, tránh tình trạng các model bị đè chồng lấn lên nhau." data-en="Automatically arranges imported models into a clean matrix grid with adjustable spacing, preventing assets from spawning directly on top of each other at origin."></p>
             </div>
             <!-- Feature 4 -->
             <div class="feature-card">
-                <div class="feature-icon">🎛️</div>
-                <h3 data-vi="Khử vết ghép Seamless" data-en="Seamless Texture Blending">Khử vết ghép Seamless</h3>
-                <p data-vi="Xóa bỏ các đường phân tách phân mảnh lộ vân gạch, gỗ bằng bộ lọc mượt mà thông minh. Giúp bạn tạo ra những vật liệu lặp vô hạn (tileable) tự nhiên, chân thực nhất." data-en="Remove visible pattern seam lines using smart blending filters. Helps you create organic, highly realistic tileable materials with ease."></p>
+                <div class="feature-icon">🏷️</div>
+                <h3 data-vi="Tự động phân lớp Layer" data-en="Auto Layer Categorization">Tự động phân lớp Layer</h3>
+                <p data-vi="Phân tích cấu trúc thư mục và từ khóa mô hình để tự động gán layer tương ứng (ví dụ: Furniture, Lighting, Vegetation), giữ cho quản lý scene của bạn luôn gọn gàng sạch sẽ." data-en="Analyzes asset names and folders to automatically group models into corresponding 3ds Max layers (e.g. Furniture, Lighting, Plants) to keep your project hierarchy organized."></p>
             </div>
             <!-- Feature 5 -->
             <div class="feature-card">
-                <div class="feature-icon">⚙️</div>
-                <h3 data-vi="Tự động dựng node V-Ray &amp; Corona" data-en="Auto V-Ray &amp; Corona Networks">Tự động dựng node V-Ray &amp; Corona</h3>
-                <p data-vi="Tự động nhận diện trình render hiện hành để thiết lập và kết nối mạng lưới node vật liệu vật lý tương ứng chuẩn xác chỉ trong nháy mắt, gán trực tiếp lên đối tượng." data-en="Automatically detects the active renderer to set up and connect physical material node networks accurately, assigning them directly to objects in viewport."></p>
+                <div class="feature-icon">📂</div>
+                <h3 data-vi="Quét ảnh preview thông minh" data-en="Companion Model Finder">Quét ảnh preview thông minh</h3>
+                <p data-vi="Kéo thả duy nhất ảnh preview (.jpg/.png) từ web hay folder vào — thuật toán tự động quét tìm tệp tin .max hoặc file nén tương ứng trong thư mục để đưa vào hàng đợi." data-en="Drag a preview image (.jpg/.png) in — the plugin auto-scans nearby folders to locate the companion .max file or archive, adding the model directly into the queue."></p>
             </div>
             <!-- Feature 6 -->
             <div class="feature-card">
                 <div class="feature-icon">📐</div>
-                <h3 data-vi="Auto UVW &amp; Điều khiển trực quan" data-en="Auto UVW &amp; Tiling Control">Auto UVW &amp; Điều khiển trực quan</h3>
-                <p data-vi="Tích hợp bộ áp nhanh tọa độ UVW Map và tinh chỉnh tỉ lệ lặp (tiling), xoay góc (rotation) vật liệu trực quan trực tiếp trên giao diện plugin mà không cần mở bảng Material Editor." data-en="Integrated quick UVW mapping and controls for tiling and rotation directly in the plugin window, bypassing the need to open the 3ds Max Material Editor."></p>
+                <h3 data-vi="Xuất CAD 2D tự động" data-en="3D to 2D CAD Export">Xuất CAD 2D tự động</h3>
+                <p data-vi="Tích hợp tiện ích bổ trợ tự tạo hình chiếu CAD 2D từ khối 3D vừa merge, giúp bạn nhanh chóng triển khai bản vẽ mặt bằng kỹ thuật mà không cần vẽ lại." data-en="Includes a companion utility script to auto-generate 2D CAD projection block lines from your merged 3D geometry for rapid construction drawing generation."></p>
             </div>
         </div>
     </section>
@@ -682,33 +640,33 @@
     <!-- STEPS / WORKFLOW -->
     <section class="steps-section" id="workflow">
         <div class="section-label" data-vi="QUY TRÌNH" data-en="STEPS">QUY TRÌNH</div>
-        <h2 class="section-title" data-vi="Quy trình 3 bước tối giản" data-en="Simple 3-Step Workflow"></h2>
-        <p class="section-desc" data-vi="Tiết kiệm tới 95% thời gian tìm kiếm map và dựng vật liệu Corona/V-Ray." data-en="Save up to 95% of your time searching maps and building Corona/V-Ray materials."></p>
+        <h2 class="section-title" data-vi="Quy trình 3 bước siêu tốc" data-en="Simple 3-Step Import Flow"></h2>
+        <p class="section-desc" data-vi="Đơn giản hóa việc quản lý và nhập hàng tá mô hình phức tạp vào 3ds Max." data-en="Simplifies the process of managing and importing dozens of heavy assets into 3ds Max."></p>
 
         <div class="steps-grid">
             <div class="step-item">
                 <div class="step-num">01</div>
-                <h3 data-vi="Kéo &amp; Thả Ảnh" data-en="Drag &amp; Drop Image">Kéo &amp; Thả Ảnh</h3>
-                <p data-vi="Kéo ảnh diffuse hoặc file nén zip/rar của vật liệu thả thẳng vào giao diện plugin." data-en="Drag your diffuse texture or a compressed zip/rar archive directly into the plugin window."></p>
+                <h3 data-vi="Kéo Thả Tài Nguyên" data-en="Drag &amp; Drop Assets">Kéo Thả Tài Nguyên</h3>
+                <p data-vi="Thả nhiều file .max, file nén hoặc thư mục chứa thư viện 3D vào hàng đợi hiển thị." data-en="Drop multiple .max files, zip archives, or vegetation/furniture folders directly into the queue view."></p>
             </div>
             <div class="step-item">
                 <div class="step-num">02</div>
-                <h3 data-vi="Tinh Chỉnh Cài Đặt" data-en="Adjust Parameters">Tinh Chỉnh Cài Đặt</h3>
-                <p data-vi="Bật/tắt chế độ Seamless Gaussian, Auto UVW, chọn loại vật liệu Render và tỉ lệ Tiling mong muốn." data-en="Toggle Seamless Gaussian, Auto UVW, select the rendering target, and adjust your tiling scale."></p>
+                <h3 data-vi="Cấu hình tùy chọn" data-en="Configure Settings">Cấu hình tùy chọn</h3>
+                <p data-vi="Bật Auto Grid, chọn khoảng cách lưới, gán danh mục layer và tùy chọn thu gom maps." data-en="Enable Auto Grid, adjust spacing, choose layer naming patterns, and select texture collect folders."></p>
             </div>
             <div class="step-item">
                 <div class="step-num">03</div>
-                <h3 data-vi="Áp dụng 1-Click" data-en="Apply Material">Áp dụng 1-Click</h3>
-                <p data-vi="Nhấn nút Generate &amp; Apply. Vật liệu được tự động tạo và gán thẳng lên đối tượng đang chọn." data-en="Click Generate &amp; Apply. The material is instantly built and assigned to the selected 3D object."></p>
+                <h3 data-vi="Bấm Merge / Batch" data-en="Batch Merge &amp; Relink">Bấm Merge / Batch</h3>
+                <p data-vi="Nhấp Merge, hệ thống tự động import từng tệp và chạy thuật toán Smart Relink map ngầm." data-en="Click Batch Merge, the system automatically processes all entries and smart-relinks all assets in the background."></p>
             </div>
         </div>
     </section>
 
     <!-- PRICING -->
     <section id="pricing">
-        <div class="section-label" data-vi="BẢNG GIÁ KHUYẾN MÃI" data-en="LAUNCH PRICE">BẢNG GIÁ KHUYẾN MÃI</div>
-        <h2 class="section-title" data-vi="Sở hữu vĩnh viễn. Mua một lần." data-en="Perpetual Pro License. Pay once."></h2>
-        <p class="section-desc" data-vi="Cơ hội sở hữu bản quyền Magic Material vĩnh viễn với giá ưu đãi cực lớn nhân dịp mở bán." data-en="Special introductory pricing to own a perpetual license of Magic Material."></p>
+        <div class="section-label" data-vi="BẢNG GIÁ KHUYẾN MÃI" data-en="INTRODUCTORY PRICE">BẢNG GIÁ KHUYẾN MÃI</div>
+        <h2 class="section-title" data-vi="Sở hữu vĩnh viễn. Không phí gia hạn." data-en="Pay once. Use forever."></h2>
+        <p class="section-desc" data-vi="Giấy phép trọn đời kích hoạt theo ID phần cứng máy tính (HWID), sử dụng không giới hạn." data-en="Introductory launch pricing for a perpetual license tied to your HWID."></p>
 
         <div class="pricing-section">
             <div class="pricing-grid">
@@ -716,16 +674,16 @@
                 <div class="price-card featured">
                     <div>
                         <div class="price-badge">LIFETIME KEY</div>
-                        <h3 data-vi="Magic Material Standalone" data-en="Magic Material Standalone">Magic Material Standalone</h3>
+                        <h3 data-vi="Magic Merger Standalone" data-en="Magic Merger Standalone">Magic Merger Standalone</h3>
                         <div class="price-amount" data-vi="<del>999.000đ</del> 300.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $12 <span>/ lifetime</span>"></div>
                         <div class="price-period" data-vi="Khuyến mãi đặc biệt nhân dịp mở bán" data-en="Special introductory discount">Khuyến mãi đặc biệt nhân dịp mở bán</div>
                         
                         <ul class="price-features">
-                            <li data-vi="Tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement)" data-en="Auto generate full set of PBR maps (Normal, Roughness, AO, Displacement)"></li>
-                            <li data-vi="Nhận diện tự động thông minh các loại map có sẵn từ thư viện" data-en="Smart automatic detection of existing maps from vendor libraries"></li>
-                            <li data-vi="Thiết lập mạng lưới vật liệu Corona &amp; V-Ray tự động" data-en="Automatic Corona &amp; V-Ray material network setup"></li>
-                            <li data-vi="Xử lý khuyết tật phân tách hoa văn (Seamless) nhanh chóng chỉ 1-Click" data-en="1-click seamless texture edge blending"></li>
-                            <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật miễn phí trọn đời" data-en="Perpetual license with lifetime free updates"></li>
+                            <li data-vi="Merge hàng loạt tệp tin .max và file nén .zip/.rar/.7z" data-en="Batch merge multiple .max files and .zip/.rar/.7z archives"></li>
+                            <li data-vi="Smart Relink tự tìm map thất lạc theo lô (lên tới 50.000 file index)" data-en="Smart Relinker auto-locates missing maps (up to 50k file indices)"></li>
+                            <li data-vi="Tự động phân bố vị trí dạng lưới (Grid Layout) và gán Layer" data-en="Auto Grid Layout positioning and automatic layer grouping"></li>
+                            <li data-vi="Xử lý đường dẫn map quá dài và thu gom map thông minh" data-en="Fixes long file paths and consolidates textures into project folders"></li>
+                            <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật phiên bản mới miễn phí trọn đời" data-en="Perpetual license with lifetime free updates"></li>
                         </ul>
                     </div>
                     <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center; margin-top:20px;" data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
@@ -757,21 +715,21 @@
     <section id="faq" style="background: var(--bg-dark);">
         <div class="section-label">FAQ</div>
         <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions"></h2>
-        <p class="section-desc" data-vi="Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Material." data-en="Core technical aspects about how Magic Material functions under the hood."></p>
+        <p class="section-desc" data-vi="Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Merger." data-en="Core technical aspects about how Magic Merger functions under the hood."></p>
 
         <div class="faq-section">
             <div class="faq-grid">
                 <div class="faq-item">
-                    <h3 data-vi="Plugin tương thích với những trình render và phiên bản 3ds Max nào?" data-en="Which 3ds Max versions and renderers are supported?"></h3>
-                    <p data-vi="Magic Material được tối ưu hóa và tương thích hoàn toàn với các phiên bản 3ds Max từ 2022 đến 2027+. Plugin tự động cấu hình và thiết lập mạng lưới node vật liệu chuẩn xác cho cả Corona Renderer (CoronaPhysicalMtl) và V-Ray (VRayMtl) dựa trên thiết lập render hiện tại của bạn." data-en="Magic Material is fully compatible with 3ds Max 2022 up to 2027+. The plugin auto-detects and sets up material networks for both Corona Renderer (CoronaPhysicalMtl) and V-Ray (VRayMtl) based on your active renderer."></p>
+                    <h3 data-vi="Plugin hoạt động như thế nào khi kéo thả ảnh preview?" data-en="How does the plugin handle preview image drag-and-drops?"></h3>
+                    <p data-vi="Khi bạn kéo một tệp ảnh preview (.jpg/.png) vào plugin, thuật toán 'Companion Finder' sẽ tự động quét thư mục chứa ảnh đó để tìm các tệp tin model đi kèm (file .max, hoặc archive nén chứa .max) có cùng tên gốc. Sau đó, nó tự động đưa model tìm được vào hàng đợi để merge." data-en="When you drop a preview image (.jpg/.png) into the plugin, the 'Companion Finder' algorithm scans the folder to locate matching model files (.max, or archives containing .max) sharing the same root filename, automatically queuing them for import."></p>
                 </div>
                 <div class="faq-item">
-                    <h3 data-vi="Tôi có thể kéo thả những loại file nào vào plugin?" data-en="What files can I drag and drop into the plugin?"></h3>
-                    <p data-vi="Bạn có thể kéo thả trực tiếp các định dạng ảnh đơn lẻ (JPG, PNG, TGA), toàn bộ thư mục chứa map của dự án, hoặc thậm chí là các tệp nén (.zip, .rar, .7z). Plugin sẽ tự động phân tích cấu trúc, nhận dạng map có sẵn và trích xuất tài nguyên phù hợp." data-en="You can drag and drop single image formats (JPG, PNG, TGA), entire texture folders, or compressed archives (.zip, .rar, .7z) directly. The plugin automatically parses the files, reads existing maps, and extracts them."></p>
+                    <h3 data-vi="Làm thế nào để tính năng Smart Relink tìm thấy map bị thiếu?" data-en="How does Smart Relink locate missing texture maps?"></h3>
+                    <p data-vi="Magic Merger tự động lưu trữ cơ sở dữ liệu đường dẫn map trong thư viện của bạn (chỉ số index tối đa 50k file). Khi merge model mới, plugin sẽ phân tích cấu trúc vendor gốc (như Maxtree, Poliigon, Chaos Cosmos...) và đối chiếu với cơ sở dữ liệu để tự động thiết lập lại đường dẫn map chính xác mà không cần người dùng thao tác." data-en="Magic Merger maintains a local path index database (up to 50k files). When merging a model, it automatically parses major vendor folder conventions and redirects missing paths to correct files, restoring V-Ray/Corona material textures instantly."></p>
                 </div>
                 <div class="faq-item">
-                    <h3 data-vi="Việc tạo và gán vật liệu có làm thay đổi hay làm hỏng mô hình gốc không?" data-en="Does applying materials risk modifying or ruining the original model?"></h3>
-                    <p data-vi="Hoàn toàn không. Magic Material hoạt động theo nguyên tắc an toàn tuyệt đối: bảo toàn nguyên vẹn tọa độ map (UVW coordinates) và cấu trúc lưới gốc của mô hình. Mọi thao tác gán vật liệu đều hỗ trợ hoàn tác 100% bằng phím Ctrl+Z để bạn yên tâm thiết kế." data-en="Not at all. Magic Material works with a strict safety-first approach: original mapping coordinates (UVW) and mesh geometry are 100% preserved. All material application actions support standard Ctrl+Z undo keys to keep your scene completely safe."></p>
+                    <h3 data-vi="Tính năng gán Layer và xếp lưới (Grid Layout) hoạt động như thế nào?" data-en="How does the Grid Layout and layer grouping work?"></h3>
+                    <p data-vi="Tính năng Auto Grid xếp các model merge theo hàng lối ngăn nắp trên mặt phẳng tọa độ dựa theo khoảng cách được thiết lập trên thanh trượt. Auto Layer phân tích từ khóa và phân bổ các mô hình vừa nhập vào các layer được thiết lập sẵn trong Max để bạn dễ quản lý ẩn/hiện." data-en="Auto Grid places imported assets sequentially in a matrix layout on the ground plane using the spacing defined on the slider. Auto Layer assigns models to preset 3ds Max layer channels by analyzing file names and keywords."></p>
                 </div>
             </div>
         </div>
@@ -779,7 +737,7 @@
 
     <!-- FOOTER -->
     <footer>
-        <p>© 2025–2026 <a href="index.html">archih3.com</a> · Magic Material by Hồ Hữu Hoàng · Made in Vietnam 🇻🇳</p>
+        <p>© 2025–2026 <a href="index.html">archih3.com</a> · Magic Merger by Hồ Hữu Hoàng · Made in Vietnam 🇻🇳</p>
     </footer>
 
     <!-- LANGUAGE SWITCH & INTERACTIVE MOCKUP JS -->
@@ -805,37 +763,43 @@
         window.addEventListener('DOMContentLoaded', () => setLang('vi'));
 
         // Mockup interactive script
-        const maps = [
-            {key:'sphere', name:'Material',     sw:'sw-sphere',  badge:null,    src_vi:'CGAxis · brick_wall_01 (.ah3prv)', src_en:'CGAxis · brick_wall_01 (.ah3prv)'},
-            {key:'diffuse',name:'Diffuse',      sw:'sw-diffuse', badge:'found', src_vi:'brick_wall_01_diffuse.jpg (Tìm thấy)', src_en:'brick_wall_01_diffuse.jpg (Found)'},
-            {key:'normal', name:'Normal',       sw:'sw-normal',  badge:'found', src_vi:'brick_wall_01_normal.jpg (Tìm thấy)', src_en:'brick_wall_01_normal.jpg (Found)'},
-            {key:'rough',  name:'Roughness',    sw:'sw-rough',   badge:'gen',   src_vi:'tự động tính toán (Độ nhám / Roughness)', src_en:'auto-calculated (Roughness)'},
-            {key:'ao',     name:'AO',           sw:'sw-ao',      badge:'gen',   src_vi:'tự động tính toán (Đổ bóng kẽ khuất / AO)', src_en:'auto-calculated (AO)'},
-            {key:'disp',   name:'Displacement', sw:'sw-disp',    badge:'gen',   src_vi:'tự động tính toán (Độ lồi lõm / Displacement)', src_en:'auto-calculated (Displacement)'},
+        const models = [
+            {key:'sofa',  name:'Sofa Velvet Modern', ic:'🛋️', size:'45.2 MB', status_vi:'SẴN SÀNG', status_en:'READY', details_vi:'1 tệp .max + 12 map được phát hiện', details_en:'.max file + 12 textures detected'},
+            {key:'table', name:'Wood Dinner Table',  ic:'🪑', size:'12.8 MB', status_vi:'ĐÃ MERGE', status_en:'MERGED', details_vi:'1 tệp nén .zip + 4 map', details_en:'.zip archive + 4 textures'},
+            {key:'plant', name:'Interior Ficus',     ic:'🌿', size:'84.0 MB', status_vi:'SẴN SÀNG', status_en:'READY', details_vi:'Thư mục Globe Plants (18 map)', details_en:'Globe Plants directory (18 textures)'},
+            {key:'lamp',  name:'Pendant Lamp Brass', ic:'💡', size:'8.1 MB',  status_vi:'SẴN SÀNG', status_en:'READY', details_vi:'1 tệp .max + 2 map', details_en:'.max file + 2 textures'},
+            {key:'chair', name:'Lounge Armchair',   ic:'💺', size:'22.4 MB', status_vi:'ĐÃ MERGE', status_en:'MERGED', details_vi:'1 tệp .max + 6 map', details_en:'.max file + 6 textures'},
+            {key:'mat',   name:'Concrete Floor',     ic:'🧱', size:'15.5 MB', status_vi:'SẴN SÀNG', status_en:'READY', details_vi:'Tự sinh PBR từ ảnh preview', details_en:'Generated PBR from preview'},
         ];
 
         const thumbsEl = document.getElementById('thumbs');
         const bigSwatch = document.getElementById('bigSwatch');
-        const bigLabel = document.getElementById('bigLabel');
         const bigSrc = document.getElementById('bigSrc');
 
         function renderThumbs() {
             thumbsEl.innerHTML = '';
-            maps.forEach((m, i) => {
+            models.forEach((m, i) => {
                 const t = document.createElement('div');
                 t.className = 'thumb' + (i === 0 ? ' active' : '');
-                t.onclick = () => selectMap(i);
-                const badge = m.badge ? `<span class="badge ${m.badge}">${m.badge.toUpperCase()}</span>` : '';
-                t.innerHTML = `<div class="sw ${m.sw}"></div>${badge}<span class="cap">${m.name}</span>`;
+                t.onclick = () => selectModel(i);
+                t.innerHTML = `<span class="sw-ic">${m.ic}</span><span class="cap">${m.name}</span>`;
                 thumbsEl.appendChild(t);
             });
         }
 
-        function selectMap(i) {
+        function selectModel(i) {
             document.querySelectorAll('.thumb').forEach((t, idx) => t.classList.toggle('active', idx === i));
-            bigSwatch.className = 'swatch ' + maps[i].sw;
-            bigLabel.textContent = maps[i].name;
-            bigSrc.textContent = currentLang === 'vi' ? maps[i].src_vi : maps[i].src_en;
+            
+            const m = models[i];
+            const statusText = currentLang === 'vi' ? m.status_vi : m.status_en;
+            const detailsText = currentLang === 'vi' ? m.details_vi : m.details_en;
+            
+            bigSwatch.innerHTML = `
+                <div class="sw-name">${m.name}</div>
+                <div class="sw-info">${detailsText} (${m.size})</div>
+                <span class="sw-status">${statusText}</span>
+            `;
+            bigSrc.textContent = currentLang === 'vi' ? 'Hàng đợi dòng ' + (i+1) : 'Queue Row ' + (i+1);
         }
 
         function setState(s) {
@@ -848,19 +812,22 @@
 
         renderThumbs();
         setState('loaded');
+        selectModel(0);
         
-        // Update big preview source description if lang changes
+        // Update labels on lang toggle
         const oldSetLang = setLang;
         setLang = function(lang) {
             oldSetLang(lang);
-            // Re-select active map to refresh labels based on lang
+            // Refresh mockup text
             const activeThumb = document.querySelector('.thumb.active');
             if (activeThumb) {
                 const index = Array.from(thumbsEl.children).indexOf(activeThumb);
                 if (index !== -1) {
-                    selectMap(index);
+                    selectModel(index);
                 }
             }
+            // Update other items
+            document.getElementById('targetCat').textContent = lang === 'vi' ? 'Furniture (Đồ nội thất)' : 'Furniture';
         };
     </script>
 </body>
