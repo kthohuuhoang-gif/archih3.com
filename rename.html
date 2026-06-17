@@ -3,98 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AH3 Magic Rename — UE5 Asset Preparation Tool for 3ds Max</title>
+    <title>AH3 Magic Rename - UE5 Asset Preparation Tool for 3ds Max</title>
+    <meta name="description" content="AH3 Magic Rename - Công cụ chuẩn hóa thư viện và đổi tên hàng loạt dành cho 3ds Max để xuất sang Unreal Engine 5.">
+    <meta property="og:title" content="AH3 Magic Rename - UE5 Asset Preparation Tool for 3ds Max">
+    <meta property="og:description" content="AH3 Magic Rename - Công cụ chuẩn hóa thư viện và đổi tên hàng loạt dành cho 3ds Max để xuất sang Unreal Engine 5.">
+    <meta property="og:image" content="https://archih3.com/logo.png">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="assets/css/global.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: #121212;
-            --bg-page: #1a1a1a;
-            --bg-main: #242424;
-            --bg-surface: #2e2e2e;
-            --bg-light: #3a3a3a;
-            --primary: #4db6ac; /* Teal theme for Magic Rename */
-            --primary-hover: #5ec4ba;
-            --primary-glow: rgba(77, 182, 172, 0.15);
-            --primary-glow-strong: rgba(77, 182, 172, 0.3);
-            --text: #e0e0e0;
-            --text-secondary: #a0a0a0;
-            --text-muted: #666666;
-            --border: #444444;
-            --destructive: #c62828;
-            --warning: #ef6c00;
-            --amber: #b48232;
-            --teal-deep: #10302d;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px;
-        }
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-page);
-            color: var(--text);
-            line-height: 1.7;
-            overflow-x: hidden;
-            position: relative;
-        }
+        
 
-        /* BACKGROUND EFFECTS */
-        .bg-glow {
-            position: absolute; top: 10%; left: 50%;
-            transform: translateX(-50%); width: 1000px; height: 1000px;
-            background: radial-gradient(circle, rgba(77,182,172,0.04) 0%, transparent 70%);
-            pointer-events: none; z-index: -1;
-        }
-        .bg-grid {
-            content: ''; position: absolute; inset: 0;
-            background-image:
-                linear-gradient(rgba(77,182,172,0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(77,182,172,0.015) 1px, transparent 1px);
-            background-size: 50px 50px; pointer-events: none; z-index: -1;
-        }
+        
 
-        /* NAV */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            padding: 16px 40px;
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(26, 26, 26, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(77, 182, 172, 0.1);
-        }
-        .logo {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 20px; font-weight: 600;
-            color: var(--primary); text-decoration: none; letter-spacing: -0.5px;
-            display: flex; align-items: center; gap: 8px;
-        }
-        .logo span { color: var(--text-secondary); font-weight: 400; }
-        .nav-links { display: flex; gap: 24px; align-items: center; }
-        .nav-links a {
-            color: var(--text-secondary); text-decoration: none;
-            font-size: 14px; font-weight: 400; transition: color 0.2s;
-        }
-        .nav-links a:hover { color: var(--primary); }
+        
 
-        /* LANG TOGGLE */
-        .lang-toggle {
-            display: inline-flex; align-items: center;
-            background: var(--bg-light); border-radius: 20px;
-            padding: 2px; cursor: pointer;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px; letter-spacing: 0.5px;
-        }
-        .lang-toggle button {
-            padding: 5px 12px; border: none; border-radius: 18px;
-            cursor: pointer; background: transparent;
-            color: var(--text-muted); font-family: inherit;
-            font-size: inherit; letter-spacing: inherit; transition: all 0.2s;
-        }
-        .lang-toggle button.active {
-            background: var(--primary); color: #121212; font-weight: 600;
-        }
+        
 
         /* BUTTONS */
         .btn-primary {
@@ -312,30 +237,9 @@
         .faq-item h3 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
         .faq-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
 
-        /* FOOTER */
-        footer {
-            padding: 40px 24px; text-align: center;
-            border-top: 1px solid rgba(85,85,85,0.2);
-            background: var(--bg-dark);
-        }
-        footer p { font-size: 13px; color: var(--text-muted); }
-        footer a { color: var(--primary); text-decoration: none; }
+        
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            nav { padding: 12px 20px; }
-            .mobile-menu-btn { display: block !important; }
-            .nav-links {
-                display: none !important; flex-direction: column;
-                position: absolute; top: 100%; left: 0; right: 0;
-                background: rgba(26, 26, 26, 0.95); backdrop-filter: blur(20px);
-                padding: 16px 20px; gap: 12px;
-                border-bottom: 1px solid rgba(77,182,172,0.1);
-            }
-            .nav-links.open { display: flex !important; }
-            .hero { padding: 100px 16px 40px; }
-            section { padding: 60px 16px; }
-        }
+        
     </style>
 </head>
 <body>
