@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AH3 Magic ReBake - Standalone Auto Retopology & High-Speed Texture Baker for 3ds Max</title>
+    <meta name="description" content="AH3 Magic ReBake - Tự động tối ưu cấu trúc lưới, trải UV và chuyển đổi map vật liệu siêu tốc chỉ trong 1-Click cho 3ds Max.">
+    <meta property="og:title" content="AH3 Magic ReBake - Standalone Auto Retopology & High-Speed Texture Baker for 3ds Max">
+    <meta property="og:description" content="AH3 Magic ReBake - Tự động tối ưu cấu trúc lưới, trải UV và chuyển đổi map vật liệu siêu tốc chỉ trong 1-Click cho 3ds Max.">
+    <meta property="og:image" content="https://archih3.com/logo.png">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* BUTTONS */
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: var(--primary);
+            color: #121212; font-weight: 600; font-size: 14px;
+            border: none; border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover); transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(77, 182, 172, 0.3);
+        }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: transparent;
+            color: var(--text); font-weight: 400; font-size: 14px;
+            border: 1px solid var(--border); border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* HERO */
+        .hero {
+            padding: 140px 24px 60px;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; position: relative;
+        }
+        .hero-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; color: var(--primary);
+            border: 1px solid rgba(77,182,172,0.3);
+            padding: 6px 16px; border-radius: 20px;
+            margin-bottom: 24px; background: var(--primary-glow); letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+            line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px;
+        }
+        .hero h1 .teal { color: var(--primary); }
+        .hero-sub {
+            font-size: 18px; color: var(--text-secondary);
+            max-width: 680px; margin: 0 auto 32px; font-weight: 300;
+        }
+        .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* SECTIONS */
+        section { padding: 80px 24px; }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            color: var(--primary); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 12px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px); font-weight: 700;
+            letter-spacing: -1px; margin-bottom: 16px; text-align: center;
+        }
+        .section-desc {
+            font-size: 16px; color: var(--text-secondary);
+            max-width: 600px; font-weight: 300; margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        /* INTERACTIVE DEMO CONTAINER */
+        .interactive-section {
+            background: var(--bg-dark);
+            border-top: 1px solid rgba(77, 182, 172, 0.1);
+            border-bottom: 1px solid rgba(77, 182, 172, 0.1);
+        }
+        .app-demo-wrapper {
+            max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px;
+        }
+        .demo-bar {
+            display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap;
+            background: #0d0d0d; padding: 12px 18px; border-radius: 8px; border: 1px solid #2a2a2a;
+            margin-bottom: 20px;
+        }
+        .demo-bar span { color: var(--text-secondary); font-size: 13px; margin-right: 4px; }
+        .demo-btn {
+            background: var(--bg-light); color: var(--text); border: 1px solid var(--border);
+            padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; transition: all 0.2s;
+        }
+        .demo-btn:hover { background: #484848; }
+        .demo-btn.active { background: var(--primary); color: #121212; border-color: var(--primary); font-weight: 600; }
+
+        /* Actual UI Simulator styling */
+        .rebake-window {
+            width: 100%; max-width: 660px; background: #383838; border-radius: 8px; overflow: hidden;
+            border: 1px solid #1c1c1c; box-shadow: 0 12px 40px rgba(0,0,0,.6);
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #a0a0a0; padding: 24px; box-sizing: border-box; margin: 0 auto;
+            border-top: 3px solid var(--primary);
+        }
+
+        .rebake-win-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 24px; border-bottom: 1px solid #4a4a4a; padding-bottom: 16px;
+        }
+        .rebake-win-header-left { text-align: left; }
+        .rebake-win-brand { font-size: 12px; font-weight: bold; color: var(--primary); letter-spacing: 1.5px; margin-bottom: 4px; text-transform: uppercase; }
+        .rebake-win-title { font-size: 32px; font-weight: 300; color: #ffffff; letter-spacing: -0.5px; }
+        .rebake-win-title b { font-weight: 700; color: #ffffff; margin-left: 2px; }
+        
+        .rebake-win-header-right { text-align: right; font-size: 12px; line-height: 1.6; }
+        .rebake-win-author { font-weight: 600; color: #ffffff; }
+        .rebake-win-ver { color: #888888; }
+        .rebake-win-ver a { color: var(--primary); text-decoration: none; }
+
+        .rebake-win-body { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .rebake-win-col { display: flex; flex-direction: column; gap: 18px; }
+
+        /* UI Group Panel styling matching screenshot */
+        .rebake-ui-group {
+            border: 1px solid #4d4d4d; border-radius: 6px;
+            padding: 20px 14px 14px 14px; position: relative;
+            box-sizing: border-box; text-align: left;
+            background: #3c3c3c;
+        }
+        .rebake-ui-group-title {
+            position: absolute; top: -10px; left: 12px;
+            background: #383838; padding: 0 8px;
+            font-size: 12px; font-weight: 600; color: #888888;
+        }
+
+        /* Rows */
+        .rebake-ui-row {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 14px; font-size: 13.5px; line-height: 1.4;
+        }
+        .rebake-ui-row:last-child { margin-bottom: 0; }
+        .rebake-ui-row label { color: #d0d0d0; font-weight: 400; }
+
+        /* Sliders */
+        .rebake-ui-slider-group {
+            display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px;
+        }
+        .rebake-ui-slider-group:last-child { margin-bottom: 0; }
+        .rebake-ui-slider-label { font-size: 13.5px; color: #d0d0d0; text-align: left; }
+        .rebake-ui-slider-row { display: flex; align-items: center; gap: 12px; }
+        
+        .rebake-ui-slider {
+            flex: 1; height: 5px; background: #262626; border-radius: 3px;
+            position: relative; cursor: pointer; border: 1px solid #1a1a1a;
+        }
+        .rebake-ui-slider-fill {
+            position: absolute; left: 0; top: 0; height: 100%;
+            background: #555555; border-radius: 3px;
+        }
+        .rebake-ui-slider-knob {
+            position: absolute; top: 50%; transform: translate(-50%, -50%);
+            width: 13px; height: 13px; border-radius: 50%;
+            background: #a8a8a8; border: 1px solid #1c1c1c; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .rebake-ui-valbox {
+            width: 58px; background: #282828; border: 1px solid #4a4a4a;
+            border-radius: 4px; color: #ffffff; padding: 4px 6px;
+            font-size: 12.5px; text-align: center; font-family: sans-serif;
+            box-sizing: border-box; pointer-events: none;
+        }
+
+        /* Checkboxes inline row */
+        .rebake-ui-checkbox-row {
+            display: flex; gap: 16px; align-items: center; margin-bottom: 14px;
+        }
+        .rebake-ui-checkbox-item {
+            display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13.5px; color: #d0d0d0;
+        }
+        .rebake-ui-checkbox-box {
+            width: 14px; height: 14px; border: 1px solid #5a5a5a;
+            background: #2a2a2a; border-radius: 3px; display: flex;
+            align-items: center; justify-content: center; font-size: 10px; color: var(--primary);
+            box-sizing: border-box; transition: all 0.2s;
+        }
+        .rebake-ui-checkbox-box.checked {
+            border-color: var(--primary);
+        }
+        .rebake-ui-checkbox-box.checked::after {
+            content: '✔';
+        }
+
+        /* Flat buttons/dropdowns in Qt style */
+        .rebake-ui-btn-dropdown {
+            background: #444444; border: 1px solid #525252;
+            border-radius: 4px; color: #eeeeee; padding: 5px 14px;
+            font-size: 13px; cursor: pointer; min-width: 90px;
+            text-align: center; transition: background 0.15s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .rebake-ui-btn-dropdown:hover { background: #505050; border-color: #606060; }
+
+        /* ON/OFF toggle switch */
+        .rebake-ui-toggle {
+            width: 44px; height: 20px; border-radius: 10px;
+            position: relative; cursor: pointer; display: flex;
+            align-items: center; font-family: monospace; font-size: 9px;
+            font-weight: bold; color: #ffffff; box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+        .rebake-ui-toggle.on {
+            background: #606060; justify-content: flex-start; padding-left: 6px;
+            border: 1px solid #4a4a4a;
+        }
+        .rebake-ui-toggle.off {
+            background: #4c4c4c; justify-content: flex-end; padding-right: 6px;
+            color: #888888; border: 1px solid #3c3c3c;
+        }
+        .rebake-ui-toggle-circle {
+            width: 14px; height: 14px; border-radius: 50%;
+            background: #ffffff; position: absolute; top: 2px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.4); transition: left 0.15s;
+        }
+        .rebake-ui-toggle.on .rebake-ui-toggle-circle { left: 26px; }
+        .rebake-ui-toggle.off .rebake-ui-toggle-circle { left: 2px; }
+
+        /* UI Footer */
+        .rebake-win-footer {
+            display: flex; justify-content: space-between; align-items: flex-end;
+            border-top: 1px solid #4a4a4a; padding-top: 16px; margin-top: 24px;
+        }
+        .rebake-win-footer-left { text-align: left; flex: 1; }
+        
+        .rebake-ui-lang-btn {
+            background: #444444; border: 1px solid #525252;
+            border-radius: 4px; color: #eeeeee; padding: 6px 14px;
+            font-size: 13px; cursor: pointer; display: inline-flex;
+            align-items: center; gap: 6px; margin-bottom: 12px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2); transition: background 0.15s;
+        }
+        .rebake-ui-lang-btn:hover { background: #505050; }
+        
+        .rebake-win-status {
+            font-size: 13.5px; color: var(--primary); font-weight: 500;
+            min-height: 20px; line-height: 1.4;
+        }
+        
+        .rebake-win-footer-right { display: flex; gap: 10px; }
+        
+        .rebake-ui-btn-action {
+            background: #444444; border: 1px solid #525252;
+            border-radius: 4px; color: #ffffff; padding: 8px 24px;
+            font-size: 13.5px; font-weight: bold; cursor: pointer;
+            min-width: 90px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+        }
+        .rebake-ui-btn-action:hover { background: #505050; border-color: #606060; }
+        
+        .rebake-ui-btn-action.run-btn {
+            background: #424242; border-color: #4e4e4e; color: #888888; cursor: not-allowed;
+        }
+        .rebake-ui-btn-action.run-btn.active {
+            background: #4db6ac; border-color: #4db6ac; color: #121212; cursor: pointer;
+        }
+        .rebake-ui-btn-action.run-btn.active:hover {
+            background: #5ec4ba; box-shadow: 0 0 12px rgba(77, 182, 172, 0.4);
+        }
+
+        /* Helper styling */
+        .info-card-overlay {
+            margin-top: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(85,85,85,0.2);
+            border-radius: 6px; padding: 12px 16px; font-size: 13px; text-align: left;
+        }
+        .info-card-overlay-title { font-weight: 600; color: #ffffff; margin-bottom: 4px; }
+
+        /* FEATURES */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 20px; max-width: 1100px; margin: 0 auto;
+        }
+        .feature-card {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            border-radius: 12px; padding: 32px;
+            transition: all 0.3s; position: relative; overflow: hidden;
+            text-align: left;
+        }
+        .feature-card:hover {
+            border-color: rgba(77,182,172,0.3); transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: var(--primary-glow); border: 1px solid rgba(77,182,172,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; margin-bottom: 20px;
+        }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #ffffff; }
+        .feature-card p { font-size: 14px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        /* STEPS / WORKFLOW */
+        .steps-section {
+            background: var(--bg-main);
+        }
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px; max-width: 900px; margin: 0 auto;
+        }
+        .step-item {
+            text-align: center; position: relative;
+        }
+        .step-num {
+            font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700;
+            color: var(--primary); margin-bottom: 12px; opacity: 0.8;
+        }
+        .step-item h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; color: #ffffff; }
+        .step-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; }
+
+        /* PRICING */
+        .pricing-section { max-width: 900px; margin: 0 auto; }
+        .pricing-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 24px; margin-top: 40px;
+        }
+        .price-card {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4);
+            border-radius: 16px; padding: 48px 32px;
+            text-align: center; position: relative;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .price-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--bg-main), rgba(77, 182, 172, 0.05));
+        }
+        .price-card.featured::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 4px; background: var(--primary); border-radius: 16px 16px 0 0;
+        }
+        .price-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; padding: 4px 12px; border-radius: 12px;
+            margin-bottom: 20px; letter-spacing: 0.5px;
+            background: var(--primary-glow); color: var(--primary);
+            font-weight: 600;
+        }
+        .price-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 16px; color: #ffffff; }
+        .price-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 36px; font-weight: 600; color: var(--primary);
+            margin-bottom: 4px; display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .price-amount del { font-size: 18px; color: var(--text-secondary); font-weight: 400; }
+        .price-amount span { font-size: 14px; font-weight: 400; color: var(--text-secondary); }
+        .price-period { font-size: 13px; color: var(--warning); margin-bottom: 32px; font-weight: 600; }
+        
+        .price-features {
+            list-style: none; text-align: left; max-width: 350px; margin: 0 auto 32px;
+        }
+        .price-features li {
+            padding: 8px 0; font-size: 15px; color: var(--text-secondary);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .price-features li::before {
+            content: '✓'; color: var(--primary); font-weight: 600;
+        }
+
+        /* FAQ */
+        .faq-section { max-width: 800px; margin: 0 auto; }
+        .faq-grid { display: flex; flex-direction: column; gap: 16px; }
+        .faq-item {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            border-radius: 8px; padding: 24px;
+            text-align: left;
+        }
+        .faq-item h3 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .faq-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero { animation: fadeUp 0.8s ease-out; }
+        .feature-card { animation: fadeUp 0.6s ease-out both; }
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @media (max-width: 768px) {
+            .features-grid {
+                grid-template-columns: 1fr !important;
+            }
+            .rebake-win-body {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+            .rebake-win-footer {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 16px;
+            }
+            .rebake-win-footer-right {
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="logo"><img src="logo.png" alt="AH3" style="height:24px; vertical-align:middle; margin-right:6px; opacity:0.85;">AH3<span> Magic ReBake</span></a>
+        <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('open')" style="display:none; background:none; border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:var(--text); font-size:18px; cursor:pointer;">☰</button>
+        <div class="nav-links">
+            <a href="#features" data-vi="Tính năng" data-en="Features">Tính năng</a>
+            <a href="#workflow" data-vi="Quy trình" data-en="Workflow">Quy trình</a>
+            <a href="#pricing" data-vi="Bảng giá" data-en="Pricing">Bảng giá</a>
+            <a href="#faq" data-vi="FAQ" data-en="FAQ">FAQ</a>
+            <a href="https://youtube.com/@ArchiH3" target="_blank">YouTube</a>
+            <div class="lang-toggle">
+                <button class="active" onclick="setLang('vi')">VI</button>
+                <button onclick="setLang('en')">EN</button>
+            </div>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" data-vi="Mua ngay" data-en="Buy Now">Mua ngay</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge">STANDALONE RETOPOLOGY & BAKER PLUGIN FOR 3DS MAX</div>
+        <h1 data-vi="Lưới Quad sạch mượt.<br>Map vật liệu <span class='teal'>nguyên vẹn</span>." data-en="Clean Quad topology.<br><span class='teal'>Perfect</span> texture transfers."></h1>
+        <p class="hero-sub" data-vi="Tự động dựng lại lưới Quad sạch sẽ, mượt mà chỉ với 1-Click từ những mô hình có cấu trúc lưới lộn xộn, đa giác lỗi hoặc file quét 3D. Đồng thời tự động trải UV và truyền map vật liệu gốc sang lưới mới với tốc độ vượt trội." data-en="Automatically reconstruct clean, optimized Quad meshes in 1-Click from messy triangulated geometry, boolean errors, or 3D scans. Concurrently unwraps UVs and bakes original materials to the new mesh with blazing speed."></p>
+        <div class="hero-cta">
+            <a href="#pricing" class="btn-primary" data-vi="Nhận ưu đãi ra mắt" data-en="Get Launch Deal">Nhận ưu đãi ra mắt</a>
+            <a href="#interactive-demo" class="btn-outline" data-vi="Thử bản mô phỏng →" data-en="Try Interactive Demo →">Thử bản mô phỏng →</a>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE DEMO (SIMULATOR) -->
+    <section class="interactive-section" id="interactive-demo">
+        <div class="section-label" data-vi="BẢN MÔ PHỎNG" data-en="GUI SIMULATOR">BẢN MÔ PHỎNG</div>
+        <h2 class="section-title" data-vi="Trải nghiệm giao diện trực quan" data-en="Experience the Interface"></h2>
+        <p class="section-desc" data-vi="Thử nghiệm tương tác các tùy chọn tối ưu lưới và bake map trực tiếp trên giao diện chuẩn của Magic ReBake." data-en="Test topology optimization and texture baking options directly on Magic ReBake's UI mockup."></p>
+
+        <div class="app-demo-wrapper">
+            <!-- Plugin UI Window -->
+            <div class="rebake-window" id="rebakeWindow">
+                <!-- Mockup Header -->
+                <div class="rebake-win-header">
+                    <div class="rebake-win-header-left">
+                        <div class="rebake-win-brand">ARCHIH3</div>
+                        <div class="rebake-win-title">Magic <b>ReBake</b></div>
+                    </div>
+                    <div class="rebake-win-header-right">
+                        <div class="rebake-win-author">KTS. Hồ Hữu Hoàng</div>
+                        <div class="rebake-win-ver">v1.1.1 · <a href="index.html">archih3.com</a></div>
+                    </div>
+                </div>
+
+                <!-- Mockup Body -->
+                <div class="rebake-win-body">
+                    <!-- Left Column -->
+                    <div class="rebake-win-col">
+                        <!-- Group 1: Thiết lập Lưới -->
+                        <div class="rebake-ui-group">
+                            <span class="rebake-ui-group-title" data-vi="Thiết lập Lưới" data-en="Mesh Settings">Thiết lập Lưới</span>
+                            
+                            <div class="rebake-ui-slider-group">
+                                <span class="rebake-ui-slider-label" data-vi="Số lượng Quad" data-en="Quad Count">Số lượng Quad</span>
+                                <div class="rebake-ui-slider-row">
+                                    <div class="rebake-ui-slider" onclick="adjustSlider('Quad', event)">
+                                        <div class="rebake-ui-slider-fill" id="quadSliderFill" style="width:75%"></div>
+                                        <div class="rebake-ui-slider-knob" id="quadSliderKnob" style="left:75%"></div>
+                                    </div>
+                                    <input class="rebake-ui-valbox" id="quadVal" value="75 %" readonly>
+                                </div>
+                            </div>
+
+                            <div class="rebake-ui-slider-group">
+                                <span class="rebake-ui-slider-label" data-vi="Bảo toàn chi tiết (%)" data-en="Detail Preservation (%)">Bảo toàn chi tiết (%)</span>
+                                <div class="rebake-ui-slider-row">
+                                    <div class="rebake-ui-slider" onclick="adjustSlider('Detail', event)">
+                                        <div class="rebake-ui-slider-fill" id="detailSliderFill" style="width:50%"></div>
+                                        <div class="rebake-ui-slider-knob" id="detailSliderKnob" style="left:50%"></div>
+                                    </div>
+                                    <input class="rebake-ui-valbox" id="detailVal" value="50" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Group 2: Thiết lập Bake Texture -->
+                        <div class="rebake-ui-group">
+                            <span class="rebake-ui-group-title" data-vi="Thiết lập Bake Texture" data-en="Bake Texture Settings">Thiết lập Bake Texture</span>
+                            
+                            <div class="rebake-ui-row">
+                                <label data-vi="Bake lại Texture" data-en="Bake Textures">Bake lại Texture</label>
+                                <div class="rebake-ui-toggle on" id="toggleBake" onclick="toggleSwitch('Bake')">
+                                    <span>ON</span>
+                                    <div class="rebake-ui-toggle-circle"></div>
+                                </div>
+                            </div>
+
+                            <div class="rebake-ui-checkbox-row" id="bakeCheckboxes">
+                                <div class="rebake-ui-checkbox-item" onclick="toggleCheckbox('Cage')">
+                                    <div class="rebake-ui-checkbox-box checked" id="checkCage"></div>
+                                    <span data-vi="Lồng bao" data-en="Cage">Lồng bao</span>
+                                </div>
+                                <div class="rebake-ui-checkbox-item" onclick="toggleCheckbox('AutoCage')">
+                                    <div class="rebake-ui-checkbox-box checked" id="checkAutoCage"></div>
+                                    <span data-vi="Tự động" data-en="Auto">Tự động</span>
+                                </div>
+                                <input class="rebake-ui-valbox" value="1.00" style="width:50px; height:24px; padding:2px;" readonly>
+                            </div>
+
+                            <div class="rebake-ui-row" id="antiAliasRow">
+                                <label data-vi="Khử răng cưa" data-en="Anti-aliasing">Khử răng cưa</label>
+                                <button class="rebake-ui-btn-dropdown" data-vi="Tắt" data-en="Off">Tắt</button>
+                            </div>
+
+                            <div class="rebake-ui-row" id="bakeQualityRow">
+                                <label data-vi="Chất lượng Bake" data-en="Bake Quality">Chất lượng Bake</label>
+                                <button class="rebake-ui-btn-dropdown" data-vi="Cân bằng" data-en="Balanced">Cân bằng</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column -->
+                    <div class="rebake-win-col">
+                        <!-- Group 3: Điều hướng Lưới -->
+                        <div class="rebake-ui-group">
+                            <span class="rebake-ui-group-title" data-vi="Điều hướng Lưới" data-en="Topology Guide">Điều hướng Lưới</span>
+                            
+                            <div class="rebake-ui-row">
+                                <label data-vi="Bảo toàn Smoothing Groups" data-en="Preserve Smoothing Groups">Bảo toàn Smoothing Groups</label>
+                                <div class="rebake-ui-toggle off" id="toggleSmooth" onclick="toggleSwitch('Smooth')">
+                                    <span>OFF</span>
+                                    <div class="rebake-ui-toggle-circle"></div>
+                                </div>
+                            </div>
+
+                            <div class="rebake-ui-row">
+                                <label data-vi="Bảo toàn Material IDs" data-en="Preserve Material IDs">Bảo toàn Material IDs</label>
+                                <div class="rebake-ui-toggle off" id="toggleMatId" onclick="toggleSwitch('MatId')">
+                                    <span>OFF</span>
+                                    <div class="rebake-ui-toggle-circle"></div>
+                                </div>
+                            </div>
+
+                            <div class="rebake-ui-row">
+                                <label data-vi="Tự nhận diện góc cứng" data-en="Auto Detect Hard Edges">Tự nhận diện góc cứng</label>
+                                <div class="rebake-ui-toggle on" id="toggleHardEdges" onclick="toggleSwitch('HardEdges')">
+                                    <span>ON</span>
+                                    <div class="rebake-ui-toggle-circle"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Group 4: Tùy chọn chung -->
+                        <div class="rebake-ui-group">
+                            <span class="rebake-ui-group-title" data-vi="Tùy chọn chung" data-en="General Options">Tùy chọn chung</span>
+                            
+                            <div class="rebake-ui-row">
+                                <label data-vi="Trục đối xứng" data-en="Symmetry Axis">Trục đối xứng</label>
+                                <button class="rebake-ui-btn-dropdown" data-vi="Không" data-en="None">Không</button>
+                            </div>
+
+                            <div class="rebake-ui-row">
+                                <label data-vi="Ẩn vật thể gốc sau khi xong" data-en="Hide Source Object">Ẩn vật thể gốc sau khi xong</label>
+                                <div class="rebake-ui-toggle on" id="toggleHideSource" onclick="toggleSwitch('HideSource')">
+                                    <span>ON</span>
+                                    <div class="rebake-ui-toggle-circle"></div>
+                                </div>
+                            </div>
+
+                            <div class="rebake-ui-row">
+                                <label data-vi="Sao lưu mesh gốc" data-en="Backup Source Mesh">Sao lưu mesh gốc</label>
+                                <div class="rebake-ui-toggle on" id="toggleBackup" onclick="toggleSwitch('Backup')">
+                                    <span>ON</span>
+                                    <div class="rebake-ui-toggle-circle"></div>
+                                </div>
+                            </div>
+
+                            <div class="rebake-ui-row">
+                                <label data-vi="Nơi lưu texture" data-en="Texture Output Path">Nơi lưu texture</label>
+                                <button class="rebake-ui-btn-dropdown" style="min-width:120px;" data-vi="Scene assets" data-en="Scene assets">Scene assets</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mockup Footer -->
+                <div class="rebake-win-footer">
+                    <div class="rebake-win-footer-left">
+                        <button class="rebake-ui-lang-btn" onclick="toggleUILang()">
+                            <span>🌐 Tiếng Việt</span>
+                        </button>
+                        <div class="rebake-win-status" id="consoleOutput">Vui lòng chọn 1 đối tượng để xử lý...</div>
+                    </div>
+                    
+                    <div class="rebake-win-footer-right">
+                        <button class="rebake-ui-btn-action" onclick="resetSimulator()" data-vi="Đóng" data-en="Close">Đóng</button>
+                        <button class="rebake-ui-btn-action run-btn active" id="btnRemesh" onclick="runMockRemesh()">RUN</button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="note" data-vi="① Vùng chọn đối tượng: Mô phỏng hành động click chọn vật thể trong khung cảnh 3ds Max ở trên. ② Thiết lập: Cho phép chỉnh tỷ lệ mesh, bật/tắt bake texture, bảo toàn Smoothing Groups và các tùy chọn tiện ích. Nhấn RUN để khởi động thuật toán tối ưu lưới và bake tự động." data-en="① Viewport selection: Simulates clicking and selecting a 3D model in 3ds Max viewport. ② Configuration: Adjust Quad counts, toggle texture bake, preserve Smoothing Groups, and other pipeline options. Click RUN to execute automated retopology and baking.">
+            </p>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+        <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="KEY FEATURES">TÍNH NĂNG NỔI BẬT</div>
+        <h2 class="section-title" data-vi="Tối ưu lưới và giữ nguyên vật liệu chỉ với 1-Click" data-en="Optimize Mesh &amp; Keep Materials in 1-Click"></h2>
+        <p class="section-desc" data-vi="Khắc phục hoàn toàn các lỗi lưới tam giác lộn xộn, mesh nặng từ CAD hoặc file scan, đồng thời tái tạo lại map vật liệu nguyên vẹn trên mô hình mới siêu mượt, siêu nhẹ." data-en="Fix messy triangles, heavy CAD structures, or scan meshes. Regenerate clean topology and perfectly preserve original materials on your new lightweight mesh."></p>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">📐</div>
+                <h3 data-vi="Tối ưu hóa lưới Quad sạch mượt" data-en="Clean Quad Retopology">Tối ưu hóa lưới Quad sạch mượt</h3>
+                <p data-vi="Thuật toán dựng lưới thông minh giúp chuyển đổi toàn bộ các mô hình có lưới tam giác lỗi, đa giác lộn xộn hoặc tệp quét 3D nặng nề thành lưới Quad (bốn góc) đều tăm tắp, sạch sẽ, mượt mà và cực nhẹ." data-en="Smart reconstruction algorithm converts messy triangles, complex boolean geometry, or heavy 3D scans into clean, regular, and lightweight Quad-based models ready for rendering."></p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 data-vi="Truyền map vật liệu siêu tốc" data-en="High-Speed Material Transfer">Truyền map vật liệu siêu tốc</h3>
+                <p data-vi="Tích hợp bộ xử lý chuyển đổi map vật liệu thông minh. Tự động chiếu và chụp lại tất cả các kênh màu sắc, độ bóng, độ gồ ghề (Diffuse, Normal, Roughness, AO...) từ vật thể gốc sang vật thể mới chuẩn xác." data-en="Integrated smart texture transfer processor. Automatically maps and bakes all material channels (Diffuse, Normal, Roughness, AO) from the source model onto the optimized target accurately and quickly."></p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">🗺️</div>
+                <h3 data-vi="Tự động trải UV đồng bộ" data-en="Automatic UV Unwrapping">Tự động trải UV đồng bộ</h3>
+                <p data-vi="Tự động tính toán và trải lại hệ tọa độ UV cho lưới Quad mới trực tiếp ngay trong không gian làm việc của 3ds Max. Giúp lưới và map vật liệu khớp khớp hoàn hảo mà không bị lệch hay méo dạng." data-en="Automatically computes and unwraps UV coordinates for the new Quad mesh directly inside 3ds Max, ensuring textures fit perfectly without stretching or scaling distortions."></p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">🩹</div>
+                <h3 data-vi="Khử răng cưa và lỗi biên UV" data-en="Boundary &amp; Seam Healing">Khử răng cưa và lỗi biên UV</h3>
+                <p data-vi="Bộ lọc thông minh tự động phát hiện và tinh chỉnh các vết đứt gãy UV dọc các đường biên cắt. Loại bỏ hoàn toàn hiện tượng vệt răng cưa hoặc lỗi gai nhọn khó chịu ở mép vân vật liệu." data-en="Smart filtering detects and corrects UV texture seams along boundary splits. Completely eliminates unwanted staircasing, artifacts, or spikes at the edges of your materials."></p>
+            </div>
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3 data-vi="Quy trình 1-Click chạy ngầm" data-en="1-Click Background Pipeline">Quy trình 1-Click chạy ngầm</h3>
+                <p data-vi="Hoàn toàn tự động hóa. Từ khâu xuất mesh nháp, xử lý lưới, trải tọa độ UV đến bake map và gán lại vật liệu hoàn thiện. Bạn chỉ cần nhập số lưới mong muốn và bấm nút, hệ thống sẽ tự lo." data-en="Completely automated workflow. From temp mesh exporting, topology calculation, UV mapping, texture baking, to assigning the final material. Just enter your target count and press one button."></p>
+            </div>
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3 data-vi="Xử lý Offline - Bản quyền HWID" data-en="Offline Processing &amp; HWID">Xử lý Offline - Bản quyền HWID</h3>
+                <p data-vi="Hoạt động 100% cục bộ trên máy tính của bạn, không tải tệp tin lên cloud, đảm bảo an toàn tuyệt đối cho dữ liệu dự án. Bản quyền trọn đời gắn với ID máy tính, nhận cập nhật tự động miễn phí." data-en="Runs 100% locally on your computer with zero cloud uploads, ensuring absolute privacy for your assets. Lifetime license tied to your HWID with free automatic updates."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEPS / WORKFLOW -->
+    <section class="steps-section" id="workflow">
+        <div class="section-label" data-vi="QUY TRÌNH XỬ LÝ" data-en="WORKFLOW">QUY TRÌNH XỬ LÝ</div>
+        <h2 class="section-title" data-vi="Tối ưu lưới chỉ với 3 bước đơn giản" data-en="Optimize Mesh in 3 Simple Steps"></h2>
+        <p class="section-desc" data-vi="Chuyển đổi những model lỗi, nặng nề thành mô hình siêu nhẹ sẵn sàng sử dụng." data-en="Convert heavy and messy models into game-ready, lightweight assets."></p>
+
+        <div class="steps-grid">
+            <div class="step-item">
+                <div class="step-num">01</div>
+                <h3 data-vi="Chọn vật thể &amp; Số lưới" data-en="Select Mesh &amp; Target">Chọn vật thể &amp; Số lưới</h3>
+                <p data-vi="Chọn mô hình cần tối ưu lưới trong Max, thiết lập số lượng lưới Quad mong muốn trên thanh trượt." data-en="Select the target model in your scene, and adjust the slider to set your desired target Quad polygon count."></p>
+            </div>
+            <div class="step-item">
+                <div class="step-num">02</div>
+                <h3 data-vi="Chạy tối ưu tự động" data-en="Run Auto Retopology">Chạy tối ưu tự động</h3>
+                <p data-vi="Nhấn nút Remesh, hệ thống tự động tính toán cấu trúc hình học và tái tạo lại lưới Quad chuẩn chỉ sau vài giây." data-en="Click the Remesh button. The engine computes the geometry layout and reconstructs clean Quad topology instantly."></p>
+            </div>
+            <div class="step-item">
+                <div class="step-num">03</div>
+                <h3 data-vi="Tự động trải UV &amp; Bake" data-en="Auto UV &amp; Bake">Tự động trải UV &amp; Bake</h3>
+                <p data-vi="Plugin tự động trải UV, chụp map từ vật thể cũ gán sang vật thể mới, thiết lập vật liệu hoàn thiện tự động." data-en="The plugin automatically unwraps UVs, projects textures, and assigns a ready-to-render material back to the scene."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+        <div class="section-label" data-vi="BẢNG GIÁ KHUYẾN MÃI" data-en="LAUNCH PRICE">BẢNG GIÁ KHUYẾN MÃI</div>
+        <h2 class="section-title" data-vi="Khuyến Mãi Ra Mắt Cực Lớn. Chỉ 3 Ngày!" data-en="Flash Launch Discount. 3 Days Only!"></h2>
+        <p class="section-desc" data-vi="Sở hữu trọn đời công cụ tối ưu hóa lưới hàng đầu cho 3ds Max với giá sale chưa từng có. Kích hoạt theo ID máy tính (HWID)." data-en="Get lifetime access to the premier topology optimization plugin for 3ds Max at an unmatched price. Tied to HWID."></p>
+
+        <div class="pricing-section">
+            <div class="pricing-grid">
+                <!-- Card 1: Standalone -->
+                <div class="price-card featured" style="border-color: #ff9100;">
+                    <div style="position:absolute; top:0; left:0; right:0; height:3px; background:#ff9100; border-radius:16px 16px 0 0;"></div>
+                    <div>
+                        <div class="price-badge" style="background: rgba(255, 145, 0, 0.15); color: #ff9100;">FLASH SALE - 3 DAYS ONLY</div>
+                        <h3 data-vi="Magic ReBake Standalone" data-en="Magic ReBake Standalone">Magic ReBake Standalone</h3>
+                        <div class="price-amount" data-vi="<del>999.000đ</del> 200.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $8 <span>/ lifetime</span>"></div>
+                        <div class="price-period" data-vi="Giảm giá sốc 80% nhân dịp mở bán (Chỉ áp dụng trong 3 ngày)" data-en="Huge 80% discount for launch (Valid for 3 days only)">Giảm giá sốc 80% nhân dịp mở bán (Chỉ áp dụng trong 3 ngày)</div>
+                        
+                        <ul class="price-features">
+                            <li data-vi="Tối ưu hóa lưới Quad tự động từ mô hình bất kỳ" data-en="Auto Quad retopology from any 3D model geometry"></li>
+                            <li data-vi="Bake truyền map vật liệu siêu tốc (Diffuse, Normal, Roughness, AO...)" data-en="High-speed texture projection baking (Diffuse, Normal, Roughness, AO...)"></li>
+                            <li data-vi="Tự động trải UV đồng bộ trực tiếp ngay trong 3ds Max" data-en="Auto UV unwrapping directly integrated inside 3ds Max"></li>
+                            <li data-vi="Bộ vá lỗi biên mép UV tự động, loại bỏ vết đứt gãy răng cưa" data-en="Boundary seam healer to eliminate edge staircase artifacts"></li>
+                            <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật miễn phí trọn đời qua OTA" data-en="Perpetual license with lifetime free updates via built-in OTA"></li>
+                        </ul>
+                    </div>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center; margin-top:20px; background:#ff9100; color:#121212;" data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
+                </div>
+
+                <!-- Card 2: Combo -->
+                <div class="price-card featured">
+                    <div>
+                        <div class="price-badge" style="background:var(--primary-glow); color:var(--primary);">SUPER COMBO OFFER</div>
+                        <h3 data-vi="Combo 3 Standalone Plugins" data-en="Combo 3 Standalone Plugins">Combo 3 Standalone Plugins</h3>
+                        <div class="price-amount" data-vi="<del>2.997.000đ</del> 600.000đ <span>/ vĩnh viễn</span>" data-en="<del>$117</del> $24 <span>/ lifetime</span>"></div>
+                        <div class="price-period" data-vi="Sở hữu bộ ba công cụ tối ưu hóa quy trình hàng đầu" data-en="Get all three workflow-defining tools together">Sở hữu bộ ba công cụ tối ưu hóa quy trình hàng đầu</div>
+                        
+                        <ul class="price-features">
+                            <li data-vi="Giấy phép vĩnh viễn cho cả 3 plugin độc lập" data-en="Perpetual lifetime keys for all 3 standalone plugins"></li>
+                            <li data-vi="<b>Magic ReBake</b> — Tối ưu hóa lưới Quad &amp; Bake map vật liệu" data-en="<b>Magic ReBake</b> — Quad retopology &amp; texture bake transfer"></li>
+                            <li data-vi="<b>Magic Merger</b> — Batch import model 3D &amp; Smart Relink map" data-en="<b>Magic Merger</b> — Batch merge models &amp; smart texture relinking"></li>
+                            <li data-vi="<b>Magic Material</b> — Tự động tạo map PBR 1-Click offline" data-en="<b>Magic Material</b> — 1-click offline PBR material generator"></li>
+                            <li data-vi="Tương thích 3ds Max 2022-2027+, hỗ trợ Corona / V-Ray" data-en="Supports 3ds Max 2022-2027+, Corona / V-Ray engine ready"></li>
+                            <li data-vi="Nhận các bản cập nhật mới miễn phí trọn đời" data-en="Lifetime free updates &amp; developer support"></li>
+                        </ul>
+                    </div>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center; margin-top:20px;" data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="background: var(--bg-dark);">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions"></h2>
+        <p class="section-desc" data-vi="Các chi tiết cốt lõi giúp bạn hiểu rõ cơ chế hoạt động của Magic ReBake." data-en="Core details helping you understand how Magic ReBake operates under the hood."></p>
+
+        <div class="faq-section" style="max-width: 900px; margin: 0 auto;">
+            <div class="faq-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                <div class="faq-item" style="background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4); border-radius: 12px; padding: 24px;">
+                    <h3 style="font-size:16px; font-weight:600; color:var(--primary); margin-bottom:10px;" data-vi="Plugin hoạt động như thế nào?" data-en="How does the plugin work?"></h3>
+                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; font-weight:300;" data-vi="Khi bạn click Remesh, plugin gọi một bộ xử lý hình học chạy ẩn để dựng lại lưới Quad chuẩn. Sau đó, một thuật toán dò tia vector hóa sẽ chạy trên CPU để tính toán và truyền màu sắc, map vật liệu chính xác từ mesh cũ sang mesh mới theo đúng hệ tọa độ UV mới tạo." data-en="When you click Remesh, the plugin invokes a background geometry processor to build the Quad mesh. Then, a vectorized raycasting algorithm runs on your CPU to calculate and project colors and maps from the original mesh to the new UV layout."></p>
+                </div>
+                <div class="faq-item" style="background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4); border-radius: 12px; padding: 24px;">
+                    <h3 style="font-size:16px; font-weight:600; color:var(--primary); margin-bottom:10px;" data-vi="Tính năng trải UV tự động và sửa biên mép hoạt động thế nào?" data-en="How does auto UV unwrap and boundary healing work?"></h3>
+                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; font-weight:300;" data-vi="Trước khi bake, plugin tự động chạy thuật toán trải phẳng tọa độ map lên lưới Quad mới. Nếu lưới Quad bị đứt gãy dọc đường chéo đa giác tạo ra các seam lỗi, bộ lọc vá biên (Boundary Healer) sẽ tự động khớp các đỉnh biên và là phẳng vùng mép, loại bỏ hoàn toàn các lỗi sọc hoặc gai nhọn." data-en="Before baking, the plugin automatically unwraps mapping coordinates for the new mesh. If the Quad layout splits along polygon diagonals creating bad seams, a Boundary Healer aligns the split vertices to smooth out the edges, removing striping or pixel artifacts."></p>
+                </div>
+                <div class="faq-item" style="background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4); border-radius: 12px; padding: 24px;">
+                    <h3 style="font-size:16px; font-weight:600; color:var(--primary); margin-bottom:10px;" data-vi="Bản quyền HWID hoạt động thế nào? Cập nhật ra sao?" data-en="How does HWID licensing and update work?"></h3>
+                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; font-weight:300;" data-vi="Giấy phép trọn đời được liên kết với ID phần cứng máy tính (HWID). Mọi tính năng xử lý lưới và bake map hoạt động hoàn toàn offline, đảm bảo tính bảo mật. Mỗi khi có bản vá lỗi hoặc tính năng mới, plugin sẽ tự kiểm tra và tải bản cập nhật tự động (OTA) rất nhanh chóng." data-en="Your perpetual license is linked to your hardware ID (HWID). All retopology and baking features operate offline for maximum security. When a patch or new version is available, the plugin checks and pulls updates automatically (OTA) in seconds."></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2025–2026 <a href="index.html">archih3.com</a> · Magic ReBake by Hồ Hữu Hoàng · Made in Vietnam 🇻🇳</p>
+    </footer>
+
+    <!-- LANGUAGE SWITCH & INTERACTIVE MOCKUP JS -->
+    <script>
+        let currentLang = 'vi';
+        
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = text;
+                } else {
+                    el.innerHTML = text;
+                }
+            });
+            // Update dynamic mockup items
+            updateMockupText();
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => setLang('vi'));
+
+        // Mockup interactive script
+        let isDone = false;
+        let quadPct = 75;
+        let detailPct = 50;
+        let isBake = true;
+        let isCage = true;
+        let isAutoCage = true;
+        let isSmooth = false;
+        let isMatId = false;
+        let isHardEdges = true;
+        let isHideSource = true;
+        let isBackup = true;
+
+        const consoleEl = document.getElementById('consoleOutput');
+
+        function updateMockupText() {
+            // Update Language Globe button text
+            const langBtnSpan = document.querySelector('.rebake-ui-lang-btn span');
+            if (langBtnSpan) {
+                langBtnSpan.textContent = currentLang === 'vi' ? '🌐 Tiếng Việt' : '🌐 English';
+            }
+
+            if (!isDone) {
+                consoleEl.textContent = currentLang === 'vi'
+                    ? 'Sẵn sàng tối ưu lưới đối tượng đang chọn...'
+                    : 'Ready to optimize mesh for selected object...';
+            }
+        }
+
+        function adjustSlider(type, e) {
+            const slider = e.currentTarget;
+            const rect = slider.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const pct = Math.max(0, Math.min(100, Math.round((x / rect.width) * 100)));
+            
+            if (type === 'Quad') {
+                quadPct = pct;
+                document.getElementById('quadSliderFill').style.width = pct + '%';
+                document.getElementById('quadSliderKnob').style.left = pct + '%';
+                document.getElementById('quadVal').value = pct + ' %';
+            } else if (type === 'Detail') {
+                detailPct = pct;
+                document.getElementById('detailSliderFill').style.width = pct + '%';
+                document.getElementById('detailSliderKnob').style.left = pct + '%';
+                document.getElementById('detailVal').value = pct;
+            }
+            
+            isDone = false;
+            updateMockupText();
+        }
+
+        function toggleSwitch(opt) {
+            if (opt === 'Bake') {
+                isBake = !isBake;
+                updateToggleUI('toggleBake', isBake);
+                
+                // Dim bake parameters when off
+                const opacityVal = isBake ? '1' : '0.4';
+                const pointerVal = isBake ? 'auto' : 'none';
+                document.getElementById('bakeCheckboxes').style.opacity = opacityVal;
+                document.getElementById('bakeCheckboxes').style.pointerEvents = pointerVal;
+                document.getElementById('antiAliasRow').style.opacity = opacityVal;
+                document.getElementById('antiAliasRow').style.pointerEvents = pointerVal;
+                document.getElementById('bakeQualityRow').style.opacity = opacityVal;
+                document.getElementById('bakeQualityRow').style.pointerEvents = pointerVal;
+            } else if (opt === 'Smooth') {
+                isSmooth = !isSmooth;
+                updateToggleUI('toggleSmooth', isSmooth);
+            } else if (opt === 'MatId') {
+                isMatId = !isMatId;
+                updateToggleUI('toggleMatId', isMatId);
+            } else if (opt === 'HardEdges') {
+                isHardEdges = !isHardEdges;
+                updateToggleUI('toggleHardEdges', isHardEdges);
+            } else if (opt === 'HideSource') {
+                isHideSource = !isHideSource;
+                updateToggleUI('toggleHideSource', isHideSource);
+            } else if (opt === 'Backup') {
+                isBackup = !isBackup;
+                updateToggleUI('toggleBackup', isBackup);
+            }
+            
+            isDone = false;
+            updateMockupText();
+        }
+
+        function updateToggleUI(id, state) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.className = 'rebake-ui-toggle ' + (state ? 'on' : 'off');
+            el.querySelector('span').textContent = state ? 'ON' : 'OFF';
+        }
+
+        function toggleCheckbox(opt) {
+            if (!isBake) return;
+
+            if (opt === 'Cage') {
+                isCage = !isCage;
+                document.getElementById('checkCage').classList.toggle('checked', isCage);
+            } else if (opt === 'AutoCage') {
+                isAutoCage = !isAutoCage;
+                document.getElementById('checkAutoCage').classList.toggle('checked', isAutoCage);
+            }
+            
+            isDone = false;
+            updateMockupText();
+        }
+
+        function toggleUILang() {
+            const nextLang = currentLang === 'vi' ? 'en' : 'vi';
+            setLang(nextLang);
+        }
+
+        function runMockRemesh() {
+            const btn = document.getElementById('btnRemesh');
+            btn.classList.remove('active');
+            btn.disabled = true;
+            
+            let stage = 0;
+            const stages = currentLang === 'vi' ? [
+                '[1/4] Đang chuẩn bị xuất geometry tạm thời...',
+                '[2/4] Đang tính toán cấu trúc tối ưu lưới Quad...',
+                '[3/4] Đang tự động trải tọa độ UV...',
+                '[4/4] Đang bake truyền tải map vật liệu...',
+                'Hoàn tất! Đã tối ưu lưới và bake map thành công.'
+            ] : [
+                '[1/4] Exporting temporary geometry...',
+                '[2/4] Calculating Quad topology optimization...',
+                '[3/4] Auto unwrapping UV layout...',
+                '[4/4] Baking original textures to target mesh...',
+                'Success! Mesh topology optimized and baked.'
+            ];
+
+            function runStage() {
+                consoleEl.textContent = stages[stage];
+                stage++;
+                if (stage < stages.length) {
+                    setTimeout(runStage, 950);
+                } else {
+                    isDone = true;
+                    btn.classList.add('active');
+                    btn.disabled = false;
+                }
+            }
+            
+            runStage();
+        }
+
+        function resetSimulator() {
+            isDone = false;
+            quadPct = 75;
+            document.getElementById('quadSliderFill').style.width = '75%';
+            document.getElementById('quadSliderKnob').style.left = '75%';
+            document.getElementById('quadVal').value = '75 %';
+            
+            detailPct = 50;
+            document.getElementById('detailSliderFill').style.width = '50%';
+            document.getElementById('detailSliderKnob').style.left = '50%';
+            document.getElementById('detailVal').value = '50';
+
+            updateMockupText();
+        }
+
+        // Initialize state
+        updateMockupText();
+    </script>
+</body>
+</html>
