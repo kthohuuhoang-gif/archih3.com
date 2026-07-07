@@ -81,6 +81,24 @@
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 24px;
         }
+        .products-group-title {
+            font-size: 24px; font-weight: 600;
+            color: var(--primary);
+            margin: 48px 0 24px;
+            display: flex; align-items: center; gap: 12px;
+            font-family: 'Outfit', sans-serif;
+            letter-spacing: -0.5px;
+        }
+        .products-group-title::after {
+            content: ''; flex: 1; height: 1px;
+            background: linear-gradient(90deg, rgba(77, 182, 172, 0.2), transparent);
+        }
+        .products-group-title.coming-soon {
+            color: var(--text-muted);
+        }
+        .products-group-title.coming-soon::after {
+            background: linear-gradient(90deg, rgba(102, 102, 102, 0.15), transparent);
+        }
         .product-card {
             background: var(--bg-main);
             border: 1px solid rgba(85, 85, 85, 0.3);
@@ -130,10 +148,7 @@
             background: var(--primary-glow); color: var(--primary);
             border: 1px solid rgba(77,182,172,0.3);
         }
-        .product-badge.game {
-            background: rgba(239, 108, 0, 0.15); color: var(--warning);
-            border: 1px solid rgba(239, 108, 0, 0.3);
-        }
+
         .product-badge.soon {
             background: rgba(255,255,255,0.05); color: var(--text-muted);
             border: 1px solid rgba(85,85,85,0.2);
@@ -233,7 +248,6 @@
         <div class="nav-links">
             <a href="#products" data-vi="Sản phẩm" data-en="Products">Sản phẩm</a>
             <a href="kindle/" data-vi="Bản Kindle" data-en="Kindle Edition" id="kindle-nav-link" style="display: none;">Bản Kindle</a>
-            <a href="archi_hell/" target="_blank" data-vi="The Archi-Hell" data-en="The Archi-Hell">The Archi-Hell</a>
             <a href="#author" data-vi="Tác giả" data-en="Author">Tác giả</a>
             <a href="https://youtube.com/@ArchiH3" target="_blank">YouTube</a>
             <div class="lang-toggle">
@@ -252,21 +266,10 @@
 
     <!-- PRODUCTS GRID -->
     <section class="products-section" id="products">
-        <div class="products-grid">
-            <!-- 1. AH3 Hub -->
-            <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
-                <div class="product-meta">
-                    <div class="product-header">
-                        <div class="product-icon"><img src="ArchiH3-Icon_40.png" alt="AH3 Hub" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                        <span class="product-badge new" data-vi="PHỔ BIẾN" data-en="POPULAR">PHỔ BIẾN</span>
-                    </div>
-                    <h3 class="product-title">AH3 Hub</h3>
-                    <p class="product-desc" data-vi="Một bộ công cụ toàn diện ứng dụng AI hỗ trợ đặc biệt cho quá trình làm việc của KTS: từ tìm ý tưởng, tìm và tạo vật liệu tự động, merge đối tượng thông minh đến các trình tạo ảnh, render nhanh bằng AI." data-en="A comprehensive AI-powered toolkit specifically designed to assist architects throughout their workflow: from brainstorming, automatic material search and creation, smart asset merging, to AI image generation and quick rendering."></p>
-                </div>
-                <a href="hub.html" class="product-cta primary-btn" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
-            </div>
-
-            <!-- 2. Magic Material -->
+        <!-- Commercial / Paid Plugins -->
+        <h2 class="products-group-title" data-vi="Công cụ Thương mại (Có phí)" data-en="Commercial Plugins (Paid)">Công cụ Thương mại (Có phí)</h2>
+        <div class="products-grid" style="margin-bottom: 48px;">
+            <!-- Magic Material -->
             <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
                 <div class="product-meta">
                     <div class="product-header">
@@ -296,7 +299,7 @@
             <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
                 <div class="product-meta">
                     <div class="product-header">
-                        <div class="product-icon"><img src="magicrebakepro_icon.png" alt="Magic ReBake" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
+                        <div class="product-icon"><img src="magicrebakepro_icon_48.png" alt="Magic ReBake" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
                         <span class="product-badge new" data-vi="MỚI" data-en="NEW">MỚI</span>
                     </div>
                     <h3 class="product-title">Magic ReBake</h3>
@@ -305,7 +308,7 @@
                 <a href="rebake.html" class="product-cta primary-btn" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
             </div>
 
-            <!-- 3. Magic Tree -->
+            <!-- Magic Tree -->
             <div class="product-card" style="--glow-color: rgba(102, 187, 106, 0.15); --hover-border: var(--green);">
                 <div class="product-meta">
                     <div class="product-header">
@@ -316,6 +319,23 @@
                     <p class="product-desc" data-vi="Plugin tạo cây động thông minh cho 3ds Max. Tự tạo chuyển động cành lá rung rinh trong gió tự nhiên, tối ưu hóa hiển thị và render proxy." data-en="Dynamic tree plugin for 3ds Max. Procedural leaf and branch movements in the wind, optimized for heavy render proxies."></p>
                 </div>
                 <a href="tree.html" class="product-cta primary-btn" style="background: var(--green); color: #121212;" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
+            </div>
+        </div>
+
+        <!-- Free & Freemium Plugins -->
+        <h2 class="products-group-title" data-vi="Công cụ Miễn phí & Đa dụng" data-en="Free & Freemium Plugins">Công cụ Miễn phí & Đa dụng</h2>
+        <div class="products-grid" style="margin-bottom: 48px;">
+            <!-- AH3 Hub -->
+            <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
+                <div class="product-meta">
+                    <div class="product-header">
+                        <div class="product-icon"><img src="ArchiH3-Icon_40.png" alt="AH3 Hub" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
+                        <span class="product-badge new" data-vi="PHỔ BIẾN" data-en="POPULAR">PHỔ BIẾN</span>
+                    </div>
+                    <h3 class="product-title">AH3 Hub</h3>
+                    <p class="product-desc" data-vi="Một bộ công cụ toàn diện ứng dụng AI hỗ trợ đặc biệt cho quá trình làm việc của KTS: từ tìm ý tưởng, tìm và tạo vật liệu tự động, merge đối tượng thông minh đến các trình tạo ảnh, render nhanh bằng AI." data-en="A comprehensive AI-powered toolkit specifically designed to assist architects throughout their workflow: from brainstorming, automatic material search and creation, smart asset merging, to AI image generation and quick rendering."></p>
+                </div>
+                <a href="hub.html" class="product-cta primary-btn" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
             </div>
 
             <!-- Magic Rename -->
@@ -331,6 +351,49 @@
                 <a href="rename.html" class="product-cta primary-btn" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
             </div>
 
+            <!-- Magic Reset -->
+            <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
+                <div class="product-meta">
+                    <div class="product-header">
+                        <div class="product-icon">🔄</div>
+                        <span class="product-badge new" data-vi="MIỄN PHÍ" data-en="FREE">MIỄN PHÍ</span>
+                    </div>
+                    <h3 class="product-title">Magic Reset</h3>
+                    <p class="product-desc" data-vi="Công cụ khôi phục cài đặt gốc 3ds Max nhanh chóng. Tự động phát hiện phiên bản Max, dọn dẹp các tệp cấu hình lỗi và đưa phần mềm về trạng thái xuất xưởng sạch sẽ." data-en="Quick factory reset tool for 3ds Max settings. Automatically detects installed Max versions, cleans corrupted configuration files, and restores the software to a clean state."></p>
+                </div>
+                <a href="Download%20Free/Reset3dsMax.exe" download class="product-cta primary-btn" data-vi="↓ Tải về (Miễn phí)" data-en="↓ Download (Free)">↓ Tải về (Miễn phí)</a>
+            </div>
+
+            <!-- Magic Slice -->
+            <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
+                <div class="product-meta">
+                    <div class="product-header">
+                        <div class="product-icon"><img src="magicslice_icon_48.png" alt="Magic Slice" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
+                        <span class="product-badge new" data-vi="MIỄN PHÍ" data-en="FREE">MIỄN PHÍ</span>
+                    </div>
+                    <h3 class="product-title">Magic Slice</h3>
+                    <p class="product-desc" data-vi="Plugin quản lý mặt cắt thông minh cho 3ds Max. Tạo nhanh mặt cắt lát cắt, bật/tắt toàn bộ lát cắt trong scene, tự động gom gizmo vào layer riêng và hỗ trợ hoàn tác Ctrl+Z an toàn." data-en="Smart slicing and cut management plugin for 3ds Max. Fast slice modifier creation, global toggle for all slices, auto-layering gizmos, and safe Ctrl+Z undo support."></p>
+                </div>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Hãy share bài viết ở Facebook và liên hệ DEV để nhận mật khẩu tải bộ cài. (Mật khẩu giải nén/cài đặt là: AH3)');" class="product-cta primary-btn" data-vi="↓ Tải về (Miễn phí)" data-en="↓ Download (Free)">↓ Tải về (Miễn phí)</a>
+            </div>
+        </div>
+
+        <!-- Upcoming Projects -->
+        <h2 class="products-group-title coming-soon" data-vi="Dự án sắp ra mắt (Coming Soon)" data-en="Upcoming Projects (Coming Soon)">Dự án sắp ra mắt (Coming Soon)</h2>
+        <div class="products-grid">
+            <!-- Magic Cat -->
+            <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
+                <div class="product-meta">
+                    <div class="product-header">
+                        <div class="product-icon">🐈</div>
+                        <span class="product-badge soon" data-vi="SẮP CÓ" data-en="COMING SOON">SẮP CÓ</span>
+                    </div>
+                    <h3 class="product-title">Magic Cat</h3>
+                    <p class="product-desc" data-vi="Thú cưng ảo tương tác (Magic Buddy) đồng hành cùng KTS ngay trong 3ds Max. Theo dõi tiến trình render, nhắc nhở lưu bài, nhắc nhở nghỉ ngơi một cách thú vị." data-en="Interactive virtual pet companion (Magic Buddy) for architects in 3ds Max. Keeps you company during long renders, reminds you to save and take breaks in a fun way."></p>
+                </div>
+                <a href="https://youtube.com/@ArchiH3" target="_blank" class="product-cta secondary-btn" data-vi="Theo dõi tiến độ ↗" data-en="Follow progress ↗">Theo dõi tiến độ ↗</a>
+            </div>
+
             <!-- Magic Search -->
             <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
                 <div class="product-meta">
@@ -344,7 +407,7 @@
                 <a href="https://youtube.com/@ArchiH3" target="_blank" class="product-cta secondary-btn" data-vi="Theo dõi tiến độ ↗" data-en="Follow progress ↗">Theo dõi tiến độ ↗</a>
             </div>
 
-            <!-- 4. Magic Rain -->
+            <!-- Magic Rain -->
             <div class="product-card" style="--glow-color: rgba(41, 182, 246, 0.15); --hover-border: var(--blue);">
                 <div class="product-meta">
                     <div class="product-header">
@@ -357,7 +420,7 @@
                 <a href="https://youtube.com/@ArchiH3" target="_blank" class="product-cta secondary-btn" data-vi="Theo dõi tiến độ ↗" data-en="Follow progress ↗">Theo dõi tiến độ ↗</a>
             </div>
 
-            <!-- 5. Magic Anima -->
+            <!-- Magic Anima -->
             <div class="product-card" style="--glow-color: rgba(171, 71, 188, 0.15); --hover-border: #ab47bc;">
                 <div class="product-meta">
                     <div class="product-header">
@@ -370,7 +433,7 @@
                 <a href="https://youtube.com/@ArchiH3" target="_blank" class="product-cta secondary-btn" data-vi="Theo dõi tiến độ ↗" data-en="Follow progress ↗">Theo dõi tiến độ ↗</a>
             </div>
 
-            <!-- 6. Magic Curtain -->
+            <!-- Magic Curtain -->
             <div class="product-card" style="--glow-color: rgba(236, 64, 122, 0.15); --hover-border: #ec407a;">
                 <div class="product-meta">
                     <div class="product-header">
