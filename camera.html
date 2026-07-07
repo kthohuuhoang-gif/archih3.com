@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AH3 Magic Camera - Smart Camera & Viewport Manager for 3ds Max</title>
+    <meta name="description" content="AH3 Magic Camera - Plugin quản lý camera thông minh, tự động căn chỉnh phối cảnh, gióng khung lưới tỉ lệ vàng và render hàng loạt nhanh chóng cho 3ds Max.">
+    <meta property="og:title" content="AH3 Magic Camera - Smart Camera & Viewport Manager for 3ds Max">
+    <meta property="og:description" content="AH3 Magic Camera - Plugin quản lý camera thông minh, tự động căn chỉnh phối cảnh, gióng khung lưới tỉ lệ vàng và render hàng loạt nhanh chóng cho 3ds Max.">
+    <meta property="og:image" content="https://archih3.com/logo.png">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="assets/css/global.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* BUTTONS */
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: var(--primary);
+            color: #121212; font-weight: 600; font-size: 14px;
+            border: none; border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover); transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(77, 182, 172, 0.3);
+        }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: transparent;
+            color: var(--text); font-weight: 400; font-size: 14px;
+            border: 1px solid var(--border); border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* HERO */
+        .hero {
+            padding: 140px 24px 60px;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; position: relative;
+        }
+        .hero-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; color: var(--primary);
+            border: 1px solid rgba(77,182,172,0.3);
+            padding: 6px 16px; border-radius: 20px;
+            margin-bottom: 24px; background: var(--primary-glow); letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+            line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px;
+        }
+        .hero h1 .teal { color: var(--primary); }
+        .hero-sub {
+            font-size: 18px; color: var(--text-secondary);
+            max-width: 680px; margin: 0 auto 32px; font-weight: 300;
+        }
+        .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* SECTIONS */
+        section { padding: 80px 24px; }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            color: var(--primary); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 12px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px); font-weight: 700;
+            letter-spacing: -1px; margin-bottom: 16px; text-align: center;
+        }
+        .section-desc {
+            font-size: 16px; color: var(--text-secondary);
+            max-width: 600px; font-weight: 300; margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        /* FEATURES */
+        .features-grid {
+            max-width: 1100px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+        .feature-card {
+            background: var(--bg-main); border: 1px solid var(--border);
+            padding: 32px; border-radius: 12px; transition: all 0.3s;
+        }
+        .feature-card:hover {
+            border-color: var(--primary); transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .feat-icon {
+            font-size: 28px; width: 56px; height: 56px;
+            border-radius: 10px; background: rgba(77,182,172,0.05);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary); margin-bottom: 24px;
+            border: 1px solid rgba(77,182,172,0.15);
+        }
+        .feat-title { font-size: 20px; font-weight: 600; margin-bottom: 12px; }
+        .feat-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
+
+        /* PRICING */
+        .pricing-grid {
+            max-width: 900px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px; justify-content: center;
+        }
+        .pricing-card {
+            background: var(--bg-main); border: 1px solid var(--border);
+            border-radius: 16px; padding: 48px 32px;
+            position: relative; display: flex; flex-direction: column;
+            transition: all 0.3s;
+        }
+        .pricing-card:hover {
+            border-color: var(--primary); transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+        }
+        .pricing-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(180deg, rgba(77, 182, 172, 0.05) 0%, var(--bg-main) 100%);
+        }
+        .price-badge {
+            position: absolute; top: 24px; right: 24px;
+            background: rgba(77,182,172,0.15); color: var(--primary);
+            font-size: 11px; font-weight: 600; padding: 4px 10px;
+            border-radius: 12px; border: 1px solid rgba(77,182,172,0.3);
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .price-title { font-size: 24px; font-weight: 600; margin-bottom: 8px; }
+        .price-sub { font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; font-weight: 300; }
+        .price-num { font-size: 48px; font-weight: 700; color: #fff; margin-bottom: 24px; line-height: 1; }
+        .price-num span { font-size: 16px; font-weight: 400; color: var(--text-secondary); }
+        .price-features {
+            list-style: none; display: flex; flex-direction: column;
+            gap: 12px; margin-bottom: 40px; flex: 1;
+        }
+        .price-features li {
+            font-size: 14px; color: var(--text-secondary);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .price-features li::before {
+            content: "✓"; color: var(--primary); font-weight: bold;
+        }
+        .price-cta {
+            display: block; width: 100%; text-align: center;
+            padding: 14px 0; border-radius: 8px; font-size: 14px;
+            font-weight: 600; text-decoration: none; transition: all 0.25s;
+            cursor: pointer;
+        }
+        .price-cta.primary { background: var(--primary); color: #121212; }
+        .price-cta.primary:hover { background: var(--primary-hover); }
+        .price-cta.outline { border: 1px solid var(--border); color: var(--text); }
+        .price-cta.outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* FAQ */
+        .faq-container { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+        .faq-item {
+            background: var(--bg-main); border: 1px solid var(--border);
+            border-radius: 8px; padding: 24px;
+        }
+        .faq-q { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #fff; }
+        .faq-a { font-size: 14px; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+
+    <!-- NAV -->
+    <nav>
+        <a href="index.html" class="logo"><img src="logo.png" alt="AH3" style="height:24px; vertical-align:middle; margin-right:6px; opacity:0.85;">AH3<span> Magic Camera</span></a>
+        <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('open')" style="display:none; background:none; border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:var(--text); font-size:18px; cursor:pointer;">☰</button>
+        <div class="nav-links">
+            <a href="#features" data-vi="Tính năng" data-en="Features">Tính năng</a>
+            <a href="#pricing" data-vi="Bảng giá" data-en="Pricing">Bảng giá</a>
+            <a href="#faq" data-vi="FAQ" data-en="FAQ">FAQ</a>
+            <a href="https://youtube.com/@ArchiH3" target="_blank">YouTube</a>
+            <div class="lang-toggle">
+                <button class="active" onclick="setLang('vi')">VI</button>
+                <button onclick="setLang('en')">EN</button>
+            </div>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Vui lòng liên hệ DEV qua Facebook để mua hoặc tải bản quyền Magic Camera!');" class="btn-primary" data-vi="Mua ngay" data-en="Buy Now">Mua ngay</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-badge" data-vi="SMART CAMERA & VIEWPORT STATE MANAGER" data-en="SMART CAMERA & VIEWPORT STATE MANAGER">SMART CAMERA & VIEWPORT STATE MANAGER</div>
+        <h1 data-vi="Khung hình hoàn hảo.<br>Quản lý camera <span class='teal'>siêu tốc.</span>" data-en="Perfect framing.<br>High-speed <span class='teal'>camera manager.</span>"></h1>
+        <p class="hero-sub" data-vi="Plugin chuyên biệt tối ưu hóa và chuẩn hóa góc máy trong 3ds Max theo triết lý Scene Manager (Pulze). Tự động quản lý góc máy viewport, căn chỉnh phối cảnh thông minh và render hàng loạt nhanh chóng." data-en="Specialized plugin to optimize and standardize camera set-ups in 3ds Max following the Scene Manager (Pulze) philosophy. Auto-manages viewport camera states, aligns perspective intelligently, and processes batch rendering."></p>
+        <div class="hero-cta">
+            <a href="#pricing" class="btn-primary" data-vi="Sắp mở bán" data-en="Coming Soon">Sắp mở bán</a>
+            <a href="#features" class="btn-outline" data-vi="Xem tính năng" data-en="See Features">Xem tính năng</a>
+        </div>
+    </header>
+
+    <!-- FEATURES -->
+    <section id="features">
+        <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="CORE FEATURES">TÍNH NĂNG NỔI BẬT</div>
+        <h2 class="section-title" data-vi="Thiết kế dành riêng cho KTS chuyên nghiệp" data-en="Designed for Professional Architects"></h2>
+        <p class="section-desc" data-vi="Giấu đi các bước setup phức tạp, Magic Camera mang lại trải nghiệm quản lý camera mượt mà, trực quan và tối ưu nhất cho render 3D." data-en="Hiding complex backend setup, Magic Camera provides a smooth, visual, and optimized camera management experience for 3D rendering."></p>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feat-icon">🖼️</div>
+                <h3 class="feat-title" data-vi="Quản Lý Trực Quan" data-en="Visual Gallery Manager">Quản Lý Trực Quan</h3>
+                <p class="feat-desc" data-vi="Hệ thống quản lý thông minh danh sách camera trong scene. Tự động thu giữ và hiển thị trạng thái khung hình theo tỷ lệ render thực tế mà không bị méo lệch, giúp bao quát toàn bộ góc máy dự án." data-en="Smart system to manage camera list in your scene. Automatically captures and displays viewport framings matching the exact rendering aspect ratio without distortion."></p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feat-icon">📐</div>
+                <h3 class="feat-title" data-vi="Lưới Gióng Bố Cục" data-en="Composition Grid Guides">Lưới Gióng Bố Cục</h3>
+                <p class="feat-desc" data-vi="Hỗ trợ các đường gióng bố cục mỹ thuật tiêu chuẩn ngay trên viewport 3ds Max: Quy tắc 1/3 (Rule of Thirds), Tỷ lệ vàng (Golden Ratio), Đường chéo và Tâm đối xứng. Giúp kiến trúc sư thiết lập khung hình chuẩn điện ảnh." data-en="Supports professional composition guides directly on the 3ds Max viewport: Rule of Thirds, Golden Ratio, Diagonal, and Center. Set up cinematic framings easily."></p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feat-icon">⚖️</div>
+                <h3 class="feat-title" data-vi="Tự Động Căn Phối Cảnh" data-en="Perspective Correction">Tự Động Căn Phối Cảnh</h3>
+                <p class="feat-desc" data-vi="Tự động cân bằng góc máy song song mặt đất và khử độ nghiêng tụ dọc. Đưa camera về phối cảnh 2 điểm (2-Point Perspective) hoàn mỹ một cách nhanh chóng, đúng chuẩn nhiếp ảnh kiến trúc." data-en="Automatically balances the camera horizon and corrects vertical perspective tilt. Instantly establishes a perfect 2-point perspective, matching professional architectural photography standards."></p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feat-icon">🔍</div>
+                <h3 class="feat-title" data-vi="Đồng Bộ Thấu Kính & DoF" data-en="Lens & DoF Control">Đồng Bộ Thấu Kính & DoF</h3>
+                <p class="feat-desc" data-vi="Quản lý thống nhất tiêu cự thấu kính, độ sâu trường ảnh (Depth of Field), Clip Near/Far. Tự động tương thích và đồng bộ hóa thông số giữa Physical Camera, V-Ray Camera và Corona Camera." data-en="Unified parameters manager for focal length, Depth of Field (DoF), and Near/Far clipping. Automatically compatible with Physical Camera, V-Ray Camera, and Corona Camera."></p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feat-icon">⚙️</div>
+                <h3 class="feat-title" data-vi="Xuất Ảnh & Render Hàng Loạt" data-en="Batch Render & Viewport Grab">Xuất Ảnh & Render Hàng Loạt</h3>
+                <p class="feat-desc" data-vi="Hỗ trợ xuất hình ảnh viewport nhanh hàng loạt hoặc kết xuất render (Batch Render) đồng thời các camera được chọn. Rút ngắn tối đa thời gian xuất phương án phác thảo thiết kế." data-en="Supports rapid batch viewport grabbing or batch rendering for multiple selected cameras. Minimizes design option exporting times significantly."></p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feat-icon">🚀</div>
+                <h3 class="feat-title" data-vi="Trợ Lý Bố Cục AI (Sắp ra mắt)" data-en="AI Composition Assistant (Upcoming)">Trợ Lý Bố Cục AI (Sắp ra mắt)</h3>
+                <p class="feat-desc" data-vi="Tính năng sắp ra mắt hỗ trợ phân tích không gian bằng trí tuệ nhân tạo. Tự động định vị và đề xuất vị trí đặt camera, góc ống kính tối ưu nhất dựa trên hướng chính của các chủ thể 3D." data-en="Upcoming feature utilizing AI spatial analysis. Automatically suggests best camera positioning and focal length based on 3D geometry layout in the scene."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+        <div class="section-label" data-vi="BẢNG GIÁ" data-en="PRICING">BẢNG GIÁ</div>
+        <h2 class="section-title" data-vi="Lựa chọn gói bản quyền phù hợp" data-en="Choose Your License Model"></h2>
+        <p class="section-desc" data-vi="Đầu tư một lần tối ưu hóa trọn đời quy trình đặt camera và kết xuất phối cảnh 3D." data-en="One-time investment to permanently optimize your camera framing and 3D rendering workflow."></p>
+
+        <div class="pricing-grid" style="grid-template-columns: 1fr; max-width: 600px;">
+            <!-- Promo Card -->
+            <div class="pricing-card featured" style="text-align: center; align-items: center;">
+                <div class="price-badge" data-vi="SẮP MỞ BÁN" data-en="COMING SOON">SẮP MỞ BÁN</div>
+                <h3 class="price-title">Magic Camera</h3>
+                <p class="price-sub" data-vi="Đăng ký nhận thông báo ngày mở bán" data-en="Register for opening day notifications">Đăng ký nhận thông báo ngày mở bán</p>
+                <div class="price-num" style="font-size: clamp(16px, 3vw, 24px); line-height: 1.4; color: var(--primary); margin: 16px 0; font-weight: 600;" data-vi="Hãy liên tục check web ngày mở bán sẽ có giá 200k cho chỉ 3 ngày đầu tiên" data-en="Keep checking the website, opening day price will be 200k for the first 3 days only">Hãy liên tục check web ngày mở bán sẽ có giá 200k cho chỉ 3 ngày đầu tiên</div>
+                <ul class="price-features" style="text-align: left; margin-bottom: 32px;">
+                    <li data-vi="Đầy đủ tính năng quản lý thấu kính & DoF" data-en="Full camera lens & DoF manager"></li>
+                    <li data-vi="Căn phối cảnh 2 điểm trực giao" data-en="Auto horizon level & 2-point perspective"></li>
+                    <li data-vi="Chụp nhanh và quản lý an toàn viewport" data-en="Batch viewport grabbing & rendering"></li>
+                    <li data-vi="Cập nhật miễn phí tính năng AI trợ lý bố cục" data-en="Free update to upcoming AI composition assistant"></li>
+                </ul>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Hãy liên tục check web, ngày mở bán sẽ có giá 200k cho chỉ 3 ngày đầu tiên!');" class="price-cta primary" data-vi="Liên hệ DEV qua Facebook" data-en="Contact DEV via Facebook">Liên hệ DEV qua Facebook</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="CÂU HỎI THƯỜNG GẶP" data-en="FAQ">CÂU HỎI THƯỜNG GẶP</div>
+        <h2 class="section-title" data-vi="Giải đáp thắc mắc" data-en="Frequently Asked Questions"></h2>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-q" data-vi="Plugin hỗ trợ những loại camera nào trong 3ds Max?" data-en="Which camera types are supported by the plugin?"></div>
+                <div class="faq-a" data-vi="Magic Camera tương thích hoàn hảo với Standard Target Camera, Physical Camera, V-Ray Physical Camera và Corona Camera. Công cụ sẽ tự động nhận diện thấu kính đang chọn để nạp các thuộc tính phù hợp." data-en="Magic Camera is fully compatible with Standard Target Camera, Physical Camera, V-Ray Physical Camera, and Corona Camera. The tool automatically adapts properties to the selected camera type."></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" data-vi="Sau khi cài đặt có cần kết nối Internet để sử dụng không?" data-en="Does the plugin require an active internet connection?"></div>
+                <div class="faq-a" data-vi="Không. Mọi tính năng tính toán bố cục và quản lý camera đều chạy 100% offline trực tiếp trên máy của bạn, bảo mật hoàn toàn dữ liệu dự án." data-en="No. All camera management features run 100% offline on your local machine, keeping project data completely secure."></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" data-vi="Mật khẩu cài đặt/giải nén khi mua là gì?" data-en="What is the setup/unzip password?"></div>
+                <div class="faq-a" data-vi="Mật khẩu chung cho các bộ cài đặt là AH3. Khi mua bản quyền, DEV sẽ hướng dẫn cài đặt chi tiết và hỗ trợ kích hoạt trực tiếp trên máy của bạn." data-en="The general password for setup packages is AH3. Upon purchase, the DEV will guide you through the setup and assist with activation."></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer style="padding: 40px 24px; text-align: center; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-muted); background: var(--bg-dark);">
+        <p>© 2026 ArchiH3 Portal. Created by Hồ Hữu Hoàng. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let currentLang = 'vi';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = text;
+                } else {
+                    el.innerHTML = text;
+                }
+            });
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            setLang('vi');
+        });
+    </script>
+</body>
+</html>
