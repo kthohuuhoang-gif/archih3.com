@@ -185,6 +185,63 @@
             border-color: var(--text); background: rgba(255,255,255,0.03);
         }
 
+        /* PREMIUM FEATURED BANNER */
+        .premium-card-large {
+            background: linear-gradient(135deg, rgba(36,36,36,0.9) 0%, rgba(20,20,20,0.95) 100%);
+            border: 1px solid rgba(77, 182, 172, 0.35);
+            border-radius: 20px; padding: 48px;
+            position: relative; overflow: hidden;
+            display: grid; grid-template-columns: 1.2fr 1fr;
+            gap: 48px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            margin-bottom: 56px;
+            text-align: left;
+        }
+        .premium-card-large::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(circle at 80% 20%, rgba(77, 182, 172, 0.12), transparent 70%);
+            pointer-events: none;
+        }
+        .premium-card-large:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(77, 182, 172, 0.25);
+        }
+        .premium-left {
+            display: flex; flex-direction: column; justify-content: space-between;
+            z-index: 1; gap: 24px;
+        }
+        .premium-right {
+            display: flex; flex-direction: column; justify-content: center;
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px; padding: 32px;
+            z-index: 1;
+        }
+        .premium-right-title {
+            font-size: 16px; font-weight: 600; color: var(--primary);
+            margin-bottom: 20px; border-bottom: 1px solid rgba(77,182,172,0.15);
+            padding-bottom: 10px; font-family: 'Outfit', sans-serif;
+            letter-spacing: 0.5px;
+        }
+        .premium-features-list {
+            list-style: none; display: flex; flex-direction: column; gap: 16px;
+        }
+        .premium-features-list li {
+            font-size: 13px; line-height: 1.5; color: var(--text-secondary);
+        }
+        .premium-features-list li strong {
+            color: #fff; display: block; font-size: 14px; margin-bottom: 2px;
+        }
+        @media (max-width: 900px) {
+            .premium-card-large {
+                grid-template-columns: 1fr;
+                padding: 32px;
+                gap: 32px;
+            }
+        }
+
         /* ABOUT / AUTHOR Section */
         .about-section {
             background: var(--bg-main); border-top: 1px solid rgba(85,85,85,0.2);
@@ -266,6 +323,43 @@
 
     <!-- PRODUCTS GRID -->
     <section class="products-section" id="products">
+        <!-- Tool Premium -->
+        <h2 class="products-group-title" data-vi="Tool Premium" data-en="Premium Tool">Tool Premium</h2>
+        <div class="premium-card-large">
+            <div class="premium-left">
+                <div class="product-meta">
+                    <div class="product-header">
+                        <div class="product-icon"><img src="ArchiH3-Icon_40.png" alt="AH3 Hub" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
+                        <span class="product-badge new" style="background: rgba(77, 182, 172, 0.15); color: var(--primary); border: 1px solid rgba(77, 182, 172, 0.3);" data-vi="PREMIUM" data-en="PREMIUM">PREMIUM</span>
+                    </div>
+                    <h3 class="product-title" style="font-size: 28px; margin-bottom: 16px;">AH3 Hub</h3>
+                    <p class="product-desc" style="font-size: 15px; line-height: 1.6; margin-bottom: 0;" data-vi="Một siêu ứng dụng (Super-App) tích hợp trực tiếp vào 3ds Max. AH3 Hub mang cả thế giới AI thông minh và các giải pháp tự động hóa nâng cao đặt ngay vào không gian làm việc của KTS. Giúp cắt giảm tối đa các thao tác lặp đi lặp lại và mở ra khả năng thiết kế nhanh gấp 10 lần." data-en="A flagship super-app integrated directly into 3ds Max. AH3 Hub brings the power of AI models and advanced automation tools right to your workspace, eliminating repetitive workflows and accelerating design speed up to 10x."></p>
+                </div>
+                <a href="hub.html" class="product-cta primary-btn" style="width: auto; align-self: flex-start; padding: 14px 36px;" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
+            </div>
+            <div class="premium-right">
+                <h4 class="premium-right-title" data-vi="TÍNH NĂNG PRO ĐỘC QUYỀN" data-en="EXCLUSIVE PRO FEATURES">TÍNH NĂNG PRO ĐỘC QUYỀN</h4>
+                <ul class="premium-features-list">
+                    <li>
+                        <strong data-vi="🤖 Local AI Render Studio" data-en="🤖 Local AI Render Studio">🤖 Local AI Render Studio</strong>
+                        <span data-vi="Khởi tạo ý tưởng thiết kế cực nhanh trực tiếp từ Viewport bằng Stable Diffusion và ControlNet cục bộ." data-en="Generate design alternatives in seconds directly from the Viewport using local Stable Diffusion & ControlNet."></span>
+                    </li>
+                    <li>
+                        <strong data-vi="🎨 AI Material Creator" data-en="🎨 AI Material Creator">🎨 AI Material Creator</strong>
+                        <span data-vi="Tự động phân tích hình ảnh và dựng toàn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement) thông minh." data-en="Automatically analyze images and generate comprehensive PBR maps (Normal, Roughness, AO, Displacement)."></span>
+                    </li>
+                    <li>
+                        <strong data-vi="📦 Smart Asset Relinker & Merger" data-en="📦 Smart Asset Relinker & Merger">📦 Smart Asset Relinker & Merger</strong>
+                        <span data-vi="Kéo thả file .max/nén để tự động import, xếp lưới, dọn layer và tự động tìm lại đường dẫn map bị mất." data-en="Drag, drop, auto-import, auto-arrange, and automatically relink missing texture paths."></span>
+                    </li>
+                    <li>
+                        <strong data-vi="💬 AI Chat & Script Assistant" data-en="💬 AI Chat & Script Assistant">💬 AI Chat & Script Assistant</strong>
+                        <span data-vi="Trò chuyện, tự động viết mã MaxScript và hỗ trợ gỡ lỗi kỹ thuật trực tiếp ngay trong 3ds Max." data-en="Chat with AI, auto-generate MaxScript code, and troubleshoot design errors right inside your viewport."></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
         <!-- Commercial / Paid Plugins -->
         <h2 class="products-group-title" data-vi="Công cụ Thương mại (Có phí)" data-en="Commercial Plugins (Paid)">Công cụ Thương mại (Có phí)</h2>
         <div class="products-grid" style="margin-bottom: 48px;">
@@ -335,22 +429,7 @@
             </div>
         </div>
 
-        <!-- Tool Premium -->
-        <h2 class="products-group-title" data-vi="Tool Premium" data-en="Premium Tool">Tool Premium</h2>
-        <div class="products-grid" style="margin-bottom: 48px;">
-            <!-- AH3 Hub -->
-            <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
-                <div class="product-meta">
-                    <div class="product-header">
-                        <div class="product-icon"><img src="ArchiH3-Icon_40.png" alt="AH3 Hub" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                        <span class="product-badge new" style="background: rgba(77, 182, 172, 0.15); color: var(--primary); border: 1px solid rgba(77, 182, 172, 0.3);" data-vi="PREMIUM" data-en="PREMIUM">PREMIUM</span>
-                    </div>
-                    <h3 class="product-title">AH3 Hub</h3>
-                    <p class="product-desc" data-vi="Một bộ công cụ toàn diện ứng dụng AI hỗ trợ đặc biệt cho quá trình làm việc của KTS: từ tìm ý tưởng, tìm và tạo vật liệu tự động, merge đối tượng thông minh đến các trình tạo ảnh, render nhanh bằng AI." data-en="A comprehensive AI-powered toolkit specifically designed to assist architects throughout their workflow: from brainstorming, automatic material search and creation, smart asset merging, to AI image generation and quick rendering."></p>
-                </div>
-                <a href="hub.html" class="product-cta primary-btn" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
-            </div>
-        </div>
+
 
         <!-- Free & Freemium Plugins -->
         <h2 class="products-group-title" data-vi="Công cụ Miễn phí & Đa dụng" data-en="Free & Freemium Plugins">Công cụ Miễn phí & Đa dụng</h2>
@@ -391,7 +470,7 @@
                     <h3 class="product-title">Magic Slice</h3>
                     <p class="product-desc" data-vi="Plugin quản lý mặt cắt thông minh cho 3ds Max. Tạo nhanh mặt cắt lát cắt, bật/tắt toàn bộ lát cắt trong scene, tự động gom gizmo vào layer riêng và hỗ trợ hoàn tác Ctrl+Z an toàn." data-en="Smart slicing and cut management plugin for 3ds Max. Fast slice modifier creation, global toggle for all slices, auto-layering gizmos, and safe Ctrl+Z undo support."></p>
                 </div>
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Hãy share bài viết ở Facebook và liên hệ DEV để nhận mật khẩu tải bộ cài. (Mật khẩu giải nén/cài đặt là: AH3)');" class="product-cta primary-btn" data-vi="↓ Tải về (Miễn phí)" data-en="↓ Download (Free)">↓ Tải về (Miễn phí)</a>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Hãy share bài viết ở Facebook và liên hệ DEV để nhận mật khẩu tải bộ cài nhé!');" class="product-cta primary-btn" data-vi="↓ Tải về (Miễn phí)" data-en="↓ Download (Free)">↓ Tải về (Miễn phí)</a>
             </div>
 
             <!-- Magic CAD -->
@@ -402,7 +481,7 @@
                         <span class="product-badge new" data-vi="MIỄN PHÍ" data-en="FREE">MIỄN PHÍ</span>
                     </div>
                     <h3 class="product-title">Magic CAD</h3>
-                    <p class="product-desc" data-vi="Plugin hỗ trợ thiết kế và tối ưu bản vẽ CAD khi nhập vào 3ds Max. Giúp tự động dọn dẹp các đối tượng thừa, nối spline hở và chuẩn hóa layer bản vẽ tức thì." data-en="Clean and standardize imported CAD drawings in 3ds Max. Automatically removes junk elements, welds open splines, and optimizes layers instantly."></p>
+                    <p class="product-desc" data-vi="Plugin xuất mô hình 3D từ 3ds Max sang định dạng bản vẽ CAD (DWG/DXF) nhanh chóng. Tự động chuyển đổi các mặt cắt, nét vẽ spline và hình khối thành nét vẽ CAD chuẩn kỹ thuật theo layer." data-en="Export 3ds Max models directly to CAD drawing formats (DWG/DXF). Automatically converts 3D geometry, slice planes, and splines into standardized CAD layers and vectors."></p>
                 </div>
                 <a href="Download%20Free/AH3_Magic_CAD_v1.0.5.mzp" download class="product-cta primary-btn" data-vi="↓ Tải về (Miễn phí)" data-en="↓ Download (Free)">↓ Tải về (Miễn phí)</a>
             </div>
