@@ -242,6 +242,131 @@
             }
         }
 
+        /* FEATURED SLICE CARD */
+        .featured-slice {
+            grid-column: 1 / -1;
+            display: grid !important;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 32px;
+            background: linear-gradient(135deg, rgba(36,36,36,0.85) 0%, rgba(20,20,20,0.95) 100%) !important;
+            border-color: rgba(77, 182, 172, 0.25) !important;
+            text-align: left;
+        }
+        .featured-slice-right {
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 12px; padding: 28px;
+            display: flex; flex-direction: column;
+            justify-content: center; gap: 12px;
+        }
+        .featured-slice-right-title {
+            color: var(--primary); font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+            margin-bottom: 8px; font-family: 'Outfit', sans-serif;
+        }
+        .featured-slice-list {
+            list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: var(--text-secondary);
+        }
+        .featured-slice-list li {
+            display: flex; gap: 8px; align-items: center;
+        }
+        @media (max-width: 900px) {
+            .featured-slice {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        /* FEATURED TREE CARD */
+        .featured-tree {
+            grid-column: 1 / -1;
+            display: grid !important;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 32px;
+            background: linear-gradient(135deg, rgba(30, 48, 30, 0.4) 0%, rgba(20, 20, 20, 0.95) 100%) !important;
+            border-color: rgba(102, 187, 106, 0.25) !important;
+            text-align: left;
+        }
+        .featured-tree-right {
+            background: rgba(102, 187, 106, 0.015);
+            border: 1px solid rgba(102, 187, 106, 0.08);
+            border-radius: 12px; padding: 28px;
+            display: flex; flex-direction: column;
+            justify-content: center; gap: 12px;
+        }
+        .featured-tree-right-title {
+            color: var(--green); font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+            margin-bottom: 8px; font-family: 'Outfit', sans-serif;
+        }
+        .featured-tree-list {
+            list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: var(--text-secondary);
+        }
+        .featured-tree-list li {
+            display: flex; gap: 8px; align-items: center;
+        }
+        @media (max-width: 900px) {
+            .featured-tree {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        /* FEATURED CAMERA CARD */
+        .featured-camera {
+            grid-column: 1 / -1;
+            display: grid !important;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 32px;
+            background: linear-gradient(135deg, rgba(30, 48, 48, 0.4) 0%, rgba(20, 20, 20, 0.95) 100%) !important;
+            border-color: rgba(77, 182, 172, 0.35) !important;
+            text-align: left;
+        }
+        .featured-camera-right {
+            background: rgba(77, 182, 172, 0.015);
+            border: 1px solid rgba(77, 182, 172, 0.08);
+            border-radius: 12px; padding: 28px;
+            display: flex; flex-direction: column;
+            justify-content: center; gap: 12px;
+        }
+        .featured-camera-right-title {
+            color: var(--primary); font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+            margin-bottom: 8px; font-family: 'Outfit', sans-serif;
+        }
+        .featured-camera-list {
+            list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: var(--text-secondary);
+        }
+        .featured-camera-list li {
+            display: flex; gap: 8px; align-items: center;
+        }
+        @media (max-width: 900px) {
+            .featured-camera {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        /* GENERAL MOBILE OPTIMIZATIONS FOR FEATURED CARDS */
+        @media (max-width: 768px) {
+            .premium-card-large, .featured-slice, .featured-tree, .featured-camera {
+                padding: 24px 20px !important;
+                gap: 20px !important;
+            }
+            .premium-card-large .product-cta,
+            .featured-slice .product-cta,
+            .featured-tree .product-cta,
+            .featured-camera .product-cta {
+                width: 100% !important;
+                align-self: stretch !important;
+                text-align: center;
+                margin-top: 12px;
+            }
+            .premium-right,
+            .featured-slice-right,
+            .featured-tree-right,
+            .featured-camera-right {
+                padding: 20px !important;
+            }
+        }
+
         /* ABOUT / AUTHOR Section */
         .about-section {
             background: var(--bg-main); border-top: 1px solid rgba(85,85,85,0.2);
@@ -363,6 +488,30 @@
         <!-- Commercial / Paid Plugins -->
         <h2 class="products-group-title" data-vi="Công cụ Thương mại (Có phí)" data-en="Commercial Plugins (Paid)">Công cụ Thương mại (Có phí)</h2>
         <div class="products-grid" style="margin-bottom: 48px;">
+            <!-- Magic Tree (Featured Full-Width Card) -->
+            <div class="product-card featured-tree" style="--glow-color: rgba(102, 187, 106, 0.15); --hover-border: var(--green);">
+                <div class="premium-left">
+                    <div class="product-meta">
+                        <div class="product-header">
+                            <div class="product-icon"><img src="magictree_icon_48.png" alt="Magic Tree" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
+                            <span class="product-badge" style="background: rgba(102, 187, 106, 0.15); color: var(--green); border: 1px solid rgba(102, 187, 106, 0.3);" data-vi="NỔI BẬT THƯƠNG MẠI" data-en="FEATURED COMMERCIAL">NỔI BẬT THƯƠNG MẠI</span>
+                        </div>
+                        <h3 class="product-title">Magic Tree</h3>
+                        <p class="product-desc" data-vi="Plugin tạo và tối ưu hóa hệ thống cây xanh động thông minh cho 3ds Max. Tự động thiết lập các chuyển động rung lắc tự nhiên của cành lá theo sức gió, kiểm soát hiển thị proxy thông minh giúp file làm việc siêu nhẹ." data-en="Dynamic tree and vegetation animation generator plugin for 3ds Max. Automatically simulates realistic branch and leaf wind swaying, while optimizing viewport proxy displays for lightweight scenes."></p>
+                    </div>
+                    <a href="tree.html" class="product-cta primary-btn" style="background: var(--green); color: #121212; width: auto; align-self: flex-start; padding: 14px 36px;" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
+                </div>
+                <div class="featured-tree-right">
+                    <h4 class="featured-tree-right-title" data-vi="ƯU ĐIỂM VƯỢT TRỘI CỦA MAGIC TREE" data-en="KEY ADVANTAGES OF MAGIC TREE">ƯU ĐIỂM VƯỢT TRỘI CỦA MAGIC TREE</h4>
+                    <ul class="featured-tree-list">
+                        <li data-vi="🍃 Hiệu ứng gió động tự nhiên cho mọi loại cây" data-en="🍃 Natural wind sway animation for any 3D tree">🍃 Hiệu ứng gió động tự nhiên cho mọi loại cây</li>
+                        <li data-vi="🖥️ Tối ưu hóa viewport siêu tốc với chế độ Smart Proxy" data-en="🖥️ Supercharged viewport performance using Smart Proxy">🖥️ Tối ưu hóa viewport siêu tốc với chế độ Smart Proxy</li>
+                        <li data-vi="🌲 Thư viện cài đặt sẵn phong phú (Gió nhẹ, bão, lốc)" data-en="🌲 Diverse wind presets (Breeze, storm, gust)">🌲 Thư viện cài đặt sẵn phong phú (Gió nhẹ, bão, lốc)</li>
+                        <li data-vi="💾 Tiết kiệm bộ nhớ RAM tối đa khi render cảnh lớn" data-en="💾 Maximize RAM savings during heavy scene rendering">💾 Tiết kiệm bộ nhớ RAM tối đa khi render cảnh lớn</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Magic Material -->
             <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
                 <div class="product-meta">
@@ -401,32 +550,6 @@
                 </div>
                 <a href="rebake.html" class="product-cta primary-btn" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
             </div>
-
-            <!-- Magic Tree -->
-            <div class="product-card" style="--glow-color: rgba(102, 187, 106, 0.15); --hover-border: var(--green);">
-                <div class="product-meta">
-                    <div class="product-header">
-                        <div class="product-icon"><img src="magictree_icon_48.png" alt="Magic Tree" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                        <span class="product-badge" style="background: rgba(102, 187, 106, 0.15); color: var(--green); border: 1px solid rgba(102, 187, 106, 0.3);" data-vi="MỚI" data-en="NEW">MỚI</span>
-                    </div>
-                    <h3 class="product-title">Magic Tree</h3>
-                    <p class="product-desc" data-vi="Plugin tạo cây động thông minh cho 3ds Max. Tự tạo chuyển động cành lá rung rinh trong gió tự nhiên, tối ưu hóa hiển thị và render proxy." data-en="Dynamic tree plugin for 3ds Max. Procedural leaf and branch movements in the wind, optimized for heavy render proxies."></p>
-                </div>
-                <a href="tree.html" class="product-cta primary-btn" style="background: var(--green); color: #121212;" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
-            </div>
-
-            <!-- Magic Camera -->
-            <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
-                <div class="product-meta">
-                    <div class="product-header">
-                        <div class="product-icon"><img src="magiccamera_icon_48.png" alt="Magic Camera" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                        <span class="product-badge" style="background: rgba(77, 182, 172, 0.15); color: var(--primary); border: 1px solid rgba(77, 182, 172, 0.3);" data-vi="SẮP CÓ" data-en="COMING SOON">SẮP CÓ</span>
-                    </div>
-                    <h3 class="product-title">Magic Camera</h3>
-                    <p class="product-desc" data-vi="Plugin quản lý camera thông minh cho 3ds Max theo triết lý Scene Manager. Tự động chụp thumbnail viewport, căn phối cảnh trực giao và hỗ trợ render hàng loạt nhanh chóng." data-en="Smart camera and viewport state manager plugin for 3ds Max. Auto-captures safe-frame viewport thumbnails, aligns vertical perspective, and supports batch rendering."></p>
-                </div>
-                <a href="camera.html" class="product-cta primary-btn" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
-            </div>
         </div>
 
 
@@ -434,6 +557,30 @@
         <!-- Free & Freemium Plugins -->
         <h2 class="products-group-title" data-vi="Công cụ Miễn phí & Đa dụng" data-en="Free & Freemium Plugins">Công cụ Miễn phí & Đa dụng</h2>
         <div class="products-grid" style="margin-bottom: 48px;">
+            <!-- Magic Slice (Featured Full-Width Card) -->
+            <div class="product-card featured-slice">
+                <div class="premium-left">
+                    <div class="product-meta">
+                        <div class="product-header">
+                            <div class="product-icon"><img src="magicslice_icon_48.png" alt="Magic Slice" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
+                            <span class="product-badge new" style="background: rgba(77, 182, 172, 0.15); color: var(--primary); border: 1px solid rgba(77, 182, 172, 0.3);" data-vi="NỔI BẬT MIỄN PHÍ" data-en="FEATURED FREE">NỔI BẬT MIỄN PHÍ</span>
+                        </div>
+                        <h3 class="product-title">Magic Slice</h3>
+                        <p class="product-desc" data-vi="Plugin quản lý mặt cắt thông minh hàng đầu cho 3ds Max. Tự động hóa toàn bộ quy trình tạo lát cắt, bật/tắt hiển thị mặt cắt toàn scene, quản lý gizmo khoa học và hỗ trợ hoàn tác Ctrl+Z tuyệt đối an toàn." data-en="The leading smart slicing and section cut manager plugin for 3ds Max. Automates your slice creation workflows, controls global cut visibility, auto-groups gizmos into separate layers, and supports 100% safe Ctrl+Z undo."></p>
+                    </div>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Hãy share bài viết ở Facebook và liên hệ DEV để nhận mật khẩu tải bộ cài nhé!');" class="product-cta primary-btn" style="width: auto; align-self: flex-start; padding: 14px 36px;" data-vi="↓ Tải về (Miễn phí)" data-en="↓ Download (Free)">↓ Tải về (Miễn phí)</a>
+                </div>
+                <div class="featured-slice-right">
+                    <h4 class="featured-slice-right-title" data-vi="TẠI SAO NÊN DÙNG MAGIC SLICE?" data-en="WHY USE MAGIC SLICE?">TẠI SAO NÊN DÙNG MAGIC SLICE?</h4>
+                    <ul class="featured-slice-list">
+                        <li data-vi="⚡ Tạo nhanh mặt cắt chỉ với 1 click chuột" data-en="⚡ Create section cuts instantly with 1-click">⚡ Tạo nhanh mặt cắt chỉ với 1 click chuột</li>
+                        <li data-vi="👁️ Quản lý hiển thị mặt cắt cục bộ hoặc toàn scene" data-en="👁️ Manage section cut visibility globally or locally">👁️ Quản lý hiển thị mặt cắt cục bộ hoặc toàn scene</li>
+                        <li data-vi="📁 Tự động dọn dẹp và phân nhóm Gizmo vào Layer riêng" data-en="📁 Automatically clean & layer slice gizmos">📁 Tự động dọn dẹp và phân nhóm Gizmo vào Layer riêng</li>
+                        <li data-vi="🔄 Tương thích hoàn toàn với phím Ctrl+Z khi chỉnh sửa" data-en="🔄 Native support for standard Ctrl+Z undo history">🔄 Tương thích hoàn toàn với phím Ctrl+Z khi chỉnh sửa</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Magic Rename -->
             <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
                 <div class="product-meta">
@@ -460,19 +607,6 @@
                 <a href="Download%20Free/Reset3dsMax.exe" download class="product-cta primary-btn" data-vi="↓ Tải về (Miễn phí)" data-en="↓ Download (Free)">↓ Tải về (Miễn phí)</a>
             </div>
 
-            <!-- Magic Slice -->
-            <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
-                <div class="product-meta">
-                    <div class="product-header">
-                        <div class="product-icon"><img src="magicslice_icon_48.png" alt="Magic Slice" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                        <span class="product-badge new" data-vi="MIỄN PHÍ" data-en="FREE">MIỄN PHÍ</span>
-                    </div>
-                    <h3 class="product-title">Magic Slice</h3>
-                    <p class="product-desc" data-vi="Plugin quản lý mặt cắt thông minh cho 3ds Max. Tạo nhanh mặt cắt lát cắt, bật/tắt toàn bộ lát cắt trong scene, tự động gom gizmo vào layer riêng và hỗ trợ hoàn tác Ctrl+Z an toàn." data-en="Smart slicing and cut management plugin for 3ds Max. Fast slice modifier creation, global toggle for all slices, auto-layering gizmos, and safe Ctrl+Z undo support."></p>
-                </div>
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Hãy share bài viết ở Facebook và liên hệ DEV để nhận mật khẩu tải bộ cài nhé!');" class="product-cta primary-btn" data-vi="↓ Tải về (Miễn phí)" data-en="↓ Download (Free)">↓ Tải về (Miễn phí)</a>
-            </div>
-
             <!-- Magic CAD -->
             <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
                 <div class="product-meta">
@@ -490,6 +624,30 @@
         <!-- Upcoming Projects -->
         <h2 class="products-group-title coming-soon" data-vi="Dự án sắp ra mắt (Coming Soon)" data-en="Upcoming Projects (Coming Soon)">Dự án sắp ra mắt (Coming Soon)</h2>
         <div class="products-grid">
+            <!-- Magic Camera (Featured Full-Width Card) -->
+            <div class="product-card featured-camera" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
+                <div class="premium-left">
+                    <div class="product-meta">
+                        <div class="product-header">
+                            <div class="product-icon"><img src="magiccamera_icon_48.png" alt="Magic Camera" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
+                            <span class="product-badge soon" style="background: rgba(77, 182, 172, 0.15); color: var(--primary); border: 1px solid rgba(77, 182, 172, 0.3);" data-vi="SẮP CÓ (TIÊU ĐIỂM)" data-en="COMING SOON (FEATURED)">SẮP CÓ (TIÊU ĐIỂM)</span>
+                        </div>
+                        <h3 class="product-title">Magic Camera</h3>
+                        <p class="product-desc" data-vi="Plugin quản lý camera thông minh cho 3ds Max theo triết lý Scene Manager. Tự động chụp ảnh viewport chuẩn tỷ lệ render thực tế, khử tụ dọc thiết lập phối cảnh 2 điểm nhanh chóng và quản lý thuộc tính thấu kính đồng bộ." data-en="Smart camera and viewport state manager plugin for 3ds Max. Auto-captures safe-frame viewport thumbnails, aligns vertical perspective, and synchronizes dynamic camera lens parameters."></p>
+                    </div>
+                    <a href="camera.html" class="product-cta secondary-btn" style="width: auto; align-self: flex-start; padding: 14px 36px;" data-vi="Xem chi tiết →" data-en="See details →">Xem chi tiết →</a>
+                </div>
+                <div class="featured-camera-right">
+                    <h4 class="featured-camera-right-title" data-vi="TÍNH NĂNG ĐƯỢC CHỜ ĐỢI NHẤT" data-en="MOST ANTICIPATED FEATURES">TÍNH NĂNG ĐƯỢC CHỜ ĐỢI NHẤT</h4>
+                    <ul class="featured-camera-list">
+                        <li data-vi="🖼️ Quản lý danh sách Camera trực quan bằng Thumbnail" data-en="🖼️ Manage camera setups visually using Viewport Thumbnails">🖼️ Quản lý danh sách Camera trực quan bằng Thumbnail</li>
+                        <li data-vi="📐 Lưới gióng bố cục mỹ thuật (1/3, tỉ lệ vàng) trên Viewport" data-en="📐 Art composition grids (Rule of thirds, golden ratio) on Viewport">📐 Lưới gióng bố cục mỹ thuật (1/3, tỉ lệ vàng) trên Viewport</li>
+                        <li data-vi="⚖️ Tự động khử tụ dọc (2-Point Perspective) chuẩn nhiếp ảnh" data-en="⚖️ Automatic vertical tilt correction for 2-point perspective">⚖️ Tự động khử tụ dọc (2-Point Perspective) chuẩn nhiếp ảnh</li>
+                        <li data-vi="⚙️ Xuất hình ảnh viewport nhanh và render hàng loạt" data-en="⚙️ High-speed viewport grabbing and batch rendering support">⚙️ Xuất hình ảnh viewport nhanh và render hàng loạt</li>
+                    </ul>
+                </div>
+            </div>
+
             <!-- Magic Cat -->
             <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
                 <div class="product-meta">
@@ -551,6 +709,19 @@
                     </div>
                     <h3 class="product-title">Magic Curtain</h3>
                     <p class="product-desc" data-vi="Plugin mô phỏng chuyển động rèm và vải mềm dưới tác động của gió. Tự động tính toán va chạm và tạo chuyển động lướt nhẹ tự nhiên." data-en="Curtain and fabric dynamic wind simulation plugin. Auto-calculates collisions and generates natural breeze swaying movements."></p>
+                </div>
+                <a href="https://youtube.com/@ArchiH3" target="_blank" class="product-cta secondary-btn" data-vi="Theo dõi tiến độ ↗" data-en="Follow progress ↗">Theo dõi tiến độ ↗</a>
+            </div>
+
+            <!-- Magic Ripple -->
+            <div class="product-card" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
+                <div class="product-meta">
+                    <div class="product-header">
+                        <div class="product-icon">🌊</div>
+                        <span class="product-badge soon" data-vi="SẮP CÓ" data-en="COMING SOON">SẮP CÓ</span>
+                    </div>
+                    <h3 class="product-title">Magic Ripple</h3>
+                    <p class="product-desc" data-vi="Hệ thống mô phỏng sóng nước vật lý và lan truyền động cho 3ds Max. Tự động tính toán va chạm vật thể để tạo sóng vỗ bờ, sóng gợn lăn tăn, sóng biển động và bọt nước chân thực." data-en="Physics-based water ripple and wave propagation simulator for 3ds Max. Procedurally calculates object collision ripples, shore waves, open ocean swells, and realistic foam dynamics."></p>
                 </div>
                 <a href="https://youtube.com/@ArchiH3" target="_blank" class="product-cta secondary-btn" data-vi="Theo dõi tiến độ ↗" data-en="Follow progress ↗">Theo dõi tiến độ ↗</a>
             </div>
