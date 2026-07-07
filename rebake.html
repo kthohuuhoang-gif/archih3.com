@@ -420,6 +420,20 @@
                 justify-content: flex-end;
             }
         }
+    
+        /* INTERFACE CONTAINER RESPONSIVE */
+        .interface-container {
+            max-width: 800px; margin: 0 auto; padding: 24px;
+            background: var(--bg-main); border: 1px solid var(--border);
+            border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .interface-container {
+                padding: 10px !important;
+                border-radius: 10px !important;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -451,180 +465,19 @@
         <p class="hero-sub" data-vi="Tự động dựng lại lưới Quad sạch sẽ, mượt mà chỉ với 1-Click từ những mô hình có cấu trúc lưới lộn xộn, đa giác lỗi hoặc file quét 3D. Đồng thời tự động trải UV và truyền map vật liệu gốc sang lưới mới với tốc độ vượt trội." data-en="Automatically reconstruct clean, optimized Quad meshes in 1-Click from messy triangulated geometry, boolean errors, or 3D scans. Concurrently unwraps UVs and bakes original materials to the new mesh with blazing speed."></p>
         <div class="hero-cta">
             <a href="#pricing" class="btn-primary" data-vi="Nhận ưu đãi ra mắt" data-en="Get Launch Deal">Nhận ưu đãi ra mắt</a>
-            <a href="#interactive-demo" class="btn-outline" data-vi="Thử bản mô phỏng →" data-en="Try Interactive Demo →">Thử bản mô phỏng →</a>
+            <a href="#interface" class="btn-outline" data-vi="Thử bản mô phỏng →" data-en="Try Interactive Demo →">Thử bản mô phỏng →</a>
         </div>
     </section>
 
     <!-- INTERACTIVE DEMO (SIMULATOR) -->
-    <section class="interactive-section" id="interactive-demo">
-        <div class="section-label" data-vi="BẢN MÔ PHỎNG" data-en="GUI SIMULATOR">BẢN MÔ PHỎNG</div>
-        <h2 class="section-title" data-vi="Trải nghiệm giao diện trực quan" data-en="Experience the Interface"></h2>
-        <p class="section-desc" data-vi="Thử nghiệm tương tác các tùy chọn tối ưu lưới và bake map trực tiếp trên giao diện chuẩn của Magic ReBake." data-en="Test topology optimization and texture baking options directly on Magic ReBake's UI mockup."></p>
-
-        <div class="app-demo-wrapper">
-            <!-- Plugin UI Window -->
-            <div class="rebake-window" id="rebakeWindow">
-                <!-- Mockup Header -->
-                <div class="rebake-win-header">
-                    <div class="rebake-win-header-left">
-                        <div class="rebake-win-brand">ARCHIH3</div>
-                        <div class="rebake-win-title">Magic <b>ReBake</b></div>
-                    </div>
-                    <div class="rebake-win-header-right">
-                        <div class="rebake-win-author">KTS. Hồ Hữu Hoàng</div>
-                        <div class="rebake-win-ver">v1.1.1 · <a href="index.html">archih3.com</a></div>
-                    </div>
-                </div>
-
-                <!-- Mockup Body -->
-                <div class="rebake-win-body">
-                    <!-- Left Column -->
-                    <div class="rebake-win-col">
-                        <!-- Group 1: Thiết lập Lưới -->
-                        <div class="rebake-ui-group">
-                            <span class="rebake-ui-group-title" data-vi="Thiết lập Lưới" data-en="Mesh Settings">Thiết lập Lưới</span>
-                            
-                            <div class="rebake-ui-slider-group">
-                                <span class="rebake-ui-slider-label" data-vi="Số lượng Quad" data-en="Quad Count">Số lượng Quad</span>
-                                <div class="rebake-ui-slider-row">
-                                    <div class="rebake-ui-slider" onclick="adjustSlider('Quad', event)">
-                                        <div class="rebake-ui-slider-fill" id="quadSliderFill" style="width:75%"></div>
-                                        <div class="rebake-ui-slider-knob" id="quadSliderKnob" style="left:75%"></div>
-                                    </div>
-                                    <input class="rebake-ui-valbox" id="quadVal" value="75 %" readonly>
-                                </div>
-                            </div>
-
-                            <div class="rebake-ui-slider-group">
-                                <span class="rebake-ui-slider-label" data-vi="Bảo toàn chi tiết (%)" data-en="Detail Preservation (%)">Bảo toàn chi tiết (%)</span>
-                                <div class="rebake-ui-slider-row">
-                                    <div class="rebake-ui-slider" onclick="adjustSlider('Detail', event)">
-                                        <div class="rebake-ui-slider-fill" id="detailSliderFill" style="width:50%"></div>
-                                        <div class="rebake-ui-slider-knob" id="detailSliderKnob" style="left:50%"></div>
-                                    </div>
-                                    <input class="rebake-ui-valbox" id="detailVal" value="50" readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Group 2: Thiết lập Bake Texture -->
-                        <div class="rebake-ui-group">
-                            <span class="rebake-ui-group-title" data-vi="Thiết lập Bake Texture" data-en="Bake Texture Settings">Thiết lập Bake Texture</span>
-                            
-                            <div class="rebake-ui-row">
-                                <label data-vi="Bake lại Texture" data-en="Bake Textures">Bake lại Texture</label>
-                                <div class="rebake-ui-toggle on" id="toggleBake" onclick="toggleSwitch('Bake')">
-                                    <span>ON</span>
-                                    <div class="rebake-ui-toggle-circle"></div>
-                                </div>
-                            </div>
-
-                            <div class="rebake-ui-checkbox-row" id="bakeCheckboxes">
-                                <div class="rebake-ui-checkbox-item" onclick="toggleCheckbox('Cage')">
-                                    <div class="rebake-ui-checkbox-box checked" id="checkCage"></div>
-                                    <span data-vi="Lồng bao" data-en="Cage">Lồng bao</span>
-                                </div>
-                                <div class="rebake-ui-checkbox-item" onclick="toggleCheckbox('AutoCage')">
-                                    <div class="rebake-ui-checkbox-box checked" id="checkAutoCage"></div>
-                                    <span data-vi="Tự động" data-en="Auto">Tự động</span>
-                                </div>
-                                <input class="rebake-ui-valbox" value="1.00" style="width:50px; height:24px; padding:2px;" readonly>
-                            </div>
-
-                            <div class="rebake-ui-row" id="antiAliasRow">
-                                <label data-vi="Khử răng cưa" data-en="Anti-aliasing">Khử răng cưa</label>
-                                <button class="rebake-ui-btn-dropdown" data-vi="Tắt" data-en="Off">Tắt</button>
-                            </div>
-
-                            <div class="rebake-ui-row" id="bakeQualityRow">
-                                <label data-vi="Chất lượng Bake" data-en="Bake Quality">Chất lượng Bake</label>
-                                <button class="rebake-ui-btn-dropdown" data-vi="Cân bằng" data-en="Balanced">Cân bằng</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Column -->
-                    <div class="rebake-win-col">
-                        <!-- Group 3: Điều hướng Lưới -->
-                        <div class="rebake-ui-group">
-                            <span class="rebake-ui-group-title" data-vi="Điều hướng Lưới" data-en="Topology Guide">Điều hướng Lưới</span>
-                            
-                            <div class="rebake-ui-row">
-                                <label data-vi="Bảo toàn Smoothing Groups" data-en="Preserve Smoothing Groups">Bảo toàn Smoothing Groups</label>
-                                <div class="rebake-ui-toggle off" id="toggleSmooth" onclick="toggleSwitch('Smooth')">
-                                    <span>OFF</span>
-                                    <div class="rebake-ui-toggle-circle"></div>
-                                </div>
-                            </div>
-
-                            <div class="rebake-ui-row">
-                                <label data-vi="Bảo toàn Material IDs" data-en="Preserve Material IDs">Bảo toàn Material IDs</label>
-                                <div class="rebake-ui-toggle off" id="toggleMatId" onclick="toggleSwitch('MatId')">
-                                    <span>OFF</span>
-                                    <div class="rebake-ui-toggle-circle"></div>
-                                </div>
-                            </div>
-
-                            <div class="rebake-ui-row">
-                                <label data-vi="Tự nhận diện góc cứng" data-en="Auto Detect Hard Edges">Tự nhận diện góc cứng</label>
-                                <div class="rebake-ui-toggle on" id="toggleHardEdges" onclick="toggleSwitch('HardEdges')">
-                                    <span>ON</span>
-                                    <div class="rebake-ui-toggle-circle"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Group 4: Tùy chọn chung -->
-                        <div class="rebake-ui-group">
-                            <span class="rebake-ui-group-title" data-vi="Tùy chọn chung" data-en="General Options">Tùy chọn chung</span>
-                            
-                            <div class="rebake-ui-row">
-                                <label data-vi="Trục đối xứng" data-en="Symmetry Axis">Trục đối xứng</label>
-                                <button class="rebake-ui-btn-dropdown" data-vi="Không" data-en="None">Không</button>
-                            </div>
-
-                            <div class="rebake-ui-row">
-                                <label data-vi="Ẩn vật thể gốc sau khi xong" data-en="Hide Source Object">Ẩn vật thể gốc sau khi xong</label>
-                                <div class="rebake-ui-toggle on" id="toggleHideSource" onclick="toggleSwitch('HideSource')">
-                                    <span>ON</span>
-                                    <div class="rebake-ui-toggle-circle"></div>
-                                </div>
-                            </div>
-
-                            <div class="rebake-ui-row">
-                                <label data-vi="Sao lưu mesh gốc" data-en="Backup Source Mesh">Sao lưu mesh gốc</label>
-                                <div class="rebake-ui-toggle on" id="toggleBackup" onclick="toggleSwitch('Backup')">
-                                    <span>ON</span>
-                                    <div class="rebake-ui-toggle-circle"></div>
-                                </div>
-                            </div>
-
-                            <div class="rebake-ui-row">
-                                <label data-vi="Nơi lưu texture" data-en="Texture Output Path">Nơi lưu texture</label>
-                                <button class="rebake-ui-btn-dropdown" style="min-width:120px;" data-vi="Scene assets" data-en="Scene assets">Scene assets</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mockup Footer -->
-                <div class="rebake-win-footer">
-                    <div class="rebake-win-footer-left">
-                        <button class="rebake-ui-lang-btn" onclick="toggleUILang()">
-                            <span>🌐 Tiếng Việt</span>
-                        </button>
-                        <div class="rebake-win-status" id="consoleOutput">Vui lòng chọn 1 đối tượng để xử lý...</div>
-                    </div>
-                    
-                    <div class="rebake-win-footer-right">
-                        <button class="rebake-ui-btn-action" onclick="resetSimulator()" data-vi="Đóng" data-en="Close">Đóng</button>
-                        <button class="rebake-ui-btn-action run-btn active" id="btnRemesh" onclick="runMockRemesh()">RUN</button>
-                    </div>
-                </div>
-            </div>
-
-            <p class="note" data-vi="① Vùng chọn đối tượng: Mô phỏng hành động click chọn vật thể trong khung cảnh 3ds Max ở trên. ② Thiết lập: Cho phép chỉnh tỷ lệ mesh, bật/tắt bake texture, bảo toàn Smoothing Groups và các tùy chọn tiện ích. Nhấn RUN để khởi động thuật toán tối ưu lưới và bake tự động." data-en="① Viewport selection: Simulates clicking and selecting a 3D model in 3ds Max viewport. ② Configuration: Adjust Quad counts, toggle texture bake, preserve Smoothing Groups, and other pipeline options. Click RUN to execute automated retopology and baking.">
-            </p>
+        <!-- INTERFACE SHOWCASE -->
+    <section id="interface" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="GIAO DIỆN CÔNG CỤ" data-en="INTERFACE SHOWCASE">GIAO DIỆN CÔNG CỤ</div>
+        <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI"></h2>
+        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
+        
+        <div class="interface-container">
+            <img src="interface_magicrebake.png" alt="Plugin Interface" style="width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         </div>
     </section>
 
@@ -780,9 +633,9 @@
     </footer>
 
     <!-- LANGUAGE SWITCH & INTERACTIVE MOCKUP JS -->
-    <script>
+        <script>
         let currentLang = 'vi';
-        
+
         function setLang(lang) {
             currentLang = lang;
             document.documentElement.lang = lang;
@@ -797,177 +650,11 @@
                     el.innerHTML = text;
                 }
             });
-            // Update dynamic mockup items
-            updateMockupText();
         }
         
-        window.addEventListener('DOMContentLoaded', () => setLang('vi'));
-
-        // Mockup interactive script
-        let isDone = false;
-        let quadPct = 75;
-        let detailPct = 50;
-        let isBake = true;
-        let isCage = true;
-        let isAutoCage = true;
-        let isSmooth = false;
-        let isMatId = false;
-        let isHardEdges = true;
-        let isHideSource = true;
-        let isBackup = true;
-
-        const consoleEl = document.getElementById('consoleOutput');
-
-        function updateMockupText() {
-            // Update Language Globe button text
-            const langBtnSpan = document.querySelector('.rebake-ui-lang-btn span');
-            if (langBtnSpan) {
-                langBtnSpan.textContent = currentLang === 'vi' ? '🌐 Tiếng Việt' : '🌐 English';
-            }
-
-            if (!isDone) {
-                consoleEl.textContent = currentLang === 'vi'
-                    ? 'Sẵn sàng tối ưu lưới đối tượng đang chọn...'
-                    : 'Ready to optimize mesh for selected object...';
-            }
-        }
-
-        function adjustSlider(type, e) {
-            const slider = e.currentTarget;
-            const rect = slider.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const pct = Math.max(0, Math.min(100, Math.round((x / rect.width) * 100)));
-            
-            if (type === 'Quad') {
-                quadPct = pct;
-                document.getElementById('quadSliderFill').style.width = pct + '%';
-                document.getElementById('quadSliderKnob').style.left = pct + '%';
-                document.getElementById('quadVal').value = pct + ' %';
-            } else if (type === 'Detail') {
-                detailPct = pct;
-                document.getElementById('detailSliderFill').style.width = pct + '%';
-                document.getElementById('detailSliderKnob').style.left = pct + '%';
-                document.getElementById('detailVal').value = pct;
-            }
-            
-            isDone = false;
-            updateMockupText();
-        }
-
-        function toggleSwitch(opt) {
-            if (opt === 'Bake') {
-                isBake = !isBake;
-                updateToggleUI('toggleBake', isBake);
-                
-                // Dim bake parameters when off
-                const opacityVal = isBake ? '1' : '0.4';
-                const pointerVal = isBake ? 'auto' : 'none';
-                document.getElementById('bakeCheckboxes').style.opacity = opacityVal;
-                document.getElementById('bakeCheckboxes').style.pointerEvents = pointerVal;
-                document.getElementById('antiAliasRow').style.opacity = opacityVal;
-                document.getElementById('antiAliasRow').style.pointerEvents = pointerVal;
-                document.getElementById('bakeQualityRow').style.opacity = opacityVal;
-                document.getElementById('bakeQualityRow').style.pointerEvents = pointerVal;
-            } else if (opt === 'Smooth') {
-                isSmooth = !isSmooth;
-                updateToggleUI('toggleSmooth', isSmooth);
-            } else if (opt === 'MatId') {
-                isMatId = !isMatId;
-                updateToggleUI('toggleMatId', isMatId);
-            } else if (opt === 'HardEdges') {
-                isHardEdges = !isHardEdges;
-                updateToggleUI('toggleHardEdges', isHardEdges);
-            } else if (opt === 'HideSource') {
-                isHideSource = !isHideSource;
-                updateToggleUI('toggleHideSource', isHideSource);
-            } else if (opt === 'Backup') {
-                isBackup = !isBackup;
-                updateToggleUI('toggleBackup', isBackup);
-            }
-            
-            isDone = false;
-            updateMockupText();
-        }
-
-        function updateToggleUI(id, state) {
-            const el = document.getElementById(id);
-            if (!el) return;
-            el.className = 'rebake-ui-toggle ' + (state ? 'on' : 'off');
-            el.querySelector('span').textContent = state ? 'ON' : 'OFF';
-        }
-
-        function toggleCheckbox(opt) {
-            if (!isBake) return;
-
-            if (opt === 'Cage') {
-                isCage = !isCage;
-                document.getElementById('checkCage').classList.toggle('checked', isCage);
-            } else if (opt === 'AutoCage') {
-                isAutoCage = !isAutoCage;
-                document.getElementById('checkAutoCage').classList.toggle('checked', isAutoCage);
-            }
-            
-            isDone = false;
-            updateMockupText();
-        }
-
-        function toggleUILang() {
-            const nextLang = currentLang === 'vi' ? 'en' : 'vi';
-            setLang(nextLang);
-        }
-
-        function runMockRemesh() {
-            const btn = document.getElementById('btnRemesh');
-            btn.classList.remove('active');
-            btn.disabled = true;
-            
-            let stage = 0;
-            const stages = currentLang === 'vi' ? [
-                '[1/4] Đang chuẩn bị xuất geometry tạm thời...',
-                '[2/4] Đang tính toán cấu trúc tối ưu lưới Quad...',
-                '[3/4] Đang tự động trải tọa độ UV...',
-                '[4/4] Đang bake truyền tải map vật liệu...',
-                'Hoàn tất! Đã tối ưu lưới và bake map thành công.'
-            ] : [
-                '[1/4] Exporting temporary geometry...',
-                '[2/4] Calculating Quad topology optimization...',
-                '[3/4] Auto unwrapping UV layout...',
-                '[4/4] Baking original textures to target mesh...',
-                'Success! Mesh topology optimized and baked.'
-            ];
-
-            function runStage() {
-                consoleEl.textContent = stages[stage];
-                stage++;
-                if (stage < stages.length) {
-                    setTimeout(runStage, 950);
-                } else {
-                    isDone = true;
-                    btn.classList.add('active');
-                    btn.disabled = false;
-                }
-            }
-            
-            runStage();
-        }
-
-        function resetSimulator() {
-            isDone = false;
-            quadPct = 75;
-            document.getElementById('quadSliderFill').style.width = '75%';
-            document.getElementById('quadSliderKnob').style.left = '75%';
-            document.getElementById('quadVal').value = '75 %';
-            
-            detailPct = 50;
-            document.getElementById('detailSliderFill').style.width = '50%';
-            document.getElementById('detailSliderKnob').style.left = '50%';
-            document.getElementById('detailVal').value = '50';
-
-            updateMockupText();
-        }
-
-        // Initialize state
-        updateMockupText();
+        window.addEventListener('DOMContentLoaded', () => {
+            setLang('vi');
+        });
     </script>
 </body>
 </html>

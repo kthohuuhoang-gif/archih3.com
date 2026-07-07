@@ -369,6 +369,20 @@
         .feature-card:nth-child(4) { animation-delay: 0.4s; }
         .feature-card:nth-child(5) { animation-delay: 0.5s; }
         .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    
+        /* INTERFACE CONTAINER RESPONSIVE */
+        .interface-container {
+            max-width: 800px; margin: 0 auto; padding: 24px;
+            background: var(--bg-main); border: 1px solid var(--border);
+            border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .interface-container {
+                padding: 10px !important;
+                border-radius: 10px !important;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -384,7 +398,7 @@
         <div class="nav-links">
             <a href="index.html" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
             <a href="#features" data-vi="Tính năng" data-en="Features">Tính năng</a>
-            <a href="#demo" data-vi="Trải nghiệm" data-en="Interactive Demo">Trải nghiệm</a>
+            <a href="#interface" data-vi="Giao diện" data-en="Interface">Trải nghiệm</a>
             <a href="#workflow" data-vi="Sử dụng" data-en="Workflow">Sử dụng</a>
             <a href="#pricing" data-vi="Bảng giá" data-en="Pricing">Bảng giá</a>
             <a href="#faq" data-vi="FAQ" data-en="FAQ">FAQ</a>
@@ -408,102 +422,14 @@
     </section>
 
     <!-- INTERACTIVE DEMO (MOCKUP APP) -->
-    <section class="interactive-section" id="demo">
-        <div class="section-label" data-vi="TRẢI NGHIỆM GIAO DIỆN" data-en="INTERACTIVE DEMO">TRẢI NGHIỆM GIAO DIỆN</div>
-        <h2 class="section-title" data-vi="Trải nghiệm ứng dụng trực quan" data-en="Try the Plugin Interface"></h2>
-        <p class="section-desc" data-vi="Mô phỏng cách hoạt động của hàng đợi Magic Merger Standalone trong 3ds Max. Thử click các dòng model để xem trạng thái nạp." data-en="Simulates how the Magic Merger standalone queue works in 3ds Max. Click the model items to see loaded states."></p>
-
-        <div class="app-demo-wrapper">
-            <div class="demo-bar">
-                <span data-vi="Trạng thái hàng đợi:" data-en="Queue State:">Trạng thái hàng đợi:</span>
-                <button class="demo-btn" id="btnEmpty" onclick="setState('empty')" data-vi="① Trống (Chờ kéo thả)" data-en="① Empty (Wait for drag-drop)">① Trống (Chờ kéo thả)</button>
-                <button class="demo-btn active" id="btnLoaded" onclick="setState('loaded')" data-vi="② Có hàng đợi" data-en="② Queue Populated">② Có hàng đợi</button>
-            </div>
-
-            <div class="app-window">
-                <!-- HEADER -->
-                <div class="mock-header">
-                    <div class="accentbar"></div>
-                    <div class="arch">ArchiH3</div>
-                    <div class="name">Magic <b>Merger</b></div>
-                    <div class="meta"><b>KTS. Hồ Hữu Hoàng</b><br>v1.1.5 · archih3.com</div>
-                </div>
-
-                <div class="mock-body">
-                    <div class="mock-left">
-                        <!-- EMPTY -->
-                        <div class="dropzone" id="dropzone">
-                            <div class="ic">📥</div>
-                            <h2 data-vi="Kéo &amp; thả file hoặc thư mục vào đây" data-en="Drag &amp; Drop files or folders here">Kéo &amp; thả file hoặc thư mục vào đây</h2>
-                            <p data-vi="Nhận file .max, file nén (.zip/.rar/.7z), thư mục chứa model, hoặc file ảnh xem trước (AI tự quét tìm model đi kèm)." data-en="Accepts .max files, compressed archives (.zip/.rar/.7z), folders, or preview images (AI auto-detects companion model files)."></p>
-                            <div class="types">
-                                <span>.max</span><span>.zip / .rar / .7z</span><span>Folder</span><span>Image Preview</span>
-                            </div>
-                        </div>
-
-                        <!-- LOADED -->
-                        <div id="loadedView" style="display:flex; flex-direction:column; gap:12px;">
-                            <div class="preview-big">
-                                <span class="lbl" data-vi="Thông tin hàng đợi" data-en="Queue Info">Thông tin hàng đợi</span>
-                                <div class="swatch" id="bigSwatch">
-                                    <!-- Dynamic content -->
-                                </div>
-                                <span class="src" id="bigSrc">Sẵn sàng Merge</span>
-                            </div>
-                            <div class="thumbs" id="thumbs"></div>
-                        </div>
-                    </div>
-
-                    <div class="mock-right">
-                        <h3 data-vi="Thiết lập Merge &amp; Grid" data-en="Merge &amp; Grid Settings">Thiết lập Merge &amp; Grid</h3>
-                        <div class="ctrl">
-                            <label data-vi="Grid Spacing (Khoảng cách)" data-en="Grid Spacing">Grid Spacing</label>
-                            <div class="row">
-                                <div class="slider"><div class="fill" style="width:50%"></div><div class="knob" style="left:50%"></div></div>
-                                <input class="num" value="1000 mm" readonly>
-                            </div>
-                        </div>
-                        <div class="ctrl">
-                            <label data-vi="Độ sâu quét thư mục" data-en="Folder Search Depth">Folder Search Depth</label>
-                            <div class="row">
-                                <div class="slider"><div class="fill" style="width:10%"></div><div class="knob" style="left:10%"></div></div>
-                                <input class="num" value="1" readonly>
-                            </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="toggle-row">
-                            <span data-vi="Xếp lưới tự động (Grid)" data-en="Auto Grid Layout">Xếp lưới tự động (Grid)</span>
-                            <div class="toggle" id="tgGrid" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
-                        </div>
-                        <div class="toggle-row">
-                            <span data-vi="Gán Layer theo danh mục" data-en="Auto Category Layer">Gán Layer theo danh mục</span>
-                            <div class="toggle" id="tgLayer" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
-                        </div>
-                        <div class="toggle-row">
-                            <span data-vi="Thu gom map (Consolidate)" data-en="Consolidate Maps">Thu gom map (Consolidate)</span>
-                            <div class="toggle" id="tgConsolidate" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
-                        </div>
-                        <div class="toggle-row">
-                            <span data-vi="Sửa đường dẫn map dài" data-en="Fix Long Paths">Sửa đường dẫn map dài</span>
-                            <div class="toggle" id="tgPaths" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
-                        </div>
-                        <div class="toggle-row">
-                            <span data-vi="Xuất bản vẽ CAD 2D" data-en="Export CAD 2D Block">Xuất bản vẽ CAD 2D</span>
-                            <div class="toggle off" id="tgCad" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="ctrl">
-                            <label data-vi="Target Category (Mục tiêu)" data-en="Target Category">Target Category</label>
-                            <div class="dropdown"><span id="targetCat">Furniture (Đồ nội thất)</span> <span class="ar">▾</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mock-footer">
-                    <button class="gen-btn" data-vi="Bắt đầu Merge Hàng loạt" data-en="Batch Merge &amp; Relink">Bắt đầu Merge Hàng loạt</button>
-                </div>
-            </div>
-            <p class="note" data-vi="① Trạng thái chờ: Dropzone sẵn sàng nhận tệp tin hoặc thư mục. ② Trạng thái hoạt động: Hiển thị danh sách hàng đợi các model. Tích chọn hoặc bỏ tích để merge chọn lọc. Tính năng <b>Smart Relink</b> chạy ngầm tự động liên kết map của từng model sau khi nhập." data-en="① Empty state: Dropzone is ready to receive model files or archives. ② Active state: Displays queue list of models. Check/uncheck rows to selectively merge. <b>Smart Relink</b> runs in background to auto-locate textures immediately after importing."></p>
+        <!-- INTERFACE SHOWCASE -->
+    <section id="interface" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="GIAO DIỆN CÔNG CỤ" data-en="INTERFACE SHOWCASE">GIAO DIỆN CÔNG CỤ</div>
+        <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI"></h2>
+        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
+        
+        <div class="interface-container">
+            <img src="interface_magicmerger.png" alt="Plugin Interface" style="width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         </div>
     </section>
 
@@ -657,9 +583,9 @@
     </footer>
 
     <!-- LANGUAGE SWITCH & INTERACTIVE MOCKUP JS -->
-    <script>
+        <script>
         let currentLang = 'vi';
-        
+
         function setLang(lang) {
             currentLang = lang;
             document.documentElement.lang = lang;
@@ -676,75 +602,9 @@
             });
         }
         
-        window.addEventListener('DOMContentLoaded', () => setLang('vi'));
-
-        // Mockup interactive script
-        const models = [
-            {key:'sofa',  name:'Sofa Velvet Modern', ic:'🛋️', size:'45.2 MB', status_vi:'SẴN SÀNG', status_en:'READY', details_vi:'1 tệp .max + 12 map được phát hiện', details_en:'.max file + 12 textures detected'},
-            {key:'table', name:'Wood Dinner Table',  ic:'🪑', size:'12.8 MB', status_vi:'ĐÃ MERGE', status_en:'MERGED', details_vi:'1 tệp nén .zip + 4 map', details_en:'.zip archive + 4 textures'},
-            {key:'plant', name:'Interior Ficus',     ic:'🌿', size:'84.0 MB', status_vi:'SẴN SÀNG', status_en:'READY', details_vi:'Thư mục Globe Plants (18 map)', details_en:'Globe Plants directory (18 textures)'},
-            {key:'lamp',  name:'Pendant Lamp Brass', ic:'💡', size:'8.1 MB',  status_vi:'SẴN SÀNG', status_en:'READY', details_vi:'1 tệp .max + 2 map', details_en:'.max file + 2 textures'},
-            {key:'chair', name:'Lounge Armchair',   ic:'💺', size:'22.4 MB', status_vi:'ĐÃ MERGE', status_en:'MERGED', details_vi:'1 tệp .max + 6 map', details_en:'.max file + 6 textures'},
-            {key:'mat',   name:'Concrete Floor',     ic:'🧱', size:'15.5 MB', status_vi:'SẴN SÀNG', status_en:'READY', details_vi:'Tự sinh PBR từ ảnh preview', details_en:'Generated PBR from preview'},
-        ];
-
-        const thumbsEl = document.getElementById('thumbs');
-        const bigSwatch = document.getElementById('bigSwatch');
-        const bigSrc = document.getElementById('bigSrc');
-
-        function renderThumbs() {
-            thumbsEl.innerHTML = '';
-            models.forEach((m, i) => {
-                const t = document.createElement('div');
-                t.className = 'thumb' + (i === 0 ? ' active' : '');
-                t.onclick = () => selectModel(i);
-                t.innerHTML = `<span class="sw-ic">${m.ic}</span><span class="cap">${m.name}</span>`;
-                thumbsEl.appendChild(t);
-            });
-        }
-
-        function selectModel(i) {
-            document.querySelectorAll('.thumb').forEach((t, idx) => t.classList.toggle('active', idx === i));
-            
-            const m = models[i];
-            const statusText = currentLang === 'vi' ? m.status_vi : m.status_en;
-            const detailsText = currentLang === 'vi' ? m.details_vi : m.details_en;
-            
-            bigSwatch.innerHTML = `
-                <div class="sw-name">${m.name}</div>
-                <div class="sw-info">${detailsText} (${m.size})</div>
-                <span class="sw-status">${statusText}</span>
-            `;
-            bigSrc.textContent = currentLang === 'vi' ? 'Hàng đợi dòng ' + (i+1) : 'Queue Row ' + (i+1);
-        }
-
-        function setState(s) {
-            const empty = s === 'empty';
-            document.getElementById('dropzone').classList.toggle('hidden', !empty);
-            document.getElementById('loadedView').classList.toggle('hidden', empty);
-            document.getElementById('btnEmpty').classList.toggle('active', empty);
-            document.getElementById('btnLoaded').classList.toggle('active', !empty);
-        }
-
-        renderThumbs();
-        setState('loaded');
-        selectModel(0);
-        
-        // Update labels on lang toggle
-        const oldSetLang = setLang;
-        setLang = function(lang) {
-            oldSetLang(lang);
-            // Refresh mockup text
-            const activeThumb = document.querySelector('.thumb.active');
-            if (activeThumb) {
-                const index = Array.from(thumbsEl.children).indexOf(activeThumb);
-                if (index !== -1) {
-                    selectModel(index);
-                }
-            }
-            // Update other items
-            document.getElementById('targetCat').textContent = lang === 'vi' ? 'Furniture (Đồ nội thất)' : 'Furniture';
-        };
+        window.addEventListener('DOMContentLoaded', () => {
+            setLang('vi');
+        });
     </script>
 </body>
 </html>

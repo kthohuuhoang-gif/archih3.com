@@ -240,6 +240,20 @@
         
 
         
+    
+        /* INTERFACE CONTAINER RESPONSIVE */
+        .interface-container {
+            max-width: 800px; margin: 0 auto; padding: 24px;
+            background: var(--bg-main); border: 1px solid var(--border);
+            border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .interface-container {
+                padding: 10px !important;
+                border-radius: 10px !important;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -255,7 +269,7 @@
         <div class="nav-links">
             <a href="index.html" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
             <a href="#features" data-vi="Tính năng" data-en="Features">Tính năng</a>
-            <a href="#demo" data-vi="Trải nghiệm" data-en="Interactive Demo">Trải nghiệm</a>
+            <a href="#interface" data-vi="Giao diện" data-en="Interface">Trải nghiệm</a>
             <a href="#workflow" data-vi="Sử dụng" data-en="Workflow">Sử dụng</a>
             <a href="#pricing" data-vi="Bảng giá" data-en="Pricing">Bảng giá</a>
             <a href="#faq" data-vi="FAQ" data-en="FAQ">FAQ</a>
@@ -279,52 +293,14 @@
     </section>
 
     <!-- INTERACTIVE DEMO -->
-    <section class="interactive-section" id="demo">
-        <div class="section-label" data-vi="MÔ PHỎNG HOẠT ĐỘNG" data-en="INTERACTIVE DEMO">MÔ PHỎNG HOẠT ĐỘNG</div>
-        <h2 class="section-title" data-vi="Trải nghiệm đổi tên thông minh" data-en="Try Smart Renaming"></h2>
-        <p class="section-desc" data-vi="Mô phỏng cách hoạt động của Magic Rename &amp; Grouper trong 3ds Max. Hãy thử gõ tiền tố và xem kết quả chuẩn hóa." data-en="Simulates Magic Rename &amp; Grouper running in 3ds Max. Try typing a prefix to see automated standardization."></p>
-
-        <div class="app-demo-wrapper">
-            <div class="app-window">
-                <!-- HEADER -->
-                <div class="mock-header">
-                    <div class="accentbar"></div>
-                    <div class="arch">ArchiH3</div>
-                    <div class="name">Magic <b>Rename</b></div>
-                    <div class="meta"><b>KTS. Hồ Hữu Hoàng</b><br>v1.0.2 · archih3.com</div>
-                </div>
-
-                <div class="mock-body">
-                    <div class="ctrl">
-                        <label data-vi="UE5 ASCII Prefix (Tiền tố chuẩn hóa)" data-en="UE5 ASCII Prefix">UE5 ASCII Prefix</label>
-                        <input class="input-text" id="prefixInput" value="SM_SofaVelvet" oninput="updateRenamePreview()">
-                    </div>
-
-                    <div class="rename-preview-panel" id="previewPanel">
-                        <!-- Filled by JS -->
-                    </div>
-
-                    <div class="divider"></div>
-
-                    <div class="toggle-row">
-                        <span data-vi="Đổi tên Group vật thể" data-en="Rename &amp; Group Objects">Đổi tên Group vật thể</span>
-                        <div class="toggle" id="tgGroup" onclick="this.classList.toggle('off'); updateRenamePreview();"><div class="dot"></div></div>
-                    </div>
-                    <div class="toggle-row">
-                        <span data-vi="Đổi tên Material tương ứng" data-en="Rename Materials">Đổi tên Material tương ứng</span>
-                        <div class="toggle" id="tgMat" onclick="this.classList.toggle('off'); updateRenamePreview();"><div class="dot"></div></div>
-                    </div>
-                    <div class="toggle-row">
-                        <span data-vi="Đổi tên &amp; gắn hậu tố kết cấu (Texture Suffix)" data-en="Rename &amp; Map Texture Suffixes">Đổi tên &amp; gắn hậu tố kết cấu (Texture Suffix)</span>
-                        <div class="toggle" id="tgText" onclick="this.classList.toggle('off'); updateRenamePreview();"><div class="dot"></div></div>
-                    </div>
-                </div>
-
-                <div class="mock-footer">
-                    <button class="gen-btn" data-vi="Thực thi Đổi tên &amp; Chuẩn hóa" data-en="Execute Rename &amp; Grouping">Thực thi Đổi tên &amp; Chuẩn hóa</button>
-                </div>
-            </div>
-            <p class="note" data-vi="* Thao tác trên giao diện mô phỏng thay đổi trực quan các đối tượng được chọn. Khi chạy thực tế trong 3ds Max, plugin hỗ trợ phục hồi/hoàn tác (Ctrl+Z) 100% nếu có lỗi hoặc không ưng ý." data-en="* Interactive mockup demonstrates metadata updates. In 3ds Max, the plugin runs with a native undo stack allowing full recovery (Ctrl+Z) of renamed files, groups, and texture paths."></p>
+        <!-- INTERFACE SHOWCASE -->
+    <section id="interface" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="GIAO DIỆN CÔNG CỤ" data-en="INTERFACE SHOWCASE">GIAO DIỆN CÔNG CỤ</div>
+        <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI"></h2>
+        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
+        
+        <div class="interface-container">
+            <img src="interface_magicrename.png" alt="Plugin Interface" style="width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         </div>
     </section>
 
@@ -455,9 +431,9 @@
     </footer>
 
     <!-- JS -->
-    <script>
+        <script>
         let currentLang = 'vi';
-        
+
         function setLang(lang) {
             currentLang = lang;
             document.documentElement.lang = lang;
@@ -472,58 +448,11 @@
                     el.innerHTML = text;
                 }
             });
-            updateRenamePreview();
         }
         
-        window.addEventListener('DOMContentLoaded', () => setLang('vi'));
-
-        function updateRenamePreview() {
-            const prefix = document.getElementById('prefixInput').value || 'SM_Asset';
-            const grpOn = !document.getElementById('tgGroup').classList.contains('off');
-            const matOn = !document.getElementById('tgMat').classList.contains('off');
-            const textOn = !document.getElementById('tgText').classList.contains('off');
-
-            const panel = document.getElementById('previewPanel');
-            let html = '';
-
-            if (currentLang === 'vi') {
-                html += `<div><span class="comment">// Mô phỏng đổi tên vật thể 3ds Max:</span></div>`;
-                html += `<div><span class="old">Box001</span> → <span class="new">${prefix}_mesh_01</span></div>`;
-                html += `<div><span class="old">Cylinder05</span> → <span class="new">${prefix}_mesh_02</span></div>`;
-                if (grpOn) {
-                    html += `<div><span class="comment">// Đóng gói Group vật thể:</span></div>`;
-                    html += `<div><span class="new">Group: ${prefix}</span> (chứa các mesh trên)</div>`;
-                }
-                if (matOn) {
-                    html += `<div><span class="comment">// Đổi tên vật liệu:</span></div>`;
-                    html += `<div><span class="old">Material #25</span> → <span class="new">M_${prefix}</span></div>`;
-                }
-                if (textOn) {
-                    html += `<div><span class="comment">// Đổi tên file map kết cấu:</span></div>`;
-                    html += `<div><span class="old">fabric_diffuse.jpg</span> → <span class="new">T_${prefix}_BC.jpg</span></div>`;
-                    html += `<div><span class="old">fabric_normal.png</span> → <span class="new">T_${prefix}_N.png</span></div>`;
-                }
-            } else {
-                html += `<div><span class="comment">// Simulating 3ds Max object renaming:</span></div>`;
-                html += `<div><span class="old">Box001</span> → <span class="new">${prefix}_mesh_01</span></div>`;
-                html += `<div><span class="old">Cylinder05</span> → <span class="new">${prefix}_mesh_02</span></div>`;
-                if (grpOn) {
-                    html += `<div><span class="comment">// Object grouping:</span></div>`;
-                    html += `<div><span class="new">Group: ${prefix}</span> (contains above meshes)</div>`;
-                }
-                if (matOn) {
-                    html += `<div><span class="comment">// Material renaming:</span></div>`;
-                    html += `<div><span class="old">Material #25</span> → <span class="new">M_${prefix}</span></div>`;
-                }
-                if (textOn) {
-                    html += `<div><span class="comment">// Texture mapping suffix updates:</span></div>`;
-                    html += `<div><span class="old">fabric_diffuse.jpg</span> → <span class="new">T_${prefix}_BC.jpg</span></div>`;
-                    html += `<div><span class="old">fabric_normal.png</span> → <span class="new">T_${prefix}_N.png</span></div>`;
-                }
-            }
-
-            panel.innerHTML = html;
-        }
+        window.addEventListener('DOMContentLoaded', () => {
+            setLang('vi');
+        });
     </script>
 </body>
 </html>

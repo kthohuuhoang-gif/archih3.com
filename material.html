@@ -374,6 +374,20 @@
         .feature-card:nth-child(4) { animation-delay: 0.4s; }
         .feature-card:nth-child(5) { animation-delay: 0.5s; }
         .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    
+        /* INTERFACE CONTAINER RESPONSIVE */
+        .interface-container {
+            max-width: 800px; margin: 0 auto; padding: 24px;
+            background: var(--bg-main); border: 1px solid var(--border);
+            border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .interface-container {
+                padding: 10px !important;
+                border-radius: 10px !important;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -389,7 +403,7 @@
         <div class="nav-links">
             <a href="index.html" data-vi="Trang chủ" data-en="Home">Trang chủ</a>
             <a href="#features" data-vi="Tính năng" data-en="Features">Tính năng</a>
-            <a href="#demo" data-vi="Trải nghiệm" data-en="Interactive Demo">Trải nghiệm</a>
+            <a href="#interface" data-vi="Giao diện" data-en="Interface">Trải nghiệm</a>
             <a href="#workflow" data-vi="Sử dụng" data-en="Workflow">Sử dụng</a>
             <a href="#pricing" data-vi="Bảng giá" data-en="Pricing">Bảng giá</a>
             <a href="#faq" data-vi="FAQ" data-en="FAQ">FAQ</a>
@@ -426,126 +440,40 @@
                 <div style="position:absolute; bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube">▶ Xem demo trên YouTube</div>
             </a>
         </div>
-        <script>
-            (function(){
-                var iframe = document.getElementById('yt-iframe');
-                var fallback = document.getElementById('yt-fallback');
-                if (window.location.protocol === 'file:') {
-                    iframe.style.display = 'none';
-                    fallback.style.display = 'block';
+            <script>
+        let currentLang = 'vi';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = text;
                 } else {
-                    iframe.onerror = function() {
-                        iframe.style.display = 'none';
-                        fallback.style.display = 'block';
-                    };
+                    el.innerHTML = text;
                 }
-            })();
-        </script>
+            });
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            setLang('vi');
+        });
+    </script>
     </div>
 
     <!-- INTERACTIVE DEMO (MOCKUP APP) -->
-    <section class="interactive-section" id="demo">
-        <div class="section-label" data-vi="TRẢI NGHIỆM GIAO DIỆN" data-en="INTERACTIVE DEMO">TRẢI NGHIỆM GIAO DIỆN</div>
-        <h2 class="section-title" data-vi="Trải nghiệm ứng dụng trực quan" data-en="Try the Plugin Interface"></h2>
-        <p class="section-desc" data-vi="Mô phỏng 100% cách hoạt động của plugin Magic Material Standalone trong 3ds Max. Nhấn vào các nút demo để xem các trạng thái." data-en="Simulates exactly how the Magic Material standalone plugin runs in 3ds Max. Click the demo buttons to switch states."></p>
-
-        <div class="app-demo-wrapper">
-            <div class="demo-bar">
-                <span data-vi="Trạng thái:" data-en="State:">Trạng thái:</span>
-                <button class="demo-btn" id="btnEmpty" onclick="setState('empty')" data-vi="① Chưa nạp (Kéo-Thả)" data-en="① Empty (Drag-Drop)">① Chưa nạp (Kéo-Thả)</button>
-                <button class="demo-btn active" id="btnLoaded" onclick="setState('loaded')" data-vi="② Đã nạp (Đầy đủ Map)" data-en="② Loaded (All Maps)">② Đã nạp (Đầy đủ Map)</button>
-            </div>
-
-            <div class="app-window">
-                <!-- HEADER -->
-                <div class="mock-header">
-                    <div class="accentbar"></div>
-                    <div class="arch">ArchiH3</div>
-                    <div class="name">Magic <b>Material</b></div>
-                    <div class="meta"><b>KTS. Hồ Hữu Hoàng</b><br>v1.0.0 · archih3.com</div>
-                </div>
-
-                <div class="mock-body">
-                    <div class="mock-left">
-                        <!-- EMPTY -->
-                        <div class="dropzone" id="dropzone">
-                            <div class="ic">⬇</div>
-                            <h2 data-vi="Kéo &amp; thả vào đây" data-en="Drag &amp; Drop here">Kéo &amp; thả vào đây</h2>
-                            <p data-vi="Thả ảnh Diffuse, cả folder texture, hoặc file nén — Magic Material tự nhận map có sẵn và sinh map còn thiếu." data-en="Drop a Diffuse map, a texture folder, or an archive — Magic Material detects existing maps and generates the missing ones."></p>
-                            <div class="types">
-                                <span>JPG / PNG / TGA</span><span>Folder vendor</span><span>.rar / .zip / .7z</span>
-                            </div>
-                        </div>
-
-                        <!-- LOADED -->
-                        <div id="loadedView" style="display:flex; flex-direction:column; gap:12px;">
-                            <div class="preview-big">
-                                <span class="lbl" id="bigLabel">Material</span>
-                                <div class="swatch sw-sphere" id="bigSwatch"></div>
-                                <span class="src" id="bigSrc">CGAxis · brick_wall_01 (.ah3prv)</span>
-                            </div>
-                            <div class="thumbs" id="thumbs"></div>
-                        </div>
-                    </div>
-
-                    <div class="mock-right">
-                        <h3 data-vi="Thiết lập vật liệu" data-en="Material Settings">Thiết lập vật liệu</h3>
-                        <div class="ctrl">
-                            <label data-vi="Tiling (Lặp map)" data-en="Tiling">Tiling</label>
-                            <div class="row">
-                                <div class="slider"><div class="fill" style="width:45%"></div><div class="knob" style="left:45%"></div></div>
-                                <input class="num" value="10" readonly>
-                            </div>
-                        </div>
-                        <div class="ctrl">
-                            <label data-vi="Rotation (Xoay)" data-en="Rotation">Rotation</label>
-                            <div class="row">
-                                <div class="slider"><div class="fill" style="width:0%"></div><div class="knob" style="left:0%"></div></div>
-                                <input class="num" value="0.0" readonly>
-                            </div>
-                        </div>
-                        <div class="ctrl">
-                            <label data-vi="Scale (Tỉ lệ)" data-en="Scale">Scale</label>
-                            <div class="row">
-                                <div class="slider"><div class="fill" style="width:30%"></div><div class="knob" style="left:30%"></div></div>
-                                <input class="num" value="30" readonly>
-                            </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="toggle-row">
-                            <span data-vi="Tự động UVW" data-en="Auto UVW">Tự động UVW</span>
-                            <div class="toggle" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
-                        </div>
-                        <div class="toggle-row">
-                            <span data-vi="Vật liệu Seamless" data-en="Seamless (Gaussian)">Vật liệu Seamless</span>
-                            <div class="toggle off" onclick="this.classList.toggle('off')"><div class="dot"></div></div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="ctrl">
-                            <label data-vi="Loại vật liệu render" data-en="Material Type">Loại vật liệu render</label>
-                            <div class="dropdown" data-vi="Tự phát hiện (V-Ray / Corona) ▾" data-en="Auto-detect (V-Ray / Corona) ▾">Tự phát hiện (V-Ray / Corona) ▾</div>
-                        </div>
-                        <div class="ctrl">
-                            <label data-vi="Độ bóng kim loại" data-en="Gloss / Metal">Độ bóng kim loại</label>
-                            <div class="presets">
-                                <div class="preset on" data-vi="Phi kim (Non-Metal)" data-en="Non-Metal">Phi kim (Non-Metal)</div>
-                                <div class="preset" data-vi="Kim loại (Metal)" data-en="Metal">Kim loại (Metal)</div>
-                            </div>
-                        </div>
-                        <div class="ctrl">
-                            <label data-vi="Kích thước ảnh xuất" data-en="Texture Size">Kích thước ảnh xuất</label>
-                            <div class="dropdown">2048 px <span class="ar">▾</span></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mock-footer">
-                    <button class="gen-btn" data-vi="Tạo &amp; Áp dụng Vật liệu" data-en="Generate &amp; Apply Material">Tạo &amp; Áp dụng Vật liệu</button>
-                </div>
-            </div>
-
-            <p class="note" data-vi="① Trạng thái chưa nạp: Vùng dropzone nhận ảnh hoặc file zip nén. ② Trạng thái đã nạp: lưới 6 ô hiển thị chi tiết các map vật liệu. Nhấp vào các ô nhỏ dưới để phóng lớn xem chi tiết. Nhãn <b style='color:#4db6ac'>FOUND</b> = map có sẵn, <b style='color:#b48232'>GEN</b> = map tự sinh thông minh." data-en="① Empty state: Drag-drop zone receives images or zip files. ② Loaded state: 3x2 grid displays textures. Click thumbnails to preview. <b style='color:#4db6ac'>FOUND</b> = vendor map, <b style='color:#b48232'>GEN</b> = generated by offline algorithm.">
-            </p>
+        <!-- INTERFACE SHOWCASE -->
+    <section id="interface" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="GIAO DIỆN CÔNG CỤ" data-en="INTERFACE SHOWCASE">GIAO DIỆN CÔNG CỤ</div>
+        <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI"></h2>
+        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
+        
+        <div class="interface-container">
+            <img src="interface_magicmaterial.png" alt="Plugin Interface" style="width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         </div>
     </section>
 
@@ -699,9 +627,9 @@
     </footer>
 
     <!-- LANGUAGE SWITCH & INTERACTIVE MOCKUP JS -->
-    <script>
+        <script>
         let currentLang = 'vi';
-        
+
         function setLang(lang) {
             currentLang = lang;
             document.documentElement.lang = lang;
@@ -718,66 +646,9 @@
             });
         }
         
-        window.addEventListener('DOMContentLoaded', () => setLang('vi'));
-
-        // Mockup interactive script
-        const maps = [
-            {key:'sphere', name:'Material',     sw:'sw-sphere',  badge:null,    src_vi:'CGAxis · brick_wall_01 (.ah3prv)', src_en:'CGAxis · brick_wall_01 (.ah3prv)'},
-            {key:'diffuse',name:'Diffuse',      sw:'sw-diffuse', badge:'found', src_vi:'brick_wall_01_diffuse.jpg (Tìm thấy)', src_en:'brick_wall_01_diffuse.jpg (Found)'},
-            {key:'normal', name:'Normal',       sw:'sw-normal',  badge:'found', src_vi:'brick_wall_01_normal.jpg (Tìm thấy)', src_en:'brick_wall_01_normal.jpg (Found)'},
-            {key:'rough',  name:'Roughness',    sw:'sw-rough',   badge:'gen',   src_vi:'tự động tính toán (Độ nhám / Roughness)', src_en:'auto-calculated (Roughness)'},
-            {key:'ao',     name:'AO',           sw:'sw-ao',      badge:'gen',   src_vi:'tự động tính toán (Đổ bóng kẽ khuất / AO)', src_en:'auto-calculated (AO)'},
-            {key:'disp',   name:'Displacement', sw:'sw-disp',    badge:'gen',   src_vi:'tự động tính toán (Độ lồi lõm / Displacement)', src_en:'auto-calculated (Displacement)'},
-        ];
-
-        const thumbsEl = document.getElementById('thumbs');
-        const bigSwatch = document.getElementById('bigSwatch');
-        const bigLabel = document.getElementById('bigLabel');
-        const bigSrc = document.getElementById('bigSrc');
-
-        function renderThumbs() {
-            thumbsEl.innerHTML = '';
-            maps.forEach((m, i) => {
-                const t = document.createElement('div');
-                t.className = 'thumb' + (i === 0 ? ' active' : '');
-                t.onclick = () => selectMap(i);
-                const badge = m.badge ? `<span class="badge ${m.badge}">${m.badge.toUpperCase()}</span>` : '';
-                t.innerHTML = `<div class="sw ${m.sw}"></div>${badge}<span class="cap">${m.name}</span>`;
-                thumbsEl.appendChild(t);
-            });
-        }
-
-        function selectMap(i) {
-            document.querySelectorAll('.thumb').forEach((t, idx) => t.classList.toggle('active', idx === i));
-            bigSwatch.className = 'swatch ' + maps[i].sw;
-            bigLabel.textContent = maps[i].name;
-            bigSrc.textContent = currentLang === 'vi' ? maps[i].src_vi : maps[i].src_en;
-        }
-
-        function setState(s) {
-            const empty = s === 'empty';
-            document.getElementById('dropzone').classList.toggle('hidden', !empty);
-            document.getElementById('loadedView').classList.toggle('hidden', empty);
-            document.getElementById('btnEmpty').classList.toggle('active', empty);
-            document.getElementById('btnLoaded').classList.toggle('active', !empty);
-        }
-
-        renderThumbs();
-        setState('loaded');
-        
-        // Update big preview source description if lang changes
-        const oldSetLang = setLang;
-        setLang = function(lang) {
-            oldSetLang(lang);
-            // Re-select active map to refresh labels based on lang
-            const activeThumb = document.querySelector('.thumb.active');
-            if (activeThumb) {
-                const index = Array.from(thumbsEl.children).indexOf(activeThumb);
-                if (index !== -1) {
-                    selectMap(index);
-                }
-            }
-        };
+        window.addEventListener('DOMContentLoaded', () => {
+            setLang('vi');
+        });
     </script>
 </body>
 </html>

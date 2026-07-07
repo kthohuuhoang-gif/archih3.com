@@ -231,6 +231,20 @@
         .feature-card:nth-child(4) { animation-delay: 0.4s; }
         .feature-card:nth-child(5) { animation-delay: 0.5s; }
         .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    
+        /* INTERFACE CONTAINER RESPONSIVE */
+        .interface-container {
+            max-width: 800px; margin: 0 auto; padding: 24px;
+            background: var(--bg-main); border: 1px solid var(--border);
+            border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .interface-container {
+                padding: 10px !important;
+                border-radius: 10px !important;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -285,22 +299,29 @@
                 <div style="position:absolute; bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube">▶ Xem demo trên YouTube</div>
             </a>
         </div>
-        <script>
-            // Detect local file:// or iframe load failure → show thumbnail fallback
-            (function(){
-                var iframe = document.getElementById('yt-iframe');
-                var fallback = document.getElementById('yt-fallback');
-                if (window.location.protocol === 'file:') {
-                    iframe.style.display = 'none';
-                    fallback.style.display = 'block';
+            <script>
+        let currentLang = 'vi';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = text;
                 } else {
-                    iframe.onerror = function() {
-                        iframe.style.display = 'none';
-                        fallback.style.display = 'block';
-                    };
+                    el.innerHTML = text;
                 }
-            })();
-        </script>
+            });
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            setLang('vi');
+        });
+    </script>
     </div>
 
     <!-- FEATURES -->
@@ -350,47 +371,14 @@
     </section>
 
     <!-- WIND PHYSICS VISUALIZATION -->
-    <section id="wind-physics" style="background: var(--bg-main); border-top: 1px solid rgba(102, 187, 106, 0.1); border-bottom: 1px solid rgba(102, 187, 106, 0.1);">
-        <div class="section-label" data-vi="MÔ PHỎNG VẬT LÝ" data-en="PHYSICS SIMULATION">MÔ PHỎNG VẬT LÝ</div>
-        <h2 class="section-title" data-vi="Chuyển động gió ngẫu nhiên tự nhiên" data-en="Natural & Organic Wind Movement"></h2>
-        <p class="section-desc" data-vi="Biểu đồ trực quan cách Magic Tree mô phỏng cành lá đung đưa tự nhiên nhưng vẫn đảm bảo vòng lặp (loop) mượt mà cho các phần mềm render." data-en="Visual curves showing how Magic Tree creates organic randomized wind sways with loop-perfect rendering."></p>
-
-        <div class="physics-container" style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px;">
-            <!-- Chart 1: Sway Amplitude -->
-            <div class="physics-card" style="background: var(--bg-surface); border: 1px solid rgba(85,85,85,0.3); border-radius: 12px; padding: 24px; position: relative;">
-                <div style="margin-bottom: 16px;">
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: var(--primary); background: var(--primary-glow); padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px;">LOOP-PERFECT ✅</span>
-                    <h3 style="font-size: 18px; font-weight: 600; line-height: 1.3;" data-vi="Biên độ dao động (150f Loop)" data-en="Sway Amplitude (150f Loop)">Biên độ dao động (150f Loop)</h3>
-                </div>
-                <div style="position: relative; width: 100%; height: 220px; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
-                    <canvas id="swayCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%;"></canvas>
-                </div>
-                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-vi="Biên độ uốn của cành lá biến thiên liên tục qua từng chu kỳ để tránh cảm giác lặp lại máy móc, nhưng vẫn khớp điểm đầu - cuối tại đúng frame 150 để tạo video loop hoàn hảo." data-en="Leaf and branch sway amplitudes vary dynamically across cycles to prevent robotic patterns, while locking perfectly at frame 150 for seamless video loops."></p>
-            </div>
-
-            <!-- Chart 2: Direction Jitter -->
-            <div class="physics-card" style="background: var(--bg-surface); border: 1px solid rgba(85,85,85,0.3); border-radius: 12px; padding: 24px; position: relative;">
-                <div style="margin-bottom: 16px;">
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: var(--warning); background: rgba(239, 108, 0, 0.15); padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px;">TURBULENCE 🌪️</span>
-                    <h3 style="font-size: 18px; font-weight: 600; line-height: 1.3;" data-vi="Nhiễu động hướng gió" data-en="Wind Direction Jitter">Nhiễu động hướng gió</h3>
-                </div>
-                <div style="position: relative; width: 100%; height: 220px; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
-                    <canvas id="jitterCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%;"></canvas>
-                </div>
-                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-vi="Hướng gió biến động ngẫu nhiên giúp cành lá lay động sole tự nhiên. Thuật toán tự động xử lý khớp nối chu kỳ (Bake Range) để tránh hiện tượng giật khung hình khi lặp lại video." data-en="Wind directions shift organically for realistic sways. The algorithm handles range-blending behind the scenes to avoid any visual pops during video loops."></p>
-            </div>
-
-            <!-- Chart 3: Vogel Drag Reduction -->
-            <div class="physics-card" style="background: var(--bg-surface); border: 1px solid rgba(85,85,85,0.3); border-radius: 12px; padding: 24px; position: relative;">
-                <div style="margin-bottom: 16px;">
-                    <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: #a278ff; background: rgba(162, 120, 255, 0.15); padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px;">RECONFIGURATION 🍃</span>
-                    <h3 style="font-size: 18px; font-weight: 600; line-height: 1.3;" data-vi="Kháng cản khí động học" data-en="Aerodynamic Drag">Kháng cản khí động học</h3>
-                </div>
-                <div style="position: relative; width: 100%; height: 220px; background: #121212; border-radius: 8px; border: 1px solid var(--border); overflow: hidden;">
-                    <canvas id="dragCanvas" style="position: absolute; inset: 0; width: 100%; height: 100%;"></canvas>
-                </div>
-                <p style="font-size: 13px; color: var(--text-secondary); margin-top: 12px; line-height: 1.6;" data-vi="Đường nét đứt màu đỏ thể hiện lực cản vật thể cứng (tăng theo hàm mũ 2). Đường màu xanh lá là Magic Tree: lá tự co cụm bóp nhỏ tán dưới gió to để giảm cản gió tới 60%, bảo vệ mô hình khỏi biến dạng quá đà." data-en="Dashed red line represents rigid body drag (exponential increase). Solid green line shows Magic Tree: foliage streamlines under wind to reduce drag by up to 60%, preventing unnatural mesh distortion."></p>
-            </div>
+        <!-- INTERFACE SHOWCASE -->
+    <section id="interface" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="GIAO DIỆN CÔNG CỤ" data-en="INTERFACE SHOWCASE">GIAO DIỆN CÔNG CỤ</div>
+        <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI"></h2>
+        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
+        
+        <div class="interface-container">
+            <img src="interface_magictree.png" alt="Plugin Interface" style="width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         </div>
     </section>
 
@@ -526,379 +514,8 @@
     </footer>
 
     <!-- LANGUAGE SWITCH & WIND CHART JS -->
-    <script>
+        <script>
         let currentLang = 'vi';
-        
-        function drawSwayChart() {
-            const canvas = document.getElementById('swayCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            
-            const dpr = window.devicePixelRatio || 1;
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width * dpr;
-            canvas.height = rect.height * dpr;
-            ctx.scale(dpr, dpr);
-            
-            const w = rect.width;
-            const h = rect.height;
-            
-            const padLeft = 40;
-            const padRight = 20;
-            const padTop = 25;
-            const padBottom = 32;
-            
-            const chartW = w - padLeft - padRight;
-            const chartH = h - padTop - padBottom;
-            
-            ctx.clearRect(0, 0, w, h);
-            
-            // Grid lines and style settings
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-            ctx.lineWidth = 1;
-            ctx.fillStyle = '#888888';
-            ctx.font = '10px "JetBrains Mono", monospace';
-            ctx.textAlign = 'right';
-            ctx.textBaseline = 'middle';
-            
-            // Y Grid & Labels (-0.1 to 1.1)
-            const yLines = [-0.1, 0.2, 0.4, 0.6, 0.8, 1.1];
-            yLines.forEach(val => {
-                const yRatio = (val - (-0.1)) / 1.2;
-                const y = padTop + chartH - yRatio * chartH;
-                
-                ctx.beginPath();
-                ctx.moveTo(padLeft, y);
-                ctx.lineTo(w - padRight, y);
-                ctx.stroke();
-                
-                ctx.fillText(val.toFixed(1), padLeft - 8, y);
-            });
-            
-            // X Grid & Labels (0 to 150 Frames)
-            const xLines = [0, 25, 50, 75, 100, 125, 150];
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-            xLines.forEach(val => {
-                const xRatio = val / 150;
-                const x = padLeft + xRatio * chartW;
-                
-                ctx.beginPath();
-                ctx.moveTo(x, padTop);
-                ctx.lineTo(x, padTop + chartH);
-                ctx.stroke();
-                
-                ctx.fillText(val, x, padTop + chartH + 6);
-            });
-            
-            // Y-Axis Title (Horizontal at top-left)
-            ctx.textAlign = 'left';
-            ctx.textBaseline = 'bottom';
-            ctx.fillStyle = '#aaaaaa';
-            ctx.font = '11px "JetBrains Mono", monospace';
-            const labelAmp = currentLang === 'vi' ? 'Biên độ' : 'Amplitude';
-            ctx.fillText(labelAmp, padLeft, padTop - 6);
-            
-            // X-Axis Title
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-            ctx.fillStyle = '#888888';
-            ctx.font = '10px "JetBrains Mono", monospace';
-            ctx.fillText('Frame', padLeft + chartW / 2, padTop + chartH + 18);
-            
-            // Reference Envelope (Dashed Line)
-            ctx.beginPath();
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
-            ctx.lineWidth = 1.2;
-            ctx.setLineDash([4, 4]);
-            for (let f = 0; f <= 150; f++) {
-                const xRatio = f / 150;
-                const x = padLeft + xRatio * chartW;
-                
-                const baseAmp = 0.42 + 0.12 * Math.cos(2 * Math.PI * xRatio) + 0.08 * Math.sin(4 * Math.PI * xRatio);
-                const offset = 0.42 + 0.05 * Math.sin(2 * Math.PI * xRatio);
-                const valUpper = baseAmp * 1.1 + offset;
-                
-                const yRatio = (valUpper - (-0.1)) / 1.2;
-                const y = padTop + chartH - yRatio * chartH;
-                
-                if (f === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-            
-            // Solid Sway Wave (Green)
-            ctx.beginPath();
-            ctx.strokeStyle = '#66bb6a';
-            ctx.lineWidth = 2.2;
-            ctx.setLineDash([]);
-            ctx.shadowColor = 'rgba(102, 187, 106, 0.4)';
-            ctx.shadowBlur = 6;
-            
-            for (let f = 0; f <= 150; f++) {
-                const xRatio = f / 150;
-                const x = padLeft + xRatio * chartW;
-                
-                const baseSin = Math.sin(2 * Math.PI * 4.2 * xRatio + Math.PI / 4);
-                const ampMod = 0.42 + 0.12 * Math.cos(2 * Math.PI * xRatio) + 0.08 * Math.sin(4 * Math.PI * xRatio);
-                const offset = 0.42 + 0.05 * Math.sin(2 * Math.PI * xRatio);
-                const val = baseSin * ampMod + offset;
-                
-                const yRatio = (val - (-0.1)) / 1.2;
-                const y = padTop + chartH - yRatio * chartH;
-                
-                if (f === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
-        }
-        
-        function drawJitterChart() {
-            const canvas = document.getElementById('jitterCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            
-            const dpr = window.devicePixelRatio || 1;
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width * dpr;
-            canvas.height = rect.height * dpr;
-            ctx.scale(dpr, dpr);
-            
-            const w = rect.width;
-            const h = rect.height;
-            
-            const padLeft = 40;
-            const padRight = 20;
-            const padTop = 25;
-            const padBottom = 32;
-            
-            const chartW = w - padLeft - padRight;
-            const chartH = h - padTop - padBottom;
-            
-            ctx.clearRect(0, 0, w, h);
-            
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-            ctx.lineWidth = 1;
-            ctx.fillStyle = '#888888';
-            ctx.font = '10px "JetBrains Mono", monospace';
-            ctx.textAlign = 'right';
-            ctx.textBaseline = 'middle';
-            
-            // Y Grid & Labels (-6deg to 6deg)
-            const yLines = [-6, -4, -2, 0, 2, 4, 6];
-            yLines.forEach(val => {
-                const yRatio = (val - (-6)) / 12;
-                const y = padTop + chartH - yRatio * chartH;
-                
-                ctx.beginPath();
-                ctx.moveTo(padLeft, y);
-                ctx.lineTo(w - padRight, y);
-                ctx.stroke();
-                
-                ctx.fillText(val + '°', padLeft - 8, y);
-            });
-            
-            // X Grid & Labels (0 to 16)
-            const xLines = [0, 2, 4, 6, 8, 10, 12, 14, 16];
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-            xLines.forEach(val => {
-                const xRatio = val / 16;
-                const x = padLeft + xRatio * chartW;
-                
-                ctx.beginPath();
-                ctx.moveTo(x, padTop);
-                ctx.lineTo(x, padTop + chartH);
-                ctx.stroke();
-                
-                ctx.fillText(val, x, padTop + chartH + 6);
-            });
-            
-            // Y-Axis Title (Horizontal at top-left)
-            ctx.textAlign = 'left';
-            ctx.textBaseline = 'bottom';
-            ctx.fillStyle = '#aaaaaa';
-            ctx.font = '11px "JetBrains Mono", monospace';
-            const labelDeviation = currentLang === 'vi' ? 'Lệch hướng (độ)' : 'Deviation (deg)';
-            ctx.fillText(labelDeviation, padLeft, padTop - 6);
-            
-            // X-Axis Title
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-            ctx.fillStyle = '#888888';
-            ctx.font = '10px "JetBrains Mono", monospace';
-            const labelTime = currentLang === 'vi' ? 'Thời gian (giây)' : 'Time (seconds)';
-            ctx.fillText(labelTime, padLeft + chartW / 2, padTop + chartH + 18);
-            
-            function getJitterVal(t) {
-                return 2.2 * Math.sin(0.42 * t - 0.5) + 1.4 * Math.cos(0.85 * t + 0.8) + 0.5 * Math.sin(1.8 * t + 1.5);
-            }
-            
-            function getYCoord(val) {
-                const yRatio = (val - (-6)) / 12;
-                return padTop + chartH - yRatio * chartH;
-            }
-            
-            // Blue Line (Infinite Turbulence)
-            ctx.beginPath();
-            ctx.strokeStyle = '#29b6f6';
-            ctx.lineWidth = 1.8;
-            ctx.shadowColor = 'rgba(41, 182, 246, 0.3)';
-            ctx.shadowBlur = 4;
-            
-            for (let t = 0; t <= 16; t += 0.1) {
-                const x = padLeft + (t / 16) * chartW;
-                const y = getYCoord(getJitterVal(t));
-                if (t === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
-            
-            // Orange Line (5-second baked loop)
-            ctx.beginPath();
-            ctx.strokeStyle = '#ef6c00';
-            ctx.lineWidth = 2.2;
-            ctx.shadowColor = 'rgba(239, 108, 0, 0.4)';
-            ctx.shadowBlur = 6;
-            
-            const startVal = getJitterVal(0);
-            for (let t = 0; t <= 5; t += 0.1) {
-                const x = padLeft + (t / 16) * chartW;
-                let val = getJitterVal(t);
-                
-                // Blend smoothly back to startVal towards the 5s mark
-                if (t > 3.0) {
-                    const blendRatio = (t - 3.0) / 2.0;
-                    const tSmooth = blendRatio * blendRatio * (3 - 2 * blendRatio);
-                    val = val * (1 - tSmooth) + startVal * tSmooth;
-                }
-                
-                const y = getYCoord(val);
-                if (t === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
-        }
-
-        function drawDragChart() {
-            const canvas = document.getElementById('dragCanvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            
-            const dpr = window.devicePixelRatio || 1;
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width * dpr;
-            canvas.height = rect.height * dpr;
-            ctx.scale(dpr, dpr);
-            
-            const w = rect.width;
-            const h = rect.height;
-            
-            const padLeft = 40;
-            const padRight = 20;
-            const padTop = 25;
-            const padBottom = 32;
-            
-            const chartW = w - padLeft - padRight;
-            const chartH = h - padTop - padBottom;
-            
-            ctx.clearRect(0, 0, w, h);
-            
-            ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-            ctx.lineWidth = 1;
-            ctx.fillStyle = '#888888';
-            ctx.font = '10px "JetBrains Mono", monospace';
-            ctx.textAlign = 'right';
-            ctx.textBaseline = 'middle';
-            
-            // Y Grid & Labels (0.0 to 1.0)
-            const yLines = [0.0, 0.2, 0.4, 0.6, 0.8, 1.0];
-            yLines.forEach(val => {
-                const y = padTop + chartH - val * chartH;
-                
-                ctx.beginPath();
-                ctx.moveTo(padLeft, y);
-                ctx.lineTo(w - padRight, y);
-                ctx.stroke();
-                
-                ctx.fillText(val.toFixed(1), padLeft - 8, y);
-            });
-            
-            // X Grid & Labels (0 to 30)
-            const xLines = [0, 5, 10, 15, 20, 25, 30];
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-            xLines.forEach(val => {
-                const xRatio = val / 30;
-                const x = padLeft + xRatio * chartW;
-                
-                ctx.beginPath();
-                ctx.moveTo(x, padTop);
-                ctx.lineTo(x, padTop + chartH);
-                ctx.stroke();
-                
-                ctx.fillText(val, x, padTop + chartH + 6);
-            });
-            
-            // Y-Axis Title (Horizontal at top-left)
-            ctx.textAlign = 'left';
-            ctx.textBaseline = 'bottom';
-            ctx.fillStyle = '#aaaaaa';
-            ctx.font = '11px "JetBrains Mono", monospace';
-            const labelDrag = currentLang === 'vi' ? 'Lực cản khí động' : 'Aerodynamic Drag';
-            ctx.fillText(labelDrag, padLeft, padTop - 6);
-            
-            // X-Axis Title
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-            ctx.fillStyle = '#888888';
-            ctx.font = '10px "JetBrains Mono", monospace';
-            const labelSpeed = currentLang === 'vi' ? 'Tốc độ gió (m/s)' : 'Wind Speed (m/s)';
-            ctx.fillText(labelSpeed, padLeft + chartW / 2, padTop + chartH + 18);
-            
-            // Red Line (Rigid object drag proportional to V^2)
-            ctx.beginPath();
-            ctx.strokeStyle = '#ef5350';
-            ctx.lineWidth = 1.5;
-            ctx.setLineDash([3, 3]);
-            for (let v = 0; v <= 30; v += 0.5) {
-                const xRatio = v / 30;
-                const x = padLeft + xRatio * chartW;
-                const dragVal = Math.pow(xRatio, 2);
-                const y = padTop + chartH - dragVal * chartH;
-                
-                if (v === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-            ctx.setLineDash([]);
-            
-            // Green Line (Flexible Reconfiguration proportional to V^1.3)
-            ctx.beginPath();
-            ctx.strokeStyle = '#66bb6a';
-            ctx.lineWidth = 2.2;
-            ctx.shadowColor = 'rgba(102, 187, 106, 0.4)';
-            ctx.shadowBlur = 6;
-            
-            for (let v = 0; v <= 30; v += 0.5) {
-                const xRatio = v / 30;
-                const x = padLeft + xRatio * chartW;
-                const dragVal = Math.pow(xRatio, 1.3) * 0.72;
-                const y = padTop + chartH - dragVal * chartH;
-                
-                if (v === 0) ctx.moveTo(x, y);
-                else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
-            ctx.shadowColor = 'transparent';
-            ctx.shadowBlur = 0;
-        }
 
         function setLang(lang) {
             currentLang = lang;
@@ -914,21 +531,10 @@
                     el.innerHTML = text;
                 }
             });
-            
-            // Redraw charts with correct translations
-            drawSwayChart();
-            drawJitterChart();
-            drawDragChart();
         }
         
         window.addEventListener('DOMContentLoaded', () => {
             setLang('vi');
-        });
-        
-        window.addEventListener('resize', () => {
-            drawSwayChart();
-            drawJitterChart();
-            drawDragChart();
         });
     </script>
 </body>
