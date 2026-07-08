@@ -9,3 +9,9 @@ desktop.ini
 node_modules/
 .vscode/
 .idea/
+
+
+# Python development scripts and notes
+*.py
+*.txt
+
