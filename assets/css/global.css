@@ -21,7 +21,7 @@
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
-    overflow-x: hidden;
+    overflow-x: clip;
     width: 100%;
 }
 body {
@@ -29,7 +29,7 @@ body {
     background: var(--bg-page);
     color: var(--text);
     line-height: 1.7;
-    overflow-x: hidden;
+    overflow-x: clip;
     width: 100%;
     max-width: 100%;
     position: relative;
@@ -43,12 +43,12 @@ body {
     pointer-events: none; z-index: -1;
 }
 .bg-grid {
-    content: ''; position: absolute; inset: 0;
-    background-image:
-        linear-gradient(rgba(77,182,172,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(77,182,172,0.02) 1px, transparent 1px);
-    background-size: 50px 50px; pointer-events: none; z-index: -1;
-}
+      content: ''; position: absolute; inset: 0;
+      background-image:
+          linear-gradient(rgba(77,182,172,0.02) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(77,182,172,0.02) 1px, transparent 1px);
+      background-size: 50px 50px; pointer-events: none; z-index: -1;
+  }
 
 /* NAV */
 nav {
@@ -140,3 +140,45 @@ footer a { color: var(--primary); text-decoration: none; }
     }
     .nav-links.open { display: flex !important; }
 }
+
+/* ANTI THEFT */
+body { -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; }
+input, textarea { user-select: auto; -webkit-user-select: auto; }
+
+/* BLUEPRINT ANCHORS FOR CTA BUTTONS */
+.cta-wrapper {
+    position: relative;
+    display: inline-block;
+}
+.bp-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--hover-border, var(--primary));
+    border-radius: 0 !important; /* Square dots */
+    opacity: 0.6;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
+    pointer-events: none;
+}
+.bp-dot.tl { top: -3px; left: -3px; }
+.bp-dot.tr { top: -3px; right: -3px; }
+.bp-dot.bl { bottom: -3px; left: -3px; }
+.bp-dot.br { bottom: -3px; right: -3px; }
+
+.cta-wrapper:hover .bp-dot {
+    opacity: 1;
+    transform: scale(1.4);
+    background: #fff !important; /* Intense white glow on hover */
+}
+
+/* TEAL TEXT HIGHLIGHT FOR EXCLUSIVE PRO FEATURES */
+.highlight-teal {
+    display: inline !important;
+    background: rgba(77, 182, 172, 0.15);
+    color: var(--primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+

@@ -284,8 +284,8 @@
             gap: 20px; max-width: 1100px; margin: 0 auto;
         }
         .feature-card {
-            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
-            border-radius: 12px; padding: 32px;
+            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            border-radius: 12px !important; padding: 32px;
             transition: all 0.3s; position: relative; overflow: hidden;
             text-align: left;
         }
@@ -334,8 +334,8 @@
             gap: 24px; margin-top: 40px;
         }
         .price-card {
-            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4);
-            border-radius: 16px; padding: 48px 32px;
+            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            border-radius: 12px !important; padding: 48px 32px;
             text-align: center; position: relative;
             display: flex; flex-direction: column; justify-content: space-between;
         }
@@ -424,8 +424,8 @@
         /* INTERFACE CONTAINER RESPONSIVE */
         .interface-container {
             max-width: 800px; margin: 0 auto; padding: 24px;
-            background: var(--bg-main); border: 1px solid var(--border);
-            border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            border-radius: 12px !important; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
         @media (max-width: 768px) {
             .interface-container {
@@ -593,11 +593,14 @@
                             <li data-vi="<b>Magic ReBake</b> — Tối ưu hóa lưới Quad &amp; Bake map vật liệu" data-en="<b>Magic ReBake</b> — Quad retopology &amp; texture bake transfer"></li>
                             <li data-vi="<b>Magic Merger</b> — Batch import model 3D &amp; Smart Relink map" data-en="<b>Magic Merger</b> — Batch merge models &amp; smart texture relinking"></li>
                             <li data-vi="<b>Magic Material</b> — Tự động tạo map PBR 1-Click offline" data-en="<b>Magic Material</b> — 1-click offline PBR material generator"></li>
-                            <li data-vi="Tương thích 3ds Max 2022-2027+, hỗ trợ Corona / V-Ray" data-en="Supports 3ds Max 2022-2027+, Corona / V-Ray engine ready"></li>
+                            <li data-vi="Tương thích 3ds Max 2023-2027+, hỗ trợ Corona / V-Ray" data-en="Supports 3ds Max 2023-2027+, Corona / V-Ray engine ready"></li>
                             <li data-vi="Nhận các bản cập nhật mới miễn phí trọn đời" data-en="Lifetime free updates &amp; developer support"></li>
                         </ul>
                     </div>
-                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center; margin-top:20px;" data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
+                    <div class="cta-wrapper" style="position: relative; display: block; width: 100%; margin-top: 20px;">
+                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center;" data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
+                        <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
+                    </div>
                 </div>
             </div>
         </div>

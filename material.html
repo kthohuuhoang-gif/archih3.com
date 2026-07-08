@@ -119,7 +119,7 @@
 
         .app-window {
             width: 100%; max-width: 780px; background: var(--bg-page); border-radius: 12px; overflow: hidden;
-            border: 1px solid #000; box-shadow: 0 10px 40px rgba(0,0,0,.5);
+            border: 1px dashed rgba(255,255,255,0.15) !important; box-shadow: 0 10px 40px rgba(0,0,0,.5);
         }
 
         /* Mockup Header */
@@ -805,11 +805,14 @@
                             <li data-vi="Giấy phép trọn đời cho <b>CẢ HAI</b> plugin độc lập" data-en="Lifetime keys for <b>BOTH</b> standalone plugins"></li>
                             <li data-vi="Magic Material — tạo map PBR offline 1-click" data-en="Magic Material — 1-click offline PBR generator"></li>
                             <li data-vi="Magic Merger — batch merge và smart-relink texture" data-en="Magic Merger — batch merge &amp; smart texture relinker"></li>
-                            <li data-vi="Tương thích 3ds Max 2022-2027+, render Corona / V-Ray" data-en="Supports 3ds Max 2022-2027+, Corona / V-Ray renderers"></li>
+                            <li data-vi="Tương thích 3ds Max 2023-2027+, render Corona / V-Ray" data-en="Supports 3ds Max 2023-2027+, Corona / V-Ray renderers"></li>
                             <li data-vi="Cập nhật miễn phí trọn đời và hỗ trợ ưu tiên" data-en="Lifetime free updates &amp; priority developer support"></li>
                         </ul>
                     </div>
-                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center; margin-top:20px;" data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
+                    <div class="cta-wrapper" style="position: relative; display: block; width: 100%; margin-top: 20px;">
+                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center;" data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
+                        <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -818,9 +821,9 @@
     
     <!-- TUTORIAL / VIDEO -->
     <section id="workflow" style="background: var(--bg-surface);">
-        <div class="section-label" data-vi="HU?NG D?N S? D?NG" data-en="TUTORIAL">HU?NG D?N S? D?NG</div>
-        <h2 class="section-title" data-vi="Chi ti?t c�ch d�ng Magic Material" data-en="How to use Magic Material"></h2>
-        <p class="section-desc" data-vi="Video hu?ng d?n chi ti?t c�ch t?o v� g�n v?t li?u t? d?ng trong 3ds Max." data-en="Detailed video tutorial on generating and assigning PBR materials automatically in 3ds Max."></p>
+        <div class="section-label" data-vi="HƯỚNG DẪN SỬ DỤNG" data-en="TUTORIAL">HƯỚNG DẪN SỬ DỤNG</div>
+        <h2 class="section-title" data-vi="Chi tiết cách dùng Magic Material" data-en="How to use Magic Material"></h2>
+        <p class="section-desc" data-vi="Video hướng dẫn chi tiết cách tạo và gán vật liệu tự động trong 3ds Max." data-en="Detailed video tutorial on generating and assigning PBR materials automatically in 3ds Max."></p>
         
         <div class="video-section" style="margin-top: 40px; border-radius: 12px; overflow: hidden; max-width: 1000px; margin-left: auto; margin-right: auto; position: relative;">
             <div class="video-box" id="featured-video">
@@ -849,7 +852,7 @@
             <div class="faq-grid">
                 <div class="faq-item">
                     <h3 data-vi="Plugin tương thích với những trình render và phiên bản 3ds Max nào?" data-en="Which 3ds Max versions and renderers are supported?"></h3>
-                    <p data-vi="Magic Material được tối ưu hóa và tương thích hoàn toàn với các phiên bản 3ds Max từ 2022 đến 2027+. Plugin tự động cấu hình và thiết lập mạng lưới node vật liệu chuẩn xác cho cả Corona Renderer (CoronaPhysicalMtl) và V-Ray (VRayMtl) dựa trên thiết lập render hiện tại của bạn." data-en="Magic Material is fully compatible with 3ds Max 2022 up to 2027+. The plugin auto-detects and sets up material networks for both Corona Renderer (CoronaPhysicalMtl) and V-Ray (VRayMtl) based on your active renderer."></p>
+                    <p data-vi="Magic Material được tối ưu hóa và tương thích hoàn toàn với các phiên bản 3ds Max từ 2023 đến 2027+. Plugin tự động cấu hình và thiết lập mạng lưới node vật liệu chuẩn xác cho cả Corona Renderer (CoronaPhysicalMtl) và V-Ray (VRayMtl) dựa trên thiết lập render hiện tại của bạn." data-en="Magic Material is fully compatible with 3ds Max 2023 up to 2027+. The plugin auto-detects and sets up material networks for both Corona Renderer (CoronaPhysicalMtl) and V-Ray (VRayMtl) based on your active renderer."></p>
                 </div>
                 <div class="faq-item">
                     <h3 data-vi="Tôi có thể kéo thả những loại file nào vào plugin?" data-en="What files can I drag and drop into the plugin?"></h3>
