@@ -99,6 +99,15 @@ nav {
     padding: 8px;
     z-index: 1000;
 }
+.nav-dropdown-content::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background: transparent;
+}
 .nav-dropdown-wrapper:hover .nav-dropdown-content {
     display: flex;
     flex-direction: column;
