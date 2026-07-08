@@ -1,0 +1,1159 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="AH3 Magic Material - Standalone Offline PBR Material Generator for 3ds Max">
+<Fragment slot="head">
+<style>
+
+        
+
+        
+
+        
+
+        
+
+        /* BUTTONS */
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: var(--primary);
+            color: #121212; font-weight: 600; font-size: 14px;
+            border: none; border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover); transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(77, 182, 172, 0.3);
+        }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: transparent;
+            color: var(--text); font-weight: 400; font-size: 14px;
+            border: 1px solid var(--border); border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* HERO */
+        .hero {
+            padding: 140px 24px 60px;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; position: relative;
+        }
+        .hero-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; color: var(--primary);
+            border: 1px solid rgba(77,182,172,0.3);
+            padding: 6px 16px; border-radius: 20px;
+            margin-bottom: 24px; background: var(--primary-glow); letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+            line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px;
+        }
+        .hero h1 .teal { color: var(--primary); }
+        .hero-sub {
+            font-size: 18px; color: var(--text-secondary);
+            max-width: 680px; margin: 0 auto 32px; font-weight: 300;
+        }
+        .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* VIDEO CONTAINER */
+        .video-section {
+            max-width: 800px; margin: 0 auto 80px; padding: 0 24px;
+        }
+        .video-box {
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(77,182,172,0.2); background: #000;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5); aspect-ratio: 16/9;
+            position: relative;
+        }
+
+        /* SECTIONS */
+        section { padding: 80px 24px; }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            color: var(--primary); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 12px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px); font-weight: 700;
+            letter-spacing: -1px; margin-bottom: 16px; text-align: center;
+        }
+        .section-desc {
+            font-size: 16px; color: var(--text-secondary);
+            max-width: 600px; font-weight: 300; margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        /* INTERACTIVE DEMO CONTAINER */
+        .interactive-section {
+            background: var(--bg-dark);
+            border-top: 1px solid rgba(77, 182, 172, 0.1);
+            border-bottom: 1px solid rgba(77, 182, 172, 0.1);
+        }
+        .app-demo-wrapper {
+            max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px;
+        }
+        .demo-bar {
+            display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+            background: #0d0d0d; padding: 10px 14px; border-radius: 8px; border: 1px solid #2a2a2a;
+        }
+        .demo-bar span { color: var(--text-secondary); font-size: 12px; margin-right: 4px; }
+        .demo-btn {
+            background: var(--bg-light); color: var(--text); border: 1px solid var(--border);
+            padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; transition: all 0.2s;
+        }
+        .demo-btn:hover { background: #484848; }
+        .demo-btn.active { background: var(--primary); color: var(--teal-deep); border-color: var(--primary); font-weight: 600; }
+
+        .app-window {
+            width: 100%; max-width: 780px; background: var(--bg-page); border-radius: 12px; overflow: hidden;
+            border: 1px dashed rgba(255,255,255,0.15) !important; box-shadow: 0 10px 40px rgba(0,0,0,.5);
+        }
+
+        /* Mockup Header */
+        .mock-header {
+            padding: 16px 22px; background: linear-gradient(135deg,#242424,#191919);
+            border-bottom: 1px solid var(--border); position: relative;
+        }
+        .mock-header .accentbar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--primary); }
+        .mock-header .arch { font-size: 10.5px; font-weight: 800; letter-spacing: 3px; color: var(--primary); text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+        .mock-header .name { font-size: 25px; font-weight: 300; letter-spacing: .5px; margin-top: 2px; }
+        .mock-header .name b { font-weight: 700; }
+        .mock-header .meta { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); text-align: right; font-size: 10.5px; color: var(--text-secondary); line-height: 1.7; }
+        .mock-header .meta b { color: var(--text); }
+
+        .mock-body { display: flex; border-bottom: 1px solid var(--border); }
+        .mock-left { flex: 1.15; padding: 16px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--border); }
+        .mock-right { width: 300px; padding: 16px; display: flex; flex-direction: column; gap: 12px; background: #202020; }
+
+        /* big preview */
+        .preview-big {
+            height: 296px; border-radius: 10px; background: radial-gradient(circle at 50% 40%,#3a3a3a,#202020);
+            border: 1px solid var(--border); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+        }
+        .preview-big .swatch { width: 100%; height: 100%; }
+        .preview-big .lbl {
+            position: absolute; left: 12px; top: 10px; font-size: 12px; font-weight: 600;
+            background: rgba(0,0,0,.65); padding: 4px 10px; border-radius: 5px; color: var(--primary);
+        }
+        .preview-big .src {
+            position: absolute; right: 12px; bottom: 10px; font-size: 10.5px; color: var(--text-secondary);
+            background: rgba(0,0,0,.5); padding: 3px 9px; border-radius: 5px;
+        }
+
+        /* dropzone */
+        .dropzone {
+            flex: 1; min-height: 424px; border: 2px dashed var(--primary); border-radius: 12px;
+            background: rgba(77,182,172,.03); display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 16px; text-align: center; cursor: pointer; transition: .2s;
+        }
+        .dropzone:hover { background: rgba(77,182,172,.07); }
+        .dropzone .ic { font-size: 46px; opacity: .55; }
+        .dropzone h2 { font-size: 18px; }
+        .dropzone p { font-size: 12.5px; color: var(--text-secondary); max-width: 330px; line-height: 1.6; }
+        .dropzone .types { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
+        .dropzone .types span {
+            font-size: 10.5px; padding: 3px 9px; border-radius: 11px; background: var(--bg-surface);
+            color: var(--text-secondary); border: 1px solid var(--border);
+        }
+
+        /* thumbnails 3x2 */
+        .thumbs { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+        .thumb {
+            aspect-ratio: 1/1; border-radius: 8px; overflow: hidden; cursor: pointer;
+            border: 2px solid transparent; position: relative; background: var(--bg-surface); transition: .15s;
+        }
+        .thumb:hover { transform: translateY(-2px); }
+        .thumb.active { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+        .thumb .sw { width: 100%; height: 100%; }
+        .thumb .cap {
+            position: absolute; bottom: 0; left: 0; right: 0; font-size: 10.5px; text-align: center;
+            background: linear-gradient(transparent,rgba(0,0,0,.85)); color:#fff; padding: 9px 2px 3px; font-weight: 500;
+        }
+        .thumb .badge { position: absolute; top: 4px; right: 4px; font-size: 8.5px; padding: 1px 5px; border-radius: 3px; font-weight: 700; }
+        .badge.found { background: var(--primary); color: var(--teal-deep); }
+        .badge.gen { background: var(--amber); color: #1c1306; }
+
+        /* swatches gia lap */
+        .sw-sphere { background: radial-gradient(circle at 37% 28%, #eaeaea, #b0b0b0 22%, #6e6e6e 50%, #2c2c2c 78%, #141414); }
+        .sw-diffuse { background: repeating-linear-gradient(0deg,#7a4a32 0 13px,#693c27 13px 15px),repeating-linear-gradient(90deg,transparent 0 26px,#56331f 26px 28px); }
+        .sw-normal { background: #8a8fd8; background-image: radial-gradient(circle at 30% 30%,#9fa0ea,transparent 42%),radial-gradient(circle at 72% 70%,#6f7ad0,transparent 42%); }
+        .sw-rough { background: repeating-radial-gradient(circle at 50% 50%,#9a9a9a 0 3px,#767676 3px 7px); }
+        .sw-ao { background: radial-gradient(circle at 50% 42%,#d4d4d4,#4f4f4f 82%); }
+        .sw-disp { background: linear-gradient(135deg,#c4c4c4,#3e3e3e); }
+
+        /* right controls */
+        .mock-right h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; border-bottom: 1px solid var(--border); padding-bottom: 8px; color: var(--primary); }
+        .ctrl { margin-bottom: 10px; }
+        .ctrl label { display: block; font-size: 11px; color: var(--text-secondary); margin-bottom: 3px; }
+        .row { display: flex; align-items: center; gap: 8px; }
+        .slider { flex: 1; height: 4px; border-radius: 3px; background: var(--bg-surface); position: relative; }
+        .slider .fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--primary); border-radius: 3px; }
+        .slider .knob { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--primary); border: 2px solid #202020; }
+        .num { width: 48px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; color: var(--text); padding: 3px 4px; font-size: 11px; text-align: center; }
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-bottom: 10px; }
+        .toggle { width: 36px; height: 18px; border-radius: 9px; background: var(--primary); position: relative; cursor: pointer; transition: background 0.15s; }
+        .toggle.off { background: #555; }
+        .toggle .dot { position: absolute; top: 2px; left: 20px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: left 0.15s; }
+        .toggle.off .dot { left: 2px; }
+        .presets { display: flex; gap: 6px; }
+        .preset { flex: 1; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 5px; padding: 5px; font-size: 11px; text-align: center; cursor: pointer; }
+        .preset.on { border-color: var(--primary); color: var(--primary); background: rgba(77, 182, 172, 0.05); }
+        .preset:hover { background: #3a3a3a; }
+        .dropdown { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; font-size: 11px; color: var(--text); display: flex; justify-content: space-between; cursor: pointer; width: 100%; }
+        .dropdown .ar { color: var(--text-secondary); }
+        .divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+        .mock-footer { padding: 12px 16px; background: #191919; }
+        .gen-btn {
+            width: 100%; padding: 12px; border: none; border-radius: 6px; cursor: pointer;
+            background: linear-gradient(135deg,var(--primary),var(--primary-hover)); color: var(--teal-deep);
+            font-size: 14px; font-weight: 700; letter-spacing: .3px; box-shadow: 0 4px 14px rgba(77,182,172,.2);
+            transition: all 0.2s;
+        }
+        .gen-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+        .hidden { display: none !important; }
+        .note { font-size: 12px; color: var(--text-secondary); max-width: 780px; text-align: center; line-height: 1.6; margin-top: 14px; }
+        .note b { color: var(--primary); }
+
+        /* FEATURES */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; max-width: 1100px; margin: 0 auto;
+        }
+        .feature-card {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            border-radius: 12px; padding: 32px;
+            transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .feature-card:hover {
+            border-color: rgba(77,182,172,0.3); transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: var(--primary-glow); border: 1px solid rgba(77,182,172,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; margin-bottom: 20px;
+        }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 15px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        /* STEPS / WORKFLOW */
+        .steps-section {
+            background: var(--bg-main);
+        }
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px; max-width: 900px; margin: 0 auto;
+        }
+        .step-item {
+            text-align: center; position: relative;
+        }
+        .step-num {
+            font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700;
+            color: var(--primary); margin-bottom: 12px; opacity: 0.8;
+        }
+        .step-item h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .step-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; }
+
+        /* PRICING */
+        .pricing-section { max-width: 900px; margin: 0 auto; }
+        .pricing-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 24px; margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+            .mock-header .meta {
+                position: static !important;
+                transform: none !important;
+                text-align: left !important;
+                margin-top: 8px !important;
+            }
+            .mock-body {
+                flex-direction: column !important;
+            }
+            .mock-left {
+                border-right: none !important;
+                border-bottom: 1px solid var(--border) !important;
+            }
+            .mock-right {
+                width: 100% !important;
+            }
+        }
+        .price-card {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4);
+            border-radius: 16px; padding: 48px 32px;
+            text-align: center; position: relative;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .price-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--bg-main), rgba(77, 182, 172, 0.05));
+        }
+        .price-card.featured::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 4px; background: var(--primary); border-radius: 16px 16px 0 0;
+        }
+        .price-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; padding: 4px 12px; border-radius: 12px;
+            margin-bottom: 20px; letter-spacing: 0.5px;
+            background: var(--primary-glow); color: var(--primary);
+            font-weight: 600;
+        }
+        .price-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+        .price-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 36px; font-weight: 600; color: var(--primary);
+            margin-bottom: 4px; display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .price-amount del { font-size: 18px; color: var(--text-secondary); font-weight: 400; }
+        .price-amount span { font-size: 14px; font-weight: 400; color: var(--text-secondary); }
+        .price-period { font-size: 13px; color: var(--warning); margin-bottom: 32px; font-weight: 600; }
+        
+        .price-features {
+            list-style: none; text-align: left; max-width: 350px; margin: 0 auto 32px;
+        }
+        .price-features li {
+            padding: 8px 0; font-size: 15px; color: var(--text-secondary);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .price-features li::before {
+            content: '✓'; color: var(--primary); font-weight: 600;
+        }
+
+        /* FAQ */
+        .faq-section { max-width: 800px; margin: 0 auto; }
+        .faq-grid { display: flex; flex-direction: column; gap: 16px; }
+        .faq-item {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            border-radius: 8px; padding: 24px;
+        }
+        .faq-item h3 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .faq-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        
+
+        
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero { animation: fadeUp 0.8s ease-out; }
+        .video-section { animation: fadeUp 0.8s ease-out both; animation-delay: 0.1s; }
+        .feature-card { animation: fadeUp 0.6s ease-out both; }
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    
+        /* INTERFACE CONTAINER RESPONSIVE */
+        
+        
+        /* PIPELINE DRAG & CURSOR & INTERACTIVE DETAILS */
+        .pl-drag-file {
+            position: absolute; left: -80px; top: 220px; width: 60px; height: 60px;
+            background: #8D6E63; border-radius: 6px; border: 1px dashed var(--primary);
+            opacity: 0; z-index: 100; pointer-events: none;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        .pl-drag-file::before { content: '??'; font-size: 24px; }
+        
+        .pl-cursor {
+            position: absolute; left: 200px; top: 380px; width: 24px; height: 24px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234db6ac' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z'/%3E%3C/svg%3E") no-repeat;
+            opacity: 0; z-index: 101; pointer-events: none;
+        }
+        .pl-cursor.click-pulse::after {
+            content: ''; position: absolute; left: -8px; top: -8px; width: 16px; height: 16px;
+            border: 2px solid var(--primary); border-radius: 50%; animation: pulse 0.4s ease-out;
+        }
+        @keyframes pulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
+
+        /* Term Header tabs */
+        .pl-term-hdr { display: flex; align-items: center; justify-content: space-between; height: 32px; padding: 0 12px; background: #1a1a1a; border-bottom: 1px solid #333; }
+        .pl-term-tabs { display: flex; gap: 4px; height: 100%; align-items: flex-end; }
+        .pl-tab {
+            padding: 4px 10px; font-size: 10px; color: #666; background: #111;
+            border: 1px solid #222; border-bottom: none; border-radius: 4px 4px 0 0;
+            cursor: pointer; transition: all 0.3s; font-family: sans-serif; font-weight: bold;
+        }
+        .pl-tab.active { color: var(--primary); background: #111; border-color: rgba(77,182,172,0.3); }
+
+        .pl-switch.active { background: var(--primary) !important; }
+        .pl-switch.active div { left: 16px !important; background-color: #000 !important; }
+
+        .step-item { cursor: pointer; }
+        .step-item:hover { opacity: 0.8 !important; transform: translateY(-2px); }
+
+        /* PIPELINE ANIMATION */
+        .pipeline-wrapper { width: 100%; display: flex; justify-content: center; overflow: hidden; padding: 20px 0; }
+        .pipeline-demo {
+            width: 900px; height: 450px; position: relative;
+            background: #0a0a0a; border-radius: 12px;
+            border: 1px solid rgba(77,182,172,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 40px rgba(0,0,0,0.5);
+            transform-origin: center top; font-family: 'JetBrains Mono', monospace;
+        }
+        
+        @media (max-width: 950px) { .pipeline-demo { transform: scale(0.85); margin-bottom: -60px; } }
+        @media (max-width: 768px) { .pipeline-demo { transform: scale(0.65); margin-bottom: -140px; } }
+        @media (max-width: 500px) { .pipeline-demo { transform: scale(0.42); margin-bottom: -240px; } }
+
+        .pl-path {
+            position: absolute; border: 2px dashed rgba(77,182,172,0.3);
+            border-top: none; border-left: none;
+        }
+        .pl-path-1 { width: 160px; height: 2px; top: 190px; left: 160px; border-bottom: 2px dashed rgba(77,182,172,0.3); }
+        .pl-path-2 { width: 140px; height: 2px; top: 120px; right: 180px; border-bottom: 2px dashed rgba(77,182,172,0.3); }
+        .pl-path-3 { width: 2px; height: 160px; top: 120px; right: 180px; border-right: 2px dashed rgba(77,182,172,0.3); }
+
+        .pl-img, .pl-img-ghost {
+            position: absolute; left: 40px; top: 130px;
+            width: 120px; height: 120px; border-radius: 8px; border: 2px solid #555;
+            background: #8D6E63; background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.15) 10px, rgba(0,0,0,0.15) 20px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); z-index: 10;
+        }
+        .pl-img::after { content: 'diffuse.jpg'; position: absolute; bottom: -24px; left: 0; right: 0; text-align: center; color: #888; font-size: 11px; }
+        .pl-img-ghost { opacity: 0; z-index: 11; transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; }
+        .pl-img-ghost.fly-in { transform: translateX(200px) scale(0.1) rotate(180deg); opacity: 0; }
+        .pl-img-ghost.active { opacity: 0.8; }
+        
+        .pl-btn {
+            position: absolute; left: 40px; top: 290px; width: 120px;
+            padding: 12px 0; background: var(--primary); color: #000;
+            border: none; border-radius: 6px; font-weight: bold; cursor: pointer;
+            transition: all 0.3s; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+        }
+        .pl-btn:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(77,182,172,0.3); }
+        .pl-btn.active { background: #444; color: #888; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .pl-term {
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+            width: 320px; height: 260px; background: #111; border-radius: 8px;
+            border: 1px solid rgba(77,182,172,0.2); overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.8); z-index: 5;
+        }
+        .pl-term-hdr { background: #1a1a1a; padding: 8px 12px; display: flex; align-items: center; border-bottom: 1px solid #333; }
+        .pl-term-dots { display: flex; gap: 6px; }
+        .pl-term-dots span { width: 10px; height: 10px; border-radius: 50%; }
+        .pl-term-dots span:nth-child(1) { background: #ff5f56; }
+        .pl-term-dots span:nth-child(2) { background: #ffbd2e; }
+        .pl-term-dots span:nth-child(3) { background: #27c93f; }
+        
+        .pl-term-body {
+            padding: 12px; height: 210px; overflow-y: hidden; text-align: left;
+            color: #4af626; font-size: 11px; line-height: 1.6;
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px);
+        }
+        .term-line { opacity: 0; animation: fadeInLine 0s forwards; }
+        .term-line.info { color: #888; }
+        .term-line.high { color: #fff; text-shadow: 0 0 5px #fff; }
+        .term-line.succ { color: #4af626; text-shadow: 0 0 3px #4af626; }
+        .term-cursor { display: inline-block; width: 6px; height: 12px; background: #4af626; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 4px; }
+        @keyframes fadeInLine { to { opacity: 1; } }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .pl-maps {
+            position: absolute; right: 50px; top: 100px;
+            display: flex; gap: 8px; width: 260px; justify-content: center;
+            opacity: 0; transition: all 0.5s; z-index: 10;
+        }
+        .pl-map {
+            width: 44px; height: 44px; border-radius: 4px; display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: bold; color: #fff; border: 1px solid rgba(255,255,255,0.2);
+            opacity: 0; transform: scale(0); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .pl-map.norm { background: #8a8fd8; }
+        .pl-map.rough { background: #666; }
+        .pl-map.ao { background: #ddd; color: #000; }
+        .pl-map.disp { background: #fff; color: #000; }
+        
+        .pl-maps.pop { opacity: 1; }
+        .pl-map.pop { opacity: 1; transform: scale(1); }
+        .pl-maps.merge { transform: scale(0); opacity: 0; }
+
+        .pl-sphere {
+            position: absolute; right: 140px; top: 80px;
+            width: 84px; height: 84px; border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #a07a62, #693c27 60%, #2c1a11);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 0 15px rgba(0,0,0,0.8);
+            opacity: 0; transform: scale(0); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); z-index: 20;
+        }
+        .pl-sphere::after { content: 'PBR Material'; position: absolute; bottom: -24px; left: -10px; right: -10px; text-align: center; color: var(--primary); font-size: 10px; opacity: 0; transition: opacity 0.3s; }
+        .pl-sphere.pop { opacity: 1; transform: scale(1); }
+        .pl-sphere.pop::after { opacity: 1; }
+        .pl-sphere.fly-box { transform: translate(0, 190px) scale(0.4); opacity: 0; }
+        .pl-sphere.fly-box::after { opacity: 0; }
+
+        .pl-scene {
+            position: absolute; right: 130px; bottom: 80px;
+            width: 100px; height: 100px; perspective: 800px; z-index: 5;
+        }
+        .pl-box {
+            width: 100px; height: 100px; position: relative;
+            transform-style: preserve-3d; transform: rotateX(-20deg) rotateY(45deg);
+        }
+        .pl-face {
+            position: absolute; width: 100px; height: 100px;
+            border: 1px solid rgba(77,182,172,0.4);
+            background: rgba(77,182,172,0.05);
+            box-shadow: inset 0 0 15px rgba(77,182,172,0.1);
+            transition: all 0.5s ease;
+            backface-visibility: visible;
+        }
+        .pl-face.front { transform: translateZ(50px); }
+        .pl-face.right { transform: rotateY(90deg) translateZ(50px); }
+        .pl-face.top { transform: rotateX(90deg) translateZ(50px); }
+
+        .pl-box.textured { animation: boxHit 0.6s ease-out; }
+        .pl-box.textured .pl-face {
+            background-color: #8D6E63;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(0,0,0,0.15) 4px, rgba(0,0,0,0.15) 8px);
+            border-color: #5D4037;
+        }
+        .pl-box.textured .pl-face.top { background-color: #A1887F; }
+        .pl-box.textured .pl-face.right { background-color: #6D4C41; }
+        
+        .pl-ready {
+            position: absolute; right: 60px; bottom: 10px; width: 240px; text-align: center;
+            font-size: 14px; font-weight: bold; color: var(--primary); opacity: 0; transition: opacity 0.5s;
+            text-shadow: 0 0 10px rgba(77,182,172,0.5); z-index: 10;
+        }
+        @keyframes boxHit {
+            0% { filter: brightness(3) drop-shadow(0 0 30px var(--primary)); transform: rotateX(-20deg) rotateY(45deg) scale(1.1); }
+            100% { filter: brightness(1) drop-shadow(0 0 0 transparent); transform: rotateX(-20deg) rotateY(45deg) scale(1); }
+        }
+        
+        .step-item { text-align: center; position: relative; transition: all 0.4s; opacity: 0.3; filter: grayscale(100%); }
+        .step-item.active { opacity: 1; filter: grayscale(0%); transform: translateY(-5px); }
+        .step-num { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700; color: var(--primary); margin-bottom: 12px; opacity: 0.8; transition: all 0.4s; }
+        .step-item.active .step-num { text-shadow: 0 0 15px rgba(77,182,172,0.6); opacity: 1; }
+
+        .interface-container {
+            max-width: 980px; margin: 0 auto; padding: 24px;
+            background: var(--bg-main); border: 1px solid var(--border);
+            border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .interface-container {
+                padding: 10px !important;
+                border-radius: 10px !important;
+            }
+        }
+
+    
+</style>
+</Fragment>
+
+
+
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+
+    <!-- NAV -->
+    <Navbar />
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge" data-vi="100% OFFLINE PBR MATERIAL CREATOR" data-en="100% OFFLINE PBR MATERIAL CREATOR">100% OFFLINE PBR MATERIAL CREATOR</div>
+        <h1 data-vi="Khơi nguồn chất liệu.<br><span class='teal'>Tạo map siêu tốc.</span>" data-en="Unleash materials.<br><span class='teal'>Instant PBR setup.</span>"></h1>
+        <p class="hero-sub" data-vi="Plugin chuyên biệt tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement) từ ảnh 2D và thiết lập vật liệu thông minh cho 3ds Max. Tương thích sâu với V-Ray và Corona, giúp bạn bỏ qua các bước dựng map thủ công nhàm chán." data-en="Specialized plugin to automatically generate a complete set of PBR maps (Normal, Displacement, Roughness, AO) and set up material networks in 3ds Max. Deeply integrated with V-Ray and Corona to eliminate tedious manual workflows."></p>
+        <div class="hero-cta">
+            <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 300k" data-en="Get Lifetime — $12">Mua bản quyền — 300k</a>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Vui lòng liên hệ DEV qua Facebook để mua hoặc tải bộ cài bản quyền!');" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE DEMO (MOCKUP APP) -->
+        <!-- INTERFACE SHOWCASE -->
+    <section id="interface" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="GIAO DIỆN CÔNG CỤ" data-en="INTERFACE SHOWCASE">GIAO DIỆN CÔNG CỤ</div>
+        <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI"></h2>
+        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
+        
+        
+        <div class="pipeline-wrapper">
+            <div class="pipeline-demo" id="magic-pipeline">
+                <div class="pl-path pl-path-1"></div>
+                <div class="pl-path pl-path-2"></div>
+                <div class="pl-path pl-path-3"></div>
+
+                <div class="pl-img"></div>
+                <div class="pl-drag-file" id="pl-drag-file"></div>
+                <div class="pl-cursor" id="pl-cursor"></div>
+                <div class="pl-img-ghost" id="pl-img-ghost"></div>
+                <button class="pl-btn" id="pl-btn" onclick="startPipeline()">PROCESS</button>
+
+                
+                <div class="pl-term">
+                    <div class="pl-term-hdr">
+                        <div class="pl-term-dots"><span></span><span></span><span></span></div>
+                        <div class="pl-term-tabs">
+                            <div class="pl-tab active" id="pl-tab-console">Console</div>
+                            <div class="pl-tab" id="pl-tab-settings">Settings</div>
+                        </div>
+                    </div>
+                    <div class="pl-term-body" id="pl-term-out">
+                        <div id="pl-view-console">
+                            <div class="term-line info">Waiting for input...<span class="term-cursor"></span></div>
+                        </div>
+                        <div id="pl-view-settings" style="display: none; padding: 10px; font-family: sans-serif;">
+                            <div class="pl-setting-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                <span style="color:#aaa; font-size:11px;">Brightness</span>
+                                <div style="display:flex; align-items:center; width:150px; gap:8px;">
+                                    <div style="flex:1; height:4px; background:#333; border-radius:2px; position:relative;">
+                                        <div id="pl-slide-bright" style="width:50%; height:100%; background:var(--primary); transition:width 0.8s;"></div>
+                                    </div>
+                                    <span id="pl-val-bright" style="color:var(--primary); font-size:11px; width:20px; text-align:right;">1.0</span>
+                                </div>
+                            </div>
+                            <div class="pl-setting-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                <span style="color:#aaa; font-size:11px;">Contrast</span>
+                                <div style="display:flex; align-items:center; width:150px; gap:8px;">
+                                    <div style="flex:1; height:4px; background:#333; border-radius:2px; position:relative;">
+                                        <div id="pl-slide-contrast" style="width:50%; height:100%; background:var(--primary); transition:width 0.8s;"></div>
+                                    </div>
+                                    <span id="pl-val-contrast" style="color:var(--primary); font-size:11px; width:20px; text-align:right;">1.0</span>
+                                </div>
+                            </div>
+                            <div class="pl-setting-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                <span style="color:#aaa; font-size:11px;">Seamless Blend</span>
+                                <div id="pl-switch-seamless" class="pl-switch" style="width:30px; height:16px; background:#333; border-radius:8px; position:relative; cursor:pointer; transition:background 0.3s;">
+                                    <div style="position:absolute; left:2px; top:2px; width:12px; height:12px; background:#fff; border-radius:50%; transition:left 0.3s;"></div>
+                                </div>
+                            </div>
+                            <div class="pl-setting-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                                <span style="color:#aaa; font-size:11px;">Auto UVW</span>
+                                <div class="pl-switch active" style="width:30px; height:16px; background:var(--primary); border-radius:8px; position:relative; cursor:pointer; transition:background 0.3s;">
+                                    <div style="position:absolute; left:16px; top:2px; width:12px; height:12px; background:#000; border-radius:50%; transition:left 0.3s;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pl-maps" id="pl-maps">
+                    <div class="pl-map norm">NRM</div>
+                    <div class="pl-map rough">RGH</div>
+                    <div class="pl-map ao">AO</div>
+                    <div class="pl-map disp">DSP</div>
+                </div>
+
+                <div class="pl-sphere" id="pl-sphere"></div>
+
+                <div class="pl-scene">
+                    <div class="pl-box" id="pl-box">
+                        <div class="pl-face front"></div>
+                        <div class="pl-face top"></div>
+                        <div class="pl-face right"></div>
+                    </div>
+                </div>
+                
+                <div class="pl-ready" id="pl-ready">? MATERIAL ASSIGNED</div>
+            </div>
+        </div>
+        <div class="steps-grid">
+            <div class="step-item" id="pl-step-1" onclick="playStep1()">
+                <div class="step-num">01</div>
+                <h3 data-vi="Kéo &amp; Thả Ảnh" data-en="Drag &amp; Drop Image">Kéo &amp; Thả Ảnh</h3>
+                <p data-vi="Kéo ảnh diffuse hoặc file nén zip/rar của vật liệu thả thẳng vào giao diện plugin." data-en="Drag your diffuse texture or a compressed zip/rar archive directly into the plugin window."></p>
+            </div>
+            <div class="step-item" id="pl-step-2" onclick="playStep2()">
+                <div class="step-num">02</div>
+                <h3 data-vi="Tinh Chỉnh Cài Đặt" data-en="Adjust Parameters">Tinh Chỉnh Cài Đặt</h3>
+                <p data-vi="Bật/tắt chế độ Seamless Gaussian, Auto UVW, chọn loại vật liệu Render và tỉ lệ Tiling mong muốn." data-en="Toggle Seamless Gaussian, Auto UVW, select the rendering target, and adjust your tiling scale."></p>
+            </div>
+            <div class="step-item" id="pl-step-3" onclick="playStep3()">
+                <div class="step-num">03</div>
+                <h3 data-vi="Áp dụng 1-Click" data-en="Apply Material">Áp dụng 1-Click</h3>
+                <p data-vi="Nhấn nút Generate &amp; Apply. Vật liệu được tự động tạo và gán thẳng lên đối tượng đang chọn." data-en="Click Generate &amp; Apply. The material is instantly built and assigned to the selected 3D object."></p>
+            </div>
+        </div>
+    
+
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+        <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="KEY FEATURES">TÍNH NĂNG NỔI BẬT</div>
+        <h2 class="section-title" data-vi="Tạo vật liệu PBR tự động chỉ với 1-Click" data-en="1-Click Automatic PBR Material Setup"></h2>
+        <p class="section-desc" data-vi="Biến bất kỳ ảnh texture đơn lẻ nào thành bộ vật liệu PBR hoàn chỉnh với đầy đủ các kênh phản xạ, độ gồ ghề và chiều sâu chỉ trong vài giây." data-en="Turn any single texture image into a complete PBR material set with reflections, roughness, and depth maps in seconds."></p>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">🧱</div>
+                <h3 data-vi="Tự động hóa 1-Click PBR" data-en="1-Click PBR Automation">Tự động hóa 1-Click PBR</h3>
+                <p data-vi="Kéo thả 1 ảnh diffuse duy nhất vào. Hệ thống tự động phân tích độ tương phản, sắc độ màu để dựng trọn bộ 4 bản đồ map chất lượng cao: Normal, Displacement, Roughness, AO." data-en="Drag and drop a single diffuse image. The system automatically analyzes contrast and chromatic ranges to generate 4 high-quality maps: Normal, Displacement, Roughness, and AO."></p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3 data-vi="Xử lý 100% Offline" data-en="100% Offline Engine">Xử lý 100% Offline</h3>
+                <p data-vi="Tốc độ xử lý siêu tốc ngay trên máy tính của bạn mà không cần kết nối internet hay máy chủ bên thứ ba. Bảo mật dữ liệu tuyệt đối, không tải ảnh lên đám mây." data-en="Unmatched processing speed running natively on your hardware without any internet or cloud servers. Keeps your project files completely private, zero cloud uploads."></p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3 data-vi="Nhận diện thư viện thông minh" data-en="Smart Library Detector">Nhận diện thư viện thông minh</h3>
+                <p data-vi="Tự động nhận diện cấu trúc tên của các nhà cung cấp texture lớn (CGAxis, Poliigon, Megascans, ambientCG, Poly Haven). Chỉ tự sinh những bản đồ map còn thiếu để tối ưu hóa thời gian." data-en="Auto-detects naming conventions of major texture vendors (CGAxis, Poliigon, Megascans, ambientCG, Poly Haven). Only generates missing maps to save processing time."></p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">🎛️</div>
+                <h3 data-vi="Khử vết ghép Seamless" data-en="Seamless Texture Blending">Khử vết ghép Seamless</h3>
+                <p data-vi="Xóa bỏ các đường phân tách phân mảnh lộ vân gạch, gỗ bằng bộ lọc mượt mà thông minh. Giúp bạn tạo ra những vật liệu lặp vô hạn (tileable) tự nhiên, chân thực nhất." data-en="Remove visible pattern seam lines using smart blending filters. Helps you create organic, highly realistic tileable materials with ease."></p>
+            </div>
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3 data-vi="Tự động dựng node V-Ray &amp; Corona" data-en="Auto V-Ray &amp; Corona Networks">Tự động dựng node V-Ray &amp; Corona</h3>
+                <p data-vi="Tự động nhận diện trình render hiện hành để thiết lập và kết nối mạng lưới node vật liệu vật lý tương ứng chuẩn xác chỉ trong nháy mắt, gán trực tiếp lên đối tượng." data-en="Automatically detects the active renderer to set up and connect physical material node networks accurately, assigning them directly to objects in viewport."></p>
+            </div>
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">📐</div>
+                <h3 data-vi="Auto UVW &amp; Điều khiển trực quan" data-en="Auto UVW &amp; Tiling Control">Auto UVW &amp; Điều khiển trực quan</h3>
+                <p data-vi="Tích hợp bộ áp nhanh tọa độ UVW Map và tinh chỉnh tỉ lệ lặp (tiling), xoay góc (rotation) vật liệu trực quan trực tiếp trên giao diện plugin mà không cần mở bảng Material Editor." data-en="Integrated quick UVW mapping and controls for tiling and rotation directly in the plugin window, bypassing the need to open the 3ds Max Material Editor."></p>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- PRICING -->
+    <section id="pricing">
+        <div class="section-label" data-vi="BẢNG GIÁ KHUYẾN MÃI" data-en="LAUNCH PRICE">BẢNG GIÁ KHUYẾN MÃI</div>
+        <h2 class="section-title" data-vi="Sở hữu vĩnh viễn. Mua một lần." data-en="Perpetual Pro License. Pay once."></h2>
+        <p class="section-desc" data-vi="Cơ hội sở hữu bản quyền Magic Material vĩnh viễn với giá ưu đãi cực lớn nhân dịp mở bán." data-en="Special introductory pricing to own a perpetual license of Magic Material."></p>
+
+        <div class="pricing-section">
+            <div class="pricing-grid">
+                <!-- Card 1: Standalone -->
+                <div class="price-card featured">
+                    <div>
+                        <div class="price-badge">LIFETIME KEY</div>
+                        <h3 data-vi="Magic Material Standalone" data-en="Magic Material Standalone">Magic Material Standalone</h3>
+                        <div class="price-amount" data-vi="<del>999.000đ</del> 300.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $12 <span>/ lifetime</span>"></div>
+                        <div class="price-period" data-vi="Khuyến mãi đặc biệt nhân dịp mở bán" data-en="Special introductory discount">Khuyến mãi đặc biệt nhân dịp mở bán</div>
+                        
+                        <ul class="price-features">
+                            <li data-vi="Tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement)" data-en="Auto generate full set of PBR maps (Normal, Roughness, AO, Displacement)"></li>
+                            <li data-vi="Nhận diện tự động thông minh các loại map có sẵn từ thư viện" data-en="Smart automatic detection of existing maps from vendor libraries"></li>
+                            <li data-vi="Thiết lập mạng lưới vật liệu Corona &amp; V-Ray tự động" data-en="Automatic Corona &amp; V-Ray material network setup"></li>
+                            <li data-vi="Xử lý khuyết tật phân tách hoa văn (Seamless) nhanh chóng chỉ 1-Click" data-en="1-click seamless texture edge blending"></li>
+                            <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật miễn phí trọn đời" data-en="Perpetual license with lifetime free updates"></li>
+                        </ul>
+                    </div>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center; margin-top:20px;" data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
+                </div>
+
+                <!-- Card 2: Combo -->
+                <div class="price-card featured">
+                    <div>
+                        <div class="price-badge" style="background:var(--primary-glow); color:var(--primary);">COMBO OFFER</div>
+                        <h3 data-vi="Combo Material &amp; Merger" data-en="Combo Material &amp; Merger">Combo Material &amp; Merger</h3>
+                        <div class="price-amount" data-vi="<del>1.998.000đ</del> 500.000đ <span>/ vĩnh viễn</span>" data-en="<del>$78</del> $20 <span>/ lifetime</span>"></div>
+                        <div class="price-period" data-vi="Gói combo tiết kiệm đặc biệt lên đến 75%" data-en="Special bundle discount - Save up to 75%">Gói combo tiết kiệm đặc biệt lên đến 75%</div>
+                        
+                        <ul class="price-features">
+                            <li data-vi="Giấy phép trọn đời cho <b>CẢ HAI</b> plugin độc lập" data-en="Lifetime keys for <b>BOTH</b> standalone plugins"></li>
+                            <li data-vi="Magic Material — tạo map PBR offline 1-click" data-en="Magic Material — 1-click offline PBR generator"></li>
+                            <li data-vi="Magic Merger — batch merge và smart-relink texture" data-en="Magic Merger — batch merge &amp; smart texture relinker"></li>
+                            <li data-vi="Tương thích 3ds Max 2023-2027+, render Corona / V-Ray" data-en="Supports 3ds Max 2023-2027+, Corona / V-Ray renderers"></li>
+                            <li data-vi="Cập nhật miễn phí trọn đời và hỗ trợ ưu tiên" data-en="Lifetime free updates &amp; priority developer support"></li>
+                        </ul>
+                    </div>
+                    <div class="cta-wrapper" style="position: relative; display: block; width: 100%; margin-top: 20px;">
+                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center;" data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
+                        <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- TUTORIAL / VIDEO -->
+    <section id="workflow" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="HƯỚNG DẪN SỬ DỤNG" data-en="TUTORIAL">HƯỚNG DẪN SỬ DỤNG</div>
+        <h2 class="section-title" data-vi="Chi tiết cách dùng Magic Material" data-en="How to use Magic Material"></h2>
+        <p class="section-desc" data-vi="Video hướng dẫn chi tiết cách tạo và gán vật liệu tự động trong 3ds Max." data-en="Detailed video tutorial on generating and assigning PBR materials automatically in 3ds Max."></p>
+        
+        <div class="video-section" style="margin-top: 40px; border-radius: 12px; overflow: hidden; max-width: 1000px; margin-left: auto; margin-right: auto; position: relative;">
+            <div class="video-box" id="featured-video">
+            <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/oa2y-5QDA7A?rel=0&modestbranding=1&color=white" title="AH3 Magic Material Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0;"></iframe>
+            <a id="yt-fallback" href="https://www.youtube.com/watch?v=oa2y-5QDA7A" target="_blank" style="display:none; position:absolute; inset:0; text-decoration:none; cursor:pointer;">
+                <img loading="lazy" src="https://img.youtube.com/vi/oa2y-5QDA7A/maxresdefault.jpg" alt="AH3 Magic Material Demo" style="width:100%; height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'">
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:72px; height:72px; border-radius:50%; background:rgba(77, 182, 172, 0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,0,0,0.4);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#121212"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div style="position:absolute; bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube">▶ Xem demo trên YouTube</div>
+            </a>
+        </div>
+        </div>
+    </section>
+
+
+    <!-- FAQ -->
+    <section id="faq" style="background: var(--bg-dark);">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions"></h2>
+        <p class="section-desc" data-vi="Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Material." data-en="Core technical aspects about how Magic Material functions under the hood."></p>
+
+        <div class="faq-section">
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 data-vi="Plugin tương thích với những trình render và phiên bản 3ds Max nào?" data-en="Which 3ds Max versions and renderers are supported?"></h3>
+                    <p data-vi="Magic Material được tối ưu hóa và tương thích hoàn toàn với các phiên bản 3ds Max từ 2023 đến 2027+. Plugin tự động cấu hình và thiết lập mạng lưới node vật liệu chuẩn xác cho cả Corona Renderer (CoronaPhysicalMtl) và V-Ray (VRayMtl) dựa trên thiết lập render hiện tại của bạn." data-en="Magic Material is fully compatible with 3ds Max 2023 up to 2027+. The plugin auto-detects and sets up material networks for both Corona Renderer (CoronaPhysicalMtl) and V-Ray (VRayMtl) based on your active renderer."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Tôi có thể kéo thả những loại file nào vào plugin?" data-en="What files can I drag and drop into the plugin?"></h3>
+                    <p data-vi="Bạn có thể kéo thả trực tiếp các định dạng ảnh đơn lẻ (JPG, PNG, TGA), toàn bộ thư mục chứa map của dự án, hoặc thậm chí là các tệp nén (.zip, .rar, .7z). Plugin sẽ tự động phân tích cấu trúc, nhận dạng map có sẵn và trích xuất tài nguyên phù hợp." data-en="You can drag and drop single image formats (JPG, PNG, TGA), entire texture folders, or compressed archives (.zip, .rar, .7z) directly. The plugin automatically parses the files, reads existing maps, and extracts them."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Việc tạo và gán vật liệu có làm thay đổi hay làm hỏng mô hình gốc không?" data-en="Does applying materials risk modifying or ruining the original model?"></h3>
+                    <p data-vi="Hoàn toàn không. Magic Material hoạt động theo nguyên tắc an toàn tuyệt đối: bảo toàn nguyên vẹn tọa độ map (UVW coordinates) và cấu trúc lưới gốc của mô hình. Mọi thao tác gán vật liệu đều hỗ trợ hoàn tác 100% bằng phím Ctrl+Z để bạn yên tâm thiết kế." data-en="Not at all. Magic Material works with a strict safety-first approach: original mapping coordinates (UVW) and mesh geometry are 100% preserved. All material application actions support standard Ctrl+Z undo keys to keep your scene completely safe."></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <Footer />
+
+    <!-- LANGUAGE SWITCH, PIPELINE & INTERACTIVE MOCKUP JS -->
+    <script>
+
+        let currentLang = 'vi';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = text;
+                } else {
+                    el.innerHTML = text;
+                }
+            });
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            setLang('vi');
+        });
+
+        let animTimeout = null;
+
+        function resetAll() {
+            if(animTimeout) clearTimeout(animTimeout);
+            
+            const dragFile = document.getElementById('pl-drag-file');
+            const cursor = document.getElementById('pl-cursor');
+            const baseImg = document.querySelector('.pl-img');
+            const ghostImg = document.getElementById('pl-img-ghost');
+            
+            dragFile.style.transition = 'none';
+            dragFile.style.opacity = '0';
+            dragFile.style.left = '-80px';
+            dragFile.style.top = '220px';
+            dragFile.style.transform = 'none';
+            
+            cursor.style.transition = 'none';
+            cursor.style.opacity = '0';
+            cursor.style.left = '200px';
+            cursor.style.top = '380px';
+            cursor.classList.remove('click-pulse');
+            
+            baseImg.style.opacity = '0.3';
+            ghostImg.classList.remove('fly-in', 'active');
+            
+            document.getElementById('pl-tab-console').classList.remove('active');
+            document.getElementById('pl-tab-settings').classList.remove('active');
+            document.getElementById('pl-view-console').style.display = 'none';
+            document.getElementById('pl-view-settings').style.display = 'none';
+            
+            document.getElementById('pl-slide-bright').style.width = '50%';
+            document.getElementById('pl-val-bright').innerText = '1.0';
+            document.getElementById('pl-slide-contrast').style.width = '50%';
+            document.getElementById('pl-val-contrast').innerText = '1.0';
+            document.getElementById('pl-switch-seamless').classList.remove('active');
+            
+            const maps = document.getElementById('pl-maps');
+            const mapItems = document.querySelectorAll('.pl-map');
+            const sphere = document.getElementById('pl-sphere');
+            const box = document.getElementById('pl-box');
+            const ready = document.getElementById('pl-ready');
+            const termOut = document.getElementById('pl-view-console');
+            
+            maps.classList.remove('merge', 'pop');
+            mapItems.forEach(m => m.classList.remove('pop'));
+            sphere.classList.remove('pop', 'fly-box');
+            box.classList.remove('textured');
+            ready.style.opacity = '0';
+            termOut.innerHTML = '<div class="term-line info">Waiting for input...<span class="term-cursor"></span></div>';
+            
+            for(let i=1; i<=3; i++) {
+                const stepCard = document.getElementById('pl-step-' + i);
+                if(stepCard) stepCard.classList.remove('active');
+            }
+        }
+
+        function playStep1() {
+            resetAll();
+            document.getElementById('pl-step-1').classList.add('active');
+            
+            const dragFile = document.getElementById('pl-drag-file');
+            const cursor = document.getElementById('pl-cursor');
+            const baseImg = document.querySelector('.pl-img');
+            
+            dragFile.style.transition = 'opacity 0.4s';
+            cursor.style.transition = 'opacity 0.4s';
+            dragFile.style.opacity = '1';
+            cursor.style.opacity = '1';
+            
+            animTimeout = setTimeout(() => {
+                cursor.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                cursor.style.left = '-50px';
+                cursor.style.top = '240px';
+                
+                animTimeout = setTimeout(() => {
+                    cursor.classList.add('click-pulse');
+                    
+                    animTimeout = setTimeout(() => {
+                        dragFile.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                        cursor.style.transition = 'all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                        
+                        dragFile.style.left = '70px';
+                        dragFile.style.top = '160px';
+                        cursor.style.left = '100px';
+                        cursor.style.top = '180px';
+                        
+                        animTimeout = setTimeout(() => {
+                            cursor.classList.remove('click-pulse');
+                            dragFile.style.transition = 'opacity 0.3s, transform 0.3s';
+                            dragFile.style.opacity = '0';
+                            dragFile.style.transform = 'scale(0.8)';
+                            
+                            cursor.style.transition = 'opacity 0.3s';
+                            cursor.style.opacity = '0';
+                            
+                            baseImg.style.transition = 'opacity 0.5s';
+                            baseImg.style.opacity = '1';
+                            
+                            animTimeout = setTimeout(() => {
+                                playStep2();
+                            }, 1200);
+                        }, 1000);
+                    }, 400);
+                }, 800);
+            }, 400);
+        }
+
+        function playStep2() {
+            if(animTimeout) clearTimeout(animTimeout);
+            document.getElementById('pl-step-1').classList.remove('active');
+            document.getElementById('pl-step-2').classList.add('active');
+            
+            document.querySelector('.pl-img').style.opacity = '1';
+            
+            document.getElementById('pl-tab-settings').classList.add('active');
+            document.getElementById('pl-tab-console').classList.remove('active');
+            document.getElementById('pl-view-settings').style.display = 'block';
+            document.getElementById('pl-view-console').style.display = 'none';
+            
+            const sliderBright = document.getElementById('pl-slide-bright');
+            const valBright = document.getElementById('pl-val-bright');
+            const sliderContrast = document.getElementById('pl-slide-contrast');
+            const valContrast = document.getElementById('pl-val-contrast');
+            const switchSeamless = document.getElementById('pl-switch-seamless');
+            
+            animTimeout = setTimeout(() => {
+                sliderBright.style.width = '75%';
+                let bVal = 1.0;
+                let bInterval = setInterval(() => {
+                    bVal += 0.05;
+                    if(bVal >= 1.5) {
+                        bVal = 1.5;
+                        clearInterval(bInterval);
+                    }
+                    valBright.innerText = bVal.toFixed(1);
+                }, 100);
+                
+                animTimeout = setTimeout(() => {
+                    sliderContrast.style.width = '65%';
+                    let cVal = 1.0;
+                    let cInterval = setInterval(() => {
+                        cVal += 0.05;
+                        if(cVal >= 1.3) {
+                            cVal = 1.3;
+                            clearInterval(cInterval);
+                        }
+                        valContrast.innerText = cVal.toFixed(1);
+                    }, 100);
+                    
+                    animTimeout = setTimeout(() => {
+                        switchSeamless.classList.add('active');
+                        
+                        animTimeout = setTimeout(() => {
+                            playStep3();
+                        }, 1500);
+                    }, 1000);
+                }, 1000);
+            }, 500);
+        }
+
+        function playStep3() {
+            if(animTimeout) clearTimeout(animTimeout);
+            document.getElementById('pl-step-2').classList.remove('active');
+            document.getElementById('pl-step-3').classList.add('active');
+            
+            document.querySelector('.pl-img').style.opacity = '1';
+            document.getElementById('pl-slide-bright').style.width = '75%';
+            document.getElementById('pl-val-bright').innerText = '1.5';
+            document.getElementById('pl-slide-contrast').style.width = '65%';
+            document.getElementById('pl-val-contrast').innerText = '1.3';
+            document.getElementById('pl-switch-seamless').classList.add('active');
+
+            document.getElementById('pl-tab-console').classList.add('active');
+            document.getElementById('pl-tab-settings').classList.remove('active');
+            document.getElementById('pl-view-console').style.display = 'block';
+            document.getElementById('pl-view-settings').style.display = 'none';
+            
+            const btn = document.getElementById('pl-btn');
+            btn.innerText = 'PROCESSING...';
+            btn.classList.add('active');
+
+            const ghostImg = document.getElementById('pl-img-ghost');
+            const termOut = document.getElementById('pl-view-console');
+            const maps = document.getElementById('pl-maps');
+            const mapItems = document.querySelectorAll('.pl-map');
+            const sphere = document.getElementById('pl-sphere');
+            const box = document.getElementById('pl-box');
+            const ready = document.getElementById('pl-ready');
+
+            ghostImg.style.transition = 'none';
+            ghostImg.classList.remove('fly-in', 'active');
+            
+            setTimeout(() => {
+                ghostImg.classList.add('active');
+                void ghostImg.offsetWidth;
+                ghostImg.style.transition = 'all 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+                ghostImg.classList.add('fly-in');
+            }, 100);
+
+            setTimeout(() => {
+                const plCustomTermLines = [
+                    { text: "> Initializing Pipeline...", type: "info" },
+                    { text: "> Loading source: diffuse.jpg", type: "high" },
+                    { text: "[Filter] Applying Brightness (1.5) & Contrast (1.3)", type: "info" },
+                    { text: "[Filter] Seamless Gaussian Blend... Active", type: "info" },
+                    { text: "[Worker] Normal Map Gen... OK", type: "succ" },
+                    { text: "[Worker] Roughness Gen... OK", type: "succ" },
+                    { text: "[Worker] AO Gen... OK", type: "succ" },
+                    { text: "[Worker] Displacement Gen... OK", type: "succ" },
+                    { text: ">> ENGINE COMPLETE.", type: "high" }
+                ];
+                
+                termOut.innerHTML = '';
+                let delay = 0;
+                plCustomTermLines.forEach((line, index) => {
+                    delay += 200;
+                    setTimeout(() => {
+                        const prevCur = termOut.querySelector('.term-cursor');
+                        if(prevCur) prevCur.remove();
+                        const div = document.createElement('div');
+                        div.className = 'term-line ' + line.type;
+                        div.innerHTML = line.text + '<span class="term-cursor"></span>';
+                        termOut.appendChild(div);
+                        termOut.scrollTop = termOut.scrollHeight;
+                        
+                        if(index === plCustomTermLines.length - 1) {
+                            setTimeout(() => {
+                                const finalCur = termOut.querySelector('.term-cursor');
+                                if(finalCur) finalCur.remove();
+                                
+                                maps.classList.add('pop');
+                                mapItems.forEach((m, i) => setTimeout(() => m.classList.add('pop'), i * 150));
+                                setTimeout(() => {
+                                    maps.classList.add('merge');
+                                    setTimeout(() => sphere.classList.add('pop'), 300);
+                                }, 1400);
+                                setTimeout(() => sphere.classList.add('fly-box'), 2400);
+                                setTimeout(() => {
+                                    box.classList.add('textured');
+                                    btn.innerText = 'RESTART';
+                                    btn.classList.remove('active');
+                                    setTimeout(() => ready.style.opacity = '1', 300);
+                                }, 3000);
+                            }, 300);
+                        }
+                    }, delay);
+                });
+            }, 800);
+        }
+
+        function startPipeline() {
+            playStep1();
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const pipeline = document.getElementById('magic-pipeline');
+            if (pipeline) {
+                let hasRan = false;
+                const obs = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting && !hasRan) {
+                        hasRan = true;
+                        setTimeout(startPipeline, 500);
+                    }
+                }, { threshold: 0.3 });
+                obs.observe(pipeline);
+            }
+        });
+
+
+        // Mobile navigation dropdown toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const trigger = document.querySelector('.dropdown-trigger');
+            if (trigger) {
+                trigger.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const wrapper = trigger.closest('.nav-dropdown-wrapper');
+                        if (wrapper) wrapper.classList.toggle('open');
+                    }
+                });
+            }
+        });
+        </script>
+</Layout>

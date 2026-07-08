@@ -1,0 +1,746 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="AH3 Magic Tree - Physics-Based Loop-Perfect Wind Animation for 3ds Max">
+<Fragment slot="head">
+<style>
+
+        
+
+        
+
+        
+
+        
+
+        
+        
+
+        
+        /* MAGIC TREE SIMULATION - HI-FI */
+        .tree-sim-container {
+            width: 100%; max-width: 800px; margin: 0 auto 60px;
+            background: rgba(10, 10, 10, 0.9);
+            border: 1px solid rgba(102, 187, 106, 0.3);
+            border-radius: 12px; overflow: hidden;
+            display: flex; flex-direction: column;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+        }
+        .tree-sim-canvas {
+            width: 100%; height: 420px; position: relative;
+            display: flex; align-items: flex-end; justify-content: center;
+            background: 
+                radial-gradient(circle at 50% 50%, rgba(102,187,106,0.05) 0%, transparent 60%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px), 
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 20px);
+        }
+        .tree-sim-canvas svg { width: 100%; height: 100%; overflow: visible; }
+
+        .hifi-trunk, .hifi-leaf { fill: none; stroke-linecap: round; stroke-linejoin: round; transition: all 0.6s ease; }
+        .hifi-trunk { stroke-width: 18; }
+        .hifi-leaf { stroke-width: 10; }
+        .hifi-leaf-top { stroke-width: 8; }
+        
+        .hifi-bone { stroke: rgba(255,255,255,0.6); stroke-width: 2; stroke-dasharray: 4 4; opacity: 0; transition: opacity 0.4s; }
+        .hifi-node { fill: #fff; opacity: 0; transition: opacity 0.4s; }
+
+        
+        .hifi-coconut { transition: all 0.6s ease; stroke-width: 6; }
+        
+        /* STATE 1 */
+        .tree-sim-container[data-state="1"] .hifi-coconut { stroke: #444; fill: #222; }
+
+        /* STATE 2 */
+        .tree-sim-container[data-state="2"] .hifi-coconut { stroke: #FF9800; fill: rgba(255,152,0,0.3); filter: drop-shadow(0 0 8px rgba(255,152,0,0.8)); }
+
+        /* STATE 3 */
+        .tree-sim-container[data-state="3"] .hifi-coconut { stroke: #FF9800; fill: rgba(255,152,0,0.8); filter: drop-shadow(0 0 6px rgba(255,152,0,0.5)); }
+        
+        .tree-sim-container[data-state="3"] .coconuts-group {
+            animation: coconutSway 2.5s ease-in-out infinite alternate;
+        }
+        @keyframes coconutSway {
+            0% { transform: translate(200px, 100px) rotate(-3deg); }
+            100% { transform: translate(200px, 100px) rotate(4deg); }
+        }
+
+        /* STATE 1 */
+        .tree-sim-container[data-state="1"] .hifi-trunk,
+        .tree-sim-container[data-state="1"] .hifi-leaf,
+        .tree-sim-container[data-state="1"] .hifi-leaf-top { stroke: #444; }
+
+        /* STATE 2 */
+        .tree-sim-container[data-state="2"] .hifi-trunk { stroke: #8D6E63; filter: drop-shadow(0 0 8px rgba(141,110,99,0.8)); }
+        .tree-sim-container[data-state="2"] .hifi-leaf-bottom { stroke: #2E7D32; filter: drop-shadow(0 0 8px rgba(46,125,50,0.8)); }
+        .tree-sim-container[data-state="2"] .hifi-leaf-mid { stroke: #4CAF50; filter: drop-shadow(0 0 8px rgba(76,175,80,0.8)); }
+        .tree-sim-container[data-state="2"] .hifi-leaf-top { stroke: #81C784; filter: drop-shadow(0 0 8px rgba(129,199,132,0.8)); }
+        .tree-sim-container[data-state="2"] .hifi-bone,
+        .tree-sim-container[data-state="2"] .hifi-node { opacity: 1; animation: pulseGlow 1.5s infinite alternate; }
+
+        /* STATE 3 */
+        
+        /* STATE 3 */
+        .tree-sim-container[data-state="3"] .hifi-trunk { stroke: #8D6E63; filter: drop-shadow(0 0 6px rgba(141,110,99,0.5)); }
+        .tree-sim-container[data-state="3"] .hifi-leaf-bottom { stroke: #2E7D32; filter: drop-shadow(0 0 6px rgba(46,125,50,0.5)); }
+        .tree-sim-container[data-state="3"] .hifi-leaf-mid { stroke: #4CAF50; filter: drop-shadow(0 0 6px rgba(76,175,80,0.5)); }
+        .tree-sim-container[data-state="3"] .hifi-leaf-top { stroke: #81C784; filter: drop-shadow(0 0 6px rgba(129,199,132,0.5)); }
+
+        
+        .tree-sim-container[data-state="3"] .tree-wrapper { transform-origin: 200px 380px; animation: treeSwayHiFi 3.5s ease-in-out infinite alternate; }
+        .tree-sim-container[data-state="3"] .hifi-leaf { animation: leafFlutterHiFi 1.8s ease-in-out infinite alternate; }
+        .tree-sim-container[data-state="3"] .hifi-leaf-top { animation: leafFlutterHiFi 1.4s ease-in-out infinite alternate; }
+        
+        .tree-sim-container[data-state="3"] .l-b-l { animation-delay: 0.1s; }
+        .tree-sim-container[data-state="3"] .l-b-r { animation-delay: 0.5s; }
+        .tree-sim-container[data-state="3"] .l-m-l { animation-delay: 0.3s; }
+        .tree-sim-container[data-state="3"] .l-m-r { animation-delay: 0.7s; }
+        .tree-sim-container[data-state="3"] .l-t-l { animation-delay: 0.2s; }
+        .tree-sim-container[data-state="3"] .l-t-r { animation-delay: 0.6s; }
+
+        @keyframes pulseGlow { from { opacity: 0.5; filter: drop-shadow(0 0 2px #fff); } to { opacity: 1; filter: drop-shadow(0 0 6px #fff); } }
+        @keyframes treeSwayHiFi { 0% { transform: rotate(-6deg); } 100% { transform: rotate(8deg); } }
+        @keyframes leafFlutterHiFi { 0% { transform: rotate(-5deg); } 100% { transform: rotate(7deg); } }
+
+        .tree-sim-controls { display: flex; border-top: 1px solid rgba(102,187,106,0.2); background: #111; }
+        .sim-btn { flex: 1; padding: 18px; background: transparent; border: none; color: var(--text-secondary); font-family: 'JetBrains Mono', monospace; font-size: 14px; cursor: pointer; transition: all 0.3s; border-right: 1px solid rgba(102,187,106,0.2); display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .sim-btn:last-child { border-right: none; }
+        .sim-btn:hover { background: rgba(255,255,255,0.05); color: #fff; }
+        .sim-btn.active { background: rgba(102,187,106,0.15); color: var(--primary); font-weight: 600; }
+        .sim-color-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; opacity: 0; transition: opacity 0.3s; }
+        .sim-btn.active .sim-color-dot { opacity: 1; box-shadow: 0 0 5px currentColor; }
+        @media (max-width: 600px) { .tree-sim-controls { flex-direction: column; } .sim-btn { border-right: none; border-bottom: 1px solid rgba(102,187,106,0.2); } .sim-btn:last-child { border-bottom: none; } }
+        
+        .step-item { transition: all 0.4s; }
+        .step-item.synced-active { background: rgba(102,187,106,0.05); border-color: rgba(102,187,106,0.4); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(102,187,106,0.1); }
+        .step-item.synced-active .step-num { background: var(--primary); color: #000; box-shadow: 0 0 15px rgba(102,187,106,0.5); }
+
+        /* BUTTONS */
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: var(--primary);
+            color: #121212; font-weight: 600; font-size: 14px;
+            border: none; border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover); transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(102, 187, 106, 0.3);
+        }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: transparent;
+            color: var(--text); font-weight: 400; font-size: 14px;
+            border: 1px solid var(--border); border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* HERO */
+        .hero {
+            padding: 140px 24px 60px;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; position: relative;
+        }
+        .hero-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; color: var(--primary);
+            border: 1px solid rgba(102,187,106,0.3);
+            padding: 6px 16px; border-radius: 20px;
+            margin-bottom: 24px; background: var(--primary-glow); letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+            line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px;
+        }
+        .hero h1 .green { color: var(--primary); }
+        .hero-sub {
+            font-size: 18px; color: var(--text-secondary);
+            max-width: 680px; margin: 0 auto 32px; font-weight: 300;
+        }
+        .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* VIDEO CONTAINER */
+        .video-section {
+            max-width: 800px; margin: 0 auto 80px; padding: 0 24px;
+        }
+        .video-box {
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(102,187,106,0.2); background: #000;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5); aspect-ratio: 16/9;
+            position: relative;
+        }
+
+        /* SECTIONS */
+        section { padding: 80px 24px; }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            color: var(--primary); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 12px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px); font-weight: 700;
+            letter-spacing: -1px; margin-bottom: 16px; text-align: center;
+        }
+        .section-desc {
+            font-size: 16px; color: var(--text-secondary);
+            max-width: 600px; font-weight: 300; margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        /* FEATURES */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; max-width: 1100px; margin: 0 auto;
+        }
+        .feature-card {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            border-radius: 12px; padding: 32px;
+            transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .feature-card:hover {
+            border-color: rgba(102,187,106,0.3); transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: var(--primary-glow); border: 1px solid rgba(102,187,106,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; margin-bottom: 20px;
+        }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 15px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        /* CATEGORIES SECTION */
+        .cat-table-container {
+            max-width: 900px; margin: 40px auto 0; overflow-x: auto;
+            border: 1px solid var(--border); border-radius: 8px; background: var(--bg-main);
+        }
+        table {
+            width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;
+        }
+        th, td {
+            padding: 14px 18px; border-bottom: 1px solid rgba(85,85,85,0.3);
+        }
+        th {
+            background: rgba(102, 187, 106, 0.08); color: var(--primary); font-weight: 600;
+            font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase;
+        }
+        tr:last-child td { border-bottom: none; }
+        .cat-badge {
+            font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+            padding: 2px 8px; border-radius: 4px; background: var(--primary-glow); color: var(--primary);
+        }
+
+        /* STEPS / WORKFLOW */
+        .steps-section {
+            background: var(--bg-surface);
+        }
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px; max-width: 900px; margin: 0 auto;
+        }
+        .step-item {
+            text-align: center; position: relative;
+        }
+        .step-num {
+            font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700;
+            color: var(--primary); margin-bottom: 12px; opacity: 0.8;
+        }
+        .step-item h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .step-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; }
+
+        /* PRICING */
+        .pricing-section { max-width: 600px; margin: 0 auto; }
+        .price-card {
+            background: var(--bg-main); border: 1px solid var(--primary);
+            border-radius: 16px; padding: 48px 32px;
+            text-align: center; position: relative;
+            background: linear-gradient(135deg, var(--bg-main), rgba(102,187,106,0.05));
+        }
+        .price-card::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 4px; background: var(--primary); border-radius: 16px 16px 0 0;
+        }
+        .price-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; padding: 4px 12px; border-radius: 12px;
+            margin-bottom: 20px; letter-spacing: 0.5px;
+            background: var(--primary-glow); color: var(--primary);
+        }
+        .price-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+        .price-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 40px; font-weight: 600; color: var(--primary);
+            margin-bottom: 4px; display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .price-amount del { font-size: 20px; color: var(--text-muted); font-weight: 400; }
+        .price-amount span { font-size: 16px; font-weight: 400; color: var(--text-muted); }
+        .price-period { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+        
+        .price-features {
+            list-style: none; text-align: left; max-width: 350px; margin: 0 auto 32px;
+        }
+        .price-features li {
+            padding: 8px 0; font-size: 15px; color: var(--text-secondary);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .price-features li::before {
+            content: '✓'; color: var(--primary); font-weight: 600;
+        }
+
+        /* FAQ */
+        .faq-section { max-width: 800px; margin: 0 auto; }
+        .faq-grid { display: flex; flex-direction: column; gap: 16px; }
+        .faq-item {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            border-radius: 8px; padding: 24px;
+        }
+        .faq-item h3 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .faq-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        
+
+        
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero { animation: fadeUp 0.8s ease-out; }
+        .video-section { animation: fadeUp 0.8s ease-out both; animation-delay: 0.1s; }
+        .feature-card { animation: fadeUp 0.6s ease-out both; }
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    
+        /* INTERFACE CONTAINER RESPONSIVE */
+        .interface-container {
+            max-width: 800px; margin: 0 auto; padding: 24px;
+            background: var(--bg-main); border: 1px solid var(--border);
+            border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .interface-container {
+                padding: 10px !important;
+                border-radius: 10px !important;
+            }
+        }
+
+    
+</style>
+</Fragment>
+
+
+
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+
+    <!-- NAV -->
+    <Navbar />
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge" data-vi="PHYSICS-BASED WIND SIMULATION FOR 3DS MAX" data-en="PHYSICS-BASED WIND SIMULATION FOR 3DS MAX">PHYSICS-BASED WIND SIMULATION FOR 3DS MAX</div>
+        <h1 data-vi="Thổi hồn vào cây cỏ.<br><span class='green'>Render nhẹ tênh.</span>" data-en="Breeze in your viewports.<br><span class='green'>Lightweight renders.</span>"></h1>
+        <p class="hero-sub" data-vi="Plugin chuyên biệt tạo chuyển động gió 4 lớp chân thực và tự động hóa tối ưu cho cây cối trong 3ds Max. Tương thích sâu với Corona/V-Ray Proxy, loại bỏ hoàn toàn lag giật viewport." data-en="Specialized plugin to generate realistic 4-layer wind simulations and automatic optimizations for 3ds Max vegetation. Deeply integrated with Corona/V-Ray proxies to completely eliminate viewport lag."></p>
+        <div class="hero-cta">
+            <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 450k" data-en="Get Pro Lifetime — $17">Mua bản quyền — 450k</a>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Vui lòng liên hệ DEV qua Facebook để mua hoặc tải bộ cài bản quyền!');" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+        </div>
+    </section>
+
+    <!-- STEPS / WORKFLOW -->
+    <section class="steps-section" id="workflow">
+        <div class="section-label" data-vi="QUY TRÌNH" data-en="STEPS">QUY TRÌNH</div>
+        <h2 class="section-title" data-vi="3 bước biến cây tĩnh thành cây động" data-en="3 steps from static to dynamic"></h2>
+        <p class="section-desc" data-vi="Tự động hóa hoàn toàn các công đoạn phức tạp, tối ưu hóa tối đa thời gian thao tác scene." data-en="Fully automated pipelines to minimize manual tasks and maximize scene productivity."></p>
+
+        
+        
+
+        
+        <!-- INTERACTIVE SVG SIMULATION -->
+        <div class="tree-sim-container" data-state="1" data-aos="fade-up">
+            <div class="tree-sim-canvas">
+                <svg viewBox="0 -50 400 450" xmlns="http://www.w3.org/2000/svg">
+                    <g class="tree-wrapper">
+                        <!-- BONES (State 2) -->
+                        <g class="hifi-bone-group">
+                            <line class="hifi-bone" x1="200" y1="380" x2="208" y2="280" />
+                            <line class="hifi-bone" x1="208" y1="280" x2="204" y2="180" />
+                            <line class="hifi-bone" x1="204" y1="180" x2="200" y2="100" />
+                            
+                            <line class="hifi-bone" x1="200" y1="100" x2="100" y2="150" />
+                            <line class="hifi-bone" x1="200" y1="100" x2="300" y2="150" />
+                            <line class="hifi-bone" x1="200" y1="100" x2="120" y2="60" />
+                            <line class="hifi-bone" x1="200" y1="100" x2="280" y2="60" />
+                            <line class="hifi-bone" x1="200" y1="100" x2="150" y2="20" />
+                            <line class="hifi-bone" x1="200" y1="100" x2="250" y2="20" />
+                        </g>
+
+                        <!-- TRUNK -->
+                        <!-- A thicker curved path representing the coconut trunk -->
+                        <path class="hifi-trunk" d="M200,380 Q220,240 200,100" />
+                        
+                        
+                        <!-- COCONUTS -->
+                        <g class="coconuts-group" transform="translate(200, 100)">
+                            <circle class="hifi-coconut" cx="-20" cy="5" r="14" />
+                            <circle class="hifi-coconut" cx="20" cy="5" r="14" />
+                            <circle class="hifi-coconut" cx="0" cy="18" r="16" />
+                        </g>
+                        
+                        <!-- LEAVES CANOPY -->
+
+                        <g class="leaves-group" transform="translate(200, 100)">
+                            <!-- Bottom Leaves (Blue in State 2) -->
+                            <path class="hifi-leaf hifi-leaf-bottom l-b-l" d="M0,0 C-30,-20 -100,-20 -170,40" />
+                            <path class="hifi-leaf hifi-leaf-bottom l-b-r" d="M0,0 C30,-20 100,-20 170,40" />
+                            
+                            <!-- Mid Leaves (Green in State 2) -->
+                            <path class="hifi-leaf hifi-leaf-mid l-m-l" d="M0,0 C-40,-50 -120,-60 -180,0" />
+                            <path class="hifi-leaf hifi-leaf-mid l-m-r" d="M0,0 C40,-50 120,-60 180,0" />
+                            
+                            <!-- Top Leaves (Yellow in State 2) -->
+                            <path class="hifi-leaf hifi-leaf-top l-t-l" d="M0,0 C-20,-90 -80,-130 -110,-90" />
+                            <path class="hifi-leaf hifi-leaf-top l-t-r" d="M0,0 C20,-90 80,-130 110,-90" />
+                        </g>
+
+                        <!-- NODES (State 2) -->
+                        <g class="hifi-node-group">
+                            <circle class="hifi-node" cx="200" cy="380" r="6" />
+                            <circle class="hifi-node" cx="208" cy="280" r="5" />
+                            <circle class="hifi-node" cx="204" cy="180" r="5" />
+                            <circle class="hifi-node" cx="200" cy="100" r="7" />
+                            
+                            <circle class="hifi-node" cx="100" cy="150" r="4" />
+                            <circle class="hifi-node" cx="300" cy="150" r="4" />
+                            <circle class="hifi-node" cx="120" cy="60" r="4" />
+                            <circle class="hifi-node" cx="280" cy="60" r="4" />
+                            <circle class="hifi-node" cx="150" cy="20" r="4" />
+                            <circle class="hifi-node" cx="250" cy="20" r="4" />
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <div class="tree-sim-controls">
+                <button class="sim-btn active" id="sim-btn-1" onclick="setTreeState(1)" data-vi="1. Model tĩnh" data-en="1. Static Model"><div class="sim-color-dot"></div>1. Model tĩnh</button>
+                <button class="sim-btn" id="sim-btn-2" onclick="setTreeState(2)" data-vi="2. Dò tìm sinh học (Rig)" data-en="2. Bio-Rigging"><div class="sim-color-dot"></div>2. Dò tìm sinh học (Rig)</button>
+                <button class="sim-btn" id="sim-btn-3" onclick="setTreeState(3)" data-vi="3. Đón gió (Wind Loop)" data-en="3. Wind Loop"><div class="sim-color-dot"></div>3. Đón gió (Wind Loop)</button>
+            </div>
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-item" id="step-desc-1">
+                <div class="step-num">01</div>
+                <h3 data-vi="Chọn cây hoặc Proxy" data-en="Select Foliage/Proxy">Chọn cây hoặc Proxy</h3>
+                <p data-vi="Chọn các mô hình cây 3D hoặc file Proxy của Corona/V-Ray trực tiếp trong scene 3ds Max." data-en="Select any 3D plant models or V-Ray/Corona proxy objects directly in your 3ds Max viewports."></p>
+            </div>
+            <div class="step-item" id="step-desc-2">
+                <div class="step-num">02</div>
+                <h3 data-vi="Bake gió 1-Click" data-en="1-Click Wind Bake">Bake gió 1-Click</h3>
+                <p data-vi="Nhấn nút gán gió. Magic Tree tự động phân tích cấu trúc, nhận diện chiều cao và áp dụng cấu hình chuyển động tối ưu cho từng loại cây." data-en="Click apply. Magic Tree automatically analyzes the structure, detects plant height, and applies the most optimized wind behavior."></p>
+            </div>
+            <div class="step-item" id="step-desc-3">
+                <div class="step-num">03</div>
+                <h3 data-vi="Realtime Tweak & Render" data-en="Realtime Tweak & Render">Realtime Tweak & Render</h3>
+                <p data-vi="Tinh chỉnh hướng gió, chu kỳ lặp và 13 thông số gió trực tiếp thời gian thực, sau đó render chuỗi ảnh động." data-en="Fine-tune wind directions, loops, and 13 detailed parameters with realtime updates, then render your wind-swayed animations."></p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FEATURES -->
+    <section id="features">
+        <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="KEY FEATURES">TÍNH NĂNG NỔI BẬT</div>
+        <h2 class="section-title" data-vi="Mô phỏng gió tự nhiên chỉ với 1-Click" data-en="1-Click Natural Wind Simulation"></h2>
+        <p class="section-desc" data-vi="Biến rừng cây tĩnh lặng thành chuyển động tự nhiên trong gió chỉ với vài cú click chuột, siêu nhẹ và cực kỳ nhanh chóng." data-en="Turn static forests into natural sways with just a few clicks, lightweight and extremely fast."></p>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">🍃</div>
+                <h3 data-vi="Mô phỏng chuyển động gió 4 lớp" data-en="4-Layer Dynamic Sway">Mô phỏng gió 4 lớp</h3>
+                <p data-vi="Tác động đồng thời lên 4 cấp độ cành lá: chuyển động rung lá, độ xoắn tự nhiên của tán, độ uốn cong chân thực của thân cây và độ đung đưa nhẹ của hoa/quả giúp tạo cảm giác chuyển động đa chiều chân thực nhất." data-en="Simulates movements on 4 levels: leaf flutter, natural canopy twist, realistic trunk bending, and gentle fruit/flower swaying for the most realistic multi-dimensional motion."></p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">🌿</div>
+                <h3 data-vi="Hỗ trợ mọi thư viện cây lớn" data-en="Full Library Support">Hỗ trợ mọi thư viện cây lớn</h3>
+                <p data-vi="Tương thích hoàn hảo với các thư viện cây phổ biến nhất như Maxtree, Globe Plants, Chaos Cosmos và bất kỳ file Proxy nào của V-Ray, Corona, giúp bạn làm việc trực tiếp và nhanh chóng." data-en="Perfectly compatible with the most popular vegetation libraries such as Maxtree, Globe Plants, Chaos Cosmos, and any V-Ray or Corona proxies, allowing direct and fast workflows."></p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 data-vi="Tự động hóa & Thao tác cực nhanh" data-en="1-Click Auto Pipeline">Tự động hóa & Thao tác cực nhanh</h3>
+                <p data-vi="Không cần thiết lập thủ công tốn thời gian. Magic Tree tự động nhận diện chiều cao, tối ưu hóa proxy và gán các thông số gió phù hợp giúp bạn hoàn thành công việc chỉ trong vài giây." data-en="Zero manual setups required. Magic Tree automatically detects plant heights, optimizes proxies, and applies wind presets in seconds."></p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">🎲</div>
+                <h3 data-vi="Lệch pha tự nhiên & An toàn tuyệt đối" data-en="Randomized Phase & Safe Undo">Lệch pha tự nhiên & An toàn tuyệt đối</h3>
+                <p data-vi="Mỗi cây tự động lệch pha ngẫu nhiên để khi rải rừng cây lớn (Forest Pack, Chaos Scatter) không bị đồng điệu máy móc. Hỗ trợ Ctrl+Z hoàn tác 100% cực kỳ an tâm khi thiết kế." data-en="Generates unique random phase offsets per tree to avoid repetitive patterns in scattered forests. Fully supports clean Ctrl+Z undo actions to keep your scene completely safe."></p>
+            </div>
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3 data-vi="Tối ưu Render & Dung lượng" data-en="Optimized File Size & Render">Tối ưu Render & Dung lượng</h3>
+                <p data-vi="Cơ chế bake keyframe thông minh tự động tối ưu hóa số lượng keyframe của modifier, giữ cho file scene 3ds Max cực nhẹ và không làm tăng thời gian render khi chạy camera." data-en="Smart keyframe baking automatically optimizes modifier keyframes, keeping 3ds Max file sizes lightweight and maintaining fast render times."></p>
+            </div>
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">🎛️</div>
+                <h3 data-vi="Hệ thống Preset & Tùy biến" data-en="Wind Presets & Customization">Hệ thống Preset & Tùy biến</h3>
+                <p data-vi="Cung cấp sẵn các mẫu preset gió chuẩn (Nhẹ, Vừa, Bão) và hơn 13 thanh slider tinh chỉnh chuyên sâu giúp bạn dễ dàng lưu trữ, quản lý cấu hình gió cho từng loại dự án." data-en="Comes with built-in wind presets (Breeze, Medium, Storm) and 13+ advanced sliders to easily adjust, save, and manage custom wind behaviors."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- WIND PHYSICS VISUALIZATION -->
+        <!-- INTERFACE SHOWCASE -->
+    <section id="interface" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="GIAO DIỆN CÔNG CỤ" data-en="INTERFACE SHOWCASE">GIAO DIỆN CÔNG CỤ</div>
+        <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI"></h2>
+        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
+        
+        <div class="interface-container">
+            <img src="interface_magictree.png" alt="Plugin Interface" style="width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        </div>
+    </section>
+
+    <!-- TREE CATEGORIES -->
+    <section id="categories" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="NHẬN DẠNG SINH HỌC" data-en="BIO-STRUCTURE DETECTION">NHẬN DẠNG SINH HỌC</div>
+        <h2 class="section-title" data-vi="Tự động nhận dạng 6 nhóm thực vật" data-en="Automatic detection of 6 plant types"></h2>
+        <p class="section-desc" data-vi="Hệ thống tự động phân tích cấu trúc cây và từ khóa vật liệu để áp dụng các thiết lập mô phỏng gió phù hợp nhất cho từng nhóm thực vật." data-en="Magic Tree automatically analyzes plant structures and materials to apply the most natural wind behavior for each category."></p>
+
+        <div class="cat-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th data-vi="Nhóm cây" data-en="Plant Class">Nhóm cây</th>
+                        <th data-vi="Thực vật tiêu biểu" data-en="Representative Species">Thực vật tiêu biểu</th>
+                        <th data-vi="Đặc tính chuyển động gió" data-en="Wind Sway Behavior">Đặc tính chuyển động gió</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="cat-badge">SMALL</span></td>
+                        <td data-vi="Cỏ nền, rêu bụi, hoa dại thấp sát đất" data-en="Lawn grass, moss, low groundcover wildflowers">Cỏ nền, rêu bụi, hoa dại thấp sát đất</td>
+                        <td data-vi="Dao động tần số cao cành lá sát đất, thân cỏ uốn cong mềm dẻo theo làn gió mặt đất." data-en="High-frequency leaf flutter close to ground, flexible grass blade bending."></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cat-badge">SHRUB</span></td>
+                        <td data-vi="Cây bụi tầm thấp, hoa hồng bụi, cây trang trí" data-en="Low shrubs, garden roses, ornamental low plants">Cây bụi tầm thấp, hoa hồng bụi, cây trang trí</td>
+                        <td data-vi="Rung lắc nhẹ nhàng phần cành ngọn tán bụi, neo giữ ổn định phần gốc gỗ sát mặt đất." data-en="Gentle upper branch sways, sturdy root anchoring near the soil line."></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cat-badge">TREE</span></td>
+                        <td data-vi="Cây đô thị tầm trung, cây bóng mát công cộng" data-en="Medium urban trees, public park shade trees">Cây đô thị tầm trung, cây bóng mát công cộng</td>
+                        <td data-vi="Cân bằng tự nhiên giữa độ uốn cong của thân chính và nhịp rung lắc của các tầng tán lá." data-en="Balanced natural sway between main trunk deflection and foliage vibration."></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cat-badge">BIG</span></td>
+                        <td data-vi="Cây cổ thụ lớn, xà cừ, bàng, đa cổ thụ" data-en="Large heritage trees, giant banyans, ancient maples">Cây cổ thụ lớn, xà cừ, bàng, đa cổ thụ</td>
+                        <td data-vi="Dao động chậm rãi và uy nghi của thân gỗ lớn, các cành nhánh nặng trĩu lay động biên độ lớn." data-en="Slow, majestic sways of heavy timber trunks, large branches waving."></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cat-badge">PALM</span></td>
+                        <td data-vi="Cọ cảnh, cau vua, các loài cây họ cau cảnh" data-en="Landscape palms, royal palms, cycads">Cọ cảnh, cau vua, các loài cây họ cau cảnh</td>
+                        <td data-vi="Thân sơ dẻo dai uốn nhẹ từ ngọn, lá tàu cọ vẩy động mạnh theo luồng khí nhưng cản xoắn thấp." data-en="Flexible fibrous trunk bending near the crown, long fronds whipping with low twisting."></td>
+                    </tr>
+                    <tr>
+                        <td><span class="cat-badge">COCONUT</span></td>
+                        <td data-vi="Dừa xiêm, dừa cảnh cao, cọ dầu thân gỗ cao" data-en="Coconut palms, tall oil palms, coastal palms">Dừa xiêm, dừa cảnh cao, cọ dầu thân gỗ cao</td>
+                        <td data-vi="Thân dừa uốn gập gợn sóng đặc trưng dưới sức gió mạnh, các tàu lá dừa vẩy nhịp nhàng biên độ cao." data-en="Wavy trunk bending under heavy wind speeds, large palm fronds swaying rhythmically."></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    
+    <!-- TUTORIAL / VIDEO -->
+    <section id="tutorial" style="background: var(--bg-surface);">
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 80px 24px;">
+            <div class="section-header" style="text-align: center; margin-bottom: 48px;">
+                <div class="section-label" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--primary); letter-spacing: 1px; margin-bottom: 12px;" data-vi="HƯỚNG DẪN" data-en="TUTORIAL">HƯỚNG DẪN</div>
+                <h2 class="section-title" style="font-size: 32px; font-weight: 600; margin-bottom: 16px;" data-vi="Video Hướng dẫn sử dụng" data-en="Video Tutorial">Video Hướng dẫn sử dụng</h2>
+                <p class="section-desc" style="font-size: 16px; color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto;" data-vi="Xem chi tiết cách cài đặt và sử dụng Magic Tree để tạo gió động cho scene của bạn." data-en="Watch the detailed guide on installing and using Magic Tree to animate your scenes."></p>
+            </div>
+            <div class="video-section">
+        <div class="video-box" id="featured-video">
+            <!-- Iframe (works on hosted web) -->
+            <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/aMThqiNNoBQ?rel=0&modestbranding=1&color=white" title="AH3 Magic Tree Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0;"></iframe>
+            <!-- Thumbnail fallback (shown if iframe fails on local file://) -->
+            <a id="yt-fallback" href="https://www.youtube.com/watch?v=aMThqiNNoBQ" target="_blank" style="display:none; position:absolute; inset:0; text-decoration:none; cursor:pointer;">
+                <img loading="lazy" src="https://img.youtube.com/vi/aMThqiNNoBQ/maxresdefault.jpg" alt="AH3 Magic Tree Demo" style="width:100%; height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'">
+                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
+                    <div style="width:72px; height:72px; border-radius:50%; background:rgba(102, 187, 106, 0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,0,0,0.4);">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="#121212"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                </div>
+                <div style="position:absolute; bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube">▶ Xem demo trên YouTube</div>
+            </a>
+        </div>
+            
+    </div>
+        </div>
+    </section>
+
+
+    <!-- PRICING -->
+    <section id="pricing">
+        <div class="section-label" data-vi="BẢNG GIÁ" data-en="PRICING">BẢNG GIÁ</div>
+        <h2 class="section-title" data-vi="Mua một lần. Dùng trọn đời." data-en="Pay once. Use forever."></h2>
+        <p class="section-desc" data-vi="Một giấy phép kích hoạt duy nhất theo mã ID phần cứng máy tính (HWID), sử dụng không giới hạn." data-en="A single perpetual license tied securely to your computer hardware ID, providing unlimited usage."></p>
+
+        <div class="pricing-section">
+            <div class="price-card">
+                <div class="price-badge">LIFETIME LICENSE</div>
+                <h3 data-vi="Magic Tree Pro" data-en="Magic Tree Pro">Magic Tree Pro</h3>
+                <div class="price-amount" data-vi="<del>999.000đ</del> 450.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $17 <span>/ lifetime</span>"></div>
+                <div class="price-period" data-vi="Giảm giá đặc biệt · Không phí định kỳ thuê bao" data-en="Special offer · No subscription or recurring fees"></div>
+                
+                <ul class="price-features">
+                    <li data-vi="Mô phỏng gió chuyển động 4 lớp tự nhiên và siêu mượt" data-en="Natural and ultra-smooth 4-layer wind simulations"></li>
+                    <li data-vi="Tương thích hoàn toàn Chaos Cosmos, Proxy, Maxtree, Globe Plants" data-en="Fully supports Chaos Cosmos, proxies, Maxtree, and Globe Plants"></li>
+                    <li data-vi="Thao tác cực nhanh 1-Click, không lag giật viewport" data-en="1-Click fast workflow, zero viewport lag"></li>
+                    <li data-vi="Cập nhật phiên bản mới miễn phí trọn đời" data-en="Lifetime free updates (Supports Max 2023-2027+)"></li>
+                    <li data-vi="Hỗ trợ kỹ thuật trực tiếp 1-1 từ tác giả" data-en="Direct 1-on-1 developer support from the author"></li>
+                </ul>
+
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center;" data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="background: var(--bg-surface);">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title" data-vi="Giải đáp thắc mắc kỹ thuật" data-en="Technical Frequently Asked Questions"></h2>
+        <p class="section-desc" data-vi="Các thông tin kỹ thuật quan trọng giúp bạn an tâm sử dụng trong dự án thương mại." data-en="Essential technical details for implementing the tool in commercial production."></p>
+
+        <div class="faq-section">
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 data-vi="Plugin chạy trên những phiên bản 3ds Max và môi trường nào?" data-en="Which 3ds Max versions and runtimes are supported?"></h3>
+                    <p data-vi="Magic Tree hỗ trợ 3ds Max từ phiên bản 2023 đến 2027+. Plugin tự động biên dịch và tương thích đa nền tảng: chạy trên .NET Framework 4.8 (Max 2023-2025) và chuyển đổi sang .NET 8 mới nhất (cho Max 2026+)." data-en="The plugin supports 3ds Max 2023 up to 2027+. It automatically compiles and routes calls between .NET Framework 4.8 (for 3ds Max 2023-2025) and .NET 8 (for 3ds Max 2026+) based on host architecture."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Tôi dùng Chaos Scatter, Forest Pack để rải rừng cây có bị đập chuyển động giống nhau không?" data-en="If I use Chaos Scatter or Forest Pack, will the scattered trees look identical?"></h3>
+                    <p data-vi="Không. Magic Tree tự động áp dụng độ lệch pha ngẫu nhiên (Phase Offset) cho từng cây đơn lẻ trong cảnh. Khi bạn rải hàng ngàn cây bằng Forest Pack hay Chaos Scatter, chúng sẽ tự động lay động sole nhịp nhàng cực kỳ tự nhiên thay vì chuyển động đồng điệu cơ học." data-en="No. Magic Tree automatically applies unique random phase offsets to each individual tree in the scene. Even if you scatter thousands of plants using Forest Pack or Chaos Scatter, they will sway out-of-phase dynamically instead of looking synchronized."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Việc gán gió lên các đối tượng Proxy có làm mất file hay hỏng vật liệu gốc không?" data-en="Does applying wind to Proxy objects risk losing files or ruining materials?"></h3>
+                    <p data-vi="Hoàn toàn không. Magic Tree sử dụng cơ chế bảo toàn thông tin gốc: vật liệu Multi-Material và tọa độ tham chiếu của Proxy được giữ nguyên vẹn 100%. Mọi thao tác gán gió đều hỗ trợ phím Ctrl+Z hoàn tác cực kỳ an toàn, trả lại đúng trạng thái Proxy nguyên bản mà không làm thay đổi hay phân tách file gốc." data-en="Not at all. Magic Tree features a strict safety layer: Multi-Materials and original coordinates of the proxies are 100% preserved. All actions support standard Ctrl+Z undo keys, returning the objects to their original proxy state without modifying the source files."></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <Footer />
+
+    <!-- LANGUAGE SWITCH & WIND CHART JS -->
+        <script>
+        let currentLang = 'vi';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = text;
+                } else {
+                    el.innerHTML = text;
+                }
+            });
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            setLang('vi');
+        });
+    </script>
+
+    
+
+
+    <!-- MAGIC TREE SIM SCRIPT -->
+    <script>
+        function setTreeState(state) {
+            const container = document.querySelector('.tree-sim-container');
+            if(container) {
+                container.setAttribute('data-state', state);
+                
+                for(let i = 1; i <= 3; i++) {
+                    // Update buttons
+                    const btn = document.getElementById('sim-btn-' + i);
+                    if(btn) {
+                        if(i === state) btn.classList.add('active');
+                        else btn.classList.remove('active');
+                    }
+                    
+                    // Sync with descriptions below
+                    const desc = document.getElementById('step-desc-' + i);
+                    if(desc) {
+                        if(i === state) desc.classList.add('synced-active');
+                        else desc.classList.remove('synced-active');
+                    }
+                }
+            }
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initial sync
+            setTreeState(1);
+            
+            const simContainer = document.querySelector('.tree-sim-container');
+            if (simContainer) {
+                let played = false;
+                const simObserver = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting && !played) {
+                        played = true;
+                        setTimeout(() => setTreeState(2), 1500);
+                        setTimeout(() => setTreeState(3), 3500);
+                    }
+                }, { threshold: 0.5 });
+                simObserver.observe(simContainer);
+            }
+        });
+    
+        // Mobile navigation dropdown toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const trigger = document.querySelector('.dropdown-trigger');
+            if (trigger) {
+                trigger.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const wrapper = trigger.closest('.nav-dropdown-wrapper');
+                        if (wrapper) wrapper.classList.toggle('open');
+                    }
+                });
+            }
+        });
+        </script>
+
+
+    </Layout>

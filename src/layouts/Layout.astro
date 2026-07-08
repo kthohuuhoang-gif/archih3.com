@@ -1,0 +1,69 @@
+---
+export interface Props {
+	title?: string;
+}
+
+const { title = 'AH3 Portal — AI & Automation Tools by Hồ Hữu Hoàng' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script is:inline>
+        (function() {
+            var search = window.location.search;
+            var forceDesktop = false;
+            if (search.indexOf('desktop') !== -1) {
+                forceDesktop = true;
+                if (window.sessionStorage) {
+                    sessionStorage.setItem('forceDesktop', 'true');
+                }
+            }
+            var hasForceDesktop = window.sessionStorage ? sessionStorage.getItem('forceDesktop') === 'true' : forceDesktop;
+            var isKindleDevice = /Kindle/i.test(navigator.userAgent);
+            if (isKindleDevice) {
+                if (!hasForceDesktop) {
+                    window.location.href = '/kindle/';
+                } else {
+                    window.addEventListener('DOMContentLoaded', function() {
+                        var link = document.getElementById('kindle-nav-link');
+                        if (link) link.style.display = 'inline-block';
+                    });
+                }
+            }
+        })();
+    </script>
+    <title>{title}</title>
+    <meta name="description" content="AH3 Portal - Công cụ AI và Tự động hóa Kiến trúc cho 3ds Max bởi Hồ Hữu Hoàng. Giúp tối ưu hóa quy trình làm việc của bạn.">
+    <meta property="og:title" content="AH3 Portal — AI & Automation Tools by Hồ Hữu Hoàng">
+    <meta property="og:description" content="AH3 Portal - Công cụ AI và Tự động hóa Kiến trúc cho 3ds Max bởi Hồ Hữu Hoàng. Giúp tối ưu hóa quy trình làm việc của bạn.">
+    <meta property="og:image" content="https://archih3.com/logo.png">
+    <meta property="og:type" content="website">
+    
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <slot name="head" />
+</head>
+<body>
+    <slot />
+    <!-- LANGUAGE SWITCH JS -->
+    <script is:inline src="/assets/js/lang.js"></script>
+    <script is:inline src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script is:inline>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({
+                    duration: 800,
+                    once: true,
+                    offset: 100
+                });
+            }
+        });
+    </script>
+</body>
+</html>

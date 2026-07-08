@@ -1,0 +1,1063 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="AH3 Magic Merger - Standalone Batch Model Importer & Smart Relinker for 3ds Max">
+<Fragment slot="head">
+<style>
+
+        
+
+        
+
+        
+
+        
+
+        /* BUTTONS */
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: var(--primary);
+            color: #121212; font-weight: 600; font-size: 14px;
+            border: none; border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-primary:hover {
+            background: var(--primary-hover); transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(77, 182, 172, 0.3);
+        }
+        .btn-outline {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 28px; background: transparent;
+            color: var(--text); font-weight: 400; font-size: 14px;
+            border: 1px solid var(--border); border-radius: 6px;
+            text-decoration: none; cursor: pointer; transition: all 0.25s;
+        }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* HERO */
+        .hero {
+            padding: 140px 24px 60px;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center; position: relative;
+        }
+        .hero-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; color: var(--primary);
+            border: 1px solid rgba(77,182,172,0.3);
+            padding: 6px 16px; border-radius: 20px;
+            margin-bottom: 24px; background: var(--primary-glow); letter-spacing: 1px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 60px); font-weight: 700;
+            line-height: 1.1; margin-bottom: 20px; letter-spacing: -2px;
+        }
+        .hero h1 .teal { color: var(--primary); }
+        .hero-sub {
+            font-size: 18px; color: var(--text-secondary);
+            max-width: 680px; margin: 0 auto 32px; font-weight: 300;
+        }
+        .hero-cta { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* VIDEO CONTAINER */
+        .video-section {
+            max-width: 800px; margin: 0 auto 80px; padding: 0 24px;
+        }
+        .video-box {
+            border-radius: 12px; overflow: hidden;
+            border: 1px solid rgba(77,182,172,0.2); background: #000;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5); aspect-ratio: 16/9;
+            position: relative;
+        }
+
+        /* SECTIONS */
+        section { padding: 80px 24px; }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace; font-size: 12px;
+            color: var(--primary); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 12px;
+            text-align: center;
+        }
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px); font-weight: 700;
+            letter-spacing: -1px; margin-bottom: 16px; text-align: center;
+        }
+        .section-desc {
+            font-size: 16px; color: var(--text-secondary);
+            max-width: 600px; font-weight: 300; margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        /* INTERACTIVE DEMO CONTAINER */
+        .interactive-section {
+            background: var(--bg-dark);
+            border-top: 1px solid rgba(77, 182, 172, 0.1);
+            border-bottom: 1px solid rgba(77, 182, 172, 0.1);
+        }
+        .app-demo-wrapper {
+            max-width: 1000px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px;
+        }
+        .demo-bar {
+            display: flex; gap: 8px; align-items: center; flex-wrap: wrap;
+            background: #0d0d0d; padding: 10px 14px; border-radius: 8px; border: 1px solid #2a2a2a;
+        }
+        .demo-bar span { color: var(--text-secondary); font-size: 12px; margin-right: 4px; }
+        .demo-btn {
+            background: var(--bg-light); color: var(--text); border: 1px solid var(--border);
+            padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; transition: all 0.2s;
+        }
+        .demo-btn:hover { background: #484848; }
+        .demo-btn.active { background: var(--primary); color: var(--teal-deep); border-color: var(--primary); font-weight: 600; }
+
+        .app-window {
+            width: 100%; max-width: 780px; background: var(--bg-page); border-radius: 12px; overflow: hidden;
+            border: 1px solid #000; box-shadow: 0 10px 40px rgba(0,0,0,.5);
+        }
+
+        .mock-header {
+            padding: 16px 22px; background: linear-gradient(135deg,#242424,#191919);
+            border-bottom: 1px solid var(--border); position: relative;
+        }
+        .mock-header .accentbar { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--primary); }
+        .mock-header .arch { font-size: 10.5px; font-weight: 800; letter-spacing: 3px; color: var(--primary); text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+        .mock-header .name { font-size: 25px; font-weight: 300; letter-spacing: .5px; margin-top: 2px; }
+        .mock-header .name b { font-weight: 700; }
+        .mock-header .meta { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); text-align: right; font-size: 10.5px; color: var(--text-secondary); line-height: 1.7; }
+        .mock-header .meta b { color: var(--text); }
+
+        .mock-body { display: flex; border-bottom: 1px solid var(--border); }
+        .mock-left { flex: 1.15; padding: 16px; display: flex; flex-direction: column; gap: 12px; border-right: 1px solid var(--border); }
+        .mock-right { width: 300px; padding: 16px; display: flex; flex-direction: column; gap: 12px; background: #202020; }
+
+        /* big preview */
+        .preview-big {
+            height: 296px; border-radius: 10px; background: radial-gradient(circle at 50% 40%,#3a3a3a,#202020);
+            border: 1px solid var(--border); position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center;
+        }
+        .preview-big .swatch { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 24px; text-align: center; }
+        .preview-big .sw-name { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+        .preview-big .sw-info { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+        .preview-big .sw-status { font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 4px 12px; border-radius: 4px; background: var(--primary-glow); color: var(--primary); font-weight: 600; }
+        .preview-big .lbl {
+            position: absolute; left: 12px; top: 10px; font-size: 12px; font-weight: 600;
+            background: rgba(0,0,0,.65); padding: 4px 10px; border-radius: 5px; color: var(--primary);
+        }
+        .preview-big .src {
+            position: absolute; right: 12px; bottom: 10px; font-size: 10.5px; color: var(--text-secondary);
+            background: rgba(0,0,0,.5); padding: 3px 9px; border-radius: 5px;
+        }
+
+        /* dropzone */
+        .dropzone {
+            flex: 1; min-height: 424px; border: 2px dashed var(--primary); border-radius: 12px;
+            background: rgba(77,182,172,.03); display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 16px; text-align: center; cursor: pointer; transition: .2s;
+        }
+        .dropzone:hover { background: rgba(77,182,172,.07); }
+        .dropzone .ic { font-size: 46px; opacity: .55; }
+        .dropzone h2 { font-size: 18px; }
+        .dropzone p { font-size: 12.5px; color: var(--text-secondary); max-width: 330px; line-height: 1.6; }
+        .dropzone .types { display: flex; gap: 7px; flex-wrap: wrap; justify-content: center; margin-top: 4px; }
+        .dropzone .types span {
+            font-size: 10.5px; padding: 3px 9px; border-radius: 11px; background: var(--bg-surface);
+            color: var(--text-secondary); border: 1px solid var(--border);
+        }
+
+        /* thumbnails 3x2 */
+        .thumbs { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+        .thumb {
+            aspect-ratio: 1.2/1; border-radius: 8px; overflow: hidden; cursor: pointer;
+            border: 2px solid transparent; position: relative; background: var(--bg-surface); transition: .15s;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 8px;
+        }
+        .thumb:hover { transform: translateY(-2px); }
+        .thumb.active { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+        .thumb .sw-ic { font-size: 24px; margin-bottom: 4px; }
+        .thumb .cap {
+            font-size: 9.5px; text-align: center;
+            color: var(--text); font-weight: 500;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%;
+        }
+        .thumb .badge { position: absolute; top: 4px; right: 4px; font-size: 8.5px; padding: 1px 5px; border-radius: 3px; font-weight: 700; }
+        .badge.found { background: var(--primary); color: var(--teal-deep); }
+        .badge.gen { background: var(--amber); color: #1c1306; }
+
+        /* right controls */
+        .mock-right h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; border-bottom: 1px solid var(--border); padding-bottom: 8px; color: var(--primary); }
+        .ctrl { margin-bottom: 10px; }
+        .ctrl label { display: block; font-size: 11px; color: var(--text-secondary); margin-bottom: 3px; }
+        .row { display: flex; align-items: center; gap: 8px; }
+        .slider { flex: 1; height: 4px; border-radius: 3px; background: var(--bg-surface); position: relative; }
+        .slider .fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--primary); border-radius: 3px; }
+        .slider .knob { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--primary); border: 2px solid #202020; }
+        .num { width: 56px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; color: var(--text); padding: 3px 4px; font-size: 11px; text-align: center; }
+        .toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-bottom: 10px; }
+        .toggle { width: 36px; height: 18px; border-radius: 9px; background: var(--primary); position: relative; cursor: pointer; transition: background 0.15s; }
+        .toggle.off { background: #555; }
+        .toggle .dot { position: absolute; top: 2px; left: 20px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: left 0.15s; }
+        .toggle.off .dot { left: 2px; }
+        .presets { display: flex; gap: 6px; }
+        .preset { flex: 1; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 5px; padding: 5px; font-size: 11px; text-align: center; cursor: pointer; }
+        .preset.on { border-color: var(--primary); color: var(--primary); background: rgba(77, 182, 172, 0.05); }
+        .preset:hover { background: #3a3a3a; }
+        .dropdown { background: var(--bg-surface); border: 1px solid var(--border); border-radius: 5px; padding: 6px 10px; font-size: 11px; color: var(--text); display: flex; justify-content: space-between; cursor: pointer; width: 100%; }
+        .dropdown .ar { color: var(--text-secondary); }
+        .divider { height: 1px; background: var(--border); margin: 8px 0; }
+
+        .mock-footer { padding: 12px 16px; background: #191919; }
+        .gen-btn {
+            width: 100%; padding: 12px; border: none; border-radius: 6px; cursor: pointer;
+            background: linear-gradient(135deg,var(--primary),var(--primary-hover)); color: var(--teal-deep);
+            font-size: 14px; font-weight: 700; letter-spacing: .3px; box-shadow: 0 4px 14px rgba(77,182,172,.2);
+            transition: all 0.2s;
+        }
+        .gen-btn:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+        .hidden { display: none !important; }
+        .note { font-size: 12px; color: var(--text-secondary); max-width: 780px; text-align: center; line-height: 1.6; margin-top: 14px; }
+        .note b { color: var(--primary); }
+
+        /* FEATURES */
+        .features-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; max-width: 1100px; margin: 0 auto;
+        }
+        .feature-card {
+            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            border-radius: 12px !important; padding: 32px;
+            transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .feature-card:hover {
+            border-color: rgba(77,182,172,0.3); transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .feature-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-icon {
+            width: 44px; height: 44px; border-radius: 10px;
+            background: var(--primary-glow); border: 1px solid rgba(77,182,172,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; margin-bottom: 20px;
+        }
+        .feature-card h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .feature-card p { font-size: 15px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        /* STEPS / WORKFLOW */
+        .steps-section {
+            background: var(--bg-main);
+        }
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px; max-width: 900px; margin: 0 auto;
+        }
+        .step-item {
+            text-align: center; position: relative;
+        }
+        .step-num {
+            font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700;
+            color: var(--primary); margin-bottom: 12px; opacity: 0.8;
+        }
+        .step-item h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .step-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; }
+
+        /* PRICING */
+        .pricing-section { max-width: 900px; margin: 0 auto; }
+        .pricing-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 24px; margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .pricing-grid {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+            .mock-header .meta {
+                position: static !important;
+                transform: none !important;
+                text-align: left !important;
+                margin-top: 8px !important;
+            }
+            .mock-body {
+                flex-direction: column !important;
+            }
+            .mock-left {
+                border-right: none !important;
+                border-bottom: 1px solid var(--border) !important;
+            }
+            .mock-right {
+                width: 100% !important;
+            }
+        }
+        .price-card {
+            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            border-radius: 12px !important; padding: 48px 32px;
+            text-align: center; position: relative;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .price-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, var(--bg-main), rgba(77, 182, 172, 0.05));
+        }
+        .price-card.featured::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0;
+            height: 4px; background: var(--primary); border-radius: 16px 16px 0 0;
+        }
+        .price-badge {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; padding: 4px 12px; border-radius: 12px;
+            margin-bottom: 20px; letter-spacing: 0.5px;
+            background: var(--primary-glow); color: var(--primary);
+            font-weight: 600;
+        }
+        .price-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+        .price-amount {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 36px; font-weight: 600; color: var(--primary);
+            margin-bottom: 4px; display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .price-amount del { font-size: 18px; color: var(--text-secondary); font-weight: 400; }
+        .price-amount span { font-size: 14px; font-weight: 400; color: var(--text-secondary); }
+        .price-period { font-size: 13px; color: var(--warning); margin-bottom: 32px; font-weight: 600; }
+        
+        .price-features {
+            list-style: none; text-align: left; max-width: 350px; margin: 0 auto 32px;
+        }
+        .price-features li {
+            padding: 8px 0; font-size: 15px; color: var(--text-secondary);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .price-features li::before {
+            content: '✓'; color: var(--primary); font-weight: 600;
+        }
+
+        /* FAQ */
+        .faq-section { max-width: 800px; margin: 0 auto; }
+        .faq-grid { display: flex; flex-direction: column; gap: 16px; }
+        .faq-item {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            border-radius: 8px; padding: 24px;
+        }
+        .faq-item h3 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+        .faq-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+        
+
+        
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero { animation: fadeUp 0.8s ease-out; }
+        .feature-card { animation: fadeUp 0.6s ease-out both; }
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+    
+        /* INTERFACE CONTAINER RESPONSIVE */
+        .interface-container {
+            max-width: 800px; margin: 0 auto; padding: 24px;
+            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            border-radius: 12px !important; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        @media (max-width: 768px) {
+            .interface-container {
+                padding: 10px !important;
+                border-radius: 10px !important;
+            }
+        }
+
+    
+        /* PIPELINE DRAG & CURSOR & INTERACTIVE DETAILS */
+        .pipeline-wrapper {
+            width: 100%; display: flex; justify-content: center; margin-bottom: 40px;
+        }
+        .pipeline-demo {
+            width: 900px; height: 450px; position: relative;
+            background: #0a0a0a; border-radius: 12px;
+            border: 1px solid rgba(77,182,172,0.2);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), inset 0 0 40px rgba(0,0,0,0.5);
+            transform-origin: center top; font-family: 'JetBrains Mono', monospace;
+            overflow: hidden;
+        }
+        
+        @media (max-width: 950px) { .pipeline-demo { transform: scale(0.85); margin-bottom: -60px; } }
+        @media (max-width: 768px) { .pipeline-demo { transform: scale(0.65); margin-bottom: -140px; } }
+        @media (max-width: 500px) { .pipeline-demo { transform: scale(0.42); margin-bottom: -240px; } }
+
+        .pl-path {
+            position: absolute; border: 2px dashed rgba(77,182,172,0.3);
+            border-top: none; border-left: none;
+            pointer-events: none; opacity: 0; transition: opacity 0.5s;
+        }
+        .pl-path.active { opacity: 1; }
+        .pl-path-1 { width: 160px; height: 2px; top: 190px; left: 160px; border-bottom: 2px dashed rgba(77,182,172,0.3); }
+        .pl-path-2 { width: 140px; height: 2px; top: 120px; right: 180px; border-bottom: 2px dashed rgba(77,182,172,0.3); }
+        .pl-path-3 { width: 2px; height: 160px; top: 120px; right: 180px; border-right: 2px dashed rgba(77,182,172,0.3); }
+
+        .pl-drag-file {
+            position: absolute; left: -80px; top: 160px; width: 64px; height: 64px;
+            background: rgba(30,30,30,0.9); border-radius: 8px; border: 2px solid var(--primary);
+            opacity: 0; z-index: 100; pointer-events: none;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+            transition: transform 0.8s ease-in-out, opacity 0.3s;
+        }
+        .pl-drag-file .icon { font-size: 28px; line-height: 1; }
+        .pl-drag-file .label { font-size: 8px; color: #fff; margin-top: 4px; font-weight: bold; text-transform: uppercase; }
+
+        .pl-cursor {
+            position: absolute; left: 200px; top: 380px; width: 24px; height: 24px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234db6ac' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z'/%3E%3C/svg%3E") no-repeat;
+            opacity: 0; z-index: 101; pointer-events: none;
+            transition: all 0.8s ease-in-out;
+        }
+        .pl-cursor.click-pulse::after {
+            content: ''; position: absolute; left: -8px; top: -8px; width: 16px; height: 16px;
+            border: 2px solid var(--primary); border-radius: 50%; animation: pulse 0.4s ease-out;
+        }
+        @keyframes pulse { 0% { transform: scale(0.5); opacity: 1; } 100% { transform: scale(2); opacity: 0; } }
+
+        .pl-btn {
+            position: absolute; left: 40px; top: 290px; width: 120px;
+            padding: 12px 0; background: var(--primary); color: #000;
+            border: none; border-radius: 6px; font-weight: bold; cursor: pointer;
+            transition: all 0.3s; font-family: 'JetBrains Mono', monospace; font-size: 13px;
+            z-index: 50;
+        }
+        .pl-btn:hover { background: var(--primary-hover); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(77,182,172,0.3); }
+        .pl-btn.active { background: #444; color: #888; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .pl-term {
+            position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+            width: 320px; height: 260px; background: #111; border-radius: 8px;
+            border: 1px solid rgba(77,182,172,0.2); overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.8); z-index: 5;
+        }
+        .pl-term-hdr { background: #1a1a1a; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; }
+        .pl-term-dots { display: flex; gap: 6px; }
+        .pl-term-dots span { width: 10px; height: 10px; border-radius: 50%; }
+        .pl-term-dots span:nth-child(1) { background: #ff5f56; }
+        .pl-term-dots span:nth-child(2) { background: #ffbd2e; }
+        .pl-term-dots span:nth-child(3) { background: #27c93f; }
+        
+        .pl-term-body {
+            padding: 12px; height: 210px; overflow-y: hidden; text-align: left;
+            color: #4af626; font-size: 11px; line-height: 1.6;
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px);
+        }
+        .term-line { opacity: 0; animation: fadeInLine 0.1s forwards; }
+        .term-line.info { color: #888; }
+        .term-line.high { color: #fff; text-shadow: 0 0 5px #fff; }
+        .term-line.succ { color: #4af626; text-shadow: 0 0 3px #4af626; }
+        .term-line.warn { color: #ffb74d; text-shadow: 0 0 3px #ffb74d; }
+        .term-cursor { display: inline-block; width: 6px; height: 12px; background: #4af626; animation: blink 1s step-end infinite; vertical-align: middle; margin-left: 4px; }
+        @keyframes fadeInLine { to { opacity: 1; } }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* PREVIEW POPUP */
+        .pl-preview-box {
+            position: absolute; left: 40px; top: 80px; width: 120px; height: 120px;
+            border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);
+            background: #1e1e1e; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; transform: scale(0.6); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10;
+        }
+        .pl-preview-box.pop { opacity: 1; transform: scale(1); }
+        .pl-preview-box img { width: 100%; height: 100%; object-fit: cover; border-radius: 7px; }
+        .pl-preview-box::after { content: 'PREVIEW PRV'; position: absolute; bottom: -20px; font-size: 10px; color: #888; font-weight: bold; }
+
+        /* SHIELD VIRUS SCAN */
+        .pl-shield-box {
+            position: absolute; right: 140px; top: 70px; width: 80px; height: 80px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; transform: scale(0); transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 20;
+        }
+        .pl-shield-box.pop { opacity: 1; transform: scale(1); }
+        .pl-shield-icon {
+            font-size: 40px; filter: drop-shadow(0 0 10px rgba(77, 182, 172, 0.4));
+            transition: all 0.3s;
+        }
+        .pl-shield-box::after { content: 'VIRUS SCAN'; position: absolute; bottom: -16px; font-size: 10px; color: #888; font-weight: bold; text-align: center; width: 120px; }
+        .pl-shield-box.clean .pl-shield-icon { color: #4db6ac !important; }
+        .pl-shield-box.scan { animation: scanPulse 1.5s infinite; }
+        @keyframes scanPulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255, 183, 77, 0.4)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(255, 183, 77, 0.8)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(255, 183, 77, 0.4)); }
+        }
+
+        /* 3D VIEWPORT */
+        .pl-scene {
+            position: absolute; right: 130px; bottom: 60px;
+            width: 100px; height: 100px; perspective: 800px; z-index: 5;
+            opacity: 0; transform: scale(0.6); transition: all 0.6s;
+        }
+        .pl-scene.pop { opacity: 1; transform: scale(1); }
+        .pl-scene::before {
+            content: ''; position: absolute; bottom: 0; left: -50px; right: -50px; height: 2px;
+            background: radial-gradient(circle, rgba(77, 182, 172, 0.4), transparent);
+            transform: rotateX(80deg);
+        }
+        .pl-box {
+            width: 80px; height: 80px; position: absolute; left: 10px; top: 10px;
+            transform-style: preserve-3d; transform: rotateX(-20deg) rotateY(30deg);
+            transition: transform 1.5s ease-in-out, opacity 0.5s;
+            opacity: 0.1;
+        }
+        .pl-box.textured { opacity: 1; transform: rotateX(-20deg) rotateY(390deg); }
+        .pl-face {
+            position: absolute; width: 80px; height: 80px;
+            border: 1px dashed rgba(77, 182, 172, 0.4);
+            background: rgba(77, 182, 172, 0.03);
+            transition: all 0.5s;
+        }
+        .pl-box.textured .pl-face {
+            border: 1px solid var(--primary);
+            background: rgba(77, 182, 172, 0.15);
+            box-shadow: 0 0 15px rgba(77,182,172,0.3);
+        }
+        .pl-face.front  { transform: translateZ(40px); }
+        .pl-face.back   { transform: rotateY(180deg) translateZ(40px); }
+        .pl-face.top    { transform: rotateX(90deg) translateZ(40px); }
+        .pl-face.bottom { transform: rotateX(-90deg) translateZ(40px); }
+        .pl-face.right  { transform: rotateY(90deg) translateZ(40px); }
+        .pl-face.left   { transform: rotateY(-90deg) translateZ(40px); }
+        
+        .pl-ready {
+            position: absolute; bottom: 20px; right: 40px; font-size: 11px;
+            color: var(--primary); font-weight: bold; letter-spacing: 0.5px;
+            opacity: 0; transition: opacity 0.3s;
+            text-shadow: 0 0 5px var(--primary);
+        }
+
+
+</style>
+</Fragment>
+
+
+
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+
+    <!-- NAV -->
+    <Navbar />
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge" data-vi="BATCH 3D MODEL IMPORTER &amp; SMART RELINKER" data-en="BATCH 3D MODEL IMPORTER &amp; SMART RELINKER">BATCH 3D MODEL IMPORTER &amp; SMART RELINKER</div>
+        <h1 data-vi="Nhập model hàng loạt.<br><span class='teal'>Tự động sửa map theo lô.</span>" data-en="Batch import models.<br><span class='teal'>Auto-relink textures.</span>"></h1>
+        <p class="hero-sub" data-vi="Plugin 3ds Max chuyên nghiệp để kéo thả file .max, file nén (.zip/.rar/.7z), thư mục hay ảnh preview vào scene. Tự động merge, tự động gán layer, tự động xếp lưới và smart-relink texture tức thì." data-en="Professional 3ds Max plugin to drag and drop .max files, compressed archives (.zip/.rar/.7z), folders, or preview images into your scene. Automatically merges, assigns layers, arranges in a grid, and relinks textures instantly."></p>
+        <div class="hero-cta">
+            <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 300k" data-en="Get Lifetime — $12">Mua bản quyền — 300k</a>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Vui lòng liên hệ DEV qua Facebook để mua hoặc tải bộ cài bản quyền!');" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE DEMO (MOCKUP APP) -->
+        <!-- INTERFACE SHOWCASE -->
+    <section id="interface" style="background: var(--bg-surface);">
+        <div class="section-label" data-vi="QUY TRÌNH TỰ ĐỘNG" data-en="AUTOMATED WORKFLOW">QUY TRÌNH TỰ ĐỘNG</div>
+        <h2 class="section-title" data-vi="Trải nghiệm Kéo Thả &amp; Merge thông minh" data-en="Interactive Drag &amp; Merge Pipeline"></h2>
+        <p class="section-desc" data-vi="Nhấp &quot;PROCESS MERGE&quot; để trải nghiệm toàn bộ quy trình: Giải nén, Tải ảnh PRV, Quét virus, Sửa đường dẫn map và Merge model." data-en="Click &quot;PROCESS MERGE&quot; to witness the magic: extraction, preview load, virus clean, relink, and grid-merging."></p>
+        
+        <div class="pipeline-wrapper">
+            <div class="pipeline-demo" id="magic-pipeline">
+                <div class="pl-path pl-path-1" id="pl-path-1"></div>
+                <div class="pl-path pl-path-2" id="pl-path-2"></div>
+                <div class="pl-path pl-path-3" id="pl-path-3"></div>
+
+                <!-- Preview Box -->
+                <div class="pl-preview-box" id="pl-preview-box">
+                    <img src="https://img.youtube.com/vi/sfenH9d4h8I/maxresdefault.jpg" alt="Model Preview">
+                </div>
+
+                <!-- Shield Scan Box -->
+                <div class="pl-shield-box" id="pl-shield-box">
+                    <div class="pl-shield-icon">&#128737;</div>
+                </div>
+
+                <!-- Drag File Representation -->
+                <div class="pl-drag-file" id="pl-drag-file">
+                    <div class="icon">📦</div>
+                    <div class="label">bed_3d.zip</div>
+                </div>
+
+                <div class="pl-cursor" id="pl-cursor"></div>
+                <button class="pl-btn" id="pl-btn" onclick="startPipeline()">PROCESS MERGE</button>
+
+                <!-- Mock Terminal -->
+                <div class="pl-term">
+                    <div class="pl-term-hdr">
+                        <div class="pl-term-dots"><span></span><span></span><span></span></div>
+                        <div style="font-size: 10px; color: #666; font-weight: bold;">Merger Console</div>
+                    </div>
+                    <div class="pl-term-body" id="pl-term-out">
+                        <div class="term-line info">Waiting for input...<span class="term-cursor"></span></div>
+                    </div>
+                </div>
+
+                <!-- 3D Scene Viewport -->
+                <div class="pl-scene" id="pl-scene">
+                    <div class="pl-box" id="pl-box">
+                        <div class="pl-face front"></div>
+                        <div class="pl-face back"></div>
+                        <div class="pl-face top"></div>
+                        <div class="pl-face bottom"></div>
+                        <div class="pl-face right"></div>
+                        <div class="pl-face left"></div>
+                    </div>
+                </div>
+                
+                <div class="pl-ready" id="pl-ready">✓ MODEL MERGED SUCCESSFULLY</div>
+            </div>
+        </div>
+
+        <div class="steps-grid">
+            <div class="step-item" id="pl-step-1" onclick="playStep1()" style="cursor:pointer;">
+                <div class="step-num">01</div>
+                <h3 data-vi="Kéo Thả File Nén" data-en="Drag &amp; Drop Zip">Kéo Thả File Nén</h3>
+                <p data-vi="Kéo tệp .max hoặc .zip/.rar chứa model thả trực tiếp vào plugin. Hệ thống tự động giải nén và nạp tệp." data-en="Drop your .max file or archive package directly. The system auto-extracts it instantly."></p>
+            </div>
+            <div class="step-item" id="pl-step-2" onclick="playStep2()" style="cursor:pointer;">
+                <div class="step-num">02</div>
+                <h3 data-vi="Tạo PRV &amp; Diệt Virus" data-en="Preview &amp; Scan">Tạo PRV &amp; Diệt Virus</h3>
+                <p data-vi="Plugin tự động tải ảnh xem trước PRV, quét sạch mọi script virus độc hại và tối ưu hóa tệp trước khi nạp." data-en="Companion finder locates the preview image, script virus cleaner scans code, and geometry is optimized."></p>
+            </div>
+            <div class="step-item" id="pl-step-3" onclick="playStep3()" style="cursor:pointer;">
+                <div class="step-num">03</div>
+                <h3 data-vi="Relink Map &amp; Merge" data-en="Relink &amp; Merge">Relink Map &amp; Merge</h3>
+                <p data-vi="Thuật toán Smart Relink tự sửa đường dẫn map bị thiếu, sau đó merge model đặt vào lưới tọa độ Max." data-en="Smart Relinker auto-resolves missing map paths and imports the clean model into 3ds Max layout."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERFACE SCREENSHOT SECTION -->
+    <section id="interface-shot" style="background: var(--bg-dark); border-top: 1px solid rgba(77,182,172,0.1);">
+        <div class="section-label" data-vi="GIAO DIỆN THỰC TẾ" data-en="UI SCREENSHOT">GIAO DIỆN THỰC TẾ</div>
+        <h2 class="section-title" data-vi="Trực quan hóa công cụ" data-en="Real UI Representation"></h2>
+        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
+        
+        <div class="interface-container" style="max-width: 1000px; margin: 0 auto;">
+            <img src="interface_magicmerger.png" alt="Plugin Interface" style="width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+        <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="KEY FEATURES">TÍNH NĂNG NỔI BẬT</div>
+        <h2 class="section-title" data-vi="Tối ưu hóa quy trình nhập thư viện 3D" data-en="Streamline your 3D Asset Imports"></h2>
+        <p class="section-desc" data-vi="Magic Merger giải quyết triệt để vấn đề mất mát đường dẫn map, tốn thời gian giải nén và bố trí mô hình thủ công." data-en="Magic Merger solves missing texture paths, manual zip extractions, and tedious model positioning."></p>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3 data-vi="Nhập file nén hàng loạt" data-en="Batch Zip/Rar/7z Merging">Nhập file nén hàng loạt</h3>
+                <p data-vi="Không cần giải nén thủ công từng file. Chỉ cần kéo thả hàng loạt file nén .zip, .rar, .7z hay folder chứa model vào hàng đợi, plugin tự giải nén và nhập model vào cảnh." data-en="No manual zip extractions needed. Drag-drop multiple .zip, .rar, or .7z archives or asset folders directly into the queue, and watch them auto-merge into 3ds Max."></p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3 data-vi="Smart Relink thông minh" data-en="Batch Smart Relinker">Smart Relink thông minh</h3>
+                <p data-vi="Thuật toán tự động tìm và sửa đường dẫn bitmap bị mất của mô hình vừa nhập (hỗ trợ lưu trữ lên tới 50.000 file index). Dọn dẹp cấu trúc map, sửa lỗi đường dẫn quá dài." data-en="Automatically scans, matches, and relinks missing bitmap texture paths for all merged models (supports up to 50k file index storage). Corrects vendor folder layouts and fixes long paths."></p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon">📐</div>
+                <h3 data-vi="Xếp lưới tự động (Auto Grid)" data-en="Auto Grid Layout">Xếp lưới tự động (Auto Grid)</h3>
+                <p data-vi="Tự động sắp xếp các mô hình được merge vào cảnh theo dạng lưới (Grid) ngăn nắp với khoảng cách tùy chỉnh linh hoạt, tránh tình trạng các model bị đè chồng lấn lên nhau." data-en="Automatically arranges imported models into a clean matrix grid with adjustable spacing, preventing assets from spawning directly on top of each other at origin."></p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon">🏷️</div>
+                <h3 data-vi="Tự động phân lớp Layer" data-en="Auto Layer Categorization">Tự động phân lớp Layer</h3>
+                <p data-vi="Phân tích cấu trúc thư mục và từ khóa mô hình để tự động gán layer tương ứng (ví dụ: Furniture, Lighting, Vegetation), giữ cho quản lý scene của bạn luôn gọn gàng sạch sẽ." data-en="Analyzes asset names and folders to automatically group models into corresponding 3ds Max layers (e.g. Furniture, Lighting, Plants) to keep your project hierarchy organized."></p>
+            </div>
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon">📂</div>
+                <h3 data-vi="Quét ảnh preview thông minh" data-en="Companion Model Finder">Quét ảnh preview thông minh</h3>
+                <p data-vi="Kéo thả duy nhất ảnh preview (.jpg/.png) từ web hay folder vào — thuật toán tự động quét tìm tệp tin .max hoặc file nén tương ứng trong thư mục để đưa vào hàng đợi." data-en="Drag a preview image (.jpg/.png) in — the plugin auto-scans nearby folders to locate the companion .max file or archive, adding the model directly into the queue."></p>
+            </div>
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon">📐</div>
+                <h3 data-vi="Xuất CAD 2D tự động" data-en="3D to 2D CAD Export">Xuất CAD 2D tự động</h3>
+                <p data-vi="Tích hợp tiện ích bổ trợ tự tạo hình chiếu CAD 2D từ khối 3D vừa merge, giúp bạn nhanh chóng triển khai bản vẽ mặt bằng kỹ thuật mà không cần vẽ lại." data-en="Includes a companion utility script to auto-generate 2D CAD projection block lines from your merged 3D geometry for rapid construction drawing generation."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEPS / WORKFLOW -->
+    <section class="steps-section" id="workflow">
+        <div class="section-label" data-vi="QUY TRÌNH" data-en="STEPS">QUY TRÌNH</div>
+        <h2 class="section-title" data-vi="Quy trình 3 bước siêu tốc" data-en="Simple 3-Step Import Flow"></h2>
+        <p class="section-desc" data-vi="Đơn giản hóa việc quản lý và nhập hàng tá mô hình phức tạp vào 3ds Max." data-en="Simplifies the process of managing and importing dozens of heavy assets into 3ds Max."></p>
+
+        <div class="steps-grid">
+            <div class="step-item">
+                <div class="step-num">01</div>
+                <h3 data-vi="Kéo Thả Tài Nguyên" data-en="Drag &amp; Drop Assets">Kéo Thả Tài Nguyên</h3>
+                <p data-vi="Thả nhiều file .max, file nén hoặc thư mục chứa thư viện 3D vào hàng đợi hiển thị." data-en="Drop multiple .max files, zip archives, or vegetation/furniture folders directly into the queue view."></p>
+            </div>
+            <div class="step-item">
+                <div class="step-num">02</div>
+                <h3 data-vi="Cấu hình tùy chọn" data-en="Configure Settings">Cấu hình tùy chọn</h3>
+                <p data-vi="Bật Auto Grid, chọn khoảng cách lưới, gán danh mục layer và tùy chọn thu gom maps." data-en="Enable Auto Grid, adjust spacing, choose layer naming patterns, and select texture collect folders."></p>
+            </div>
+            <div class="step-item">
+                <div class="step-num">03</div>
+                <h3 data-vi="Bấm Merge / Batch" data-en="Batch Merge &amp; Relink">Bấm Merge / Batch</h3>
+                <p data-vi="Nhấp Merge, hệ thống tự động import từng tệp và chạy thuật toán Smart Relink map ngầm." data-en="Click Batch Merge, the system automatically processes all entries and smart-relinks all assets in the background."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+        <div class="section-label" data-vi="BẢNG GIÁ KHUYẾN MÃI" data-en="INTRODUCTORY PRICE">BẢNG GIÁ KHUYẾN MÃI</div>
+        <h2 class="section-title" data-vi="Sở hữu vĩnh viễn. Không phí gia hạn." data-en="Pay once. Use forever."></h2>
+        <p class="section-desc" data-vi="Giấy phép trọn đời kích hoạt theo ID phần cứng máy tính (HWID), sử dụng không giới hạn." data-en="Introductory launch pricing for a perpetual license tied to your HWID."></p>
+
+        <div class="pricing-section">
+            <div class="pricing-grid">
+                <!-- Card 1: Standalone -->
+                <div class="price-card featured">
+                    <div>
+                        <div class="price-badge">LIFETIME KEY</div>
+                        <h3 data-vi="Magic Merger Standalone" data-en="Magic Merger Standalone">Magic Merger Standalone</h3>
+                        <div class="price-amount" data-vi="<del>999.000đ</del> 300.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $12 <span>/ lifetime</span>"></div>
+                        <div class="price-period" data-vi="Khuyến mãi đặc biệt nhân dịp mở bán" data-en="Special introductory discount">Khuyến mãi đặc biệt nhân dịp mở bán</div>
+                        
+                        <ul class="price-features">
+                            <li data-vi="Merge hàng loạt tệp tin .max và file nén .zip/.rar/.7z" data-en="Batch merge multiple .max files and .zip/.rar/.7z archives"></li>
+                            <li data-vi="Smart Relink tự tìm map thất lạc theo lô (lên tới 50.000 file index)" data-en="Smart Relinker auto-locates missing maps (up to 50k file indices)"></li>
+                            <li data-vi="Tự động phân bố vị trí dạng lưới (Grid Layout) và gán Layer" data-en="Auto Grid Layout positioning and automatic layer grouping"></li>
+                            <li data-vi="Xử lý đường dẫn map quá dài và thu gom map thông minh" data-en="Fixes long file paths and consolidates textures into project folders"></li>
+                            <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật phiên bản mới miễn phí trọn đời" data-en="Perpetual license with lifetime free updates"></li>
+                        </ul>
+                    </div>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center; margin-top:20px;" data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
+                </div>
+
+                <!-- Card 2: Combo -->
+                <div class="price-card featured">
+                    <div>
+                        <div class="price-badge" style="background:var(--primary-glow); color:var(--primary);">COMBO OFFER</div>
+                        <h3 data-vi="Combo Material &amp; Merger" data-en="Combo Material &amp; Merger">Combo Material &amp; Merger</h3>
+                        <div class="price-amount" data-vi="<del>1.998.000đ</del> 500.000đ <span>/ vĩnh viễn</span>" data-en="<del>$78</del> $20 <span>/ lifetime</span>"></div>
+                        <div class="price-period" data-vi="Gói combo tiết kiệm đặc biệt lên đến 75%" data-en="Special bundle discount - Save up to 75%">Gói combo tiết kiệm đặc biệt lên đến 75%</div>
+                        
+                        <ul class="price-features">
+                            <li data-vi="Giấy phép trọn đời cho <b>CẢ HAI</b> plugin độc lập" data-en="Lifetime keys for <b>BOTH</b> standalone plugins"></li>
+                            <li data-vi="Magic Material — tạo map PBR offline 1-click" data-en="Magic Material — 1-click offline PBR generator"></li>
+                            <li data-vi="Magic Merger — batch merge và smart-relink texture" data-en="Magic Merger — batch merge &amp; smart texture relinker"></li>
+                            <li data-vi="Tương thích 3ds Max 2023-2027+, render Corona / V-Ray" data-en="Supports 3ds Max 2023-2027+, Corona / V-Ray renderers"></li>
+                            <li data-vi="Cập nhật miễn phí trọn đời và hỗ trợ ưu tiên" data-en="Lifetime free updates &amp; priority developer support"></li>
+                        </ul>
+                    </div>
+                    <div class="cta-wrapper" style="position: relative; display: block; width: 100%; margin-top: 20px;">
+                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center;" data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
+                        <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" style="background: var(--bg-dark);">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions"></h2>
+        <p class="section-desc" data-vi="Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Merger." data-en="Core technical aspects about how Magic Merger functions under the hood."></p>
+
+        <div class="faq-section">
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 data-vi="Plugin hoạt động như thế nào khi kéo thả ảnh preview?" data-en="How does the plugin handle preview image drag-and-drops?"></h3>
+                    <p data-vi="Khi bạn kéo một tệp ảnh preview (.jpg/.png) vào plugin, thuật toán 'Companion Finder' sẽ tự động quét thư mục chứa ảnh đó để tìm các tệp tin model đi kèm (file .max, hoặc archive nén chứa .max) có cùng tên gốc. Sau đó, nó tự động đưa model tìm được vào hàng đợi để merge." data-en="When you drop a preview image (.jpg/.png) into the plugin, the 'Companion Finder' algorithm scans the folder to locate matching model files (.max, or archives containing .max) sharing the same root filename, automatically queuing them for import."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Làm thế nào để tính năng Smart Relink tìm thấy map bị thiếu?" data-en="How does Smart Relink locate missing texture maps?"></h3>
+                    <p data-vi="Magic Merger tự động lưu trữ cơ sở dữ liệu đường dẫn map trong thư viện của bạn (chỉ số index tối đa 50k file). Khi merge model mới, plugin sẽ phân tích cấu trúc vendor gốc (như Maxtree, Poliigon, Chaos Cosmos...) và đối chiếu với cơ sở dữ liệu để tự động thiết lập lại đường dẫn map chính xác mà không cần người dùng thao tác." data-en="Magic Merger maintains a local path index database (up to 50k files). When merging a model, it automatically parses major vendor folder conventions and redirects missing paths to correct files, restoring V-Ray/Corona material textures instantly."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Tính năng gán Layer và xếp lưới (Grid Layout) hoạt động như thế nào?" data-en="How does the Grid Layout and layer grouping work?"></h3>
+                    <p data-vi="Tính năng Auto Grid xếp các model merge theo hàng lối ngăn nắp trên mặt phẳng tọa độ dựa theo khoảng cách được thiết lập trên thanh trượt. Auto Layer phân tích từ khóa và phân bổ các mô hình vừa nhập vào các layer được thiết lập sẵn trong Max để bạn dễ quản lý ẩn/hiện." data-en="Auto Grid places imported assets sequentially in a matrix layout on the ground plane using the spacing defined on the slider. Auto Layer assigns models to preset 3ds Max layer channels by analyzing file names and keywords."></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <Footer />
+
+    <!-- LANGUAGE SWITCH & INTERACTIVE MOCKUP JS -->
+        <script>
+        let currentLang = 'vi';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
+            });
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = text;
+                } else {
+                    el.innerHTML = text;
+                }
+            });
+        }
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            setLang('vi');
+        });
+
+        // --- INTERACTIVE PIPELINE DEMO TIMELINE LOGIC ---
+        let animTimeout;
+
+        function playStep1() {
+            if (animTimeout) clearTimeout(animTimeout);
+            
+            document.getElementById('pl-step-1').classList.add('active');
+            document.getElementById('pl-step-2').classList.remove('active');
+            document.getElementById('pl-step-3').classList.remove('active');
+            
+            // Reset elements
+            const file = document.getElementById('pl-drag-file');
+            const cursor = document.getElementById('pl-cursor');
+            const preview = document.getElementById('pl-preview-box');
+            const shield = document.getElementById('pl-shield-box');
+            const scene = document.getElementById('pl-scene');
+            const box = document.getElementById('pl-box');
+            const path1 = document.getElementById('pl-path-1');
+            const path2 = document.getElementById('pl-path-2');
+            const path3 = document.getElementById('pl-path-3');
+            const ready = document.getElementById('pl-ready');
+            const term = document.getElementById('pl-term-out');
+            
+            file.style.opacity = '0';
+            file.style.transform = 'translate(0, 0)';
+            cursor.style.opacity = '0';
+            cursor.style.transform = 'translate(0, 0)';
+            preview.classList.remove('pop');
+            shield.classList.remove('pop', 'clean', 'scan');
+            scene.classList.remove('pop');
+            box.classList.remove('textured');
+            path1.classList.remove('active');
+            path2.classList.remove('active');
+            path3.classList.remove('active');
+            ready.style.opacity = '0';
+            
+            // Print Step 1 Logs
+            term.innerHTML = '<div class="term-line info">Waiting for input...<span class="term-cursor"></span></div>';
+            
+            setTimeout(() => {
+                file.style.opacity = '1';
+                cursor.style.opacity = '1';
+                
+                // Cursor moves to drag file
+                cursor.style.transform = 'translate(-240px, -200px)';
+                
+                setTimeout(() => {
+                    cursor.classList.add('click-pulse');
+                    
+                    // Drag file with cursor
+                    setTimeout(() => {
+                        cursor.classList.remove('click-pulse');
+                        cursor.style.transform = 'translate(-70px, -170px)';
+                        file.style.transform = 'translate(170px, 30px)';
+                        
+                        setTimeout(() => {
+                            cursor.style.opacity = '0';
+                            file.style.opacity = '0.5';
+                            
+                            term.innerHTML = '';
+                            const logLines = [
+                                { text: "> Drag & Drop event detected.", type: "info" },
+                                { text: "> Target package: bed_3d_vray.zip", type: "high" },
+                                { text: "[ZipWorker] Decompressing archive...", type: "info" },
+                                { text: "[ZipWorker] Extracted bed_3d_vray.max successfully.", type: "succ" }
+                            ];
+                            
+                            let delay = 0;
+                            logLines.forEach((line, index) => {
+                                delay += 200;
+                                setTimeout(() => {
+                                    const prevCur = term.querySelector('.term-cursor');
+                                    if(prevCur) prevCur.remove();
+                                    const div = document.createElement('div');
+                                    div.className = 'term-line ' + line.type;
+                                    div.innerHTML = line.text + '<span class="term-cursor"></span>';
+                                    term.appendChild(div);
+                                    term.scrollTop = term.scrollHeight;
+                                    
+                                    if(index === logLines.length - 1) {
+                                        animTimeout = setTimeout(playStep2, 1200);
+                                    }
+                                }, delay);
+                            });
+                        }, 800);
+                    }, 500);
+                }, 800);
+            }, 300);
+        }
+
+        function playStep2() {
+            if (animTimeout) clearTimeout(animTimeout);
+            
+            document.getElementById('pl-step-1').classList.remove('active');
+            document.getElementById('pl-step-2').classList.add('active');
+            document.getElementById('pl-step-3').classList.remove('active');
+            
+            const term = document.getElementById('pl-term-out');
+            const preview = document.getElementById('pl-preview-box');
+            const shield = document.getElementById('pl-shield-box');
+            
+            const logLines = [
+                { text: "[CompanionFinder] Scanning folder for preview image...", type: "info" },
+                { text: "[CompanionFinder] Loaded: bed_3d_vray.jpg", type: "succ" },
+                { text: "[Security] Initiating MAXScript malware sweep...", type: "warn" },
+                { text: "[Security] Scanning geometry structures...", type: "warn" },
+                { text: "[Security] Scan completed: 0 script viruses found. Clean!", type: "succ" }
+            ];
+            
+            let delay = 0;
+            logLines.forEach((line, index) => {
+                delay += 300;
+                setTimeout(() => {
+                    const prevCur = term.querySelector('.term-cursor');
+                    if(prevCur) prevCur.remove();
+                    const div = document.createElement('div');
+                    div.className = 'term-line ' + line.type;
+                    div.innerHTML = line.text + '<span class="term-cursor"></span>';
+                    term.appendChild(div);
+                    term.scrollTop = term.scrollHeight;
+                    
+                    if (index === 1) {
+                        preview.classList.add('pop');
+                    }
+                    if (index === 2) {
+                        shield.classList.add('pop', 'scan');
+                    }
+                    if (index === logLines.length - 1) {
+                        shield.classList.remove('scan');
+                        shield.classList.add('clean');
+                        animTimeout = setTimeout(playStep3, 1500);
+                    }
+                }, delay);
+            });
+        }
+
+        function playStep3() {
+            if (animTimeout) clearTimeout(animTimeout);
+            
+            document.getElementById('pl-step-1').classList.remove('active');
+            document.getElementById('pl-step-2').classList.remove('active');
+            document.getElementById('pl-step-3').classList.add('active');
+            
+            const term = document.getElementById('pl-term-out');
+            const path1 = document.getElementById('pl-path-1');
+            const path2 = document.getElementById('pl-path-2');
+            const path3 = document.getElementById('pl-path-3');
+            const scene = document.getElementById('pl-scene');
+            const box = document.getElementById('pl-box');
+            const ready = document.getElementById('pl-ready');
+            const btn = document.getElementById('pl-btn');
+            
+            btn.innerText = 'PROCESSING...';
+            btn.classList.add('active');
+            
+            const logLines = [
+                { text: "[SmartRelinker] Scanning for missing asset textures...", type: "info" },
+                { text: "[SmartRelinker] Matching with local directory index...", type: "info" },
+                { text: "[SUCCESS] Relinked: textures/wood_diff.jpg", type: "succ" },
+                { text: "[SUCCESS] Relinked: textures/fabric_bump.jpg", type: "succ" },
+                { text: "[SceneWorker] Merging bed_3d_vray.max into active scene...", type: "info" },
+                { text: "[SceneWorker] Arranging into matrix layout grid...", type: "info" },
+                { text: ">> BATCH QUEUE COMPLETED. 100% SUCCESS.", type: "high" }
+            ];
+            
+            let delay = 0;
+            logLines.forEach((line, index) => {
+                delay += 250;
+                setTimeout(() => {
+                    const prevCur = term.querySelector('.term-cursor');
+                    if(prevCur) prevCur.remove();
+                    const div = document.createElement('div');
+                    div.className = 'term-line ' + line.type;
+                    div.innerHTML = line.text + '<span class="term-cursor"></span>';
+                    term.appendChild(div);
+                    term.scrollTop = term.scrollHeight;
+                    
+                    if (index === 0) {
+                        path1.classList.add('active');
+                    }
+                    if (index === 2) {
+                        path2.classList.add('active');
+                        path3.classList.add('active');
+                    }
+                    if (index === 4) {
+                        scene.classList.add('pop');
+                    }
+                    if (index === logLines.length - 1) {
+                        box.classList.add('textured');
+                        setTimeout(() => {
+                            ready.style.opacity = '1';
+                            btn.innerText = 'RESTART';
+                            btn.classList.remove('active');
+                        }, 500);
+                    }
+                }, delay);
+            });
+        }
+
+        function startPipeline() {
+            playStep1();
+        }
+
+        // Observer to autotrigger when scrolled in
+        window.addEventListener('DOMContentLoaded', () => {
+            const pipeline = document.getElementById('magic-pipeline');
+            if (pipeline) {
+                let hasRan = false;
+                const obs = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting && !hasRan) {
+                        hasRan = true;
+                        setTimeout(startPipeline, 500);
+                    }
+                }, { threshold: 0.3 });
+                obs.observe(pipeline);
+            }
+        });
+    
+        // Mobile navigation dropdown toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const trigger = document.querySelector('.dropdown-trigger');
+            if (trigger) {
+                trigger.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const wrapper = trigger.closest('.nav-dropdown-wrapper');
+                        if (wrapper) wrapper.classList.toggle('open');
+                    }
+                });
+            }
+        });
+        </script>
+</Layout>
