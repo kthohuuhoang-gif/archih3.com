@@ -2500,7 +2500,7 @@ import Footer from '../components/Footer.astro';
     
     <!-- AOS JS -->
     
-    <script>
+    <script is:inline>
         document.addEventListener("DOMContentLoaded", function() {
             
             if (typeof AOS !== 'undefined') {
@@ -2561,7 +2561,7 @@ import Footer from '../components/Footer.astro';
 
         });
     </script>
-<script>
+<script is:inline>
 
         // --- MINI SIMULATIONS LOGIC ---
         function runHubSim(btn) {
@@ -2895,7 +2895,7 @@ import Footer from '../components/Footer.astro';
         });
 
 </script>
-<script>
+<script is:inline>
 
         // --- MINI SIMULATIONS LOGIC ---
         function runHubSim(btn) {

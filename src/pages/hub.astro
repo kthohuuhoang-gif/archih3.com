@@ -599,7 +599,7 @@ import Footer from '../components/Footer.astro';
                 <div style="position:absolute; bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube"></div>
             </a>
         </div>
-        <script>
+        <script is:inline>
             // Detect local file:// or iframe load failure → show thumbnail fallback
             (function(){
                 var iframe = document.getElementById('yt-iframe');
@@ -908,7 +908,7 @@ import Footer from '../components/Footer.astro';
                             <div style="position:absolute; bottom:12px; left:12px; font-size:11px; color:rgba(255,255,255,0.8); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch on YouTube"></div>
                         </a>
                     </div>
-                    <script>
+                    <script is:inline>
                         (function(){
                             var iframe = document.getElementById('qr-yt-iframe');
                             var fallback = document.getElementById('qr-yt-fallback');
@@ -1168,7 +1168,7 @@ import Footer from '../components/Footer.astro';
     <Footer />
 
     <!-- LANGUAGE SWITCH -->
-    <script>
+    <script is:inline>
         let currentLang = 'vi';
         function setLang(lang) {
             currentLang = lang;
@@ -1189,7 +1189,7 @@ import Footer from '../components/Footer.astro';
     </script>
 
     <!-- SLIDESHOW -->
-    <script>
+    <script is:inline>
         let currentSlide = 0;
         const slides = document.querySelectorAll('#t2iSlideshow .slide');
         const dots = document.querySelectorAll('.slide-dot');
@@ -1222,7 +1222,7 @@ import Footer from '../components/Footer.astro';
 
     
     <!-- PRO EFFECTS JS -->
-    <script>
+    <script is:inline>
         document.addEventListener("DOMContentLoaded", function() {
             // Typewriter Effect
             const terminal = document.getElementById('ai-terminal');
@@ -1323,7 +1323,7 @@ import Footer from '../components/Footer.astro';
 
     <!-- AOS JS -->
     
-    <script>
+    <script is:inline>
         document.addEventListener("DOMContentLoaded", function() {
             
             if (typeof AOS !== 'undefined') {

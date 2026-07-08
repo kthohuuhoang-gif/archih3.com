@@ -657,7 +657,7 @@ import Footer from '../components/Footer.astro';
     <Footer />
 
     <!-- LANGUAGE SWITCH & WIND CHART JS -->
-        <script>
+        <script is:inline>
         let currentLang = 'vi';
 
         function setLang(lang) {
@@ -685,7 +685,7 @@ import Footer from '../components/Footer.astro';
 
 
     <!-- MAGIC TREE SIM SCRIPT -->
-    <script>
+    <script is:inline>
         function setTreeState(state) {
             const container = document.querySelector('.tree-sim-container');
             if(container) {
