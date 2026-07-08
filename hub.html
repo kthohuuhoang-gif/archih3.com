@@ -472,7 +472,7 @@
         .game-pitch { /* col-1: 4 màn description */ }
         .game-preview { /* col-2: terminal mock screen */ }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .game-grid {
                 grid-template-columns: 1fr !important;
                 gap: 32px !important;
@@ -529,7 +529,7 @@
             grid-template-columns: 3fr 2fr;
             gap: 40px;
         }
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .spotlight-grid-3-2 {
                 grid-template-columns: 1fr !important;
                 gap: 32px !important;
@@ -543,7 +543,7 @@
         /* SYSTEM REQUIREMENTS — 2 cards (desktop) → 1 col (mobile)
            FIX (2026-05-17): Inline style "grid-template-columns: 1fr 1fr" không có mobile
            breakpoint → cards bị bóp còn ~160px trên iPhone, list bullet wrap loạn. */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .req-grid-cards {
                 grid-template-columns: 1fr !important;
                 gap: 16px !important;
