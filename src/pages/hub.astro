@@ -32,24 +32,24 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- FEATURED VIDEO -->
-    <div style="max-width:800px; margin:60px auto 80px; padding:0 24px; position:relative; z-index:2;">
-        <div style="text-align:center; margin-bottom:24px;">
+    <div  class="relative" style="max-width:800px; margin:60px auto 80px; padding:0 24px; z-index:2;">
+        <div  class="text-center mb-6">
             <span class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="FEATURED">TÍNH NĂNG NỔI BẬT</span>
-            <h2 class="section-title" style="font-size:clamp(22px, 3vw, 32px); margin-bottom:8px;" data-vi="AI i2Asset — Đưa ảnh vào, nhận tài nguyên 3D ra" data-en="AI i2Asset — Drop an image, get 3D assets back"></h2>
-            <p style="font-size:15px; color:var(--text-secondary); font-weight:300;" data-vi="Không keyword, không lục folder, không thử sai. Xem demo 4 tình huống thực tế." data-en="No keywords, no folder diving, no trial and error. Watch 4 real-world scenarios."></p>
+            <h2 class="section-title mb-2"  data-vi="AI i2Asset — Đưa ảnh vào, nhận tài nguyên 3D ra" data-en="AI i2Asset — Drop an image, get 3D assets back" style="font-size:clamp(22px, 3vw, 32px);"></h2>
+            <p  data-vi="Không keyword, không lục folder, không thử sai. Xem demo 4 tình huống thực tế." data-en="No keywords, no folder diving, no trial and error. Watch 4 real-world scenarios." class="text-muted font-light" style="font-size:15px;"></p>
         </div>
-        <div id="featured-video" style="border-radius:12px; overflow:hidden; border:1px solid rgba(77,182,172,0.2); background:#000; box-shadow:0 8px 40px rgba(0,0,0,0.4); aspect-ratio:16/9; position:relative;">
+        <div id="featured-video"  class="relative" style="border-radius:12px; overflow:hidden; border:1px solid rgba(77,182,172,0.2); background:#000; box-shadow:0 8px 40px rgba(0,0,0,0.4); aspect-ratio:16/9;">
             <!-- Iframe (works on hosted web) -->
-            <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/a3VRXUJ6n9Y?rel=0&modestbranding=1&color=white" title="AI i2Asset — AH3 Hub Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0;"></iframe>
+            <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/a3VRXUJ6n9Y?rel=0&modestbranding=1&color=white" title="AI i2Asset — AH3 Hub Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  class="absolute inset-0"></iframe>
             <!-- Thumbnail fallback (shown if iframe fails on local file://) -->
-            <a id="yt-fallback" href="https://youtu.be/a3VRXUJ6n9Y" target="_blank" style="display:none; position:absolute; inset:0; text-decoration:none; cursor:pointer;">
-                <img loading="lazy" src="https://img.youtube.com/vi/a3VRXUJ6n9Y/maxresdefault.jpg" alt="AI i2Asset Demo" style="width:100%; height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'">
-                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-                    <div style="width:72px; height:72px; border-radius:50%; background:rgba(77,182,172,0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,0,0,0.4);">
+            <a id="yt-fallback" href="https://youtu.be/a3VRXUJ6n9Y" target="_blank"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer;">
+                <img loading="lazy" src="https://img.youtube.com/vi/a3VRXUJ6n9Y/maxresdefault.jpg" alt="AI i2Asset Demo"  onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'" class="w-full" style="height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;">
+                <div  class="absolute inset-0 flex items-center justify-center">
+                    <div  class="flex items-center justify-center" style="width:72px; height:72px; border-radius:50%; background:rgba(77,182,172,0.9); box-shadow:0 4px 20px rgba(0,0,0,0.4);">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M8 5v14l11-7z"/></svg>
                     </div>
                 </div>
-                <div style="position:absolute; bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube"></div>
+                <div  data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube" class="absolute" style="bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;"></div>
             </a>
         </div>
         <script is:inline>
@@ -91,7 +91,7 @@ import Footer from '../components/Footer.astro';
     </div>
 
     <!-- WHY AH3 HUB -->
-    <section id="why" style="background: var(--bg-surface);">
+    <section id="why"  class="bg-surface">
         <div class="why-section">
             <div class="section-label">WHY</div>
             <h2 class="section-title" data-vi="Câu chuyện bắt đầu từ sự bất tiện" data-en="Born from frustration"></h2>
@@ -217,7 +217,7 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- AI STUDIO SPOTLIGHT -->
-    <section id="ai-studio" style="background: var(--bg-surface);">
+    <section id="ai-studio"  class="bg-surface">
         <div class="spotlight">
             <div class="spotlight-grid">
                 <div class="spotlight-visual">
@@ -236,7 +236,7 @@ import Footer from '../components/Footer.astro';
                         <div class="tw-hidden"><span class="output" data-vi="  Đang rename..." data-en="  Renaming..."></span></div>
                         <div class="tw-hidden"><span class="success" data-vi="  ✔ Đã đổi tên 12 objects thành công" data-en="  ✔ Successfully renamed 12 objects"></span></div>
                         <br>
-                        <div class="tw-hidden" id="tw-step2"><span class="prompt">You ></span> <span class="cmd" id="tw-cmd2" data-vi="Tạo vật liệu gỗ cho tất cả" data-en="Create wood material for all"></span><span id="tw-cursor2" class="cursor" style="display:none;">_</span></div>
+                        <div class="tw-hidden" id="tw-step2"><span class="prompt">You ></span> <span class="cmd" id="tw-cmd2" data-vi="Tạo vật liệu gỗ cho tất cả" data-en="Create wood material for all"></span><span id="tw-cursor2" class="cursor hidden" >_</span></div>
                     </div>
                 </div>
                 <div class="spotlight-text">
@@ -250,7 +250,7 @@ import Footer from '../components/Footer.astro';
                         <li data-vi="Quét scene, chọn object, chuyển ảnh thành đường nét" data-en="Scan scenes, select objects, convert images to line art"></li>
                         <li data-vi="Học từ lỗi cũ để lần sau thông minh hơn" data-en="Learns from past errors to get smarter next time"></li>
                     </ul>
-                    <p style="margin-top:24px; padding:10px 14px; background:rgba(255,255,255,0.03); border-radius:4px; font-size:12px; color:var(--text-muted); line-height:1.6;" data-vi="ℹ️ Khi đăng tải output AI lên mạng xã hội hoặc dự án công khai, bạn có trách nhiệm tiết lộ nội dung AI theo luật áp dụng." data-en="ℹ️ When publishing AI output on social media or public projects, you are responsible for disclosing AI-generated content per applicable law."></p>
+                    <p  data-vi="ℹ️ Khi đăng tải output AI lên mạng xã hội hoặc dự án công khai, bạn có trách nhiệm tiết lộ nội dung AI theo luật áp dụng." data-en="ℹ️ When publishing AI output on social media or public projects, you are responsible for disclosing AI-generated content per applicable law." class="mt-6" style="padding:10px 14px; background:rgba(255,255,255,0.03); border-radius:4px; font-size:12px; color:var(--text-muted); line-height:1.6;"></p>
                 </div>
             </div>
         </div>
@@ -272,27 +272,27 @@ import Footer from '../components/Footer.astro';
                     </ul>
                 </div>
 
-                <div class="spotlight-visual" style="border-radius:12px; overflow:hidden;">
-                    <img src="i23d.jpg" alt="Image-to-3D Demo" loading="lazy" style="width:100%; display:block; border-radius:12px;">
+                <div class="spotlight-visual"  style="border-radius:12px; overflow:hidden;">
+                    <img src="i23d.jpg" alt="Image-to-3D Demo" loading="lazy"  class="w-full block" style="border-radius:12px;">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- T2I + I2I SPOTLIGHT -->
-    <section id="t2i-i2i-spotlight" style="background: var(--bg-surface);">
+    <section id="t2i-i2i-spotlight"  class="bg-surface">
         <div class="spotlight">
             <div class="spotlight-grid spotlight-grid-3-2">
-                <div class="spotlight-visual" style="border-radius:12px; overflow:hidden; position:relative;">
+                <div class="spotlight-visual relative"  style="border-radius:12px; overflow:hidden;">
                     
-                    <div class="before-after-container" id="ba-slider" style="position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; border-radius:12px; cursor: ew-resize;">
-                        <img src="demo t-i2i B2.jpg" alt="After" style="width:100%; height:100%; object-fit:cover; position:absolute; top:0; left:0; pointer-events:none;">
-                        <div class="before-image" id="ba-before" style="position:absolute; top:0; left:0; width:50%; height:100%; overflow:hidden; pointer-events:none;">
-                            <img src="demo t-i2i B1.jpg" alt="Before" id="ba-before-img" style="width:200%; height:100%; object-fit:cover; max-width:none; pointer-events:none;">
+                    <div class="before-after-container relative w-full" id="ba-slider"  style="aspect-ratio:16/9; overflow:hidden; border-radius:12px; cursor: ew-resize;">
+                        <img src="demo t-i2i B2.jpg" alt="After"  class="w-full absolute pointer-events-none" style="height:100%; object-fit:cover; top:0; left:0;">
+                        <div class="before-image absolute pointer-events-none" id="ba-before"  style="top:0; left:0; width:50%; height:100%; overflow:hidden;">
+                            <img src="demo t-i2i B1.jpg" alt="Before" id="ba-before-img"  class="pointer-events-none" style="width:200%; height:100%; object-fit:cover; max-width:none;">
                         </div>
-                        <div class="slider-handle" id="ba-handle" style="position:absolute; top:0; bottom:0; left:50%; width:4px; background:var(--primary); transform:translateX(-50%); pointer-events:none;">
-                            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); width:32px; height:32px; background:var(--primary); border-radius:50%; display:flex; align-items:center; justify-content:center; box-shadow:0 0 10px rgba(0,0,0,0.5);">
-                                <span style="color:#111; font-weight:bold; font-size:14px; font-family:sans-serif;">↔</span>
+                        <div class="slider-handle absolute pointer-events-none" id="ba-handle"  style="top:0; bottom:0; left:50%; width:4px; background:var(--primary); transform:translateX(-50%);">
+                            <div  class="absolute flex items-center justify-center" style="top:50%; left:50%; transform:translate(-50%, -50%); width:32px; height:32px; background:var(--primary); border-radius:50%; box-shadow:0 0 10px rgba(0,0,0,0.5);">
+                                <span  style="color:#111; font-weight:bold; font-size:14px; font-family:sans-serif;">↔</span>
                             </div>
                         </div>
                     </div>
@@ -334,31 +334,31 @@ import Footer from '../components/Footer.astro';
                     </ul>
                 </div>
 
-                <div class="spotlight-visual" style="border-radius:12px; overflow:hidden;">
-                    <img src="demo i2a.jpg" alt="I2A Visual Search Demo" loading="lazy" style="width:100%; display:block; border-radius:12px;">
+                <div class="spotlight-visual"  style="border-radius:12px; overflow:hidden;">
+                    <img src="demo i2a.jpg" alt="I2A Visual Search Demo" loading="lazy"  class="w-full block" style="border-radius:12px;">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- QUICK RENDER SPOTLIGHT (NEW in v1.8.5.10) -->
-    <section id="quick-render" style="background: var(--bg-surface);">
+    <section id="quick-render"  class="bg-surface">
         <div class="spotlight">
             <div class="spotlight-grid">
-                <div class="spotlight-visual" style="border-radius:12px; overflow:hidden;">
-                    <img src="demo quick render.jpg" alt="Quick Render Demo" loading="lazy" style="width:100%; display:block; border-radius:12px 12px 0 0;">
+                <div class="spotlight-visual"  style="border-radius:12px; overflow:hidden;">
+                    <img src="demo quick render.jpg" alt="Quick Render Demo" loading="lazy"  class="w-full block" style="border-radius:12px 12px 0 0;">
                     <!-- Video demo embed (compact, aspect 16:9) -->
-                    <div id="qr-video" style="background:#000; aspect-ratio:16/9; position:relative; border-top:1px solid rgba(85,85,85,0.4);">
-                        <iframe id="qr-yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/sfenH9d4h8I?rel=0&modestbranding=1&color=white" title="Quick Render Demo — AH3 Hub" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0; border-radius:0 0 12px 12px;"></iframe>
+                    <div id="qr-video"  class="relative" style="background:#000; aspect-ratio:16/9; border-top:1px solid rgba(85,85,85,0.4);">
+                        <iframe id="qr-yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/sfenH9d4h8I?rel=0&modestbranding=1&color=white" title="Quick Render Demo — AH3 Hub" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  class="absolute inset-0" style="border-radius:0 0 12px 12px;"></iframe>
                         <!-- Thumbnail fallback (shown if iframe fails on local file://) -->
-                        <a id="qr-yt-fallback" href="https://youtu.be/sfenH9d4h8I" target="_blank" style="display:none; position:absolute; inset:0; text-decoration:none; cursor:pointer; border-radius:0 0 12px 12px; overflow:hidden;">
-                            <img src="https://img.youtube.com/vi/sfenH9d4h8I/maxresdefault.jpg" alt="Quick Render Demo" style="width:100%; height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'">
-                            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-                                <div style="width:56px; height:56px; border-radius:50%; background:rgba(77,182,172,0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,0,0,0.4);">
+                        <a id="qr-yt-fallback" href="https://youtu.be/sfenH9d4h8I" target="_blank"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer; border-radius:0 0 12px 12px; overflow:hidden;">
+                            <img src="https://img.youtube.com/vi/sfenH9d4h8I/maxresdefault.jpg" alt="Quick Render Demo"  onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'" class="w-full" style="height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;">
+                            <div  class="absolute inset-0 flex items-center justify-center">
+                                <div  class="flex items-center justify-center" style="width:56px; height:56px; border-radius:50%; background:rgba(77,182,172,0.9); box-shadow:0 4px 20px rgba(0,0,0,0.4);">
                                     <svg width="22" height="22" viewBox="0 0 24 24" fill="#1a1a1a"><path d="M8 5v14l11-7z"/></svg>
                                 </div>
                             </div>
-                            <div style="position:absolute; bottom:12px; left:12px; font-size:11px; color:rgba(255,255,255,0.8); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch on YouTube"></div>
+                            <div  data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch on YouTube" class="absolute" style="bottom:12px; left:12px; font-size:11px; color:rgba(255,255,255,0.8); font-family:'JetBrains Mono',monospace;"></div>
                         </a>
                     </div>
                     <script is:inline>
@@ -379,9 +379,9 @@ import Footer from '../components/Footer.astro';
                 </div>
 
                 <div class="spotlight-text">
-                    <h3 style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                    <h3  class="flex items-center" style="gap:10px; flex-wrap:wrap;">
                         // QUICK RENDER
-                        <span style="background: var(--primary); color: #1a1a1a; padding: 2px 10px; border-radius: 4px; font-size: 10px; letter-spacing: 1px; font-family: 'JetBrains Mono', monospace; font-weight: 600;">NEW</span>
+                        <span  class="font-semibold" style="background: var(--primary); color: #1a1a1a; padding: 2px 10px; border-radius: 4px; font-size: 10px; letter-spacing: 1px; font-family: 'JetBrains Mono', monospace;">NEW</span>
                     </h3>
                     <h2 data-vi="Render nhanh.<br>AI hoàn thiện cho bạn." data-en="Quick render.<br>AI finishes the rest."></h2>
                     <p data-vi="Không còn chờ render 30 phút mới biết composition đúng hay sai. Ctrl+Click nút Quick — render draft nhanh trong 1-5 phút (tôn trọng hoàn toàn setting của bạn), AI hoàn thiện thành ảnh photoreal. Gõ thêm một dòng để thêm người, cây cảnh, nội thất — AI bám sát yêu cầu, không tự ý bỏ qua." data-en="No more 30-minute renders just to check if your composition works. Ctrl+Click the Quick button — a fast draft in 1-5 minutes (fully respecting your settings), then AI finishes it into a photoreal image. Add a line of text to include people, greenery, furniture — AI follows your request precisely, no silent drops."></p>
@@ -399,11 +399,11 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- MATERIAL SPOTLIGHT -->
-    <section id="material-spotlight" style="background: var(--bg-surface);">
+    <section id="material-spotlight"  class="bg-surface">
         <div class="spotlight">
             <div class="spotlight-grid">
-                <div class="spotlight-visual" style="border-radius:12px; overflow:hidden;">
-                    <img src="demo i2 material.jpg" alt="Material Generator Demo" loading="lazy" style="width:100%; display:block; border-radius:12px;">
+                <div class="spotlight-visual"  style="border-radius:12px; overflow:hidden;">
+                    <img src="demo i2 material.jpg" alt="Material Generator Demo" loading="lazy"  class="w-full block" style="border-radius:12px;">
                 </div>
 
                 <div class="spotlight-text">
@@ -444,64 +444,64 @@ import Footer from '../components/Footer.astro';
 
     <!-- SYSTEM REQUIREMENTS -->
     <section id="system-req">
-        <div style="max-width:900px; margin:0 auto;">
-            <div style="text-align:center;">
+        <div  style="max-width:900px; margin:0 auto;">
+            <div  class="text-center">
                 <div class="section-label" data-vi="CẤU HÌNH" data-en="REQUIREMENTS">CẤU HÌNH</div>
                 <h2 class="section-title" data-vi="Máy tính nào chạy được AH3 Hub?" data-en="What hardware do you need?"></h2>
-                <p class="section-desc" style="margin:0 auto 40px;" data-vi="AH3 Hub chạy được trên đa số máy của kiến trúc sư và thiết kế ngày nay. Tính năng AI cần GPU NVIDIA — dưới đây là cấu hình tối thiểu và khuyến nghị." data-en="AH3 Hub runs on most modern designer/architect machines. AI features require an NVIDIA GPU — minimum and recommended specs below."></p>
+                <p class="section-desc"  data-vi="AH3 Hub chạy được trên đa số máy của kiến trúc sư và thiết kế ngày nay. Tính năng AI cần GPU NVIDIA — dưới đây là cấu hình tối thiểu và khuyến nghị." data-en="AH3 Hub runs on most modern designer/architect machines. AI features require an NVIDIA GPU — minimum and recommended specs below." style="margin:0 auto 40px;"></p>
             </div>
 
-            <div class="req-grid-cards" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+            <div class="req-grid-cards"  style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
                 <!-- Minimum card -->
-                <div style="background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4); border-radius: 12px; padding: 32px;">
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-                        <span style="font-size:11px; padding:4px 12px; border-radius:12px; background:rgba(85,85,85,0.3); color:var(--text-secondary); font-family:'JetBrains Mono', monospace; letter-spacing:0.5px;">MIN</span>
-                        <h3 style="font-size:18px; font-weight:600;" data-vi="Tối thiểu" data-en="Minimum"></h3>
+                <div  style="background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4); border-radius: 12px; padding: 32px;">
+                    <div  class="flex items-center mb-4" style="gap:10px;">
+                        <span  class="text-muted" style="font-size:11px; padding:4px 12px; border-radius:12px; background:rgba(85,85,85,0.3); font-family:'JetBrains Mono', monospace; letter-spacing:0.5px;">MIN</span>
+                        <h3  data-vi="Tối thiểu" data-en="Minimum" class="font-semibold" style="font-size:18px;"></h3>
                     </div>
-                    <ul style="list-style:none; padding:0; margin:0;">
-                        <li style="padding:8px 0; color:var(--text-secondary); font-size:15px; display:flex; gap:10px;"><span style="color:var(--primary);">✓</span><span data-vi="GPU NVIDIA 8 GB+ VRAM (RTX 3060 / 4060)" data-en="NVIDIA GPU 8 GB+ VRAM (RTX 3060 / 4060)"></span></li>
-                        <li style="padding:8px 0; color:var(--text-secondary); font-size:15px; display:flex; gap:10px;"><span style="color:var(--primary);">✓</span><span data-vi="RAM 16 GB+" data-en="16 GB+ RAM"></span></li>
-                        <li style="padding:8px 0; color:var(--text-secondary); font-size:15px; display:flex; gap:10px;"><span style="color:var(--primary);">✓</span><span data-vi="3ds Max 2023-2027+" data-en="3ds Max 2023-2027+"></span></li>
-                        <li style="padding:8px 0; color:var(--text-secondary); font-size:15px; display:flex; gap:10px;"><span style="color:var(--primary);">✓</span><span data-vi="Windows 10 (64-bit)" data-en="Windows 10 (64-bit)"></span></li>
-                        <li style="padding:8px 0; color:var(--text-secondary); font-size:15px; display:flex; gap:10px;"><span style="color:var(--primary);">✓</span><span data-vi="Internet (cho AI cloud)" data-en="Internet (for AI cloud)"></span></li>
+                    <ul  class="p-0" style="list-style:none; margin:0;">
+                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="GPU NVIDIA 8 GB+ VRAM (RTX 3060 / 4060)" data-en="NVIDIA GPU 8 GB+ VRAM (RTX 3060 / 4060)"></span></li>
+                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="RAM 16 GB+" data-en="16 GB+ RAM"></span></li>
+                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="3ds Max 2023-2027+" data-en="3ds Max 2023-2027+"></span></li>
+                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="Windows 10 (64-bit)" data-en="Windows 10 (64-bit)"></span></li>
+                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="Internet (cho AI cloud)" data-en="Internet (for AI cloud)"></span></li>
                     </ul>
                 </div>
 
                 <!-- Recommended card -->
-                <div style="background: linear-gradient(135deg, var(--bg-main), rgba(77,182,172,0.08)); border: 1px solid var(--primary); border-radius: 12px; padding: 32px; position: relative;">
-                    <div style="position:absolute; top:0; left:0; right:0; height:3px; background:var(--primary); border-radius:12px 12px 0 0;"></div>
-                    <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-                        <span style="font-size:11px; padding:4px 12px; border-radius:12px; background:var(--primary-glow); color:var(--primary); font-family:'JetBrains Mono', monospace; letter-spacing:0.5px;">RECOMMENDED</span>
-                        <h3 style="font-size:18px; font-weight:600;" data-vi="Khuyến nghị" data-en="Recommended"></h3>
+                <div  class="relative" style="background: linear-gradient(135deg, var(--bg-main), rgba(77,182,172,0.08)); border: 1px solid var(--primary); border-radius: 12px; padding: 32px;">
+                    <div  class="absolute" style="top:0; left:0; right:0; height:3px; background:var(--primary); border-radius:12px 12px 0 0;"></div>
+                    <div  class="flex items-center mb-4" style="gap:10px;">
+                        <span  class="text-primary" style="font-size:11px; padding:4px 12px; border-radius:12px; background:var(--primary-glow); font-family:'JetBrains Mono', monospace; letter-spacing:0.5px;">RECOMMENDED</span>
+                        <h3  data-vi="Khuyến nghị" data-en="Recommended" class="font-semibold" style="font-size:18px;"></h3>
                     </div>
-                    <ul style="list-style:none; padding:0; margin:0;">
-                        <li style="padding:8px 0; color:var(--text-secondary); font-size:15px; display:flex; gap:10px;"><span style="color:var(--primary);">✓</span><span data-vi="GPU NVIDIA 12 GB VRAM (RTX 3080 / 4070)" data-en="NVIDIA GPU 12 GB VRAM (RTX 3080 / 4070)"></span></li>
-                        <li style="padding:8px 0; color:var(--text-secondary); font-size:15px; display:flex; gap:10px;"><span style="color:var(--primary);">✓</span><span data-vi="RAM 32 GB" data-en="32 GB RAM"></span></li>
-                        <li style="padding:8px 0; color:var(--text-secondary); font-size:15px; display:flex; gap:10px;"><span style="color:var(--primary);">✓</span><span data-vi="3ds Max 2024+ (hiệu năng tốt nhất)" data-en="3ds Max 2024+ (best performance)"></span></li>
-                        <li style="padding:8px 0; color:var(--text-secondary); font-size:15px; display:flex; gap:10px;"><span style="color:var(--primary);">✓</span><span data-vi="Windows 11 (64-bit)" data-en="Windows 11 (64-bit)"></span></li>
-                        <li style="padding:8px 0; color:var(--text-secondary); font-size:15px; display:flex; gap:10px;"><span style="color:var(--primary);">✓</span><span data-vi="Internet ổn định" data-en="Stable internet"></span></li>
+                    <ul  class="p-0" style="list-style:none; margin:0;">
+                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="GPU NVIDIA 12 GB VRAM (RTX 3080 / 4070)" data-en="NVIDIA GPU 12 GB VRAM (RTX 3080 / 4070)"></span></li>
+                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="RAM 32 GB" data-en="32 GB RAM"></span></li>
+                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="3ds Max 2024+ (hiệu năng tốt nhất)" data-en="3ds Max 2024+ (best performance)"></span></li>
+                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="Windows 11 (64-bit)" data-en="Windows 11 (64-bit)"></span></li>
+                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="Internet ổn định" data-en="Stable internet"></span></li>
                     </ul>
                 </div>
             </div>
 
-            <p style="margin-top:24px; text-align:center; font-size:13px; color:var(--text-muted); font-family:'JetBrains Mono', monospace;" data-vi="ℹ️ GPU yếu hơn 8 GB VRAM vẫn dùng được các module non-AI (Tools, YouTube, Games, Chat)" data-en="ℹ️ GPUs below 8 GB VRAM can still use non-AI modules (Tools, YouTube, Games, Chat)"></p>
+            <p  data-vi="ℹ️ GPU yếu hơn 8 GB VRAM vẫn dùng được các module non-AI (Tools, YouTube, Games, Chat)" data-en="ℹ️ GPUs below 8 GB VRAM can still use non-AI modules (Tools, YouTube, Games, Chat)" class="mt-6 text-center" style="font-size:13px; color:var(--text-muted); font-family:'JetBrains Mono', monospace;"></p>
         </div>
     </section>
 
     <!-- PRICING -->
-    <section id="pricing" style="background: var(--bg-surface);">
+    <section id="pricing"  class="bg-surface">
         <div class="pricing-section">
             <div class="section-label">PRICING</div>
             <h2 class="section-title" data-vi="Bắt đầu miễn phí. Mở khóa khi sẵn sàng." data-en="Start free. Unlock when ready."></h2>
-            <p class="section-desc" style="margin: 0 auto 0;" data-vi="Để đảm bảo tài nguyên hệ thống và duy trì chất lượng dịch vụ, AH3 Hub hiện không còn cung cấp phiên bản Free. Mọi tính năng cao cấp đều được tích hợp đầy đủ trong bản Pro." data-en="To guarantee system resources and maintain service quality, AH3 Hub no longer offers a Free version. All premium features are fully integrated into the Pro version."></p>
+            <p class="section-desc"  data-vi="Để đảm bảo tài nguyên hệ thống và duy trì chất lượng dịch vụ, AH3 Hub hiện không còn cung cấp phiên bản Free. Mọi tính năng cao cấp đều được tích hợp đầy đủ trong bản Pro." data-en="To guarantee system resources and maintain service quality, AH3 Hub no longer offers a Free version. All premium features are fully integrated into the Pro version." style="margin: 0 auto 0;"></p>
 
             <div class="pricing-grid">
-                <div class="price-card" data-aos="fade-up" style="opacity: 0.7; position: relative;">
-                    <div class="price-badge free" style="background: rgba(77, 182, 172, 0.15); color: var(--primary); border: 1px solid rgba(77, 182, 172, 0.3);">V2.0 COMING</div>
+                <div class="price-card relative" data-aos="fade-up"  style="opacity: 0.7;">
+                    <div class="price-badge free text-primary"  style="background: rgba(77, 182, 172, 0.15); border: 1px solid rgba(77, 182, 172, 0.3);">V2.0 COMING</div>
                     <h3 data-vi="AH3 Hub v2.0" data-en="AH3 Hub v2.0">AH3 Hub v2.0</h3>
-                    <div class="price-amount" style="color: var(--primary);" data-vi="Đang nâng cấp..." data-en="Upgrading..."></div>
-                    <div class="price-period" style="color: var(--primary); font-weight: 600;" data-vi="Dự kiến phát hành: Tháng 9" data-en="Expected Release: September">Dự kiến phát hành: Tháng 9</div>
-                    <ul class="price-features" style="text-decoration: line-through; opacity: 0.6;">
+                    <div class="price-amount text-primary"  data-vi="Đang nâng cấp..." data-en="Upgrading..."></div>
+                    <div class="price-period text-primary font-semibold"  data-vi="Dự kiến phát hành: Tháng 9" data-en="Expected Release: September">Dự kiến phát hành: Tháng 9</div>
+                    <ul class="price-features"  style="text-decoration: line-through; opacity: 0.6;">
                         <li data-vi="Text-to-Image — tạo ảnh từ text" data-en="Text-to-Image — generate from text"></li>
                         <li data-vi="Image-to-Image — biến đổi ảnh" data-en="Image-to-Image — transform images"></li>
                         <li data-vi="Image-to-3D — ảnh thành model" data-en="Image-to-3D — photo to model"></li>
@@ -511,8 +511,8 @@ import Footer from '../components/Footer.astro';
                         <li class="disabled" data-vi="AI-Assist (giới hạn)" data-en="AI-Assist (limited)"></li>
                         <li class="disabled" data-vi="Model Nano Banana mới nhất" data-en="Latest Nano Banana model"></li>
                     </ul>
-                    <p style="margin-top:16px; padding:12px 14px; background:rgba(77,182,172,0.08); border-left:2px solid var(--primary); border-radius:4px; font-size:12px; color:var(--text-secondary); line-height:1.6;" data-vi="ℹ️ <strong>Đang nâng cấp hệ thống:</strong> Bản Free hiện tạm dừng đăng ký để chuẩn bị cho siêu nâng cấp v2.0 vào tháng 9 với động cơ AI thế hệ mới đột phá và tốc độ xử lý vượt trội. Hãy cùng chờ đợi!" data-en="ℹ️ <strong>System Upgrading:</strong> Free registration is paused to prepare for the massive v2.0 upgrade this September. Featuring a next-gen breakthrough AI engine and ultra-fast speed. Stay tuned!"></p>
-                    <a href="#" class="price-cta free-btn" style="background: rgba(77,182,172,0.1); color: var(--primary); border-color: rgba(77,182,172,0.3); cursor: pointer;" data-vi="Đón chờ v2.0" data-en="Teaser v2.0"></a>
+                    <p data-vi="ℹ️ <strong class='mt-4 text-muted' style='padding:12px 14px; background:rgba(77,182,172,0.08); border-left:2px solid var(--primary); border-radius:4px; font-size:12px; line-height:1.6;'>Đang nâng cấp hệ thống:</strong> Bản Free hiện tạm dừng đăng ký để chuẩn bị cho siêu nâng cấp v2.0 vào tháng 9 với động cơ AI thế hệ mới đột phá và tốc độ xử lý vượt trội. Hãy cùng chờ đợi!" data-en="ℹ️ <strong>System Upgrading:</strong> Free registration is paused to prepare for the massive v2.0 upgrade this September. Featuring a next-gen breakthrough AI engine and ultra-fast speed. Stay tuned!"></p>
+                    <a href="#" class="price-cta free-btn text-primary"  data-vi="Đón chờ v2.0" data-en="Teaser v2.0" style="background: rgba(77,182,172,0.1); border-color: rgba(77,182,172,0.3); cursor: pointer;"></a>
                 </div>
 
                 <div class="price-card featured" data-aos="fade-up">
@@ -531,7 +531,7 @@ import Footer from '../components/Footer.astro';
                         <li data-vi="Support trực tiếp, cam kết lâu dài" data-en="Direct support, long-term commitment"></li>
                         <li data-vi="Cập nhật suốt đời khi còn subscription" data-en="Lifetime updates while subscribed"></li>
                     </ul>
-                    <p style="margin-top:16px; padding:12px 14px; background:rgba(77,182,172,0.08); border-left:2px solid var(--primary); border-radius:4px; font-size:12px; color:var(--text-secondary); line-height:1.6;" data-vi="ℹ️ <strong>Phí Pro</strong> chi trả AI-Assist và cloud features. Tính năng AI cục bộ giữ giới hạn phi thương mại — Free và Pro đều như nhau.<br>↩ Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro." data-en="ℹ️ <strong>Pro fee</strong> covers AI-Assist and cloud features. Local AI keeps non-commercial limits — same for Free and Pro.<br>↩ 100% refund within 7 days if no Pro feature used."></p>
+                    <p data-vi="ℹ️ <strong class='mt-4 text-muted' style='padding:12px 14px; background:rgba(77,182,172,0.08); border-left:2px solid var(--primary); border-radius:4px; font-size:12px; line-height:1.6;'>Phí Pro</strong> chi trả AI-Assist và cloud features. Tính năng AI cục bộ giữ giới hạn phi thương mại — Free và Pro đều như nhau.<br>↩ Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro." data-en="ℹ️ <strong>Pro fee</strong> covers AI-Assist and cloud features. Local AI keeps non-commercial limits — same for Free and Pro.<br>↩ 100% refund within 7 days if no Pro feature used."></p>
                     <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="price-cta pro-btn" data-vi="Liên hệ mua Pro" data-en="Contact for Pro"></a>
                 </div>
             </div>
@@ -540,72 +540,72 @@ import Footer from '../components/Footer.astro';
 
     <!-- FAQ -->
     <section id="faq">
-        <div style="max-width:1000px; margin:0 auto;">
-            <div style="text-align:center;">
+        <div  style="max-width:1000px; margin:0 auto;">
+            <div  class="text-center">
                 <div class="section-label">FAQ</div>
                 <h2 class="section-title" data-vi="Câu hỏi thường gặp" data-en="Frequently asked questions"></h2>
-                <p class="section-desc" style="margin:0 auto 48px;" data-vi="Những câu hỏi phổ biến nhất từ user. Còn thắc mắc khác? Email tác giả." data-en="Most common questions from users. Other questions? Email the author."></p>
+                <p class="section-desc"  data-vi="Những câu hỏi phổ biến nhất từ user. Còn thắc mắc khác? Email tác giả." data-en="Most common questions from users. Other questions? Email the author." style="margin:0 auto 48px;"></p>
             </div>
 
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+            <div  style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
                 <!-- Q1 -->
-                <div style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3 style="font-size:16px; font-weight:600; color:var(--primary); margin-bottom:10px;" data-vi="GPU yếu (4 GB) có chạy được không?" data-en="Will it run on weaker GPU (4 GB)?"></h3>
-                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; font-weight:300;" data-vi="Có. AH3 Hub vẫn cài và chạy bình thường. Module non-AI (YouTube, Games, Tools, Chat) hoạt động đầy đủ. Tính năng AI cục bộ cần GPU 8 GB+ VRAM — bạn có thể dùng cloud features ở Pro tier thay thế." data-en="Yes. AH3 Hub installs and runs fine. Non-AI modules (YouTube, Games, Tools, Chat) work fully. Local AI features need 8 GB+ VRAM — use cloud features in Pro tier as alternative."></p>
+                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
+                    <h3  data-vi="GPU yếu (4 GB) có chạy được không?" data-en="Will it run on weaker GPU (4 GB)?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
+                    <p  data-vi="Có. AH3 Hub vẫn cài và chạy bình thường. Module non-AI (YouTube, Games, Tools, Chat) hoạt động đầy đủ. Tính năng AI cục bộ cần GPU 8 GB+ VRAM — bạn có thể dùng cloud features ở Pro tier thay thế." data-en="Yes. AH3 Hub installs and runs fine. Non-AI modules (YouTube, Games, Tools, Chat) work fully. Local AI features need 8 GB+ VRAM — use cloud features in Pro tier as alternative." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
 
                 <!-- Q2 -->
-                <div style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3 style="font-size:16px; font-weight:600; color:var(--primary); margin-bottom:10px;" data-vi="Có cần internet để dùng AI không?" data-en="Do I need internet for AI?"></h3>
-                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; font-weight:300;" data-vi="Không bắt buộc. AI cục bộ chạy hoàn toàn offline trên máy bạn. Internet chỉ cần khi tải AI model lần đầu (~5-15 GB tùy tier) và khi dùng cloud features ở Pro tier." data-en="Not required. Local AI runs fully offline on your machine. Internet is only needed for initial model download (~5-15 GB depending on tier) and Pro cloud features."></p>
+                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
+                    <h3  data-vi="Có cần internet để dùng AI không?" data-en="Do I need internet for AI?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
+                    <p  data-vi="Không bắt buộc. AI cục bộ chạy hoàn toàn offline trên máy bạn. Internet chỉ cần khi tải AI model lần đầu (~5-15 GB tùy tier) và khi dùng cloud features ở Pro tier." data-en="Not required. Local AI runs fully offline on your machine. Internet is only needed for initial model download (~5-15 GB depending on tier) and Pro cloud features." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
 
                 <!-- Q3 -->
-                <div style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3 style="font-size:16px; font-weight:600; color:var(--primary); margin-bottom:10px;" data-vi="Pro hủy được không? Có hoàn tiền?" data-en="Can I cancel Pro? Refund?"></h3>
-                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; font-weight:300;" data-vi="Có. Hủy bất cứ lúc nào — Pro vẫn dùng đến hết chu kỳ thanh toán. Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro nào." data-en="Yes. Cancel anytime — Pro stays active until end of billing cycle. 100% refund within 7 days if no Pro feature has been used."></p>
+                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
+                    <h3  data-vi="Pro hủy được không? Có hoàn tiền?" data-en="Can I cancel Pro? Refund?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
+                    <p  data-vi="Có. Hủy bất cứ lúc nào — Pro vẫn dùng đến hết chu kỳ thanh toán. Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro nào." data-en="Yes. Cancel anytime — Pro stays active until end of billing cycle. 100% refund within 7 days if no Pro feature has been used." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
 
                 <!-- Q4 -->
-                <div style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3 style="font-size:16px; font-weight:600; color:var(--primary); margin-bottom:10px;" data-vi="Có chạy trên Mac không?" data-en="Does it run on Mac?"></h3>
-                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; font-weight:300;" data-vi="Hiện tại chỉ hỗ trợ Windows 10/11 (64-bit). Chưa có kế hoạch port macOS — vì 3ds Max bản thân nó cũng chỉ chạy trên Windows." data-en="Currently Windows 10/11 (64-bit) only. No macOS port planned — 3ds Max itself only runs on Windows."></p>
+                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
+                    <h3  data-vi="Có chạy trên Mac không?" data-en="Does it run on Mac?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
+                    <p  data-vi="Hiện tại chỉ hỗ trợ Windows 10/11 (64-bit). Chưa có kế hoạch port macOS — vì 3ds Max bản thân nó cũng chỉ chạy trên Windows." data-en="Currently Windows 10/11 (64-bit) only. No macOS port planned — 3ds Max itself only runs on Windows." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
                 <!-- Q6 -->
-                <div style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3 style="font-size:16px; font-weight:600; color:var(--primary); margin-bottom:10px;" data-vi="Output AI có vi phạm bản quyền không?" data-en="Does AI output infringe copyright?"></h3>
-                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; font-weight:300;" data-vi="Output thuộc về bạn theo điều khoản model. Tuy nhiên bạn có trách nhiệm rà soát kết quả trước khi sử dụng — AI có thể vô tình tạo nội dung tương tự bản quyền hiện có. Khuyến nghị review trước khi publish." data-en="Output belongs to you per model terms. However, you are responsible for reviewing results before use — AI may inadvertently produce content similar to existing copyrighted works. Review before publishing is recommended."></p>
+                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
+                    <h3  data-vi="Output AI có vi phạm bản quyền không?" data-en="Does AI output infringe copyright?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
+                    <p  data-vi="Output thuộc về bạn theo điều khoản model. Tuy nhiên bạn có trách nhiệm rà soát kết quả trước khi sử dụng — AI có thể vô tình tạo nội dung tương tự bản quyền hiện có. Khuyến nghị review trước khi publish." data-en="Output belongs to you per model terms. However, you are responsible for reviewing results before use — AI may inadvertently produce content similar to existing copyrighted works. Review before publishing is recommended." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
 
                 <!-- Q7 -->
-                <div style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3 style="font-size:16px; font-weight:600; color:var(--primary); margin-bottom:10px;" data-vi="Update version mới có mất data không?" data-en="Will updates erase my data?"></h3>
-                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; font-weight:300;" data-vi="Không. Hub có hệ thống auto-update không xóa data người dùng. Settings, prompt history, cache, license đều giữ nguyên qua các bản update." data-en="No. Hub's auto-update system never erases user data. Settings, prompt history, cache, license all persist across updates."></p>
+                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
+                    <h3  data-vi="Update version mới có mất data không?" data-en="Will updates erase my data?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
+                    <p  data-vi="Không. Hub có hệ thống auto-update không xóa data người dùng. Settings, prompt history, cache, license đều giữ nguyên qua các bản update." data-en="No. Hub's auto-update system never erases user data. Settings, prompt history, cache, license all persist across updates." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
 
                 <!-- Q8 -->
-                <div style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3 style="font-size:16px; font-weight:600; color:var(--primary); margin-bottom:10px;" data-vi="Hỗ trợ Corona / V-Ray version nào?" data-en="Which Corona / V-Ray versions?"></h3>
-                    <p style="font-size:14px; color:var(--text-secondary); line-height:1.7; font-weight:300;" data-vi="Hỗ trợ Corona Renderer và V-Ray cho 3ds Max 2023-2027+. Material Generator và Quick Render tích hợp với cả hai render engine." data-en="Supports Corona Renderer and V-Ray for 3ds Max 2023-2027+. Material Generator and Quick Render integrate with both render engines."></p>
+                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
+                    <h3  data-vi="Hỗ trợ Corona / V-Ray version nào?" data-en="Which Corona / V-Ray versions?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
+                    <p  data-vi="Hỗ trợ Corona Renderer và V-Ray cho 3ds Max 2023-2027+. Material Generator và Quick Render tích hợp với cả hai render engine." data-en="Supports Corona Renderer and V-Ray for 3ds Max 2023-2027+. Material Generator and Quick Render integrate with both render engines." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
             </div>
 
-            <p style="margin-top:32px; text-align:center; font-size:14px; color:var(--text-muted);" data-vi="Còn thắc mắc khác? Email <a href='mailto:hohuuhoang@archih3.com' style='color:var(--primary); text-decoration:none;'>hohuuhoang@archih3.com</a>" data-en="Other questions? Email <a href='mailto:hohuuhoang@archih3.com' style='color:var(--primary); text-decoration:none;'>hohuuhoang@archih3.com</a>"></p>
+                    <p class="text-center mt-8 text-muted" style="font-size:14px;" data-vi="Còn thắc mắc khác? Email <a href='mailto:hohuuhoang@archih3.com' style='color:var(--primary); text-decoration:none;'>hohuuhoang@archih3.com</a>" data-en="Other questions? Email <a href='mailto:hohuuhoang@archih3.com' style='color:var(--primary); text-decoration:none;'>hohuuhoang@archih3.com</a>"></p>
         </div>
     </section>
 
     <!-- DOWNLOAD CTA -->
-    <section id="download" style="background: var(--bg-surface);">
+    <section id="download"  class="bg-surface">
         <div class="cta-section">
             <div class="cta-box">
                 <div class="section-label">GET STARTED</div>
                 <h2 data-vi="Câu chuyện tiếp theo là của bạn" data-en="The next chapter is yours"></h2>
                 <p data-vi="AH3 Hub miễn phí cho hầu hết tính năng. Cài đặt trong 2 phút và bắt đầu trải nghiệm AI ngay trong 3ds Max. Muốn nhiều hơn? Nâng cấp Pro bất cứ lúc nào." data-en="AH3 Hub is free for most features. Install in 2 minutes and start experiencing AI inside 3ds Max. Want more? Upgrade to Pro anytime."></p>
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-download" style="font-size:16px; padding:14px 32px;" data-vi="↓ Liên hệ tải v1.8.x" data-en="↓ Contact to Download v1.8.x"></a>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-download"  data-vi="↓ Liên hệ tải v1.8.x" data-en="↓ Contact to Download v1.8.x" style="font-size:16px; padding:14px 32px;"></a>
                 <div class="install-cmd">
                     <span>$</span> <span data-vi="Chạy AH3_Hub_Setup.exe → Chọn phiên bản Max → Done" data-en="Run AH3_Hub_Setup.exe → Select Max version → Done"></span>
                 </div>
-                <p style="margin-top:12px; font-size:13px; color:var(--text-muted); font-family:'JetBrains Mono', monospace;" data-vi="⚠️ Windows cảnh báo? Nhấn More info → Run anyway" data-en="⚠️ Windows warning? Click More info → Run anyway"></p>
+                <p  data-vi="⚠️ Windows cảnh báo? Nhấn More info → Run anyway" data-en="⚠️ Windows warning? Click More info → Run anyway" style="margin-top:12px; font-size:13px; color:var(--text-muted); font-family:'JetBrains Mono', monospace;"></p>
 
                 <div class="req-grid">
                     <span class="req-item" data-vi="3ds Max 2023-2027+" data-en="3ds Max 2023-2027+"></span>

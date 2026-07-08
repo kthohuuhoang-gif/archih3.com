@@ -1143,3 +1143,37 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
         }
 
     
+
+/* =========================================
+   UTILITY CLASSES (Auto-generated)
+========================================= */
+.flex { display: flex !important; }
+.items-center { align-items: center !important; }
+.justify-center { justify-content: center !important; }
+.hidden { display: none !important; }
+.block { display: block !important; }
+.absolute { position: absolute !important; }
+.relative { position: relative !important; }
+.opacity-0 { opacity: 0 !important; }
+.pointer-events-none { pointer-events: none !important; }
+.w-full { width: 100% !important; }
+.text-center { text-align: center !important; }
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+.font-semibold { font-weight: 600 !important; }
+.font-light { font-weight: 300 !important; }
+.text-primary { color: var(--primary) !important; }
+.text-muted { color: var(--text-secondary) !important; }
+.bg-surface { background: var(--bg-surface) !important; }
+.inset-0 { inset: 0 !important; }
+.transition-all { transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important; }
+.gap-2 { gap: 8px !important; }
+.gap-3 { gap: 12px !important; }
+.gap-4 { gap: 16px !important; }
+.mt-4 { margin-top: 16px !important; }
+.mt-6 { margin-top: 24px !important; }
+.mb-2 { margin-bottom: 8px !important; }
+.mb-4 { margin-bottom: 16px !important; }
+.mb-6 { margin-bottom: 24px !important; }
+.mb-8 { margin-bottom: 32px !important; }
+.p-0 { padding: 0 !important; }

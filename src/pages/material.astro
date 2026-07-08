@@ -29,7 +29,7 @@ import Footer from '../components/Footer.astro';
 
     <!-- INTERACTIVE DEMO (MOCKUP APP) -->
         <!-- INTERFACE SHOWCASE -->
-    <section id="interface" style="background: var(--bg-surface);">
+    <section id="interface"  class="bg-surface">
         <div class="section-label" data-vi="GIAO DIỆN CÔNG CỤ" data-en="INTERFACE SHOWCASE">GIAO DIỆN CÔNG CỤ</div>
         <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI"></h2>
         <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
@@ -60,35 +60,35 @@ import Footer from '../components/Footer.astro';
                         <div id="pl-view-console">
                             <div class="term-line info">Waiting for input...<span class="term-cursor"></span></div>
                         </div>
-                        <div id="pl-view-settings" style="display: none; padding: 10px; font-family: sans-serif;">
-                            <div class="pl-setting-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                                <span style="color:#aaa; font-size:11px;">Brightness</span>
-                                <div style="display:flex; align-items:center; width:150px; gap:8px;">
-                                    <div style="flex:1; height:4px; background:#333; border-radius:2px; position:relative;">
-                                        <div id="pl-slide-bright" style="width:50%; height:100%; background:var(--primary); transition:width 0.8s;"></div>
+                        <div id="pl-view-settings"  class="hidden" style="padding: 10px; font-family: sans-serif;">
+                            <div class="pl-setting-row flex items-center"  style="justify-content:space-between; margin-bottom:12px;">
+                                <span  style="color:#aaa; font-size:11px;">Brightness</span>
+                                <div  class="flex items-center" style="width:150px; gap:8px;">
+                                    <div  class="relative" style="flex:1; height:4px; background:#333; border-radius:2px;">
+                                        <div id="pl-slide-bright"  style="width:50%; height:100%; background:var(--primary); transition:width 0.8s;"></div>
                                     </div>
-                                    <span id="pl-val-bright" style="color:var(--primary); font-size:11px; width:20px; text-align:right;">1.0</span>
+                                    <span id="pl-val-bright"  class="text-primary" style="font-size:11px; width:20px; text-align:right;">1.0</span>
                                 </div>
                             </div>
-                            <div class="pl-setting-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                                <span style="color:#aaa; font-size:11px;">Contrast</span>
-                                <div style="display:flex; align-items:center; width:150px; gap:8px;">
-                                    <div style="flex:1; height:4px; background:#333; border-radius:2px; position:relative;">
-                                        <div id="pl-slide-contrast" style="width:50%; height:100%; background:var(--primary); transition:width 0.8s;"></div>
+                            <div class="pl-setting-row flex items-center"  style="justify-content:space-between; margin-bottom:12px;">
+                                <span  style="color:#aaa; font-size:11px;">Contrast</span>
+                                <div  class="flex items-center" style="width:150px; gap:8px;">
+                                    <div  class="relative" style="flex:1; height:4px; background:#333; border-radius:2px;">
+                                        <div id="pl-slide-contrast"  style="width:50%; height:100%; background:var(--primary); transition:width 0.8s;"></div>
                                     </div>
-                                    <span id="pl-val-contrast" style="color:var(--primary); font-size:11px; width:20px; text-align:right;">1.0</span>
+                                    <span id="pl-val-contrast"  class="text-primary" style="font-size:11px; width:20px; text-align:right;">1.0</span>
                                 </div>
                             </div>
-                            <div class="pl-setting-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                                <span style="color:#aaa; font-size:11px;">Seamless Blend</span>
-                                <div id="pl-switch-seamless" class="pl-switch" style="width:30px; height:16px; background:#333; border-radius:8px; position:relative; cursor:pointer; transition:background 0.3s;">
-                                    <div style="position:absolute; left:2px; top:2px; width:12px; height:12px; background:#fff; border-radius:50%; transition:left 0.3s;"></div>
+                            <div class="pl-setting-row flex items-center"  style="justify-content:space-between; margin-bottom:12px;">
+                                <span  style="color:#aaa; font-size:11px;">Seamless Blend</span>
+                                <div id="pl-switch-seamless" class="pl-switch relative"  style="width:30px; height:16px; background:#333; border-radius:8px; cursor:pointer; transition:background 0.3s;">
+                                    <div  class="absolute" style="left:2px; top:2px; width:12px; height:12px; background:#fff; border-radius:50%; transition:left 0.3s;"></div>
                                 </div>
                             </div>
-                            <div class="pl-setting-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-                                <span style="color:#aaa; font-size:11px;">Auto UVW</span>
-                                <div class="pl-switch active" style="width:30px; height:16px; background:var(--primary); border-radius:8px; position:relative; cursor:pointer; transition:background 0.3s;">
-                                    <div style="position:absolute; left:16px; top:2px; width:12px; height:12px; background:#000; border-radius:50%; transition:left 0.3s;"></div>
+                            <div class="pl-setting-row flex items-center"  style="justify-content:space-between; margin-bottom:12px;">
+                                <span  style="color:#aaa; font-size:11px;">Auto UVW</span>
+                                <div class="pl-switch active relative"  style="width:30px; height:16px; background:var(--primary); border-radius:8px; cursor:pointer; transition:background 0.3s;">
+                                    <div  class="absolute" style="left:16px; top:2px; width:12px; height:12px; background:#000; border-radius:50%; transition:left 0.3s;"></div>
                                 </div>
                             </div>
                         </div>
@@ -208,13 +208,13 @@ import Footer from '../components/Footer.astro';
                             <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật miễn phí trọn đời" data-en="Perpetual license with lifetime free updates"></li>
                         </ul>
                     </div>
-                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center; margin-top:20px;" data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase" style="margin-top:20px;">Liên hệ mua bản quyền</a>
                 </div>
 
                 <!-- Card 2: Combo -->
                 <div class="price-card featured">
                     <div>
-                        <div class="price-badge" style="background:var(--primary-glow); color:var(--primary);">COMBO OFFER</div>
+                        <div class="price-badge text-primary"  style="background:var(--primary-glow);">COMBO OFFER</div>
                         <h3 data-vi="Combo Material &amp; Merger" data-en="Combo Material &amp; Merger">Combo Material &amp; Merger</h3>
                         <div class="price-amount" data-vi="<del>1.998.000đ</del> 500.000đ <span>/ vĩnh viễn</span>" data-en="<del>$78</del> $20 <span>/ lifetime</span>"></div>
                         <div class="price-period" data-vi="Gói combo tiết kiệm đặc biệt lên đến 75%" data-en="Special bundle discount - Save up to 75%">Gói combo tiết kiệm đặc biệt lên đến 75%</div>
@@ -227,8 +227,8 @@ import Footer from '../components/Footer.astro';
                             <li data-vi="Cập nhật miễn phí trọn đời và hỗ trợ ưu tiên" data-en="Lifetime free updates &amp; priority developer support"></li>
                         </ul>
                     </div>
-                    <div class="cta-wrapper" style="position: relative; display: block; width: 100%; margin-top: 20px;">
-                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center;" data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
+                    <div class="cta-wrapper relative block w-full"  style="margin-top: 20px;">
+                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
                         <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
                     </div>
                 </div>
@@ -238,22 +238,22 @@ import Footer from '../components/Footer.astro';
 
     
     <!-- TUTORIAL / VIDEO -->
-    <section id="workflow" style="background: var(--bg-surface);">
+    <section id="workflow"  class="bg-surface">
         <div class="section-label" data-vi="HƯỚNG DẪN SỬ DỤNG" data-en="TUTORIAL">HƯỚNG DẪN SỬ DỤNG</div>
         <h2 class="section-title" data-vi="Chi tiết cách dùng Magic Material" data-en="How to use Magic Material"></h2>
         <p class="section-desc" data-vi="Video hướng dẫn chi tiết cách tạo và gán vật liệu tự động trong 3ds Max." data-en="Detailed video tutorial on generating and assigning PBR materials automatically in 3ds Max."></p>
         
-        <div class="video-section" style="margin-top: 40px; border-radius: 12px; overflow: hidden; max-width: 1000px; margin-left: auto; margin-right: auto; position: relative;">
+        <div class="video-section relative"  style="margin-top: 40px; border-radius: 12px; overflow: hidden; max-width: 1000px; margin-left: auto; margin-right: auto;">
             <div class="video-box" id="featured-video">
-            <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/oa2y-5QDA7A?rel=0&modestbranding=1&color=white" title="AH3 Magic Material Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0;"></iframe>
-            <a id="yt-fallback" href="https://www.youtube.com/watch?v=oa2y-5QDA7A" target="_blank" style="display:none; position:absolute; inset:0; text-decoration:none; cursor:pointer;">
-                <img loading="lazy" src="https://img.youtube.com/vi/oa2y-5QDA7A/maxresdefault.jpg" alt="AH3 Magic Material Demo" style="width:100%; height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'">
-                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-                    <div style="width:72px; height:72px; border-radius:50%; background:rgba(77, 182, 172, 0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,0,0,0.4);">
+            <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/oa2y-5QDA7A?rel=0&modestbranding=1&color=white" title="AH3 Magic Material Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  class="absolute inset-0"></iframe>
+            <a id="yt-fallback" href="https://www.youtube.com/watch?v=oa2y-5QDA7A" target="_blank"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer;">
+                <img loading="lazy" src="https://img.youtube.com/vi/oa2y-5QDA7A/maxresdefault.jpg" alt="AH3 Magic Material Demo"  onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'" class="w-full" style="height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;">
+                <div  class="absolute inset-0 flex items-center justify-center">
+                    <div  class="flex items-center justify-center" style="width:72px; height:72px; border-radius:50%; background:rgba(77, 182, 172, 0.9); box-shadow:0 4px 20px rgba(0,0,0,0.4);">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="#121212"><path d="M8 5v14l11-7z"/></svg>
                     </div>
                 </div>
-                <div style="position:absolute; bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube">▶ Xem demo trên YouTube</div>
+                <div  data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube" class="absolute" style="bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;">▶ Xem demo trên YouTube</div>
             </a>
         </div>
         </div>
@@ -261,7 +261,7 @@ import Footer from '../components/Footer.astro';
 
 
     <!-- FAQ -->
-    <section id="faq" style="background: var(--bg-dark);">
+    <section id="faq"  style="background: var(--bg-dark);">
         <div class="section-label">FAQ</div>
         <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions"></h2>
         <p class="section-desc" data-vi="Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Material." data-en="Core technical aspects about how Magic Material functions under the hood."></p>

@@ -29,7 +29,7 @@ import Footer from '../components/Footer.astro';
 
     <!-- INTERACTIVE DEMO (MOCKUP APP) -->
         <!-- INTERFACE SHOWCASE -->
-    <section id="interface" style="background: var(--bg-surface);">
+    <section id="interface"  class="bg-surface">
         <div class="section-label" data-vi="QUY TRÌNH TỰ ĐỘNG" data-en="AUTOMATED WORKFLOW">QUY TRÌNH TỰ ĐỘNG</div>
         <h2 class="section-title" data-vi="Trải nghiệm Kéo Thả &amp; Merge thông minh" data-en="Interactive Drag &amp; Merge Pipeline"></h2>
         <p class="section-desc" data-vi="Nhấp &quot;PROCESS MERGE&quot; để trải nghiệm toàn bộ quy trình: Giải nén, Tải ảnh PRV, Quét virus, Sửa đường dẫn map và Merge model." data-en="Click &quot;PROCESS MERGE&quot; to witness the magic: extraction, preview load, virus clean, relink, and grid-merging."></p>
@@ -63,7 +63,7 @@ import Footer from '../components/Footer.astro';
                 <div class="pl-term">
                     <div class="pl-term-hdr">
                         <div class="pl-term-dots"><span></span><span></span><span></span></div>
-                        <div style="font-size: 10px; color: #666; font-weight: bold;">Merger Console</div>
+                        <div  style="font-size: 10px; color: #666; font-weight: bold;">Merger Console</div>
                     </div>
                     <div class="pl-term-body" id="pl-term-out">
                         <div class="term-line info">Waiting for input...<span class="term-cursor"></span></div>
@@ -87,17 +87,17 @@ import Footer from '../components/Footer.astro';
         </div>
 
         <div class="steps-grid">
-            <div class="step-item" id="pl-step-1" onclick="playStep1()" style="cursor:pointer;">
+            <div class="step-item" id="pl-step-1" onclick="playStep1()"  style="cursor:pointer;">
                 <div class="step-num">01</div>
                 <h3 data-vi="Kéo Thả File Nén" data-en="Drag &amp; Drop Zip">Kéo Thả File Nén</h3>
                 <p data-vi="Kéo tệp .max hoặc .zip/.rar chứa model thả trực tiếp vào plugin. Hệ thống tự động giải nén và nạp tệp." data-en="Drop your .max file or archive package directly. The system auto-extracts it instantly."></p>
             </div>
-            <div class="step-item" id="pl-step-2" onclick="playStep2()" style="cursor:pointer;">
+            <div class="step-item" id="pl-step-2" onclick="playStep2()"  style="cursor:pointer;">
                 <div class="step-num">02</div>
                 <h3 data-vi="Tạo PRV &amp; Diệt Virus" data-en="Preview &amp; Scan">Tạo PRV &amp; Diệt Virus</h3>
                 <p data-vi="Plugin tự động tải ảnh xem trước PRV, quét sạch mọi script virus độc hại và tối ưu hóa tệp trước khi nạp." data-en="Companion finder locates the preview image, script virus cleaner scans code, and geometry is optimized."></p>
             </div>
-            <div class="step-item" id="pl-step-3" onclick="playStep3()" style="cursor:pointer;">
+            <div class="step-item" id="pl-step-3" onclick="playStep3()"  style="cursor:pointer;">
                 <div class="step-num">03</div>
                 <h3 data-vi="Relink Map &amp; Merge" data-en="Relink &amp; Merge">Relink Map &amp; Merge</h3>
                 <p data-vi="Thuật toán Smart Relink tự sửa đường dẫn map bị thiếu, sau đó merge model đặt vào lưới tọa độ Max." data-en="Smart Relinker auto-resolves missing map paths and imports the clean model into 3ds Max layout."></p>
@@ -106,13 +106,13 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- INTERFACE SCREENSHOT SECTION -->
-    <section id="interface-shot" style="background: var(--bg-dark); border-top: 1px solid rgba(77,182,172,0.1);">
+    <section id="interface-shot"  style="background: var(--bg-dark); border-top: 1px solid rgba(77,182,172,0.1);">
         <div class="section-label" data-vi="GIAO DIỆN THỰC TẾ" data-en="UI SCREENSHOT">GIAO DIỆN THỰC TẾ</div>
         <h2 class="section-title" data-vi="Trực quan hóa công cụ" data-en="Real UI Representation"></h2>
         <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
         
-        <div class="interface-container" style="max-width: 1000px; margin: 0 auto;">
-            <img src="interface_magicmerger.png" alt="Plugin Interface" style="width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+        <div class="interface-container"  style="max-width: 1000px; margin: 0 auto;">
+            <img src="interface_magicmerger.png" alt="Plugin Interface"  class="w-full block" style="height: auto; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         </div>
     </section>
 
@@ -211,13 +211,13 @@ import Footer from '../components/Footer.astro';
                             <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật phiên bản mới miễn phí trọn đời" data-en="Perpetual license with lifetime free updates"></li>
                         </ul>
                     </div>
-                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center; margin-top:20px;" data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase" style="margin-top:20px;">Liên hệ mua bản quyền</a>
                 </div>
 
                 <!-- Card 2: Combo -->
                 <div class="price-card featured">
                     <div>
-                        <div class="price-badge" style="background:var(--primary-glow); color:var(--primary);">COMBO OFFER</div>
+                        <div class="price-badge text-primary"  style="background:var(--primary-glow);">COMBO OFFER</div>
                         <h3 data-vi="Combo Material &amp; Merger" data-en="Combo Material &amp; Merger">Combo Material &amp; Merger</h3>
                         <div class="price-amount" data-vi="<del>1.998.000đ</del> 500.000đ <span>/ vĩnh viễn</span>" data-en="<del>$78</del> $20 <span>/ lifetime</span>"></div>
                         <div class="price-period" data-vi="Gói combo tiết kiệm đặc biệt lên đến 75%" data-en="Special bundle discount - Save up to 75%">Gói combo tiết kiệm đặc biệt lên đến 75%</div>
@@ -230,8 +230,8 @@ import Footer from '../components/Footer.astro';
                             <li data-vi="Cập nhật miễn phí trọn đời và hỗ trợ ưu tiên" data-en="Lifetime free updates &amp; priority developer support"></li>
                         </ul>
                     </div>
-                    <div class="cta-wrapper" style="position: relative; display: block; width: 100%; margin-top: 20px;">
-                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center;" data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
+                    <div class="cta-wrapper relative block w-full"  style="margin-top: 20px;">
+                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
                         <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
                     </div>
                 </div>
@@ -240,7 +240,7 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- FAQ -->
-    <section id="faq" style="background: var(--bg-dark);">
+    <section id="faq"  style="background: var(--bg-dark);">
         <div class="section-label">FAQ</div>
         <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions"></h2>
         <p class="section-desc" data-vi="Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Merger." data-en="Core technical aspects about how Magic Merger functions under the hood."></p>

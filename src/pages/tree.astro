@@ -176,18 +176,18 @@ import Footer from '../components/Footer.astro';
 
     <!-- WIND PHYSICS VISUALIZATION -->
         <!-- INTERFACE SHOWCASE -->
-    <section id="interface" style="background: var(--bg-surface);">
+    <section id="interface"  class="bg-surface">
         <div class="section-label" data-vi="GIAO DIỆN CÔNG CỤ" data-en="INTERFACE SHOWCASE">GIAO DIỆN CÔNG CỤ</div>
         <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI"></h2>
         <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
         
         <div class="interface-container">
-            <img src="interface_magictree.png" alt="Plugin Interface" style="width: 100%; height: auto; display: block; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
+            <img src="interface_magictree.png" alt="Plugin Interface"  class="w-full block" style="height: auto; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
         </div>
     </section>
 
     <!-- TREE CATEGORIES -->
-    <section id="categories" style="background: var(--bg-surface);">
+    <section id="categories"  class="bg-surface">
         <div class="section-label" data-vi="NHẬN DẠNG SINH HỌC" data-en="BIO-STRUCTURE DETECTION">NHẬN DẠNG SINH HỌC</div>
         <h2 class="section-title" data-vi="Tự động nhận dạng 6 nhóm thực vật" data-en="Automatic detection of 6 plant types"></h2>
         <p class="section-desc" data-vi="Hệ thống tự động phân tích cấu trúc cây và từ khóa vật liệu để áp dụng các thiết lập mô phỏng gió phù hợp nhất cho từng nhóm thực vật." data-en="Magic Tree automatically analyzes plant structures and materials to apply the most natural wind behavior for each category."></p>
@@ -239,26 +239,26 @@ import Footer from '../components/Footer.astro';
 
     
     <!-- TUTORIAL / VIDEO -->
-    <section id="tutorial" style="background: var(--bg-surface);">
-        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 80px 24px;">
-            <div class="section-header" style="text-align: center; margin-bottom: 48px;">
-                <div class="section-label" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--primary); letter-spacing: 1px; margin-bottom: 12px;" data-vi="HƯỚNG DẪN" data-en="TUTORIAL">HƯỚNG DẪN</div>
-                <h2 class="section-title" style="font-size: 32px; font-weight: 600; margin-bottom: 16px;" data-vi="Video Hướng dẫn sử dụng" data-en="Video Tutorial">Video Hướng dẫn sử dụng</h2>
-                <p class="section-desc" style="font-size: 16px; color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto;" data-vi="Xem chi tiết cách cài đặt và sử dụng Magic Tree để tạo gió động cho scene của bạn." data-en="Watch the detailed guide on installing and using Magic Tree to animate your scenes."></p>
+    <section id="tutorial"  class="bg-surface">
+        <div class="container"  style="max-width: 1200px; margin: 0 auto; padding: 80px 24px;">
+            <div class="section-header text-center"  style="margin-bottom: 48px;">
+                <div class="section-label text-primary"  data-vi="HƯỚNG DẪN" data-en="TUTORIAL" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 1px; margin-bottom: 12px;">HƯỚNG DẪN</div>
+                <h2 class="section-title font-semibold mb-4"  data-vi="Video Hướng dẫn sử dụng" data-en="Video Tutorial" style="font-size: 32px;">Video Hướng dẫn sử dụng</h2>
+                <p class="section-desc"  data-vi="Xem chi tiết cách cài đặt và sử dụng Magic Tree để tạo gió động cho scene của bạn." data-en="Watch the detailed guide on installing and using Magic Tree to animate your scenes." style="font-size: 16px; color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto;"></p>
             </div>
             <div class="video-section">
         <div class="video-box" id="featured-video">
             <!-- Iframe (works on hosted web) -->
-            <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/aMThqiNNoBQ?rel=0&modestbranding=1&color=white" title="AH3 Magic Tree Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute; inset:0;"></iframe>
+            <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/aMThqiNNoBQ?rel=0&modestbranding=1&color=white" title="AH3 Magic Tree Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  class="absolute inset-0"></iframe>
             <!-- Thumbnail fallback (shown if iframe fails on local file://) -->
-            <a id="yt-fallback" href="https://www.youtube.com/watch?v=aMThqiNNoBQ" target="_blank" style="display:none; position:absolute; inset:0; text-decoration:none; cursor:pointer;">
-                <img loading="lazy" src="https://img.youtube.com/vi/aMThqiNNoBQ/maxresdefault.jpg" alt="AH3 Magic Tree Demo" style="width:100%; height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'">
-                <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center;">
-                    <div style="width:72px; height:72px; border-radius:50%; background:rgba(102, 187, 106, 0.9); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,0,0,0.4);">
+            <a id="yt-fallback" href="https://www.youtube.com/watch?v=aMThqiNNoBQ" target="_blank"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer;">
+                <img loading="lazy" src="https://img.youtube.com/vi/aMThqiNNoBQ/maxresdefault.jpg" alt="AH3 Magic Tree Demo"  onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'" class="w-full" style="height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;">
+                <div  class="absolute inset-0 flex items-center justify-center">
+                    <div  class="flex items-center justify-center" style="width:72px; height:72px; border-radius:50%; background:rgba(102, 187, 106, 0.9); box-shadow:0 4px 20px rgba(0,0,0,0.4);">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="#121212"><path d="M8 5v14l11-7z"/></svg>
                     </div>
                 </div>
-                <div style="position:absolute; bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;" data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube">▶ Xem demo trên YouTube</div>
+                <div  data-vi="▶ Xem demo trên YouTube" data-en="▶ Watch demo on YouTube" class="absolute" style="bottom:16px; left:16px; font-size:13px; color:rgba(255,255,255,0.7); font-family:'JetBrains Mono',monospace;">▶ Xem demo trên YouTube</div>
             </a>
         </div>
             
@@ -288,13 +288,13 @@ import Footer from '../components/Footer.astro';
                     <li data-vi="Hỗ trợ kỹ thuật trực tiếp 1-1 từ tác giả" data-en="Direct 1-on-1 developer support from the author"></li>
                 </ul>
 
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" style="display: block; width: 100%; text-align: center;" data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
             </div>
         </div>
     </section>
 
     <!-- FAQ -->
-    <section id="faq" style="background: var(--bg-surface);">
+    <section id="faq"  class="bg-surface">
         <div class="section-label">FAQ</div>
         <h2 class="section-title" data-vi="Giải đáp thắc mắc kỹ thuật" data-en="Technical Frequently Asked Questions"></h2>
         <p class="section-desc" data-vi="Các thông tin kỹ thuật quan trọng giúp bạn an tâm sử dụng trong dự án thương mại." data-en="Essential technical details for implementing the tool in commercial production."></p>
