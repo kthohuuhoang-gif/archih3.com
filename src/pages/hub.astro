@@ -566,11 +566,6 @@ import Footer from '../components/Footer.astro';
                     <p  data-vi="Có. Hủy bất cứ lúc nào — Pro vẫn dùng đến hết chu kỳ thanh toán. Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro nào." data-en="Yes. Cancel anytime — Pro stays active until end of billing cycle. 100% refund within 7 days if no Pro feature has been used." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
 
-                <!-- Q4 -->
-                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3  data-vi="Có chạy trên Mac không?" data-en="Does it run on Mac?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
-                    <p  data-vi="Hiện tại chỉ hỗ trợ Windows 10/11 (64-bit). Chưa có kế hoạch port macOS — vì 3ds Max bản thân nó cũng chỉ chạy trên Windows." data-en="Currently Windows 10/11 (64-bit) only. No macOS port planned — 3ds Max itself only runs on Windows." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
-                </div>
                 <!-- Q6 -->
                 <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
                     <h3  data-vi="Output AI có vi phạm bản quyền không?" data-en="Does AI output infringe copyright?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
@@ -585,8 +580,8 @@ import Footer from '../components/Footer.astro';
 
                 <!-- Q8 -->
                 <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3  data-vi="Hỗ trợ Corona / V-Ray version nào?" data-en="Which Corona / V-Ray versions?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
-                    <p  data-vi="Hỗ trợ Corona Renderer và V-Ray cho 3ds Max 2023-2027+. Material Generator và Quick Render tích hợp với cả hai render engine." data-en="Supports Corona Renderer and V-Ray for 3ds Max 2023-2027+. Material Generator and Quick Render integrate with both render engines." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
+                    <h3  data-vi="Hỗ trợ Hệ điều hành & Render Engine nào?" data-en="Which OS & Render Engines supported?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
+                    <p  data-vi="Chỉ hỗ trợ Windows 10/11 (do 3ds Max không chạy trên Mac). Tương thích hoàn toàn với Corona Renderer và V-Ray cho 3ds Max 2023-2027+." data-en="Windows 10/11 only (3ds Max doesn't run on Mac). Fully compatible with Corona Renderer and V-Ray for 3ds Max 2023-2027+." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
             </div>
 
@@ -601,9 +596,11 @@ import Footer from '../components/Footer.astro';
                 <div class="section-label">GET STARTED</div>
                 <h2 data-vi="Câu chuyện tiếp theo là của bạn" data-en="The next chapter is yours"></h2>
                 <p data-vi="AH3 Hub miễn phí cho hầu hết tính năng. Cài đặt trong 2 phút và bắt đầu trải nghiệm AI ngay trong 3ds Max. Muốn nhiều hơn? Nâng cấp Pro bất cứ lúc nào." data-en="AH3 Hub is free for most features. Install in 2 minutes and start experiencing AI inside 3ds Max. Want more? Upgrade to Pro anytime."></p>
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-download"  data-vi="↓ Liên hệ tải v1.8.x" data-en="↓ Contact to Download v1.8.x" style="font-size:16px; padding:14px 32px;"></a>
-                <div class="install-cmd">
-                    <span>$</span> <span data-vi="Chạy AH3_Hub_Setup.exe → Chọn phiên bản Max → Done" data-en="Run AH3_Hub_Setup.exe → Select Max version → Done"></span>
+                <div class="cta-actions" style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 24px;">
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-download"  data-vi="↓ Liên hệ tải v1.8.x" data-en="↓ Contact to Download v1.8.x" style="font-size:16px; padding:14px 32px; margin: 0;"></a>
+                    <div class="install-cmd" style="margin: 0;">
+                        <span>$</span> <span data-vi="Chạy AH3_Hub_Setup.exe → Chọn phiên bản Max → Done" data-en="Run AH3_Hub_Setup.exe → Select Max version → Done"></span>
+                    </div>
                 </div>
                 <p  data-vi="⚠️ Windows cảnh báo? Nhấn More info → Run anyway" data-en="⚠️ Windows warning? Click More info → Run anyway" style="margin-top:12px; font-size:13px; color:var(--text-muted); font-family:'JetBrains Mono', monospace;"></p>
 
