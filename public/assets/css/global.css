@@ -1460,3 +1460,10 @@ section { padding: 100px 24px; }
                 gap: 24px !important;
             }
         }
+
+/* INTERFACE GRID (2 Columns for UI Showcase) */
+.interface-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px; align-items: center; max-width: 1100px; margin: 0 auto; }
+.interface-text { text-align: left; }
+.interface-text .section-title { font-size: clamp(24px, 3vw, 36px); margin-bottom: 16px; }
+.interface-text .section-desc { font-size: 16px; margin-bottom: 0; }
+@media (max-width: 1024px) { .interface-grid { grid-template-columns: 1fr; gap: 32px; text-align: center; } .interface-text { text-align: center; } }
