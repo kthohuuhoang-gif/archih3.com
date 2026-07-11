@@ -96,6 +96,104 @@ import Footer from '../components/Footer.astro';
                     <li data-vi="Căn phối cảnh 2 điểm trực giao" data-en="Auto horizon level & 2-point perspective"></li>
                     <li data-vi="Chụp nhanh và quản lý an toàn viewport" data-en="Batch viewport grabbing & rendering"></li>
                     <li data-vi="Cập nhật miễn phí tính năng AI trợ lý bố cục" data-en="Free update to upcoming AI composition assistant"></li>
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="Magic Camera — Smart Camera Manager 3ds Max | ArchiH3" description="Plugin quản lý camera chuyên nghiệp. Composition guides, perspective correction, batch render. Sắp ra mắt.">
+<Fragment slot="head">
+
+</Fragment>
+
+
+
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+
+    <!-- NAV -->
+    <Navbar />
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="hero-badge" data-vi="SMART CAMERA & VIEWPORT STATE MANAGER" data-en="SMART CAMERA & VIEWPORT STATE MANAGER">SMART CAMERA & VIEWPORT STATE MANAGER</div>
+        <h1 data-vi="Khung hình hoàn hảo.<br>Quản lý camera <span class='teal'>siêu tốc.</span>" data-en="Perfect framing.<br>High-speed <span class='teal'>camera manager.</span>"></h1>
+        <p class="hero-sub" data-vi="Plugin chuyên biệt tối ưu hóa và chuẩn hóa góc máy trong 3ds Max theo triết lý Scene Manager (Pulze). Tự động quản lý góc máy viewport, căn chỉnh phối cảnh thông minh và render hàng loạt nhanh chóng." data-en="Specialized plugin to optimize and standardize camera set-ups in 3ds Max following the Scene Manager (Pulze) philosophy. Auto-manages viewport camera states, aligns perspective intelligently, and processes batch rendering."></p>
+        <div class="hero-cta">
+            <a href="#pricing" class="btn-primary" data-vi="Sắp mở bán" data-en="Coming Soon">Sắp mở bán</a>
+            <a href="#features" class="btn-outline" data-vi="Xem tính năng" data-en="See Features">Xem tính năng</a>
+        </div>
+    </header>
+
+    <!-- FEATURES -->
+    <section id="features">
+        <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="CORE FEATURES">TÍNH NĂNG NỔI BẬT</div>
+        <h2 class="section-title" data-vi="Thiết kế dành riêng cho KTS chuyên nghiệp" data-en="Designed for Professional Architects"></h2>
+        <p class="section-desc" data-vi="Giấu đi các bước setup phức tạp, Magic Camera mang lại trải nghiệm quản lý camera mượt mà, trực quan và tối ưu nhất cho render 3D." data-en="Hiding complex backend setup, Magic Camera provides a smooth, visual, and optimized camera management experience for 3D rendering."></p>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feat-icon">🖼️</div>
+                <h3 class="feat-title" data-vi="Quản Lý Trực Quan" data-en="Visual Gallery Manager">Quản Lý Trực Quan</h3>
+                <p class="feat-desc" data-vi="Hệ thống quản lý thông minh danh sách camera trong scene. Tự động thu giữ và hiển thị trạng thái khung hình theo tỷ lệ render thực tế mà không bị méo lệch, giúp bao quát toàn bộ góc máy dự án." data-en="Smart system to manage camera list in your scene. Automatically captures and displays viewport framings matching the exact rendering aspect ratio without distortion."></p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feat-icon">📐</div>
+                <h3 class="feat-title" data-vi="Lưới Gióng Bố Cục" data-en="Composition Grid Guides">Lưới Gióng Bố Cục</h3>
+                <p class="feat-desc" data-vi="Hỗ trợ các đường gióng bố cục mỹ thuật tiêu chuẩn ngay trên viewport 3ds Max: Quy tắc 1/3 (Rule of Thirds), Tỷ lệ vàng (Golden Ratio), Đường chéo và Tâm đối xứng. Giúp kiến trúc sư thiết lập khung hình chuẩn điện ảnh." data-en="Supports professional composition guides directly on the 3ds Max viewport: Rule of Thirds, Golden Ratio, Diagonal, and Center. Set up cinematic framings easily."></p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feat-icon">⚖️</div>
+                <h3 class="feat-title" data-vi="Tự Động Căn Phối Cảnh" data-en="Perspective Correction">Tự Động Căn Phối Cảnh</h3>
+                <p class="feat-desc" data-vi="Tự động cân bằng góc máy song song mặt đất và khử độ nghiêng tụ dọc. Đưa camera về phối cảnh 2 điểm (2-Point Perspective) hoàn mỹ một cách nhanh chóng, đúng chuẩn nhiếp ảnh kiến trúc." data-en="Automatically balances the camera horizon and corrects vertical perspective tilt. Instantly establishes a perfect 2-point perspective, matching professional architectural photography standards."></p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feat-icon">🔍</div>
+                <h3 class="feat-title" data-vi="Đồng Bộ Thấu Kính & DoF" data-en="Lens & DoF Control">Đồng Bộ Thấu Kính & DoF</h3>
+                <p class="feat-desc" data-vi="Quản lý thống nhất tiêu cự thấu kính, độ sâu trường ảnh (Depth of Field), Clip Near/Far. Tự động tương thích và đồng bộ hóa thông số giữa Physical Camera, V-Ray Camera và Corona Camera." data-en="Unified parameters manager for focal length, Depth of Field (DoF), and Near/Far clipping. Automatically compatible with Physical Camera, V-Ray Camera, and Corona Camera."></p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feat-icon">⚙️</div>
+                <h3 class="feat-title" data-vi="Xuất Ảnh & Render Hàng Loạt" data-en="Batch Render & Viewport Grab">Xuất Ảnh & Render Hàng Loạt</h3>
+                <p class="feat-desc" data-vi="Hỗ trợ xuất hình ảnh viewport nhanh hàng loạt hoặc kết xuất render (Batch Render) đồng thời các camera được chọn. Rút ngắn tối đa thời gian xuất phương án phác thảo thiết kế." data-en="Supports rapid batch viewport grabbing or batch rendering for multiple selected cameras. Minimizes design option exporting times significantly."></p>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feat-icon">🚀</div>
+                <h3 class="feat-title" data-vi="Trợ Lý Bố Cục AI (Sắp ra mắt)" data-en="AI Composition Assistant (Upcoming)">Trợ Lý Bố Cục AI (Sắp ra mắt)</h3>
+                <p class="feat-desc" data-vi="Tính năng sắp ra mắt hỗ trợ phân tích không gian bằng trí tuệ nhân tạo. Tự động định vị và đề xuất vị trí đặt camera, góc ống kính tối ưu nhất dựa trên hướng chính của các chủ thể 3D." data-en="Upcoming feature utilizing AI spatial analysis. Automatically suggests best camera positioning and focal length based on 3D geometry layout in the scene."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+        <div class="section-label" data-vi="BẢNG GIÁ" data-en="PRICING">BẢNG GIÁ</div>
+        <h2 class="section-title" data-vi="Lựa chọn gói bản quyền phù hợp" data-en="Choose Your License Model"></h2>
+        <p class="section-desc" data-vi="Đầu tư một lần tối ưu hóa trọn đời quy trình đặt camera và kết xuất phối cảnh 3D." data-en="One-time investment to permanently optimize your camera framing and 3D rendering workflow."></p>
+
+        <div class="pricing-grid"  style="grid-template-columns: 1fr; max-width: 600px;">
+            <!-- Promo Card -->
+            <div class="pricing-card featured text-center items-center" >
+                <div class="price-badge" data-vi="SẮP MỞ BÁN" data-en="COMING SOON">SẮP MỞ BÁN</div>
+                <h3 class="price-title">Magic Camera</h3>
+                <p class="price-sub" data-vi="Đăng ký nhận thông báo ngày mở bán" data-en="Register for opening day notifications">Đăng ký nhận thông báo ngày mở bán</p>
+                <div class="price-num text-primary font-semibold"  data-vi="Hãy liên tục check web ngày mở bán sẽ có giá 200k cho chỉ 3 ngày đầu tiên" data-en="Keep checking the website, opening day price will be 200k for the first 3 days only" style="font-size: clamp(16px, 3vw, 24px); line-height: 1.4; margin: 16px 0;">Hãy liên tục check web ngày mở bán sẽ có giá 200k cho chỉ 3 ngày đầu tiên</div>
+                <ul class="price-features text-left mb-8" >
+                    <li data-vi="Đầy đủ tính năng quản lý thấu kính & DoF" data-en="Full camera lens & DoF manager"></li>
+                    <li data-vi="Căn phối cảnh 2 điểm trực giao" data-en="Auto horizon level & 2-point perspective"></li>
+                    <li data-vi="Chụp nhanh và quản lý an toàn viewport" data-en="Batch viewport grabbing & rendering"></li>
+                    <li data-vi="Cập nhật miễn phí tính năng AI trợ lý bố cục" data-en="Free update to upcoming AI composition assistant"></li>
                 </ul>
                 <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Hãy liên tục check web, ngày mở bán sẽ có giá 200k cho chỉ 3 ngày đầu tiên!');" class="price-cta primary" data-vi="Liên hệ DEV qua Facebook" data-en="Contact DEV via Facebook">Liên hệ DEV qua Facebook</a>
             </div>
@@ -124,9 +222,7 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- FOOTER -->
-    <footer  class="text-center" style="padding: 40px 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-muted); background: var(--bg-dark);">
-        <p>© 2026 ArchiH3 Portal. Created by Hồ Hữu Hoàng. All rights reserved.</p>
-    </footer>
+    <Footer />
 
     <script is:inline>
         let currentLang = 'vi';

@@ -2,5 +2,109 @@
 // Footer.astro
 ---
 <footer>
-    <p>© 2025–2026 <a href="/">archih3.com</a> · Portal by Hồ Hữu Hoàng · Made in Vietnam 🇻🇳</p>
+    <div class="footer-grid">
+        <div class="footer-brand">
+            <a href="/" class="footer-logo"><img src="/logo.png" alt="AH3" style="height:20px; vertical-align:middle; margin-right:6px; opacity:0.85;">AH3 Tools</a>
+            <p class="footer-business" data-vi="Hộ Kinh Doanh Dịch vụ Kiến Trúc ArchiH3" data-en="ArchiH3 Architecture Services">Hộ Kinh Doanh Dịch vụ Kiến Trúc ArchiH3</p>
+            <p class="footer-contact">✉ hohuuhoang@archih3.com</p>
+        </div>
+        <div class="footer-links">
+            <h4 data-vi="Sản phẩm" data-en="Products">Sản phẩm</h4>
+            <a href="/hub">AH3 Hub</a>
+            <a href="/material">Magic Material</a>
+            <a href="/merger">Magic Merger</a>
+            <a href="/tree">Magic Tree</a>
+            <a href="/rebake">Magic ReBake</a>
+            <a href="/rename">Magic Rename</a>
+            <a href="/camera">Magic Camera</a>
+        </div>
+        <div class="footer-links">
+            <h4 data-vi="Liên kết" data-en="Links">Liên kết</h4>
+            <a href="https://youtube.com/@ArchiH3" target="_blank">YouTube</a>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank">Facebook</a>
+            <a href="mailto:hohuuhoang@archih3.com">Email</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2025–2026 Hộ Kinh Doanh Dịch vụ Kiến Trúc ArchiH3 · Made in Vietnam 🇻🇳</p>
+    </div>
 </footer>
+
+<style>
+    footer {
+        padding: 48px 40px 24px;
+        background: var(--bg-dark);
+        border-top: 1px solid rgba(77, 182, 172, 0.1);
+    }
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 40px;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding-bottom: 32px;
+        border-bottom: 1px solid rgba(85,85,85,0.2);
+    }
+    .footer-logo {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--primary);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    .footer-business {
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+        font-weight: 400;
+    }
+    .footer-contact {
+        font-size: 13px;
+        color: var(--text-muted);
+    }
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .footer-links h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .footer-links a {
+        font-size: 13px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    .footer-links a:hover {
+        color: var(--primary);
+    }
+    .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    .footer-bottom p {
+        font-size: 12px;
+        color: var(--text-muted);
+    }
+    @media (max-width: 768px) {
+        footer { padding: 32px 20px 16px; }
+        .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 24px;
+            text-align: center;
+        }
+        .footer-logo { justify-content: center; }
+        .footer-links { align-items: center; }
+    }
+</style>

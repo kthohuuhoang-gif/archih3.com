@@ -2,7 +2,7 @@
 // Navbar.astro
 ---
 <nav>
-    <a href="/" class="logo"><img src="/logo.png" alt="AH3" style="height:24px; vertical-align:middle; margin-right:6px; opacity:0.85;">AH3<span> Portal</span></a>
+    <a href="/" class="logo"><img src="/logo.png" alt="AH3" style="height:24px; vertical-align:middle; margin-right:6px; opacity:0.85;">AH3<span> Tools</span></a>
     <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('open')" style="display:none; background:none; border:1px solid var(--border); border-radius:6px; padding:6px 10px; color:var(--text); font-size:18px; cursor:pointer;">☰</button>
     <div class="nav-links">
         <div class="nav-dropdown-wrapper">
@@ -43,10 +43,23 @@
                             <span data-vi="Bake map &amp; Decimate tối ưu" data-en="Map baking &amp; decimation">Bake map &amp; Decimate tối ưu</span>
                         </div>
                     </a>
+                    <a href="/camera">
+                        <span class="dd-icon"><img src="/magiccamera_icon_48.png" alt="Camera"></span>
+                        <div class="dd-text">
+                            <strong data-vi="Magic Camera" data-en="Magic Camera">Magic Camera</strong>
+                            <span data-vi="Camera & phối cảnh thông minh" data-en="Smart camera manager">Camera & phối cảnh thông minh</span>
+                        </div>
+                    </a>
+                    <a href="/rename">
+                        <span class="dd-icon"><img src="/magicrename_icon_48.png" alt="Rename"></span>
+                        <div class="dd-text">
+                            <strong data-vi="Magic Rename" data-en="Magic Rename">Magic Rename</strong>
+                            <span data-vi="Đổi tên & chuẩn hóa UE5" data-en="Batch rename & UE5 prep">Đổi tên & chuẩn hóa UE5</span>
+                        </div>
+                    </a>
                 </div>
             </div>
-        <a href="/kindle" data-vi="Bản Kindle" data-en="Kindle Edition" id="kindle-nav-link" style="display: none;">Bản Kindle</a>
-        <a href="#author" data-vi="Tác giả" data-en="Author">Tác giả</a>
+        <a href="/#author" data-vi="Tác giả" data-en="Author">Tác giả</a>
         <a href="https://youtube.com/@ArchiH3" target="_blank">YouTube</a>
         <div class="lang-toggle">
             <button class="active" onclick="setLang('vi')">VI</button>
