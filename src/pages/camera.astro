@@ -236,7 +236,7 @@ import Footer from '../components/Footer.astro';
         /* FEATURES */
         .features-grid {
             max-width: 1100px; margin: 0 auto;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
             gap: 24px;
         }
         .feature-card {
@@ -260,7 +260,7 @@ import Footer from '../components/Footer.astro';
         /* PRICING */
         .pricing-grid {
             max-width: 900px; margin: 0 auto;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
             gap: 32px; justify-content: center;
         }
         .pricing-card {
@@ -318,5 +318,36 @@ import Footer from '../components/Footer.astro';
         }
         .faq-q { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #fff; }
         .faq-a { font-size: 14px; color: var(--text-secondary); line-height: 1.6; font-weight: 300; }
+
+        /* TABLET */
+        @media (max-width: 1024px) {
+            .hero { padding: 120px 24px 50px; }
+            .hero h1 { font-size: clamp(30px, 5vw, 48px); }
+            .features-grid { grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); }
+            .pricing-grid { grid-template-columns: 1fr; max-width: 500px; }
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            .hero { padding: 110px 16px 40px; }
+            .hero h1 { font-size: clamp(26px, 6vw, 36px); letter-spacing: -1px; }
+            .hero-sub { font-size: 15px; }
+            .hero-badge { font-size: 10px; padding: 5px 12px; }
+            .hero-cta { flex-direction: column; width: 100%; max-width: 320px; margin: 0 auto; gap: 10px; }
+            .hero-cta .btn-primary,
+            .hero-cta .btn-outline { width: 100%; justify-content: center; text-align: center; }
+            section { padding: 50px 16px; }
+            .section-title { font-size: clamp(22px, 5vw, 30px); }
+            .section-desc { font-size: 14px; margin-bottom: 36px; }
+            .features-grid { grid-template-columns: 1fr; gap: 16px; }
+            .feature-card { padding: 24px; }
+            .feat-title { font-size: 17px; }
+            .feat-desc { font-size: 13px; }
+            .pricing-grid { grid-template-columns: 1fr !important; max-width: 100%; }
+            .pricing-card { padding: 32px 20px; }
+            .faq-item { padding: 18px; }
+            .faq-q { font-size: 15px; }
+            .faq-a { font-size: 13px; }
+        }
     
 </style>

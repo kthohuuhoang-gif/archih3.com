@@ -269,32 +269,7 @@ footer a { color: var(--primary); text-decoration: none; }
 body {  }
 input, textarea { user-select: auto; -webkit-user-select: auto; }
 
-/* BLUEPRINT ANCHORS FOR CTA BUTTONS */
-.cta-wrapper {
-    position: relative;
-    display: inline-block;
-}
-.bp-dot {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: var(--hover-border, var(--primary));
-    border-radius: 0 !important; /* Square dots */
-    opacity: 0.6;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 10;
-    pointer-events: none;
-}
-.bp-dot.tl { top: -3px; left: -3px; }
-.bp-dot.tr { top: -3px; right: -3px; }
-.bp-dot.bl { bottom: -3px; left: -3px; }
-.bp-dot.br { bottom: -3px; right: -3px; }
-
-.cta-wrapper:hover .bp-dot {
-    opacity: 1;
-    transform: scale(1.4);
-    background: #fff !important; /* Intense white glow on hover */
-}
+/* BLUEPRINT ANCHORS FOR CTA BUTTONS — moved to later block */
 
 /* TEAL TEXT HIGHLIGHT FOR EXCLUSIVE PRO FEATURES */
 .highlight-teal {
@@ -371,8 +346,6 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
             100% { transform: translate(100px, 50px) scale(1.2); }
         }
 
-            100% { transform: translate(100px, 50px) scale(1.2); }
-        }
 
         .hero-content {
             position: relative; z-index: 1;
@@ -449,11 +422,7 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
             max-width: 1200px; margin: 0 auto;
             padding: 20px 24px 80px;
         }
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 24px;
-        }
+        /* (products-grid moved to later block for deduplication) */
         .products-group-title {
             font-size: var(--text-xl); font-weight: 600;
             color: var(--primary);
@@ -472,27 +441,7 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
         .products-group-title.coming-soon::after {
             background: linear-gradient(90deg, rgba(102, 102, 102, 0.15), transparent);
         }
-        .product-card {
-            background: var(--bg-main);
-            border: 1px solid rgba(85, 85, 85, 0.3);
-            border-radius: var(--radius-lg); padding: 32px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            position: relative; overflow: hidden;
-            display: flex; flex-direction: column;
-            justify-content: space-between;
-        }
-        .product-card::before {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at 50% 0%, var(--glow-color, var(--primary-glow)), transparent 70%);
-            opacity: 0; transition: opacity 0.4s;
-            pointer-events: none;
-        }
-        .product-card:hover {
-            border-color: var(--hover-border, var(--primary));
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
-        }
-        .product-card:hover::before { opacity: 0.8; }
+        /* (product-card base styles moved to later block for deduplication) */
         
         .product-meta {
             position: relative; z-index: 1;
@@ -883,7 +832,7 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
         
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
             gap: 28px;
             margin-bottom: 60px;
         }
@@ -1193,25 +1142,10 @@ section[id] { scroll-margin-top: 80px; }
 section { padding: 100px 24px; }
 .features-section { max-width: 1100px; margin: 0 auto; }
 .features-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
             gap: 20px;
         }
-.feature-card {
-    background: var(--bg-surface); border: 1px dashed rgba(255,255,255,0.15);
-    border-radius: var(--radius-lg); padding: 32px;
-    transition: all 0.3s; position: relative; overflow: hidden;
-}
-.feature-card:hover {
-    border-color: var(--primary); transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(77,182,172,0.15);
-}
-.feature-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary), transparent);
-            opacity: 0; transition: opacity 0.3s;
-        }
-.feature-card:hover::before { opacity: 1; }
+/* (feature-card styles consolidated below) */
 .feature-icon {
             width: 44px; height: 44px; border-radius: 10px;
             background: var(--primary-glow); border: 1px solid rgba(77,182,172,0.2);
