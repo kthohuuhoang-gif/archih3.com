@@ -174,7 +174,7 @@ import Footer from '../components/Footer.astro';
         <p class="section-desc" data-vi="Các chi tiết cốt lõi giúp bạn hiểu rõ cơ chế hoạt động của Magic ReBake." data-en="Core details helping you understand how Magic ReBake operates under the hood."></p>
 
         <div class="faq-section"  style="max-width: 900px; margin: 0 auto;">
-            <div class="faq-grid"  style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+            <div class="faq-grid"  style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 20px;">
                 <div class="faq-item"  style="background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4); border-radius: 12px; padding: 24px;">
                     <h3  data-vi="Plugin hoạt động như thế nào?" data-en="How does the plugin work?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
                     <p  data-vi="Khi bạn click Remesh, plugin gọi một bộ xử lý hình học chạy ẩn để dựng lại lưới Quad chuẩn. Sau đó, một thuật toán dò tia vector hóa sẽ chạy trên CPU để tính toán và truyền màu sắc, map vật liệu chính xác từ mesh cũ sang mesh mới theo đúng hệ tọa độ UV mới tạo." data-en="When you click Remesh, the plugin invokes a background geometry processor to build the Quad mesh. Then, a vectorized raycasting algorithm runs on your CPU to calculate and project colors and maps from the original mesh to the new UV layout." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
@@ -642,6 +642,16 @@ import Footer from '../components/Footer.astro';
             .rebake-win-footer-right {
                 justify-content: flex-end;
             }
+            /* Pricing mobile fix */
+            .pricing-section { padding: 0 8px; }
+            .price-card { padding: 28px 16px; }
+            .price-amount { font-size: 22px; flex-wrap: wrap; justify-content: center; gap: 6px; }
+            .price-amount del { font-size: 15px; }
+            .price-amount span { font-size: 12px; width: 100%; }
+            .price-period { font-size: 12px; }
+            .price-features { max-width: 100%; }
+            .price-features li { font-size: 13px; }
+            .price-card h3 { font-size: 18px; }
         }
     
         /* INTERFACE CONTAINER RESPONSIVE */

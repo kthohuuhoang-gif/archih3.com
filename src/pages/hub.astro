@@ -547,7 +547,7 @@ import Footer from '../components/Footer.astro';
                 <p class="section-desc"  data-vi="Những câu hỏi phổ biến nhất từ user. Còn thắc mắc khác? Email tác giả." data-en="Most common questions from users. Other questions? Email the author." style="margin:0 auto 48px;"></p>
             </div>
 
-            <div  style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+            <div  style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap:20px;">
                 <!-- Q1 -->
                 <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
                     <h3  data-vi="GPU yếu (4 GB) có chạy được không?" data-en="Will it run on weaker GPU (4 GB)?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
@@ -1255,6 +1255,18 @@ import Footer from '../components/Footer.astro';
             .workflow-step { gap: 16px; padding: 16px 0; }
             .workflow-body h3 { font-size: 16px; }
             .workflow-body p { font-size: 14px; }
+            .features-grid {
+                grid-template-columns: 1fr !important;
+            }
+            /* Pricing mobile fix */
+            .pricing-section { padding: 0 8px; }
+            .price-card { padding: 28px 16px; }
+            .price-amount { font-size: 22px; flex-wrap: wrap; justify-content: center; gap: 6px; }
+            .price-amount span { font-size: 12px; width: 100%; }
+            .price-period { font-size: 12px; }
+            .price-features { max-width: 100%; }
+            .price-features li { font-size: 13px; }
+            .price-card h3 { font-size: 18px; }
         }
         @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
         .cursor { animation: blink 1s infinite; color: var(--primary); }

@@ -447,6 +447,19 @@ import Footer from '../components/Footer.astro';
                 padding: 10px !important;
                 border-radius: 10px !important;
             }
+            .features-grid {
+                grid-template-columns: 1fr !important;
+            }
+            /* Pricing mobile fix */
+            .pricing-section { padding: 0 8px; }
+            .price-card { padding: 28px 16px; }
+            .price-amount { font-size: 22px; flex-wrap: wrap; justify-content: center; gap: 6px; }
+            .price-amount del { font-size: 15px; }
+            .price-amount span { font-size: 12px; width: 100%; }
+            .price-period { font-size: 12px; }
+            .price-features { max-width: 100%; }
+            .price-features li { font-size: 13px; }
+            .price-card h3 { font-size: 18px; }
         }
 
     
