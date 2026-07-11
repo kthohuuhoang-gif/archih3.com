@@ -1401,3 +1401,23 @@ section { padding: 100px 24px; }
 .interface-text .section-title { font-size: clamp(24px, 3vw, 36px); margin-bottom: 16px; }
 .interface-text .section-desc { font-size: 16px; margin-bottom: 0; }
 @media (max-width: 1024px) { .interface-grid { grid-template-columns: 1fr; gap: 32px; text-align: center; } .interface-text { text-align: center; } }
+
+/* MOBILE PRICING FIX — prevent text overflow on small screens */
+@media (max-width: 768px) {
+    .pricing-section { padding: 0 4px; }
+    .price-card { padding: 28px 16px !important; }
+    .price-card h3 { font-size: 18px !important; }
+    .price-amount {
+        font-size: 22px !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 6px !important;
+    }
+    .price-amount del { font-size: 15px !important; }
+    .price-amount span { font-size: 12px !important; }
+    .price-period { font-size: 12px !important; }
+    .price-features { max-width: 100% !important; }
+    .price-features li { font-size: 13px !important; }
+    .price-badge { font-size: 10px !important; }
+    section { padding: 3rem 1rem !important; }
+}
