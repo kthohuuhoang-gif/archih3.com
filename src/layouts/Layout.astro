@@ -50,6 +50,50 @@ const {
                     offset: 100
                 });
             }
+
+            // Auto-hide navbar on mobile
+            (function() {
+                var nav = document.querySelector('nav');
+                if (!nav) return;
+                var lastY = 0;
+                var ticking = false;
+                var THRESHOLD = 5;
+
+                function onScroll() {
+                    if (window.innerWidth > 768) {
+                        nav.classList.remove('nav-hidden', 'nav-scrolled');
+                        return;
+                    }
+                    var y = window.scrollY;
+                    if (y > 60) {
+                        nav.classList.add('nav-scrolled');
+                    } else {
+                        nav.classList.remove('nav-scrolled', 'nav-hidden');
+                    }
+                    if (Math.abs(y - lastY) < THRESHOLD) return;
+                    if (y > lastY && y > 80) {
+                        // Scrolling DOWN & past hero
+                        nav.classList.add('nav-hidden');
+                        // Close mobile menu if open
+                        var links = nav.querySelector('.nav-links');
+                        if (links) links.classList.remove('open');
+                    } else {
+                        // Scrolling UP
+                        nav.classList.remove('nav-hidden');
+                    }
+                    lastY = y;
+                }
+
+                window.addEventListener('scroll', function() {
+                    if (!ticking) {
+                        requestAnimationFrame(function() {
+                            onScroll();
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                }, { passive: true });
+            })();
         });
     </script>
 </body>
