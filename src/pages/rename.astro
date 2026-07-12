@@ -232,10 +232,10 @@ import Footer from '../components/Footer.astro';
             display: inline-flex; align-items: center; gap: 8px;
             padding: 12px 28px; background: transparent;
             color: var(--text); font-weight: 400; font-size: 14px;
-            border: 1px solid var(--border); border-radius: 6px;
+            border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 6px;
             text-decoration: none; cursor: pointer; transition: all 0.25s;
         }
-        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+        .btn-outline:hover { border-color: var(--primary) !important; color: var(--primary); }
 
         /* HERO */
         .hero {
@@ -307,7 +307,7 @@ import Footer from '../components/Footer.astro';
 
         .mock-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; background: #202020; }
         .rename-preview-panel {
-            background: #121212; border: 1px solid var(--border); border-radius: 8px; padding: 16px;
+            background: #121212; border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 8px; padding: 16px;
             font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.8; min-height: 140px;
         }
         .rename-preview-panel .old { color: #f48fb1; text-decoration: line-through; margin-right: 10px; }
@@ -317,8 +317,8 @@ import Footer from '../components/Footer.astro';
         /* right controls */
         .ctrl { margin-bottom: 10px; }
         .ctrl label { display: block; font-size: 11px; color: var(--text-secondary); margin-bottom: 3px; }
-        .input-text { width: 100%; background: var(--bg-surface); border: 1px solid var(--border); border-radius: 4px; color: var(--text); padding: 8px 12px; font-size: 13px; font-family: inherit; }
-        .input-text:focus { border-color: var(--primary); outline: none; }
+        .input-text { width: 100%; background: var(--bg-surface); border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 4px; color: var(--text); padding: 8px 12px; font-size: 13px; font-family: inherit; }
+        .input-text:focus { border-color: var(--primary) !important; outline: none; }
         .toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-bottom: 10px; }
         .toggle { width: 36px; height: 18px; border-radius: 9px; background: var(--primary); position: relative; cursor: pointer; transition: background 0.15s; }
         .toggle.off { background: #555; }
@@ -390,10 +390,7 @@ import Footer from '../components/Footer.astro';
             text-align: center; position: relative;
             background: linear-gradient(135deg, var(--bg-main), rgba(77, 182, 172, 0.05));
         }
-        .price-card::after {
-            content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 4px; background: var(--primary); border-radius: 16px 16px 0 0;
-        }
+        
         .price-badge {
             display: inline-block; font-family: 'JetBrains Mono', monospace;
             font-size: 11px; padding: 4px 12px; border-radius: 12px;
@@ -426,7 +423,7 @@ import Footer from '../components/Footer.astro';
         .faq-section { max-width: 800px; margin: 0 auto; }
         .faq-grid { display: flex; flex-direction: column; gap: 16px; }
         .faq-item {
-            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
             border-radius: 8px; padding: 24px;
         }
         .faq-item h3 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
@@ -439,8 +436,8 @@ import Footer from '../components/Footer.astro';
         /* INTERFACE CONTAINER RESPONSIVE */
         .interface-container {
             max-width: 800px; margin: 0 auto; padding: 24px;
-            background: var(--bg-main); border: 1px solid var(--border);
-            border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            border-radius: 12px !important; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
         @media (max-width: 768px) {
             .interface-container {

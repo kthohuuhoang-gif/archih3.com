@@ -122,7 +122,7 @@ import Footer from '../components/Footer.astro';
         <div class="pricing-section">
             <div class="pricing-grid">
                 <!-- Card 1: Standalone -->
-                <div class="price-card featured"  style="border-color: var(--primary);">
+                <div class="price-card featured"  style="border-color: var(--primary) !important;">
                     <div  class="absolute" style="top:0; left:0; right:0; height:3px; background:#ff9100; border-radius:16px 16px 0 0;"></div>
                     <div>
                         <div class="price-badge"  style="background: rgba(255, 145, 0, 0.15); color: #ff9100;">FLASH SALE - 3 DAYS ONLY</div>
@@ -175,15 +175,15 @@ import Footer from '../components/Footer.astro';
 
         <div class="faq-section"  style="max-width: 900px; margin: 0 auto;">
             <div class="faq-grid"  style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 20px;">
-                <div class="faq-item"  style="background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4); border-radius: 12px; padding: 24px;">
+                <div class="faq-item"  style="background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 12px; padding: 24px;">
                     <h3  data-vi="Plugin hoạt động như thế nào?" data-en="How does the plugin work?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
                     <p  data-vi="Khi bạn click Remesh, plugin gọi một bộ xử lý hình học chạy ẩn để dựng lại lưới Quad chuẩn. Sau đó, một thuật toán dò tia vector hóa sẽ chạy trên CPU để tính toán và truyền màu sắc, map vật liệu chính xác từ mesh cũ sang mesh mới theo đúng hệ tọa độ UV mới tạo." data-en="When you click Remesh, the plugin invokes a background geometry processor to build the Quad mesh. Then, a vectorized raycasting algorithm runs on your CPU to calculate and project colors and maps from the original mesh to the new UV layout." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
-                <div class="faq-item"  style="background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4); border-radius: 12px; padding: 24px;">
+                <div class="faq-item"  style="background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 12px; padding: 24px;">
                     <h3  data-vi="Tính năng trải UV tự động và sửa biên mép hoạt động thế nào?" data-en="How does auto UV unwrap and boundary healing work?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
                     <p  data-vi="Trước khi bake, plugin tự động chạy thuật toán trải phẳng tọa độ map lên lưới Quad mới. Nếu lưới Quad bị đứt gãy dọc đường chéo đa giác tạo ra các seam lỗi, bộ lọc vá biên (Boundary Healer) sẽ tự động khớp các đỉnh biên và là phẳng vùng mép, loại bỏ hoàn toàn các lỗi sọc hoặc gai nhọn." data-en="Before baking, the plugin automatically unwraps mapping coordinates for the new mesh. If the Quad layout splits along polygon diagonals creating bad seams, a Boundary Healer aligns the split vertices to smooth out the edges, removing striping or pixel artifacts." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
-                <div class="faq-item"  style="background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4); border-radius: 12px; padding: 24px;">
+                <div class="faq-item"  style="background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 12px; padding: 24px;">
                     <h3  data-vi="Bản quyền HWID hoạt động thế nào? Cập nhật ra sao?" data-en="How does HWID licensing and update work?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;"></h3>
                     <p  data-vi="Giấy phép trọn đời được liên kết với ID phần cứng máy tính (HWID). Mọi tính năng xử lý lưới và bake map hoạt động hoàn toàn offline, đảm bảo tính bảo mật. Mỗi khi có bản vá lỗi hoặc tính năng mới, plugin sẽ tự kiểm tra và tải bản cập nhật tự động (OTA) rất nhanh chóng." data-en="Your perpetual license is linked to your hardware ID (HWID). All retopology and baking features operate offline for maximum security. When a patch or new version is available, the plugin checks and pulls updates automatically (OTA) in seconds." class="text-muted font-light" style="font-size:14px; line-height:1.7;"></p>
                 </div>
@@ -252,10 +252,10 @@ import Footer from '../components/Footer.astro';
             display: inline-flex; align-items: center; gap: 8px;
             padding: 12px 28px; background: transparent;
             color: var(--text); font-weight: 400; font-size: 14px;
-            border: 1px solid var(--border); border-radius: 6px;
+            border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 6px;
             text-decoration: none; cursor: pointer; transition: all 0.25s;
         }
-        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+        .btn-outline:hover { border-color: var(--primary) !important; color: var(--primary); }
 
         /* HERO */
         .hero {
@@ -316,11 +316,11 @@ import Footer from '../components/Footer.astro';
         }
         .demo-bar span { color: var(--text-secondary); font-size: 13px; margin-right: 4px; }
         .demo-btn {
-            background: var(--bg-light); color: var(--text); border: 1px solid var(--border);
+            background: var(--bg-light); color: var(--text); border: 1px dashed rgba(255,255,255,0.15) !important;
             padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; transition: all 0.2s;
         }
         .demo-btn:hover { background: #484848; }
-        .demo-btn.active { background: var(--primary); color: #121212; border-color: var(--primary); font-weight: 600; }
+        .demo-btn.active { background: var(--primary); color: #121212; border-color: var(--primary) !important; font-weight: 600; }
 
         /* Actual UI Simulator styling */
         .rebake-window {
@@ -412,7 +412,7 @@ import Footer from '../components/Footer.astro';
             box-sizing: border-box; transition: all 0.2s;
         }
         .rebake-ui-checkbox-box.checked {
-            border-color: var(--primary);
+            border-color: var(--primary) !important;
         }
         .rebake-ui-checkbox-box.checked::after {
             content: '✔';
@@ -563,13 +563,10 @@ import Footer from '../components/Footer.astro';
             display: flex; flex-direction: column; justify-content: space-between;
         }
         .price-card.featured {
-            border-color: var(--primary);
+            border-color: var(--primary) !important;
             background: linear-gradient(135deg, var(--bg-main), rgba(77, 182, 172, 0.05));
         }
-        .price-card.featured::after {
-            content: ''; position: absolute; top: 0; left: 0; right: 0;
-            height: 4px; background: var(--primary); border-radius: 16px 16px 0 0;
-        }
+        
         .price-badge {
             display: inline-block; font-family: 'JetBrains Mono', monospace;
             font-size: 11px; padding: 4px 12px; border-radius: 12px;
@@ -602,7 +599,7 @@ import Footer from '../components/Footer.astro';
         .faq-section { max-width: 800px; margin: 0 auto; }
         .faq-grid { display: flex; flex-direction: column; gap: 16px; }
         .faq-item {
-            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.3);
+            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
             border-radius: 8px; padding: 24px;
             text-align: left;
         }
