@@ -308,9 +308,9 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
         /* ADVANCED HERO */
         .hero {
             position: relative;
-            padding: 160px 24px 100px;
+            padding: 180px 24px 120px;
             display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
+            align-items: center;
             text-align: center;
             overflow: hidden;
             min-height: 80vh;
@@ -406,12 +406,12 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
 
         /* Mobile & iPad Optimizations */
         @media (max-width: 1024px) {
-            .hero { min-height: 60vh; padding: 140px 24px 80px; }
+            .hero { min-height: 60vh; padding: 160px 24px 80px; }
             .orb-1 { width: 300px; height: 300px; }
             .orb-2 { width: 400px; height: 400px; }
         }
         @media (max-width: 768px) {
-            .hero { padding: 120px 20px 60px; }
+            .hero { padding: 140px 20px 60px; }
             .hero-cta-group { flex-direction: column; width: 100%; max-width: 350px; margin: 0 auto; gap: 12px; }
             .hero-cta-btn { width: 100%; font-size: var(--text-base); padding: 14px 24px; }
             .hero h1 { letter-spacing: -1px; }
