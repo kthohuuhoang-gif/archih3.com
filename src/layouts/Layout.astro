@@ -51,44 +51,39 @@ const {
                 });
             }
 
-            // Auto-hide navbar on mobile
+            // Mobile FAB + navbar toggle
             (function() {
                 var nav = document.querySelector('nav');
-                if (!nav) return;
-                var lastY = 0;
-                var ticking = false;
+                var fab = document.getElementById('mobile-fab');
+                if (!nav || !fab) return;
+                var navLinks = nav.querySelector('.nav-links');
+                var isOpen = false;
 
-                function onScroll() {
-                    if (window.innerWidth > 768) {
-                        nav.classList.remove('nav-visible', 'nav-scrolled');
-                        return;
-                    }
-                    var y = window.scrollY;
-                    if (y > 60) {
-                        nav.classList.add('nav-scrolled');
-                    } else {
-                        nav.classList.remove('nav-scrolled');
-                    }
-                    if (y < lastY) {
-                        // Scrolling UP → show
+                fab.addEventListener('click', function() {
+                    isOpen = !isOpen;
+                    if (isOpen) {
                         nav.classList.add('nav-visible');
-                    } else if (y > lastY && y > 50) {
-                        // Scrolling DOWN → hide
+                        if (navLinks) navLinks.classList.add('open');
+                        fab.classList.add('fab-open');
+                    } else {
                         nav.classList.remove('nav-visible');
-                        var links = nav.querySelector('.nav-links');
-                        if (links) links.classList.remove('open');
+                        if (navLinks) navLinks.classList.remove('open');
+                        fab.classList.remove('fab-open');
+                    }
+                });
+
+                // Close when scrolling down
+                var lastY = 0;
+                window.addEventListener('scroll', function() {
+                    if (window.innerWidth > 768) return;
+                    var y = window.scrollY;
+                    if (y > lastY && y > 50 && isOpen) {
+                        isOpen = false;
+                        nav.classList.remove('nav-visible');
+                        if (navLinks) navLinks.classList.remove('open');
+                        fab.classList.remove('fab-open');
                     }
                     lastY = y;
-                }
-
-                window.addEventListener('scroll', function() {
-                    if (!ticking) {
-                        requestAnimationFrame(function() {
-                            onScroll();
-                            ticking = false;
-                        });
-                        ticking = true;
-                    }
                 }, { passive: true });
             })();
         });
