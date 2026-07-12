@@ -256,8 +256,9 @@ footer a { color: var(--primary); text-decoration: none; }
     nav {
         padding: 10px 16px;
         transition: transform 0.3s ease, background 0.3s ease;
+        transform: translateY(-100%);
     }
-    nav.nav-hidden { transform: translateY(-100%); }
+    nav.nav-visible { transform: translateY(0); }
     nav.nav-scrolled { background: rgba(26, 26, 26, 0.95); }
     .logo img { height: 20px !important; }
     .logo { font-size: 15px !important; }

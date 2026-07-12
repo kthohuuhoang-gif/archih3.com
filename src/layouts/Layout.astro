@@ -57,29 +57,26 @@ const {
                 if (!nav) return;
                 var lastY = 0;
                 var ticking = false;
-                var THRESHOLD = 5;
 
                 function onScroll() {
                     if (window.innerWidth > 768) {
-                        nav.classList.remove('nav-hidden', 'nav-scrolled');
+                        nav.classList.remove('nav-visible', 'nav-scrolled');
                         return;
                     }
                     var y = window.scrollY;
                     if (y > 60) {
                         nav.classList.add('nav-scrolled');
                     } else {
-                        nav.classList.remove('nav-scrolled', 'nav-hidden');
+                        nav.classList.remove('nav-scrolled');
                     }
-                    if (Math.abs(y - lastY) < THRESHOLD) return;
-                    if (y > lastY && y > 80) {
-                        // Scrolling DOWN & past hero
-                        nav.classList.add('nav-hidden');
-                        // Close mobile menu if open
+                    if (y < lastY) {
+                        // Scrolling UP → show
+                        nav.classList.add('nav-visible');
+                    } else if (y > lastY && y > 50) {
+                        // Scrolling DOWN → hide
+                        nav.classList.remove('nav-visible');
                         var links = nav.querySelector('.nav-links');
                         if (links) links.classList.remove('open');
-                    } else {
-                        // Scrolling UP
-                        nav.classList.remove('nav-hidden');
                     }
                     lastY = y;
                 }
