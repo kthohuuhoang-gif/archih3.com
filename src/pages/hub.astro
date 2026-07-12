@@ -23,7 +23,7 @@ import Footer from '../components/Footer.astro';
             <h1 data-vi="Bạn thiết kế.<br><span class='teal'>AI</span> lo phần còn lại." data-en="You design.<br><span class='teal'>AI</span> handles the rest."></h1>
             <p class="hero-sub" data-vi="Tôi từng mất hàng giờ mỗi ngày chỉ để chuyển tab, copy-paste và lặn ngụp tìm thư viện. AH3 Hub ra đời để chấm dứt vòng lặp nhàm chán đó — mang 10+ công cụ AI đặt thẳng vào không gian làm việc 3ds Max của bạn." data-en="I used to spend hours every day just switching tabs, copy-pasting, and diving through asset libraries. AH3 Hub was born to end that tedious loop — putting 10+ AI tools right inside your 3ds Max workspace."></p>
             <div class="hero-cta">
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-download" data-vi="↓ Tải AH3 Hub" data-en="↓ Download AH3 Hub"></a>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" data-vi="↓ Tải AH3 Hub" data-en="↓ Download AH3 Hub"></a>
                 <a href="#ai-studio" class="btn-outline" data-vi="Xem AI Studio →" data-en="See AI Studio →"></a>
             </div>
             <div class="hero-version">v1.8.x · 3ds Max 2023-2027+ · Windows 10/11</div>
@@ -35,7 +35,7 @@ import Footer from '../components/Footer.astro';
     <div  class="relative" style="max-width:800px; margin:60px auto 80px; padding:0 24px; z-index:2;">
         <div  class="text-center mb-6">
             <span class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="FEATURED">TÍNH NĂNG NỔI BẬT</span>
-            <h2 class="section-title mb-2"  data-vi="AI i2Asset — Đưa ảnh vào, nhận tài nguyên 3D ra" data-en="AI i2Asset — Drop an image, get 3D assets back" style="font-size:clamp(22px, 3vw, 32px);"></h2>
+            <h2 class="section-title mb-2"  data-vi="AI i2Asset — Đưa ảnh vào, nhận tài nguyên 3D ra" data-en="AI i2Asset — Drop an image, get 3D assets back" ></h2>
             <p  data-vi="Không keyword, không lục folder, không thử sai. Xem demo 4 tình huống thực tế." data-en="No keywords, no folder diving, no trial and error. Watch 4 real-world scenarios." class="text-muted font-light" style="font-size:15px;"></p>
         </div>
         <div id="featured-video"  class="relative" style="border-radius:12px; overflow:hidden; border:1px solid rgba(77,182,172,0.2); background:#000; box-shadow:0 8px 40px rgba(0,0,0,0.4); aspect-ratio:16/9;">
@@ -597,7 +597,7 @@ import Footer from '../components/Footer.astro';
                 <h2 data-vi="Câu chuyện tiếp theo là của bạn" data-en="The next chapter is yours"></h2>
                 <p data-vi="AH3 Hub miễn phí cho hầu hết tính năng. Cài đặt trong 2 phút và bắt đầu trải nghiệm AI ngay trong 3ds Max. Muốn nhiều hơn? Nâng cấp Pro bất cứ lúc nào." data-en="AH3 Hub is free for most features. Install in 2 minutes and start experiencing AI inside 3ds Max. Want more? Upgrade to Pro anytime."></p>
                 <div class="cta-actions" style="display: flex; gap: 16px; justify-content: center; align-items: center; flex-wrap: wrap; margin-top: 24px;">
-                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-download"  data-vi="↓ Liên hệ tải v1.8.x" data-en="↓ Contact to Download v1.8.x" style="font-size:16px; padding:14px 32px; margin: 0;"></a>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary"  data-vi="↓ Liên hệ tải v1.8.x" data-en="↓ Contact to Download v1.8.x" style="font-size:16px; padding:14px 32px; margin: 0;"></a>
                     <div class="install-cmd" style="margin: 0;">
                         <span>$</span> <span data-vi="Chạy AH3_Hub_Setup.exe → Chọn phiên bản Max → Done" data-en="Run AH3_Hub_Setup.exe → Select Max version → Done"></span>
                     </div>
@@ -849,20 +849,20 @@ import Footer from '../components/Footer.astro';
         }
 
         
-        .nav-links .btn-download { color: #1a1a1a; }
-        .nav-links .btn-download:hover { color: #1a1a1a; }
+        .nav-links .btn-primary { color: #1a1a1a; }
+        .nav-links .btn-primary:hover { color: #1a1a1a; }
 
         
 
         /* BUTTONS */
-        .btn-download {
+        .btn-primary {
             display: inline-flex; align-items: center; gap: 8px;
             padding: 10px 24px; background: var(--primary);
             color: #1a1a1a; font-weight: 600; font-size: 14px;
             border: none; border-radius: 6px;
             text-decoration: none; cursor: pointer; transition: all 0.25s;
         }
-        .btn-download:hover {
+        .btn-primary:hover {
             background: var(--primary-hover); transform: translateY(-1px);
             box-shadow: 0 4px 20px rgba(77, 182, 172, 0.3);
         }
@@ -1048,7 +1048,7 @@ import Footer from '../components/Footer.astro';
             margin-bottom: 20px; font-family: 'JetBrains Mono', monospace;
             letter-spacing: 1px;
         }
-        .spotlight-text h2 { font-size: 32px; font-weight: 700; letter-spacing: -1px; margin-bottom: 20px; }
+        .spotlight-text h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -1px; margin-bottom: 20px; }
         .spotlight-text p { color: var(--text-secondary); font-weight: 300; margin-bottom: 16px; }
         .feature-list { list-style: none; margin-top: 24px; }
         .feature-list li {
@@ -1099,7 +1099,7 @@ import Footer from '../components/Footer.astro';
             pointer-events: none;
         }
         .cta-box { position: relative; z-index: 1; }
-        .cta-box h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 700; letter-spacing: -1px; margin-bottom: 16px; }
+        .cta-box h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; letter-spacing: -1px; margin-bottom: 16px; }
         .cta-box p { color: var(--text-secondary); font-weight: 300; margin-bottom: 40px; }
         .install-cmd {
             display: inline-block; background: var(--bg-main);
@@ -1301,7 +1301,7 @@ import Footer from '../components/Footer.astro';
                 gap: 6px !important;
             }
             /* CTA buttons stack full-width trên mobile */
-            .game-cta-row .btn-download,
+            .game-cta-row .btn-primary,
             .game-cta-row .btn-outline {
                 flex: 1;
                 justify-content: center;
