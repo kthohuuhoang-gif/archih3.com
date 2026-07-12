@@ -422,27 +422,28 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
             max-width: 1200px; margin: 0 auto;
             padding: 20px 24px 80px;
         }
-        /* (products-grid moved to later block for deduplication) */
         .products-group-title {
-            font-size: var(--text-xl); font-weight: 600;
-            color: var(--primary);
-            margin: 48px 0 24px;
-            display: flex; align-items: center; gap: 12px;
+            font-size: clamp(28px, 4vw, 44px); font-weight: 700;
+            color: #fff;
+            margin: 80px 0 12px;
+            display: block; text-align: center;
             font-family: 'Outfit', sans-serif;
-            letter-spacing: -0.5px;
+            letter-spacing: -1px;
         }
-        .products-group-title::after {
-            content: ''; flex: 1; height: 1px;
-            background: linear-gradient(90deg, rgba(77, 182, 172, 0.2), transparent);
+        .products-group-title .teal {
+            background: linear-gradient(135deg, #80cbc4, #4db6ac, #00796b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .products-group-title.coming-soon {
-            color: var(--text-muted);
+        .products-group-subtitle {
+            text-align: center;
+            font-size: clamp(14px, 2vw, 17px);
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            font-weight: 300;
+            line-height: 1.6;
         }
-        .products-group-title.coming-soon::after {
-            background: linear-gradient(90deg, rgba(102, 102, 102, 0.15), transparent);
-        }
-        /* (product-card base styles moved to later block for deduplication) */
-        
+
         .product-meta {
             position: relative; z-index: 1;
         }
@@ -477,8 +478,9 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
         }
 
         .product-title {
-            font-size: var(--text-xl); font-weight: 600;
-            margin-bottom: 12px; color: var(--primary) !important;
+            font-size: 28px; font-weight: 700;
+            margin-bottom: 12px; color: #fff !important;
+            letter-spacing: -0.5px;
         }
         .featured-wide .product-title {
             font-size: var(--text-xl);
