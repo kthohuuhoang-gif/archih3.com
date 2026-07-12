@@ -308,462 +308,74 @@ import Footer from '../components/Footer.astro';
 
     <!-- PRODUCTS GRID -->
     <section class="products-section" id="products">
-        <!-- 1. Commercial / Paid Tools (Vertical Grid) -->
-        <h2 class="products-group-title" data-vi="Công cụ Thương mại (Có phí)" data-en="Commercial Plugins (Paid)">Công cụ Thương mại (Có phí)</h2>
+        <!-- FLAGSHIP PRODUCTS -->
+        <h2 class="products-group-title" data-vi="Plugin nổi bật" data-en="Featured Plugins">Plugin nổi bật</h2>
         <div class="products-grid">
             
-            <div class="product-card featured-wide" data-aos="fade-up"  style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
-                <div class="premium-left flex"  style="flex-direction: column; justify-content: space-between;">
-                    <div class="product-meta">
-                        <div class="product-header">
-                            <div class="product-icon"><img src="/ArchiH3-Icon_40.png" alt="AH3 Hub"  style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                            <span class="product-badge new text-primary"  data-vi="PREMIUM" data-en="PREMIUM" style="background: rgba(77, 182, 172, 0.15); border: 1px solid rgba(77, 182, 172, 0.3);">PREMIUM</span>
-                        </div>
-                        <h3 class="product-title">AH3 Hub</h3>
-                        <p class="product-desc" data-vi="Một siêu ứng dụng tích hợp trực tiếp vào 3ds Max. Mang AI thông minh và giải pháp tự động hóa nâng cao vào không gian làm việc." data-en="A flagship super-app for 3ds Max. Brings local AI models and advanced automation tools right to your viewport."></p>
-                        
-                <div class="mini-sim-box" id="hub-sim-card">
-                    <div class="sim-viewport">
-<svg class="sim-svg" viewBox="0 0 200 112.5">
-                            <defs>
-                                <linearGradient id="hub-sky-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" stop-color="#05020c"/>
-                                    <stop offset="100%" stop-color="#140a24"/>
-                                </linearGradient>
-                                <linearGradient id="hub-window-glow" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#ffb74d"/>
-                                    <stop offset="100%" stop-color="#e65100"/>
-                                </linearGradient>
-                                <radialGradient id="hub-gold-sphere" cx="30%" cy="30%" r="70%">
-                                    <stop offset="0%" stop-color="#ffe082"/>
-                                    <stop offset="50%" stop-color="#ffb300"/>
-                                    <stop offset="100%" stop-color="#b78103"/>
-                                </radialGradient>
-                                <linearGradient id="hub-wall-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#1f2937"/>
-                                    <stop offset="100%" stop-color="#111827"/>
-                                </linearGradient>
-                                <linearGradient id="hub-metal-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="#78909c"/>
-                                    <stop offset="50%" stop-color="#cfd8dc"/>
-                                    <stop offset="100%" stop-color="#455a64"/>
-                                </linearGradient>
-                                <linearGradient id="hub-light-spill" x1="50%" y1="0%" x2="50%" y2="100%">
-                                    <stop offset="0%" stop-color="#ffb74d" stop-opacity="0.25"/>
-                                    <stop offset="100%" stop-color="#ffb74d" stop-opacity="0"/>
-                                </linearGradient>
-                            </defs>
-                            
-                            <!-- 1. Wireframe Sketch (Base) -->
-                            <g class="wf-lines"  style="transition: opacity 0.4s;">
-                                <!-- House Block -->
-                                <rect x="35" y="45" width="85" height="55" fill="none" stroke="#4db6ac" stroke-width="0.8" />
-                                <rect x="45" y="60" width="65" height="40" fill="none" stroke="#4db6ac" stroke-width="0.8" />
-                                <polygon points="30,45 125,45 105,25 50,25" fill="none" stroke="#4db6ac" stroke-width="0.8" />
-                                <!-- Sphere -->
-                                <circle cx="155" cy="75" r="18" fill="none" stroke="#4db6ac" stroke-width="0.8" />
-                                <ellipse cx="155" cy="75" rx="18" ry="6" fill="none" stroke="#4db6ac" stroke-width="0.8" />
-                                <ellipse cx="155" cy="75" rx="6" ry="18" fill="none" stroke="#4db6ac" stroke-width="0.8" />
-                                <!-- Cylinder -->
-                                <ellipse cx="20" cy="85" rx="10" ry="3" fill="none" stroke="#4db6ac" stroke-width="0.8" />
-                                <ellipse cx="20" cy="98" rx="10" ry="3" fill="none" stroke="#4db6ac" stroke-width="0.8" />
-                                <line x1="10" y1="85" x2="10" y2="98" stroke="#4db6ac" stroke-width="0.8" />
-                                <line x1="30" y1="85" x2="30" y2="98" stroke="#4db6ac" stroke-width="0.8" />
-                            </g>
-
-                            <!-- 2. Flat Color Stage (Shading) -->
-                            <g class="colored-view opacity-0 pointer-events-none"  style="transition: opacity 0.5s;">
-                                <rect x="0" y="0" width="200" height="112.5" fill="#111" />
-                                <!-- House Flat Shading -->
-                                <rect x="35" y="45" width="85" height="55" fill="#2d3748" />
-                                <rect x="45" y="60" width="65" height="40" fill="#319795" />
-                                <polygon points="30,45 125,45 105,25 50,25" fill="#4a5568" />
-                                <!-- Sphere Flat Shading -->
-                                <circle cx="155" cy="75" r="18" fill="#d69e2e" />
-                                <!-- Cylinder Flat Shading -->
-                                <rect x="10" y="85" width="20" height="13" fill="#718096" />
-                            </g>
-
-                            <!-- 3. AI Realistic Render Stage (Final Photo-Render) -->
-                            <g class="rendered-view" clip-path="url(#hub-card-clip)">
-                                <rect x="0" y="0" width="200" height="112.5" fill="url(#hub-sky-grad)" />
-                                <!-- Stars -->
-                                <circle cx="25" cy="20" r="0.5" fill="#fff" opacity="0.8" />
-                                <circle cx="85" cy="15" r="0.5" fill="#fff" opacity="0.6" />
-                                <circle cx="170" cy="30" r="0.8" fill="#fff" opacity="0.9" />
-                                <circle cx="185" cy="12" r="0.5" fill="#fff" opacity="0.7" />
-                                
-                                <!-- Sphere Shadow & Body -->
-                                <ellipse cx="155" cy="95" rx="16" ry="3.5" fill="rgba(0,0,0,0.6)" filter="blur(2px)" />
-                                <circle cx="155" cy="75" r="18" fill="url(#hub-gold-sphere)" />
-                                
-                                <!-- House Shadow & Body -->
-                                <rect x="35" y="45" width="85" height="55" fill="url(#hub-wall-grad)" />
-                                <polygon points="30,45 125,45 105,25 50,25" fill="#1a202c" />
-                                <!-- Glowing Window & Light Spill -->
-                                <polygon points="45,80 15,112.5 140,112.5 110,80" fill="url(#hub-light-spill)" />
-                                <rect x="45" y="60" width="65" height="40" fill="url(#hub-window-glow)" />
-                                <line x1="77.5" y1="60" x2="77.5" y2="100" stroke="#111827" stroke-width="1.2" />
-                                <line x1="45" y1="80" x2="110" y2="80" stroke="#111827" stroke-width="1" />
-                                
-                                <!-- Cylinder Shadow & Body -->
-                                <ellipse cx="20" cy="99" rx="10" ry="2.5" fill="rgba(0,0,0,0.5)" filter="blur(1.5px)" />
-                                <rect x="10" y="85" width="20" height="13.5" fill="url(#hub-metal-grad)" />
-                                <ellipse cx="20" cy="85" rx="10" ry="3" fill="#cfd8dc" />
-                            </g>
-                            
-                            <!-- Scan line -->
-                            <line class="scan-line hidden" x1="0" y1="0" x2="0" y2="112.5" stroke="var(--primary)" stroke-width="1.5"   />
-                            <clipPath id="hub-card-clip"><rect id="hub-card-clip-rect" x="0" y="0" width="0" height="112.5" /></clipPath>
-                        </svg>
-                    </div>
-                    <div class="sim-controls">
-                        <button class="sim-action-btn" onclick="runHubSim(this)" data-vi="GENERATE AI RENDER" data-en="GENERATE AI RENDER">GENERATE AI RENDER</button>
-                    </div>
-                </div>
-
-                    </div>
-                    <div class="hub-status-note mt-4"  data-vi="* Phiên bản v1.8.4 hiện đang tạm ngưng cung cấp để nâng cấp toàn diện lên Ver 2.0" data-en="* Version v1.8.4 is temporarily suspended for a comprehensive upgrade to Ver 2.0" style="font-size: 11px; color: #ffb74d; line-height: 1.4; font-family: 'Outfit', sans-serif; opacity: 0.85;">* Phiên bản v1.8.4 hiện đang tạm ngưng cung cấp để nâng cấp toàn diện lên Ver 2.0</div>
-                    <a href="/hub" class="product-cta primary-btn"  data-vi="Xem chức năng v1.8.4 →" data-en="View features v1.8.4 →" style="width: auto; padding: 14px 36px; margin-top: 12px;">Xem chức năng v1.8.4 →</a>
-                </div>
-                <div class="featured-wide-right cta-wrapper">
-                    <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
-                    <h4 class="featured-slice-right-title font-semibold"  data-vi="TÍNH NĂNG PRO ĐỘC QUYỀN" data-en="EXCLUSIVE PRO FEATURES" style="margin-bottom: 20px; font-family: 'Outfit', sans-serif;">TÍNH NĂNG PRO ĐỘC QUYỀN</h4>
-                    <div class="pro-upgrade-note mb-6 font-semibold"  data-vi="🔥 TẤT CẢ TÍNH NĂNG ĐANG ĐƯỢC NÂNG CẤP TOÀN DIỆN LÊN VER 2.0 - DỰ KIẾN 09/2026" data-en="🔥 ALL FEATURES UNDER ACTIVE UPGRADE TO VER 2.0 - LAUNCHING SEPT 2026" style="margin-top: -12px; font-size: 11px; color: #ffb74d; font-family: 'Outfit', sans-serif; opacity: 0.9; letter-spacing: 0.5px;">🔥 TẤT CẢ TÍNH NĂNG ĐANG ĐƯỢC NÂNG CẤP TOÀN DIỆN LÊN VER 2.0 - DỰ KIẾN 09/2026</div>
-                    <ul class="extra-features-list"  style="border: none; padding-top: 0; margin-top: 0;">
-                        <li>
-<strong data-vi="⚙️ AI Real-time Rendering Engine" data-en="⚙️ AI Real-time Rendering Engine">⚙️ AI Real-time Rendering Engine</strong>
-                            <span data-vi="<span class='highlight-teal'>Vẽ trực tiếp Corona/V-Ray không chạy tia (Ray-Tracing-Free)</span> bằng AI. Tự học và dựng hình siêu thực <span class='highlight-teal'>cảnh phức tạp với tốc độ gần như tức thì</span>" data-en="<span class='highlight-teal'>Ray-Tracing-Free render</span> using AI. Instantly generates photorealistic Corona/V-Ray visuals for <span class='highlight-teal'>complex scenes near-instantly</span>"></span>
-                        </li>
-                        <li>
-<strong data-vi="⚡ Smart Photon Optimizer" data-en="⚡ Smart Photon Optimizer">⚡ Smart Photon Optimizer</strong>
-                            <span data-vi="Can thiệp nhân render, <span class='highlight-teal'>cắt bỏ 99% tia sáng tán xạ vô ích</span> Tập trung photon khử nhiễu tối đa, đưa <span class='highlight-teal'>thời gian render về mức tối thiểu</span>" data-en="Prunes <span class='highlight-teal'>99% of wasted light rays</span> Focuses photons for instant noise-free results, reducing <span class='highlight-teal'>rendering time significantly</span>"></span>
-                        </li>
-                        <li>
-<strong data-vi="🔍 AI Detail Upscaler 16K" data-en="🔍 AI Detail Upscaler 16K">🔍 AI Detail Upscaler 16K</strong>
-                            <span data-vi="Không chỉ <span class='highlight-teal'>upscale ảnh lên 16K siêu thực</span>, AI tự động bù đắp các <span class='highlight-teal'>chi tiết quang học điện ảnh cao cấp</span>, biến ảnh thô thành tác phẩm nghệ thuật" data-en="Upscales <span class='highlight-teal'>renders to 16K photorealistic</span> Computes and injects <span class='highlight-teal'>cinematic lens effects</span> to convert raw outputs into masterpiece photography."></span>
-                        </li>
-                        <li>
-<strong data-vi="🧠 Smart Scene Auto-Repair" data-en="🧠 Smart Scene Auto-Repair">🧠 Smart Scene Auto-Repair</strong>
-                            <span data-vi="Tự động <span class='highlight-teal'>sửa mesh hỏng và tái tạo vật liệu lỗi</span> Tự thu hồi missing maps và dọn rác nhanh chóng, giúp file <span class='highlight-teal'>hoạt động mượt mà hơn khi render</span>" data-en="Auto-repairs <span class='highlight-teal'>broken meshes and corrupt shaders</span> Restores maps and cleans files rapidly, ensuring Max <span class='highlight-teal'>runs reliably during rendering</span>"></span>
-                        </li>
-                        <li>
-<strong data-vi="🎬 AI Frame Interpolator" data-en="🎬 AI Frame Interpolator">🎬 AI Frame Interpolator</strong>
-                            <span data-vi="Nội suy chuyển động video AI. Chỉ cần render <span class='highlight-teal'>10 FPS thay vì 30 FPS</span>, plugin tự động điền các frame còn lại để video <span class='highlight-teal'>mượt mà 60 FPS</span>" data-en="AI temporal frame interpolator. Render only <span class='highlight-teal'>10 FPS instead of 30 FPS</span>; the plugin auto-fills remaining frames for a <span class='highlight-teal'>smooth 60 FPS video</span>"></span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-        <div class="products-grid"  style="margin-top: -32px;">
-            
-            <div class="product-card" data-aos="fade-up"  style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
+            <div class="product-card" data-aos="fade-up" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
                 <div class="product-meta">
                     <div class="product-header">
-                        <div class="product-icon"><img src="/magicmat_icon_48.png" alt="Magic Material"  style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
+                        <div class="product-icon"><img src="/magicmat_icon_48.png" alt="Magic Material" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
                         <span class="product-badge new" data-vi="MỚI" data-en="NEW">MỚI</span>
                     </div>
                     <h3 class="product-title">Magic Material</h3>
-                    <p class="product-desc" data-vi="Plugin PBR Material cho 3ds Max. Tự động nhận diện map có sẵn và sinh map PBR (Normal, Displacement, Roughness, AO)." data-en="Standalone PBR Material plugin for 3ds Max. Generates a complete PBR material from a diffuse image."></p>
-                    
-                <div class="mini-sim-box" id="material-sim-card">
-                    <div class="sim-viewport flex justify-center items-center"  style="gap:20px;">
-                        <div class="mini-file">diffuse</div>
-                        <div class="mini-maps-grid hidden"  style="grid-template-columns: repeat(2, 1fr); gap:4px;">
-                            <div class="mini-map-tile nrm">NRM</div>
-                            <div class="mini-map-tile rgh">RGH</div>
-                        </div>
-                        <div class="mini-scene"  style="perspective:400px;">
-                            <div class="mini-box" id="min-box-element-card">
-                                <div class="mini-face f-front"></div>
-                                <div class="mini-face f-top"></div>
-                                <div class="mini-face f-right"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sim-controls">
-                        <button class="sim-action-btn text-primary" onclick="runMaterialSim(this)"  data-vi="GENERATE PBR MAPS" data-en="GENERATE PBR MAPS">GENERATE PBR MAPS</button>
-                    </div>
+                    <p class="product-desc" data-vi="Tạo map PBR offline 1-Click từ ảnh Diffuse. Tương thích V-Ray, Corona, Arnold." data-en="1-Click offline PBR map generation from Diffuse textures. V-Ray, Corona, Arnold compatible."></p>
                 </div>
-
-                    <ul class="extra-features-list">
-                        <li>
-                            <strong data-vi="⚡ Tạo map PBR 1-Click" data-en="⚡ 1-Click PBR Generation">⚡ Tạo map PBR 1-Click</strong>
-                            <span data-vi="Tạo toàn bộ map PBR offline hoàn chỉnh chỉ với 1 click chuột." data-en="Generates Normal, Roughness, AO, Displacement instantly."></span>
-                        </li>
-                        <li>
-                            <strong data-vi="🔒 Sinh map offline 100%" data-en="🔒 100% Offline Processing">🔒 Sinh map offline 100%</strong>
-                            <span data-vi="Không cần kết nối internet, bảo mật tuyệt đối dữ liệu thiết kế." data-en="Fully secure local calculations with zero cloud dependencies."></span>
-                        </li>
-                        <li>
-                            <strong data-vi="🔌 Tương thích cao" data-en="🔌 Renderer Compatibility">🔌 Tương thích cao</strong>
-                            <span data-vi="Tương thích hoàn toàn với V-Ray, Corona và Arnold Renderer." data-en="Native support for V-Ray, Corona, and Arnold materials."></span>
-                        </li>
-                    </ul>
-                </div>
-                <a href="/material" class="product-cta primary-btn mt-6"  data-vi="Xem chức năng →" data-en="View features →">Xem chức năng →</a>
+                <a href="/material" class="product-cta primary-btn mt-6" data-vi="Xem chi tiết →" data-en="View details →">Xem chi tiết →</a>
             </div>
 
-            
-            <div class="product-card" data-aos="fade-up"  style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
+            <div class="product-card" data-aos="fade-up" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
                 <div class="product-meta">
                     <div class="product-header">
-                        <div class="product-icon"><img src="/magicmerger_icon_48.png" alt="Magic Merger"  style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
+                        <div class="product-icon"><img src="/magicmerger_icon_48.png" alt="Magic Merger" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
                         <span class="product-badge new" data-vi="MỚI" data-en="NEW">MỚI</span>
                     </div>
                     <h3 class="product-title">Magic Merger</h3>
-                    <p class="product-desc" data-vi="Plugin import hàng loạt model 3D cho 3ds Max. Kéo thả file nén để tự động merge và smart-relink texture cực nhanh." data-en="Smart batch 3D model importer for 3ds Max. Drag and drop archives for automatic merging and relinking texture paths."></p>
-                    
-                <div class="mini-sim-box" id="merger-sim-card">
-                    <div class="sim-viewport flex justify-center items-center"  style="gap:8px;">
-                        <svg class="sim-svg" viewBox="0 0 200 120">
-                            <g class="merger-assets"  style="transition: all 0.5s;">
-                                <rect x="25" y="40" width="38" height="28" rx="3" fill="none" stroke="#666" stroke-width="1" />
-                                <text x="44" y="56" fill="#888" font-size="7" font-family="monospace" text-anchor="middle">asset_1</text>
-                                
-                                <rect x="81" y="40" width="38" height="28" rx="3" fill="none" stroke="#666" stroke-width="1" />
-                                <text x="100" y="56" fill="#888" font-size="7" font-family="monospace" text-anchor="middle">asset_2</text>
-                                
-                                <rect x="137" y="40" width="38" height="28" rx="3" fill="none" stroke="#666" stroke-width="1" />
-                                <text x="156" y="56" fill="#888" font-size="7" font-family="monospace" text-anchor="middle">asset_3</text>
-                            </g>
-                            <g class="merger-group hidden"  style="transition: all 0.5s;">
-                                <rect x="50" y="25" width="100" height="58" rx="4" fill="none" stroke="var(--primary)" stroke-width="1.5" stroke-dasharray="3 3" />
-                                <text x="100" y="58" fill="var(--primary)" font-size="9" font-family="monospace" font-weight="bold" text-anchor="middle">MERGED_GROUP</text>
-                            </g>
-                        </svg>
-                    </div>
-                    <div class="sim-controls">
-                        <button class="sim-action-btn" onclick="runMergerSim(this)" data-vi="MERGE 3D ASSETS" data-en="MERGE 3D ASSETS">MERGE 3D ASSETS</button>
-                    </div>
+                    <p class="product-desc" data-vi="Import hàng loạt model 3D từ file nén. Tự động merge và smart-relink texture." data-en="Batch 3D model importer from archives. Auto-merge and smart texture relinking."></p>
                 </div>
-
-                    <ul class="extra-features-list">
-                        <li>
-                            <strong data-vi="📦 Batch Merge cực nhanh" data-en="📦 Rapid Batch Merge">📦 Batch Merge cực nhanh</strong>
-                            <span data-vi="Merge hàng loạt tệp model .max vào scene hiện tại tự động." data-en="Import and merge multiple .max files into scene concurrently."></span>
-                        </li>
-                        <li>
-                            <strong data-vi="🗂️ Nhập từ file nén" data-en="🗂️ Direct Archive Import">🗂️ Nhập từ file nén</strong>
-                            <span data-vi="Kéo thả trực tiếp file nén .zip, .rar, .7z để giải nén và merge." data-en="Drag-and-drop support for compressed ZIP/RAR/7z archives."></span>
-                        </li>
-                        <li>
-                            <strong data-vi="🔗 Smart Relink" data-en="🔗 Smart Relink">🔗 Smart Relink</strong>
-                            <span data-vi="Tự động tìm kiếm và sửa lại toàn bộ đường dẫn ảnh map bị thất lạc." data-en="Automatically relinks missing bitmap texture file paths."></span>
-                        </li>
-                    </ul>
-                </div>
-                <a href="/merger" class="product-cta primary-btn mt-6"  data-vi="Xem chức năng →" data-en="View features →">Xem chức năng →</a>
+                <a href="/merger" class="product-cta primary-btn mt-6" data-vi="Xem chi tiết →" data-en="View details →">Xem chi tiết →</a>
             </div>
 
-            
-            <div class="product-card" data-aos="fade-up"  style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
+            <div class="product-card" data-aos="fade-up" style="--glow-color: rgba(102, 187, 106, 0.15); --hover-border: var(--green);">
                 <div class="product-meta">
                     <div class="product-header">
-                        <div class="product-icon"><img src="/magicrebakepro_icon_48.png" alt="Magic ReBake"  style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                        <span class="product-badge new" data-vi="MỚI" data-en="NEW">MỚI</span>
+                        <div class="product-icon"><img src="/magicsree_icon_48.png" alt="Magic Tree" onerror="this.src='magictree_icon_48.png'" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
+                        <span class="product-badge" data-vi="THƯƠNG MẠI" data-en="COMMERCIAL" style="background: rgba(102, 187, 106, 0.15); color: var(--green); border: 1px solid rgba(102, 187, 106, 0.3);">THƯƠNG MẠI</span>
                     </div>
-                    <h3 class="product-title">Magic ReBake</h3>
-                    <p class="product-desc" data-vi="Plugin tự động tối ưu lưới Quad và chuyển đổi map vật liệu siêu tốc cho 3ds Max. Trải UV và bake map chuẩn xác 1-Click." data-en="Automated Quad mesh optimization and texture baking plugin for 3ds Max. Generate clean Quad meshes in 1-Click."></p>
-                    
-                <div class="mini-sim-box" id="rebake-sim-card">
-                    <div class="sim-viewport">
-                        <svg class="sim-svg" viewBox="0 0 200 120">
-                            <polygon class="rebake-mesh" points="100,20 140,50 120,95 80,95 60,50" fill="none" stroke="#e57373" stroke-width="1.2"   style="transition: all 0.5s;" />
-                            <line class="rebake-laser hidden" x1="40" y1="20" x2="160" y2="20" stroke="var(--primary)" stroke-width="1.5"   style="transition: transform 1.5s linear;" />
-                        </svg>
-                    </div>
-                    <div class="sim-controls">
-                        <button class="sim-action-btn" onclick="runRebakeSim(this)" data-vi="OPTIMIZE &amp; BAKE" data-en="OPTIMIZE &amp; BAKE">OPTIMIZE &amp; BAKE</button>
-                    </div>
+                    <h3 class="product-title">Magic Tree</h3>
+                    <p class="product-desc" data-vi="Tạo cây xanh động với vật lý gió khí động học. Tối ưu viewport proxy giảm 80% VRAM." data-en="Dynamic vegetation with aerodynamic wind physics. 80% VRAM reduction via viewport proxy."></p>
                 </div>
-
-                    <ul class="extra-features-list">
-                        <li>
-                            <strong data-vi="📐 Auto Retopology" data-en="📐 Auto Retopology">📐 Auto Retopology</strong>
-                            <span data-vi="Tự động tái tạo lại lưới Quad vuông cực kỳ sạch sẽ và mượt mà." data-en="Reconstruct clean and optimized quad topology in seconds."></span>
-                        </li>
-                        <li>
-                            <strong data-vi="🎨 1-Click UV Unwrap" data-en="🎨 1-Click UV Unwrap">🎨 1-Click UV Unwrap</strong>
-                            <span data-vi="Tự động trải tọa độ UV mapping chuẩn chỉnh, không bị kéo giãn." data-en="Automated UV unwrap and flattening with zero overlaps."></span>
-                        </li>
-                        <li>
-                            <strong data-vi="🔌 Fast Texture Baking" data-en="🔌 Fast Texture Baking">🔌 Fast Texture Baking</strong>
-                            <span data-vi="Bake các bản đồ map chi tiết (Normal, AO, Diffuse) cực nhanh." data-en="Transfer and bake high-poly details onto low-poly meshes."></span>
-                        </li>
-                    </ul>
-                </div>
-                <a href="/rebake" class="product-cta primary-btn mt-6"  data-vi="Xem chức năng →" data-en="View features →">Xem chức năng →</a>
-            </div>
-
-        </div>
-        <div class="products-grid"  style="margin-top: -32px;">
-            
-            <div class="product-card featured-wide" data-aos="fade-up"  style="--glow-color: rgba(102, 187, 106, 0.15); --hover-border: var(--green);">
-                <div class="premium-left flex"  style="flex-direction: column; justify-content: space-between;">
-                    <div class="product-meta">
-                        <div class="product-header">
-                            <div class="product-icon"><img src="/magicsree_icon_48.png" alt="Magic Tree"  onerror="this.src='magictree_icon_48.png'" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                            <span class="product-badge"  data-vi="THƯƠNG MẠI" data-en="COMMERCIAL" style="background: rgba(102, 187, 106, 0.15); color: var(--green); border: 1px solid rgba(102, 187, 106, 0.3);">THƯƠNG MẠI</span>
-                        </div>
-                        <h3 class="product-title">Magic Tree</h3>
-                        <p class="product-desc" data-vi="Plugin tạo và tối ưu hóa cây xanh động cho 3ds Max. Tự động mô phỏng cành lá rung lắc tự nhiên và tối ưu viewport." data-en="Dynamic tree and vegetation generator for 3ds Max. Simulates wind swaying and optimizes viewport proxy displays."></p>
-                        
-                <div class="mini-sim-box" id="tree-sim-card">
-                    <div class="sim-viewport flex items-center justify-center" >
-                        <svg class="sim-svg" viewBox="0 0 200 120">
-                            <g class="mini-tree-wrapper"  style="transform-origin: 100px 110px; --wind-factor: 1;">
-                                <path d="M100,110 Q105,70 100,30" stroke="#8D6E63" stroke-width="8" fill="none" stroke-linecap="round" />
-                                <circle cx="100" cy="30" r="22" fill="#66bb6a" opacity="0.85" />
-                                <circle cx="85" cy="40" r="16" fill="#4caf50" opacity="0.85" />
-                                <circle cx="115" cy="40" r="16" fill="#2e7d32" opacity="0.85" />
-                            </g>
-                        </svg>
-                    </div>
-                    <div class="sim-controls flex items-center"  style="gap:8px; padding: 0 12px; justify-content: space-between;">
-                        <span  style="font-size:9px; color:#888; font-family: monospace;">WIND:</span>
-                        <input type="range" class="sim-slider" min="0" max="3" value="1" oninput="adjustTreeWind(this)"   style="flex:1; accent-color:var(--green); cursor:pointer;" />
-                        <span class="wind-label"  style="font-size:9px; color:var(--green); width:40px; text-align:right; font-family: monospace; font-weight:bold;">Breeze</span>
-                    </div>
-                </div>
-
-                    </div>
-                    <a href="/tree" class="product-cta primary-btn mt-6"  data-vi="Xem chức năng →" data-en="View features →" style="background: var(--green); color: #121212; width: auto; padding: 14px 36px;">Xem chức năng →</a>
-                </div>
-                <div class="featured-wide-right cta-wrapper">
-                    <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
-                    <h4 class="featured-slice-right-title font-semibold"  data-vi="ƯU ĐIỂM PRO ĐỘC QUYỀN" data-en="EXCLUSIVE PRO FEATURES" style="color: var(--green) !important; margin-bottom: 20px; font-family: 'JetBrains Mono', monospace !important; letter-spacing: 1.5px !important;">ƯU ĐIỂM PRO ĐỘC QUYỀN</h4>
-                    <ul class="extra-features-list"  style="border: none; padding-top: 0; margin-top: 0;">
-                        <li>
-                            <strong data-vi="🍃 Thuật toán Khí động học Wind-Drag" data-en="🍃 Aerodynamic Wind-Drag Physics">🍃 Thuật toán Khí động học Wind-Drag</strong>
-                            <span data-vi="Giả lập chuyển động cây xanh thực tế dựa trên phương trình lực cản khí động và nhiễu động dòng xoáy (Turbulence). Lá và cành cây tự động phản hồi ngẫu nhiên theo luồng gió động mà không cần đặt keyframe." data-en="Simulates realistic vegetation sway based on aerodynamic drag force and turbulent wind field formulas. Leaves and branches automatically react to fluctuating wind fields dynamically."></span>
-                            <code  style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--green); background: rgba(102,187,106,0.08); padding: 3px 6px; border-radius: 4px; margin-top: 6px; display: inline-block; border: 1px solid rgba(102,187,106,0.15);">Fd = 0.5 * ρ * v² * Cd * A</code>
-                        </li>
-                        <li>
-                            <strong data-vi="🖥️ Tối ưu hóa đa giác dạng lưới (QEM)" data-en="🖥️ Mesh Simplification & Proxy (QEM)">🖥️ Tối ưu hóa đa giác dạng lưới (QEM)</strong>
-                            <span data-vi="Tích hợp thuật toán nén lưới Quadric Error Metrics giúp đơn giản hóa hình học tán lá hàng triệu poly thành dạng Proxy siêu nhẹ ở chế độ viewport, tự động trả lại lưới gốc chi tiết khi render giúp giảm tải VRAM đến 80%." data-en="Integrates Quadric Error Metrics mesh simplification. Condenses multi-million polygon foliage into ultra-lightweight Viewport Proxies on-the-fly, auto-restoring native geometry at render time to cut VRAM usage by 80%."></span>
-                        </li>
-                        <li>
-                            <strong data-vi="🌲 Dao động đàn hồi đàn hồi tắt dần" data-en="🌲 Damped Harmonic Inertia Presets">🌲 Dao động đàn hồi đàn hồi tắt dần</strong>
-                            <span data-vi="Tích hợp phương trình dao động điều hòa tắt dần để mô phỏng quán tính đàn hồi của gỗ thân cây. Khi luồng gió mạnh đi qua, cành cây sẽ rung động nhỏ dần và hồi vị tự nhiên thay vì dừng chuyển động đột ngột." data-en="Employs damped harmonic oscillation algorithms to compute the elastic inertia of wood. Simulates natural wood rebound and micro-vibrations after high-velocity wind gusts pass through."></span>
-                            <code  style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--green); background: rgba(102,187,106,0.08); padding: 3px 6px; border-radius: 4px; margin-top: 6px; display: inline-block; border: 1px solid rgba(102,187,106,0.15);">θ(t) = θ₀ * e^(-γt) * cos(ωt)</code>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-        <!-- 2. Free & Freemium Tools (Vertical Grid) -->
-        <h2 class="products-group-title" data-vi="Công cụ Miễn phí & Đa dụng" data-en="Free & Freemium Plugins">Công cụ Miễn phí & Đa dụng</h2>
-        <div class="products-grid">
-            
-            <div class="product-card featured-wide" data-aos="fade-up">
-                <div class="premium-left flex"  style="flex-direction: column; justify-content: space-between;">
-                    <div class="product-meta">
-                        <div class="product-header">
-                            <div class="product-icon"><img src="/magicslice_icon_48.png" alt="Magic Slice"  style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                            <span class="product-badge new text-primary"  data-vi="NỔI BẬT MIỄN PHÍ" data-en="FEATURED FREE" style="background: rgba(77, 182, 172, 0.15); border: 1px solid rgba(77, 182, 172, 0.3);">NỔI BẬT MIỄN PHÍ</span>
-                        </div>
-                        <h3 class="product-title">Magic Slice</h3>
-                        <p class="product-desc" data-vi="Plugin quản lý mặt cắt thông minh hàng đầu cho 3ds Max. Tự động hóa toàn bộ quy trình tạo lát cắt, bật/tắt hiển thị mặt cắt toàn scene, quản lý gizmo khoa học và hỗ trợ hoàn tác Ctrl+Z tuyệt đối an toàn." data-en="The leading smart slicing and section cut manager plugin for 3ds Max. Automates your slice creation workflows, controls global cut visibility, auto-groups gizmos into separate layers, and supports 100% safe Ctrl+Z undo."></p>
-                    </div>
-                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="product-cta primary-btn mt-6"  data-vi="↓ Tải về (Miễn phí)" data-en="↓ Download (Free)" style="width: auto; align-self: flex-start; padding: 14px 36px;">↓ Tải về (Miễn phí)</a>
-                </div>
-                <div class="featured-wide-right cta-wrapper">
-                <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
-                    <h4 class="featured-slice-right-title font-semibold"  data-vi="TẠI SAO NÊN DÙNG MAGIC SLICE?" data-en="WHY USE MAGIC SLICE?" style="margin-bottom: 20px; font-family: 'JetBrains Mono', monospace !important; letter-spacing: 1.5px !important;">TẠI SAO NÊN DÙNG MAGIC SLICE?</h4>
-                    <ul class="extra-features-list"  style="border: none; padding-top: 0; margin-top: 0;">
-                        <li data-vi="⚡ Tạo nhanh mặt cắt chỉ với 1 click chuột" data-en="⚡ Create section cuts instantly with 1-click"><strong>⚡ Tạo nhanh mặt cắt chỉ với 1 click chuột</strong></li>
-                        <li data-vi="👁️ Quản lý hiển thị mặt cắt cục bộ hoặc toàn scene" data-en="👁️ Manage section cut visibility globally or locally"><strong>👁️ Quản lý hiển thị mặt cắt cục bộ hoặc toàn scene</strong></li>
-                        <li data-vi="📁 Tự động dọn dẹp và phân nhóm Gizmo vào Layer riêng" data-en="📁 Automatically clean & layer slice gizmos"><strong>📁 Tự động dọn dẹp và phân nhóm Gizmo vào Layer riêng</strong></li>
-                        <li data-vi="🔄 Tương thích hoàn toàn với phím Ctrl+Z khi chỉnh sửa" data-en="🔄 Native support for standard Ctrl+Z undo history"><strong>🔄 Tương thích hoàn toàn với phím Ctrl+Z khi chỉnh sửa</strong></li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-        <div class="products-grid"  style="margin-top: -32px;">
-            
-            <div class="product-card" data-aos="fade-up"  style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
-                <div class="product-meta">
-                    <div class="product-header">
-                        <div class="product-icon"><img src="/magicrename_icon_48.png" alt="Magic Rename"  style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                        <span class="product-badge new" data-vi="MIỄN PHÍ" data-en="FREE">MIỄN PHÍ</span>
-                    </div>
-                    <h3 class="product-title">Magic Rename</h3>
-                    <p class="product-desc" data-vi="Plugin tự động hóa chuẩn bị tài nguyên 3ds Max sang Unreal Engine 5. Đổi tên hàng loạt tương thích ASCII, tự động nhóm (group), tự động đổi tên material và texture suffix." data-en="Automated asset preparation plugin for exporting 3ds Max assets to Unreal Engine 5. Batch renames objects with ASCII prefixes, auto-groups, and auto-renames materials and texture suffixes."></p>
-                </div>
-                <a href="/rename" class="product-cta primary-btn mt-6"  data-vi="Xem chức năng →" data-en="View features →">Xem chức năng →</a>
-            </div>
-
-            
-            <div class="product-card" data-aos="fade-up"  style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
-                <div class="product-meta">
-                    <div class="product-header">
-                        <div class="product-icon">🔄</div>
-                        <span class="product-badge new" data-vi="MIỄN PHÍ" data-en="FREE">MIỄN PHÍ</span>
-                    </div>
-                    <h3 class="product-title">Magic Reset</h3>
-                    <p class="product-desc" data-vi="Công cụ khôi phục cài đặt gốc 3ds Max nhanh chóng. Tự động phát hiện phiên bản Max, dọn dẹp các tệp cấu hình lỗi và đưa phần mềm về trạng thái xuất xưởng sạch sẽ." data-en="Quick factory reset tool for 3ds Max settings. Automatically detects installed Max versions, cleans corrupted configuration files, and restores the software to a clean state."></p>
-                </div>
-                <a href="Download%20Free/Reset3dsMax.exe" download class="product-cta primary-btn mt-6"  data-vi="↓ Tải về (Miễn phí)" data-en="↓ Download (Free)">↓ Tải về (Miễn phí)</a>
-            </div>
-
-            
-            <div class="product-card" data-aos="fade-up"  style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
-                <div class="product-meta">
-                    <div class="product-header">
-                        <div class="product-icon"><img src="/magiccad_icon_48.png" alt="Magic CAD"  style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                        <span class="product-badge new" data-vi="MIỄN PHÍ" data-en="FREE">MIỄN PHÍ</span>
-                    </div>
-                    <h3 class="product-title">Magic CAD</h3>
-                    <p class="product-desc" data-vi="Plugin xuất mô hình 3D từ 3ds Max sang định dạng bản vẽ CAD (DWG/DXF) nhanh chóng. Tự động chuyển đổi các mặt cắt, nét vẽ spline và hình khối thành nét vẽ CAD chuẩn kỹ thuật theo layer." data-en="Export 3ds Max models directly to CAD drawing formats (DWG/DXF). Automatically converts 3D geometry, slice planes, and splines into standardized CAD layers and vectors."></p>
-                </div>
-                <a href="Download%20Free/AH3_Magic_CAD_v1.0.5.mzp" download class="product-cta primary-btn mt-6"  data-vi="↓ Tải về (Miễn phí)" data-en="↓ Download (Free)">↓ Tải về (Miễn phí)</a>
-            </div>
-
-        </div>
-        <!-- 3. Upcoming Projects -->
-        <h2 class="products-group-title coming-soon" data-vi="Dự án sắp ra mắt (Coming Soon)" data-en="Upcoming Projects (Coming Soon)">Dự án sắp ra mắt (Coming Soon)</h2>
-        <div class="products-grid" style="margin-top: -32px;">
-            
-            <div class="product-card" data-aos="fade-up"  style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
-                <div class="product-meta">
-                    <div class="product-header">
-                        <div class="product-icon"><img src="/magicsearch_icon_48.png" alt="Magic Search"  style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                        <span class="product-badge soon" data-vi="SẮP CÓ" data-en="COMING SOON">SẮP CÓ</span>
-                    </div>
-                    <h3 class="product-title">Magic Search</h3>
-                    <p class="product-desc" data-vi="Plugin tìm kiếm thư viện bằng hình ảnh cho 3ds Max. AI quét tìm đúng model, texture, HDRI tương tự và đưa vào scene." data-en="Visual asset search plugin for 3ds Max. AI sweeps and finds similar models, textures, or HDRI to import with 1 click."></p>
-                </div>
-                <a href="https://youtube.com/@ArchiH3" target="_blank" class="product-cta secondary-btn mt-6"  data-vi="Theo dõi tiến độ ↗" data-en="Watch progress ↗">Theo dõi tiến độ ↗</a>
-            </div>
-
-            <div class="product-card" data-aos="fade-up"  style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
-                <div class="product-meta">
-                    <div class="product-header">
-                        <div class="product-icon"><img src="/magiccamera_icon_48.png" alt="Magic Camera"  style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                        <span class="product-badge soon text-primary"  data-vi="SẮP CÓ" data-en="COMING SOON" style="background: rgba(77, 182, 172, 0.15); border: 1px solid rgba(77, 182, 172, 0.3);">SẮP CÓ</span>
-                    </div>
-                    <h3 class="product-title">Magic Camera</h3>
-                    <p class="product-desc" data-vi="Plugin quản lý camera thông minh cho 3ds Max. Hỗ trợ gióng lưới bố cục và khử tụ dọc chuẩn nhiếp ảnh." data-en="Smart camera and state manager plugin for 3ds Max. Correction for 2-point perspective and lens control."></p>
-                </div>
-                <a href="/camera" class="product-cta secondary-btn mt-6"  data-vi="Xem chức năng →" data-en="View features →">Xem chức năng →</a>
+                <a href="/tree" class="product-cta primary-btn mt-6" data-vi="Xem chi tiết →" data-en="View details →" style="background: var(--green); color: #121212;">Xem chi tiết →</a>
             </div>
 
         </div>
 
-        <!-- Compact list of other upcoming projects -->
-        <div style="text-align: center; padding: 24px 24px 8px; margin-top: -40px;">
-            <p style="font-size: 12px; color: var(--text-muted); font-family: 'JetBrains Mono', monospace; letter-spacing: 0.5px;" data-vi="Và nhiều dự án khác đang phát triển:" data-en="And more in development:"></p>
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 10px;">
-                <span style="padding: 5px 14px; background: rgba(41, 182, 246, 0.08); border: 1px solid rgba(41, 182, 246, 0.15); border-radius: 20px; font-size: 11px; color: #29b6f6;">🌧️ Magic Rain</span>
-                <span style="padding: 5px 14px; background: rgba(77, 182, 172, 0.08); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 20px; font-size: 11px; color: var(--primary);">🌊 Magic Ripple</span>
-                <span style="padding: 5px 14px; background: rgba(236, 64, 122, 0.08); border: 1px solid rgba(236, 64, 122, 0.15); border-radius: 20px; font-size: 11px; color: #ec407a;">💨 Magic Curtain</span>
-                <span style="padding: 5px 14px; background: rgba(171, 71, 188, 0.08); border: 1px solid rgba(171, 71, 188, 0.15); border-radius: 20px; font-size: 11px; color: #ab47bc;">🚶 Magic Anima</span>
-                <span style="padding: 5px 14px; background: rgba(255, 167, 38, 0.08); border: 1px solid rgba(255, 167, 38, 0.15); border-radius: 20px; font-size: 11px; color: #ffa726;">🐈 Magic Cat</span>
+        <!-- MORE TOOLS -->
+        <div style="text-align: center; padding: 48px 24px 16px;">
+            <h3 style="font-size: 14px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; font-family: 'JetBrains Mono', monospace; margin-bottom: 20px;" data-vi="Thêm công cụ" data-en="More tools">Thêm công cụ</h3>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+                <a href="/rebake" style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">⚡ Magic ReBake</a>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">✂️ Magic Slice <span style='font-size:10px; opacity:0.6;'>FREE</span></a>
+                <a href="/rename" style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">🏷️ Magic Rename <span style='font-size:10px; opacity:0.6;'>FREE</span></a>
+                <a href="Download%20Free/Reset3dsMax.exe" download style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">🔄 Magic Reset <span style='font-size:10px; opacity:0.6;'>FREE</span></a>
+                <a href="Download%20Free/AH3_Magic_CAD_v1.0.5.mzp" download style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">📐 Magic CAD <span style='font-size:10px; opacity:0.6;'>FREE</span></a>
+                <a href="/hub" style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">🧰 AH3 Hub <span style='font-size:10px; opacity:0.6;' data-vi='đang nâng cấp v2' data-en='upgrading to v2'>đang nâng cấp v2</span></a>
             </div>
+        </div>
+
+        <!-- COMING SOON -->
+        <div style="text-align: center; padding: 32px 24px 8px;">
+            <h3 style="font-size: 14px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; font-family: 'JetBrains Mono', monospace; margin-bottom: 20px;" data-vi="Sắp ra mắt" data-en="Coming Soon">Sắp ra mắt</h3>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
+                <span style="padding: 6px 16px; background: rgba(77, 182, 172, 0.08); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 20px; font-size: 12px; color: var(--primary);">🔍 Magic Search</span>
+                <span style="padding: 6px 16px; background: rgba(77, 182, 172, 0.08); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 20px; font-size: 12px; color: var(--primary);">📷 Magic Camera</span>
+                <span style="padding: 6px 16px; background: rgba(41, 182, 246, 0.08); border: 1px solid rgba(41, 182, 246, 0.15); border-radius: 20px; font-size: 12px; color: #29b6f6;">🌧️ Magic Rain</span>
+                <span style="padding: 6px 16px; background: rgba(77, 182, 172, 0.08); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 20px; font-size: 12px; color: var(--primary);">🌊 Magic Ripple</span>
+                <span style="padding: 6px 16px; background: rgba(236, 64, 122, 0.08); border: 1px solid rgba(236, 64, 122, 0.15); border-radius: 20px; font-size: 12px; color: #ec407a;">💨 Magic Curtain</span>
+                <span style="padding: 6px 16px; background: rgba(171, 71, 188, 0.08); border: 1px solid rgba(171, 71, 188, 0.15); border-radius: 20px; font-size: 12px; color: #ab47bc;">🚶 Magic Anima</span>
+                <span style="padding: 6px 16px; background: rgba(255, 167, 38, 0.08); border: 1px solid rgba(255, 167, 38, 0.15); border-radius: 20px; font-size: 12px; color: #ffa726;">🐈 Magic Cat</span>
+            </div>
+            <a href="https://youtube.com/@ArchiH3" target="_blank" style="display: inline-block; margin-top: 16px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 2px;" data-vi="Theo dõi YouTube để cập nhật →" data-en="Follow YouTube for updates →">Theo dõi YouTube để cập nhật →</a>
         </div>
     </section>
     <!-- AUTHOR -->
