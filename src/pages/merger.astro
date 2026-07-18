@@ -540,7 +540,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
             display: inline-flex; align-items: center; gap: 8px;
             padding: 12px 28px; background: transparent;
             color: var(--text); font-weight: 400; font-size: 14px;
-            border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 6px;
+            border: var(--border-dash) !important; border-radius: 6px;
             text-decoration: none; cursor: pointer; transition: all 0.25s;
         }
         .btn-outline:hover { border-color: var(--primary) !important; color: var(--primary); }
@@ -598,7 +598,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         }
         .demo-bar span { color: var(--text-secondary); font-size: 12px; margin-right: 4px; }
         .demo-btn {
-            background: var(--bg-light); color: var(--text); border: 1px dashed rgba(255,255,255,0.15) !important;
+            background: var(--bg-light); color: var(--text); border: var(--border-dash) !important;
             padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; transition: all 0.2s;
         }
         .demo-btn:hover { background: #484848; }
@@ -627,7 +627,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         /* big preview */
         .preview-big {
             height: 296px; border-radius: 10px; background: radial-gradient(circle at 50% 40%,#3a3a3a,#202020);
-            border: 1px dashed rgba(255,255,255,0.15) !important; position: relative; overflow: hidden; display: flex; align-items: center; }
+            border: var(--border-dash) !important; position: relative; overflow: hidden; display: flex; align-items: center; }
         .preview-big .swatch { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; padding: 24px; text-align: center; }
         .preview-big .sw-name { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
         .preview-big .sw-info { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
@@ -653,7 +653,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         .dropzone .types { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 4px; }
         .dropzone .types span {
             font-size: 10.5px; padding: 3px 9px; border-radius: 11px; background: var(--bg-surface);
-            color: var(--text-secondary); border: 1px dashed rgba(255,255,255,0.15) !important;
+            color: var(--text-secondary); border: var(--border-dash) !important;
         }
 
         /* thumbnails 3x2 */
@@ -683,17 +683,17 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         .slider { flex: 1; height: 4px; border-radius: 3px; background: var(--bg-surface); position: relative; }
         .slider .fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--primary); border-radius: 3px; }
         .slider .knob { position: absolute; top: 50%; transform: translate(-50%,-50%); width: 11px; height: 11px; border-radius: 50%; background: var(--primary); border: 2px solid #202020; }
-        .num { width: 56px; background: var(--bg-surface); border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 4px; color: var(--text); padding: 3px 4px; font-size: 11px; text-align: center; }
+        .num { width: 56px; background: var(--bg-surface); border: var(--border-dash) !important; border-radius: 4px; color: var(--text); padding: 3px 4px; font-size: 11px; text-align: center; }
         .toggle-row { display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-bottom: 10px; }
         .toggle { width: 36px; height: 18px; border-radius: 9px; background: var(--primary); position: relative; cursor: pointer; transition: background 0.15s; }
         .toggle.off { background: #555; }
         .toggle .dot { position: absolute; top: 2px; left: 20px; width: 14px; height: 14px; border-radius: 50%; background: #fff; transition: left 0.15s; }
         .toggle.off .dot { left: 2px; }
         .presets { display: flex; gap: 6px; }
-        .preset { flex: 1; background: var(--bg-surface); border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 5px; padding: 5px; font-size: 11px; text-align: center; cursor: pointer; }
+        .preset { flex: 1; background: var(--bg-surface); border: var(--border-dash) !important; border-radius: 5px; padding: 5px; font-size: 11px; text-align: center; cursor: pointer; }
         .preset.on { border-color: var(--primary) !important; color: var(--primary); background: rgba(77, 182, 172, 0.05); }
         .preset:hover { background: #3a3a3a; }
-        .dropdown { background: var(--bg-surface); border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 5px; padding: 6px 10px; font-size: 11px; color: var(--text); display: flex; justify-content: space-between; cursor: pointer; width: 100%; }
+        .dropdown { background: var(--bg-surface); border: var(--border-dash) !important; border-radius: 5px; padding: 6px 10px; font-size: 11px; color: var(--text); display: flex; justify-content: space-between; cursor: pointer; width: 100%; }
         .dropdown .ar { color: var(--text-secondary); }
         .divider { height: 1px; background: var(--border); margin: 8px 0; }
 
@@ -716,7 +716,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
             gap: 20px; max-width: 1100px; margin: 0 auto;
         }
         .feature-card {
-            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            background: var(--bg-main); border: var(--border-dash) !important;
             border-radius: 12px !important; padding: 32px;
             transition: all 0.3s; position: relative; overflow: hidden;
         }
@@ -799,7 +799,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
             .price-card h3 { font-size: 18px; }
         }
         .price-card {
-            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            background: var(--bg-main); border: var(--border-dash) !important;
             border-radius: 12px !important; padding: 48px 32px;
             text-align: center; position: relative;
             display: flex; flex-direction: column; justify-content: space-between;
@@ -841,7 +841,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         .faq-section { max-width: 800px; margin: 0 auto; }
         .faq-grid { display: flex; flex-direction: column; gap: 16px; }
         .faq-item {
-            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            background: var(--bg-main); border: var(--border-dash) !important;
             border-radius: 8px; padding: 24px;
         }
         .faq-item h3 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
@@ -867,7 +867,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         /* INTERFACE CONTAINER RESPONSIVE */
         .interface-container {
             max-width: 800px; margin: 0 auto; padding: 24px;
-            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            background: var(--bg-main); border: var(--border-dash) !important;
             border-radius: 12px !important; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
         @media (max-width: 768px) {
@@ -970,7 +970,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         /* PREVIEW POPUP */
         .pl-preview-box {
             position: absolute; left: 40px; top: 80px; width: 120px; height: 120px;
-            border-radius: 8px; border: 1px dashed rgba(255,255,255,0.15) !important;
+            border-radius: 8px; border: var(--border-dash) !important;
             background: #1e1e1e; display: flex; flex-direction: column; align-items: center; opacity: 0; transform: scale(0.6); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 10;
         }
@@ -1019,12 +1019,12 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         .pl-box.textured { opacity: 1; transform: rotateX(-20deg) rotateY(390deg); }
         .pl-face {
             position: absolute; width: 80px; height: 80px;
-            border: 1px dashed rgba(77, 182, 172, 0.4);
+            border: var(--border-dash-accent);
             background: rgba(77, 182, 172, 0.03);
             transition: all 0.5s;
         }
         .pl-box.textured .pl-face {
-            border: 1px dashed rgba(255,255,255,0.15) !important;
+            border: var(--border-dash) !important;
             background: rgba(77, 182, 172, 0.15);
             box-shadow: 0 0 15px rgba(77,182,172,0.3);
         }
