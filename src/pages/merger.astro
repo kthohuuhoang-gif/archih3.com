@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import PurchaseInfo from '../components/PurchaseInfo.astro';
 ---
 <Layout title="Magic Merger — Batch Import & Smart Relink 3ds Max | ArchiH3" description="Gộp file 3ds Max hàng loạt, tự động relink texture, hỗ trợ ZIP/RAR/7z. Plugin import model chuyên nghiệp." ogImage="/og/og-merger.jpg">
 <Fragment slot="head">
@@ -244,6 +245,8 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- FAQ -->
+    <PurchaseInfo />
+
     <section id="faq"  style="background: var(--bg-dark);">
         <div class="section-label">FAQ</div>
         <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions">Giải đáp câu hỏi kỹ thuật</h2>

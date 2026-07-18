@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import PurchaseInfo from '../components/PurchaseInfo.astro';
 ---
 <Layout title="Magic ReBake — Retopology & Bake Map 3ds Max | ArchiH3" description="Plugin tối ưu lưới Quad tự động và bake map vật liệu. Trải UV tự động, sửa biên mép, 1-Click pipeline." ogImage="/og/og-rebake.jpg">
 <Fragment slot="head">
@@ -117,7 +118,7 @@ import Footer from '../components/Footer.astro';
     <!-- PRICING -->
     <section id="pricing">
         <div class="section-label" data-vi="BẢNG GIÁ KHUYẾN MÃI" data-en="LAUNCH PRICE">BẢNG GIÁ KHUYẾN MÃI</div>
-        <h2 class="section-title" data-vi="Khuyến Mãi Ra Mắt Cực Lớn. Chỉ 3 Ngày!" data-en="Flash Launch Discount. 3 Days Only!">Khuyến Mãi Ra Mắt Cực Lớn. Chỉ 3 Ngày!</h2>
+        <h2 class="section-title" data-vi="Ưu đãi ra mắt — Sở hữu trọn đời" data-en="Launch offer — Lifetime license">Ưu đãi ra mắt — Sở hữu trọn đời</h2>
         <p class="section-desc" data-vi="Sở hữu trọn đời công cụ tối ưu hóa lưới hàng đầu cho 3ds Max với giá sale chưa từng có. Kích hoạt theo ID máy tính (HWID)." data-en="Get lifetime access to the premier topology optimization plugin for 3ds Max at an unmatched price. Tied to HWID.">Sở hữu trọn đời công cụ tối ưu hóa lưới hàng đầu cho 3ds Max với giá sale chưa từng có. Kích hoạt theo ID máy tính (HWID).</p>
 
         <div class="pricing-section">
@@ -126,10 +127,10 @@ import Footer from '../components/Footer.astro';
                 <div class="price-card featured"  style="border-color: var(--primary) !important;">
                     <div  class="absolute" style="top:0; left:0; right:0; height:3px; background:#ff9100; border-radius:16px 16px 0 0;"></div>
                     <div>
-                        <div class="price-badge"  style="background: rgba(255, 145, 0, 0.15); color: #ff9100;">FLASH SALE - 3 DAYS ONLY</div>
+                        <div class="price-badge"  style="background: rgba(255, 145, 0, 0.15); color: #ff9100;">LAUNCH OFFER</div>
                         <h3 data-vi="Magic ReBake Standalone" data-en="Magic ReBake Standalone">Magic ReBake Standalone</h3>
                         <div class="price-amount" data-vi="<del>999.000đ</del> 200.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $8 <span>/ lifetime</span>"><del>999.000đ</del> 200.000đ <span>/ vĩnh viễn</span></div>
-                        <div class="price-period" data-vi="Giảm giá sốc 80% nhân dịp mở bán (Chỉ áp dụng trong 3 ngày)" data-en="Huge 80% discount for launch (Valid for 3 days only)">Giảm giá sốc 80% nhân dịp mở bán (Chỉ áp dụng trong 3 ngày)</div>
+                        <div class="price-period" data-vi="Giá ưu đãi nhân dịp ra mắt" data-en="Special launch pricing">Giá ưu đãi nhân dịp ra mắt</div>
                         
                         <ul class="price-features">
                             <li data-vi="Tối ưu hóa lưới Quad tự động từ mô hình bất kỳ" data-en="Auto Quad retopology from any 3D model geometry">Tối ưu hóa lưới Quad tự động từ mô hình bất kỳ</li>
@@ -169,6 +170,8 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- FAQ -->
+    <PurchaseInfo />
+
     <section id="faq"  style="background: var(--bg-dark);">
         <div class="section-label">FAQ</div>
         <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions">Giải đáp câu hỏi kỹ thuật</h2>
