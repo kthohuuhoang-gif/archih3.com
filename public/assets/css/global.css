@@ -29,6 +29,9 @@
     --text-secondary: #a0a0a0;
     --text-muted: #8a8a8a; /* was #666 — raised for WCAG AA contrast on dark bg */
     --border: #444444;
+    /* Blueprint dashed borders — the site-wide motif */
+    --border-dash: 1px dashed rgba(255,255,255,0.15);
+    --border-dash-accent: 1px dashed rgba(77,182,172,0.3);
     --destructive: #c62828;
     --warning: #ef6c00;
     --blue: #29b6f6;
@@ -638,7 +641,7 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
         }
         .featured-wide-right {
             background: rgba(255,255,255,0.015);
-            border: 1px dashed rgba(255,255,255,0.15) !important;
+            border: var(--border-dash) !important;
             border-radius: 12px !important; padding: 28px;
             display: flex; flex-direction: column;
             justify-content: center; gap: 12px;
@@ -855,7 +858,7 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
 
         /* RAYON DASHED CARD STYLE (Cleaned up, no corner dots on cards) */
         .product-card {
-            border: 1px dashed rgba(255, 255, 255, 0.15) !important;
+            border: var(--border-dash) !important;
             border-radius: 12px !important;
             background: var(--bg-main);
             padding: 32px;
@@ -907,7 +910,7 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
         }
         
         .featured-wide-right {
-            border-left: 1px dashed rgba(255,255,255,0.15);
+            border-left: var(--border-dash);
             padding-left: 32px;
             display: flex;
             flex-direction: column;
@@ -921,7 +924,7 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
             }
             .featured-wide-right {
                 border-left: none;
-                border-top: 1px dashed rgba(255,255,255,0.15);
+                border-top: var(--border-dash);
                 padding-left: 0;
                 padding-top: 24px;
                 margin-top: 8px;
@@ -968,7 +971,7 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
             display: flex;
             flex-direction: column;
             gap: 12px;
-            border-top: 1px dashed rgba(255,255,255,0.1);
+            border-top: var(--border-dash);
             padding-top: 16px;
         }
         .extra-features-list li {
@@ -1019,7 +1022,7 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
         }
         .marquee-item { width: 240px; flex-shrink: 0; cursor: pointer; display: block; text-decoration: none; color: inherit; }
         .marquee-item .marquee-title { font-size: var(--text-sm); margin-bottom: 8px; font-weight: 600; color: #fff; font-family: monospace; display: flex; justify-content: space-between; align-items: center; }
-        .marquee-item .mini-sim-box { height: 100px; border: 1px dashed rgba(255,255,255,0.15); transition: border 0.3s; margin-top: 0; }
+        .marquee-item .mini-sim-box { height: 100px; border: var(--border-dash); transition: border 0.3s; margin-top: 0; }
         .marquee-item:hover .mini-sim-box { border-color: var(--primary); }
         .marquee-item .sim-controls { display: none !important; }
         .marquee-item .sim-viewport { height: 100%; padding: 4px; }
@@ -1048,7 +1051,7 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
         /* MINI SIMULATIONS STYLES */
         .mini-sim-box {
             background: rgba(15, 15, 20, 0.4);
-            border: 1px dashed rgba(255,255,255,0.15);
+            border: var(--border-dash);
             border-radius: var(--radius-md);
             margin-top: 16px;
             overflow: hidden;
@@ -1419,7 +1422,7 @@ section { padding: 100px 24px; }
             gap: 24px; margin-top: 40px;
         }
 .feature-card {
-    background: var(--bg-surface); border: 1px dashed rgba(255,255,255,0.15);
+    background: var(--bg-surface); border: var(--border-dash);
     border-radius: var(--radius-lg); padding: 32px;
     transition: all 0.3s; position: relative; overflow: hidden;
 }

@@ -521,7 +521,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
             display: inline-flex; align-items: center; gap: 8px;
             padding: 12px 28px; background: transparent;
             color: var(--text); font-weight: 400; font-size: 14px;
-            border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 6px;
+            border: var(--border-dash) !important; border-radius: 6px;
             text-decoration: none; cursor: pointer; transition: all 0.25s;
         }
         .btn-outline:hover { border-color: var(--primary) !important; color: var(--primary); }
@@ -570,7 +570,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
             gap: 20px; max-width: 1100px; margin: 0 auto;
         }
         .feature-card {
-            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            background: var(--bg-main); border: var(--border-dash) !important;
             border-radius: 12px; padding: 32px;
             transition: all 0.3s; position: relative; overflow: hidden;
         }
@@ -596,7 +596,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         /* CATEGORIES SECTION */
         .cat-table-container {
             max-width: 900px; margin: 40px auto 0; overflow-x: auto;
-            border: 1px dashed rgba(255,255,255,0.15) !important; border-radius: 8px; background: var(--bg-main);
+            border: var(--border-dash) !important; border-radius: 8px; background: var(--bg-main);
         }
         table {
             width: 100%; border-collapse: collapse; text-align: left; font-size: 14px;
@@ -635,7 +635,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         /* PRICING */
         .pricing-section { max-width: 600px; margin: 0 auto; }
         .price-card {
-            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            background: var(--bg-main); border: var(--border-dash) !important;
             border-radius: 12px !important; padding: 48px 32px;
             text-align: center; position: relative;
             background: linear-gradient(135deg, var(--bg-main), rgba(102,187,106,0.05));
@@ -672,7 +672,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         .faq-section { max-width: 800px; margin: 0 auto; }
         .faq-grid { display: flex; flex-direction: column; gap: 16px; }
         .faq-item {
-            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            background: var(--bg-main); border: var(--border-dash) !important;
             border-radius: 8px; padding: 24px;
         }
         .faq-item h3 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
@@ -699,7 +699,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         /* INTERFACE CONTAINER RESPONSIVE */
         .interface-container {
             max-width: 800px; margin: 0 auto; padding: 24px;
-            background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+            background: var(--bg-main); border: var(--border-dash) !important;
             border-radius: 12px !important; box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
         @media (max-width: 768px) {
