@@ -1,0 +1,286 @@
+---
+// Showcase.astro — interactive homepage playground:
+// (A) before/after comparison slider (Magic ReBake), (B) wind slider (Magic Tree).
+---
+<section class="showcase-section" id="playground">
+    <div class="showcase-label">PLAYGROUND</div>
+    <h2 class="showcase-title" data-vi="Thử ngay trên trang này" data-en="Try it right on this page">Thử ngay trên trang này</h2>
+    <p class="showcase-desc" data-vi="Không cần cài đặt — kéo thử hai demo dưới đây để cảm nhận điều plugin làm." data-en="No install needed — drag the two demos below to feel what the plugins do.">Không cần cài đặt — kéo thử hai demo dưới đây để cảm nhận điều plugin làm.</p>
+
+    <div class="showcase-grid">
+        <!-- A. Before/After: Magic ReBake -->
+        <div class="showcase-card">
+            <div class="ba-wrap" id="ba-rebake">
+                <!-- BEFORE: messy triangulated mesh -->
+                <svg class="ba-svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice">
+                    <defs>
+                        <clipPath id="ba-blob"><path d="M60,150 C40,90 90,40 150,45 C220,50 262,100 242,150 C222,185 90,185 60,150 Z"/></clipPath>
+                    </defs>
+                    <path d="M60,150 C40,90 90,40 150,45 C220,50 262,100 242,150 C222,185 90,185 60,150 Z" fill="rgba(229,115,115,0.05)" stroke="#e57373" stroke-width="1.2"/>
+                    <g clip-path="url(#ba-blob)" stroke="#e57373" stroke-width="0.7" opacity="0.75">
+                        <line x1="60" y1="150" x2="128" y2="63"/><line x1="128" y1="63" x2="96" y2="132"/>
+                        <line x1="96" y1="132" x2="171" y2="96"/><line x1="171" y1="96" x2="128" y2="63"/>
+                        <line x1="171" y1="96" x2="219" y2="61"/><line x1="219" y1="61" x2="238" y2="118"/>
+                        <line x1="171" y1="96" x2="238" y2="118"/><line x1="96" y1="132" x2="151" y2="171"/>
+                        <line x1="151" y1="171" x2="171" y2="96"/><line x1="151" y1="171" x2="209" y2="149"/>
+                        <line x1="209" y1="149" x2="238" y2="118"/><line x1="209" y1="149" x2="171" y2="96"/>
+                        <line x1="60" y1="150" x2="96" y2="132"/><line x1="76" y1="98" x2="128" y2="63"/>
+                        <line x1="76" y1="98" x2="96" y2="132"/><line x1="76" y1="98" x2="60" y2="150"/>
+                        <line x1="151" y1="45" x2="128" y2="63"/><line x1="151" y1="45" x2="171" y2="96"/>
+                        <line x1="151" y1="45" x2="219" y2="61"/><line x1="96" y1="178" x2="151" y2="171"/>
+                        <line x1="96" y1="178" x2="96" y2="132"/><line x1="186" y1="176" x2="151" y2="171"/>
+                        <line x1="186" y1="176" x2="209" y2="149"/>
+                    </g>
+                    <g fill="#e57373">
+                        <circle cx="128" cy="63" r="1.6"/><circle cx="96" cy="132" r="1.6"/><circle cx="171" cy="96" r="1.6"/>
+                        <circle cx="219" cy="61" r="1.6"/><circle cx="238" cy="118" r="1.6"/><circle cx="151" cy="171" r="1.6"/>
+                        <circle cx="209" cy="149" r="1.6"/><circle cx="76" cy="98" r="1.6"/>
+                    </g>
+                </svg>
+                <!-- AFTER: clean quad flow -->
+                <div class="ba-after" id="ba-after">
+                    <svg class="ba-svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice">
+                        <path d="M60,150 C40,90 90,40 150,45 C220,50 262,100 242,150 C222,185 90,185 60,150 Z" fill="rgba(77,182,172,0.08)" stroke="#4db6ac" stroke-width="1.2"/>
+                        <g clip-path="url(#ba-blob)" stroke="#4db6ac" stroke-width="0.7" fill="none" opacity="0.9">
+                            <path d="M50,68 C120,52 210,54 255,70"/>
+                            <path d="M46,92 C120,76 214,78 258,94"/>
+                            <path d="M44,116 C122,102 216,102 260,116"/>
+                            <path d="M46,140 C122,128 214,128 258,140"/>
+                            <path d="M52,164 C124,154 210,154 254,164"/>
+                            <path d="M78,48 C74,90 74,140 80,186"/>
+                            <path d="M106,42 C102,90 102,146 108,190"/>
+                            <path d="M134,40 C131,92 131,148 136,192"/>
+                            <path d="M162,40 C160,92 160,148 164,192"/>
+                            <path d="M190,44 C189,92 189,146 192,188"/>
+                            <path d="M218,52 C218,94 218,140 220,182"/>
+                        </g>
+                    </svg>
+                </div>
+                <div class="ba-divider" id="ba-divider"></div>
+                <input type="range" class="ba-range" id="ba-range" min="0" max="100" value="50" step="1" aria-label="Kéo để so sánh trước và sau">
+                <span class="ba-tag ba-tag-left" data-vi="Lưới gốc lộn xộn" data-en="Messy source mesh">Lưới gốc lộn xộn</span>
+                <span class="ba-tag ba-tag-right" data-vi="Sau ReBake — Quad sạch" data-en="After ReBake — clean quads">Sau ReBake — Quad sạch</span>
+            </div>
+            <div class="showcase-card-info">
+                <h3 data-vi="Magic ReBake — kéo để so sánh" data-en="Magic ReBake — drag to compare">Magic ReBake — kéo để so sánh</h3>
+                <a href="/rebake" class="showcase-link" data-vi="Xem chi tiết →" data-en="View details →">Xem chi tiết →</a>
+            </div>
+        </div>
+
+        <!-- B. Wind playground: Magic Tree -->
+        <div class="showcase-card">
+            <div class="wind-stage">
+                <svg class="ba-svg" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice">
+                    <line x1="0" y1="182" x2="300" y2="182" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+                    <!-- main tree -->
+                    <g class="pg-sway" style="transform-origin: 150px 182px; --wind-factor: 1;">
+                        <path d="M150,182 Q156,120 150,62" stroke="#8D6E63" stroke-width="10" fill="none" stroke-linecap="round"/>
+                        <circle cx="150" cy="58" r="34" fill="#66bb6a" opacity="0.9"/>
+                        <circle cx="126" cy="76" r="24" fill="#4caf50" opacity="0.9"/>
+                        <circle cx="174" cy="76" r="24" fill="#2e7d32" opacity="0.9"/>
+                    </g>
+                    <!-- small tree -->
+                    <g class="pg-sway" style="transform-origin: 244px 182px; --wind-factor: 1.3; animation-delay: -0.9s;">
+                        <path d="M244,182 Q247,152 244,128" stroke="#8D6E63" stroke-width="6" fill="none" stroke-linecap="round"/>
+                        <circle cx="244" cy="124" r="18" fill="#66bb6a" opacity="0.85"/>
+                        <circle cx="232" cy="134" r="12" fill="#2e7d32" opacity="0.85"/>
+                    </g>
+                    <!-- grass tufts -->
+                    <g class="pg-sway" style="transform-origin: 66px 182px; --wind-factor: 1.8; animation-delay: -0.4s;">
+                        <path d="M60,182 Q58,166 62,156 M66,182 Q66,162 64,152 M72,182 Q74,166 70,158" stroke="#4caf50" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </g>
+                    <g class="pg-sway" style="transform-origin: 96px 182px; --wind-factor: 1.6; animation-delay: -1.3s;">
+                        <path d="M92,182 Q90,170 93,162 M98,182 Q98,168 96,160" stroke="#66bb6a" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </g>
+                </svg>
+                <div class="wind-badge"><span id="wind-label" data-vi="Gió nhẹ" data-en="Breeze">Gió nhẹ</span></div>
+            </div>
+            <div class="wind-controls">
+                <span class="wind-scale-label" data-vi="Lặng" data-en="Calm">Lặng</span>
+                <input type="range" id="wind-range" min="0" max="3" value="1" step="1" aria-label="Điều chỉnh sức gió">
+                <span class="wind-scale-label" data-vi="Bão" data-en="Storm">Bão</span>
+            </div>
+            <div class="showcase-card-info">
+                <h3 data-vi="Magic Tree — kéo thanh gió" data-en="Magic Tree — drag the wind slider">Magic Tree — kéo thanh gió</h3>
+                <a href="/tree" class="showcase-link" data-vi="Xem chi tiết →" data-en="View details →">Xem chi tiết →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .showcase-section {
+        padding: 72px 24px 40px;
+        text-align: center;
+    }
+    .showcase-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        letter-spacing: 2px;
+        color: var(--primary);
+        margin-bottom: 12px;
+    }
+    .showcase-title {
+        font-size: clamp(26px, 4.5vw, 38px);
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+    .showcase-desc {
+        font-size: 15px;
+        color: var(--text-secondary);
+        margin-bottom: 36px;
+    }
+    .showcase-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        max-width: 1000px;
+        margin: 0 auto;
+        text-align: left;
+    }
+    .showcase-card {
+        background: var(--bg-main);
+        border: 1px solid rgba(77, 182, 172, 0.15);
+        border-radius: 14px;
+        padding: 16px;
+        transition: border-color 0.3s;
+    }
+    .showcase-card:hover { border-color: rgba(77, 182, 172, 0.4); }
+
+    /* Before/After */
+    .ba-wrap {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #101010;
+        aspect-ratio: 3 / 2;
+        touch-action: none;
+    }
+    .ba-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .ba-after {
+        position: absolute; inset: 0;
+        clip-path: inset(0 0 0 50%);
+        background: #101010;
+    }
+    .ba-divider {
+        position: absolute; top: 0; bottom: 0; left: 50%;
+        width: 2px; background: var(--primary);
+        box-shadow: 0 0 12px rgba(77, 182, 172, 0.8);
+        pointer-events: none;
+    }
+    .ba-divider::after {
+        content: '⇔';
+        position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        width: 30px; height: 30px; line-height: 30px; text-align: center;
+        background: var(--primary); color: #121212;
+        border-radius: 50%; font-size: 14px; font-weight: 700;
+    }
+    .ba-range {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        opacity: 0; cursor: ew-resize; margin: 0;
+    }
+    .ba-tag {
+        position: absolute; bottom: 10px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px; padding: 4px 10px; border-radius: 12px;
+        pointer-events: none;
+    }
+    .ba-tag-left { left: 10px; background: rgba(229,115,115,0.15); color: #e57373; }
+    .ba-tag-right { right: 10px; background: rgba(77,182,172,0.15); color: var(--primary); }
+
+    /* Wind playground */
+    .wind-stage {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #101010;
+        aspect-ratio: 3 / 2;
+    }
+    .wind-badge {
+        position: absolute; top: 10px; right: 10px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px; padding: 4px 12px;
+        background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 12px;
+    }
+    #wind-label { color: var(--green); transition: color 0.3s; }
+    .wind-controls {
+        display: flex; align-items: center; gap: 12px;
+        padding: 14px 4px 0;
+    }
+    .wind-scale-label { font-size: 12px; color: var(--text-muted); flex-shrink: 0; }
+    #wind-range {
+        flex: 1; accent-color: var(--primary); cursor: pointer;
+    }
+    .pg-sway { animation: tree-sway 3s ease-in-out infinite; }
+
+    .showcase-card-info {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 14px 4px 4px;
+    }
+    .showcase-card-info h3 { font-size: 15px; color: #fff; font-weight: 600; }
+    .showcase-link {
+        font-size: 13px; color: var(--primary); text-decoration: none; flex-shrink: 0;
+    }
+    .showcase-link:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+        .showcase-section { padding: 48px 16px 24px; }
+        .showcase-grid { grid-template-columns: 1fr; }
+        .showcase-card-info { flex-direction: column; align-items: flex-start; gap: 4px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .pg-sway { animation: none !important; }
+    }
+</style>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Before/After comparison slider
+        var baRange = document.getElementById('ba-range');
+        var baAfter = document.getElementById('ba-after');
+        var baDivider = document.getElementById('ba-divider');
+        if (baRange && baAfter && baDivider) {
+            baRange.addEventListener('input', function () {
+                var v = baRange.value;
+                baAfter.style.clipPath = 'inset(0 0 0 ' + v + '%)';
+                baDivider.style.left = v + '%';
+            });
+        }
+
+        // Wind playground
+        var windRange = document.getElementById('wind-range');
+        var windLabel = document.getElementById('wind-label');
+        var sways = document.querySelectorAll('.pg-sway');
+        var LEVELS = [
+            { dur: '0s',   str: '0deg',  vi: 'Lặng gió', en: 'Calm',   color: '#888' },
+            { dur: '3s',   str: '2deg',  vi: 'Gió nhẹ',  en: 'Breeze', color: 'var(--green)' },
+            { dur: '1.5s', str: '6deg',  vi: 'Gió mạnh', en: 'Windy',  color: '#ffa726' },
+            { dur: '0.6s', str: '12deg', vi: 'Bão',      en: 'Storm',  color: '#e57373' }
+        ];
+        function applyWind(level) {
+            var l = LEVELS[level];
+            sways.forEach(function (el) {
+                if (level === 0) {
+                    el.style.animation = 'none';
+                } else {
+                    el.style.animation = '';
+                    el.style.animationDuration = l.dur;
+                    el.style.setProperty('--wind-strength', l.str);
+                }
+            });
+            if (windLabel) {
+                var lang = document.documentElement.lang === 'en' ? 'en' : 'vi';
+                windLabel.textContent = l[lang];
+                windLabel.style.color = l.color;
+            }
+        }
+        if (windRange) {
+            windRange.addEventListener('input', function () { applyWind(parseInt(windRange.value, 10)); });
+            applyWind(parseInt(windRange.value, 10));
+        }
+    });
+</script>
