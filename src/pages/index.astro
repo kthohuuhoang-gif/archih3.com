@@ -70,6 +70,27 @@ import Footer from '../components/Footer.astro';
                 <div class="mini-sim-box" id="hub-sim-mq1">
                     <div class="sim-viewport">
                                 <svg class="sim-svg" viewBox="0 0 200 112.5">
+                                    <defs>
+                                        <linearGradient id="hub-sky-grad" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stop-color="#0d1b2a"/><stop offset="100%" stop-color="#1b263b"/>
+                                        </linearGradient>
+                                        <linearGradient id="hub-wall-grad" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stop-color="#37474f"/><stop offset="100%" stop-color="#263238"/>
+                                        </linearGradient>
+                                        <linearGradient id="hub-window-glow" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stop-color="#ffd54f"/><stop offset="100%" stop-color="#ff8f00"/>
+                                        </linearGradient>
+                                        <linearGradient id="hub-light-spill" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="0%" stop-color="#ffd54f"/><stop offset="100%" stop-color="transparent"/>
+                                        </linearGradient>
+                                        <linearGradient id="hub-metal-grad" x1="0" y1="0" x2="1" y2="0">
+                                            <stop offset="0%" stop-color="#78909c"/><stop offset="50%" stop-color="#cfd8dc"/><stop offset="100%" stop-color="#546e7a"/>
+                                        </linearGradient>
+                                        <radialGradient id="hub-gold-sphere" cx="0.35" cy="0.3" r="0.9">
+                                            <stop offset="0%" stop-color="#ffe082"/><stop offset="55%" stop-color="#d69e2e"/><stop offset="100%" stop-color="#8d6e63"/>
+                                        </radialGradient>
+                                    </defs>
+                                    
                                     <!-- 1. Wireframe Sketch (Base) -->
                                     <g class="wf-lines"  style="transition: opacity 0.4s;">
                                         <!-- House Block -->
@@ -88,7 +109,7 @@ import Footer from '../components/Footer.astro';
                                     </g>
 
                                     <!-- 2. Flat Color Stage (Shading) -->
-                                    <g class="colored-view opacity-0 pointer-events-none"  style="transition: opacity 0.5s;">
+                                    <g class="colored-view pointer-events-none"  style="transition: opacity 0.5s;">
                                         <rect x="0" y="0" width="200" height="112.5" fill="#111" />
                                         <rect x="35" y="45" width="85" height="55" fill="#2d3748" />
                                         <rect x="45" y="60" width="65" height="40" fill="#319795" />
@@ -120,7 +141,7 @@ import Footer from '../components/Footer.astro';
                                         <!-- Gold Sphere -->
                                         <circle cx="155" cy="75" r="18" fill="url(#hub-gold-sphere)" />
                                     </g>
-                                    <line class="scan-line hidden" x1="0" y1="0" x2="0" y2="112.5" stroke="var(--primary)" stroke-width="1.5"   />
+                                    <line class="scan-line" x1="0" y1="0" x2="0" y2="112.5" stroke="var(--primary)" stroke-width="1.5"   />
                                     <clipPath id="hub-clip-1"><rect id="hub-clip-rect-1" x="0" y="0" width="0" height="112.5" /></clipPath>
                                 </svg>
                             
@@ -169,17 +190,17 @@ import Footer from '../components/Footer.astro';
                     <div class="sim-viewport">
                         <svg class="sim-svg" viewBox="0 0 200 120">
                                     <polygon points="120,95 120,65 150,45 180,65 180,95" fill="none" stroke="#666" stroke-width="1.5" />
-                                    <g class="house-interior opacity-0"  style="transition: opacity 0.5s;">
+                                    <g class="house-interior"  style="transition: opacity 0.5s;">
                                         <line x1="120" y1="75" x2="180" y2="75" stroke="var(--primary)" stroke-width="1" />
                                         <rect x="135" y="75" width="10" height="20" fill="none" stroke="var(--primary)" stroke-width="1" />
                                     </g>
-                                    <polygon class="camera-frustum opacity-0" points="50,60 110,35 110,85" fill="rgba(77,182,172,0.08)" stroke="var(--primary)" stroke-width="1" stroke-dasharray="2 2"   style="transition:opacity 0.3s;" />
+                                    <polygon class="camera-frustum" points="50,60 110,35 110,85" fill="rgba(77,182,172,0.08)" stroke="var(--primary)" stroke-width="1" stroke-dasharray="2 2"   style="transition:opacity 0.3s;" />
                                     <g class="mini-camera" stroke="var(--primary)" stroke-width="1.5" fill="none"  style="transition: all 0.5s;">
                                         <rect x="15" y="53" width="24" height="14" rx="2" />
                                         <polygon points="39,56 45,53 45,67 39,64" />
                                         <circle cx="27" cy="60" r="3" />
                                     </g>
-                                    <line class="clip-plane opacity-0" x1="150" y1="20" x2="150" y2="100" stroke="#e57373" stroke-dasharray="3 3" stroke-width="1.5"   style="transition:opacity 0.3s;" />
+                                    <line class="clip-plane" x1="150" y1="20" x2="150" y2="100" stroke="#e57373" stroke-dasharray="3 3" stroke-width="1.5"   style="transition:opacity 0.3s;" />
                                 </svg>
                     </div>
                 </div>
@@ -207,7 +228,7 @@ import Footer from '../components/Footer.astro';
                                     </g>
 
                                     <!-- 2. Flat Color Stage (Shading) -->
-                                    <g class="colored-view opacity-0 pointer-events-none"  style="transition: opacity 0.5s;">
+                                    <g class="colored-view pointer-events-none"  style="transition: opacity 0.5s;">
                                         <rect x="0" y="0" width="200" height="112.5" fill="#111" />
                                         <rect x="35" y="45" width="85" height="55" fill="#2d3748" />
                                         <rect x="45" y="60" width="65" height="40" fill="#319795" />
@@ -239,7 +260,7 @@ import Footer from '../components/Footer.astro';
                                         <!-- Gold Sphere -->
                                         <circle cx="155" cy="75" r="18" fill="url(#hub-gold-sphere)" />
                                     </g>
-                                    <line class="scan-line hidden" x1="0" y1="0" x2="0" y2="112.5" stroke="var(--primary)" stroke-width="1.5"   />
+                                    <line class="scan-line" x1="0" y1="0" x2="0" y2="112.5" stroke="var(--primary)" stroke-width="1.5"   />
                                     <clipPath id="hub-clip-2"><rect id="hub-clip-rect-2" x="0" y="0" width="0" height="112.5" /></clipPath>
                                 </svg>
                             
@@ -288,17 +309,17 @@ import Footer from '../components/Footer.astro';
                     <div class="sim-viewport">
                         <svg class="sim-svg" viewBox="0 0 200 120">
                                     <polygon points="120,95 120,65 150,45 180,65 180,95" fill="none" stroke="#666" stroke-width="1.5" />
-                                    <g class="house-interior opacity-0"  style="transition: opacity 0.5s;">
+                                    <g class="house-interior"  style="transition: opacity 0.5s;">
                                         <line x1="120" y1="75" x2="180" y2="75" stroke="var(--primary)" stroke-width="1" />
                                         <rect x="135" y="75" width="10" height="20" fill="none" stroke="var(--primary)" stroke-width="1" />
                                     </g>
-                                    <polygon class="camera-frustum opacity-0" points="50,60 110,35 110,85" fill="rgba(77,182,172,0.08)" stroke="var(--primary)" stroke-width="1" stroke-dasharray="2 2"   style="transition:opacity 0.3s;" />
+                                    <polygon class="camera-frustum" points="50,60 110,35 110,85" fill="rgba(77,182,172,0.08)" stroke="var(--primary)" stroke-width="1" stroke-dasharray="2 2"   style="transition:opacity 0.3s;" />
                                     <g class="mini-camera" stroke="var(--primary)" stroke-width="1.5" fill="none"  style="transition: all 0.5s;">
                                         <rect x="15" y="53" width="24" height="14" rx="2" />
                                         <polygon points="39,56 45,53 45,67 39,64" />
                                         <circle cx="27" cy="60" r="3" />
                                     </g>
-                                    <line class="clip-plane opacity-0" x1="150" y1="20" x2="150" y2="100" stroke="#e57373" stroke-dasharray="3 3" stroke-width="1.5"   style="transition:opacity 0.3s;" />
+                                    <line class="clip-plane" x1="150" y1="20" x2="150" y2="100" stroke="#e57373" stroke-dasharray="3 3" stroke-width="1.5"   style="transition:opacity 0.3s;" />
                                 </svg>
                     </div>
                 </div>

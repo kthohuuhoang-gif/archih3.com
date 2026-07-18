@@ -113,7 +113,7 @@ import Footer from '../components/Footer.astro';
                     </div>
                 </div>
                 
-                <div class="pl-ready" id="pl-ready">? MATERIAL ASSIGNED</div>
+                <div class="pl-ready" id="pl-ready">✔ MATERIAL ASSIGNED</div>
             </div>
         </div>
         <div class="steps-grid">
@@ -293,6 +293,7 @@ import Footer from '../components/Footer.astro';
 
 
         let animTimeout = null;
+        let plRunning = false;
 
         function resetAll() {
             if(animTimeout) clearTimeout(animTimeout);
@@ -351,7 +352,11 @@ import Footer from '../components/Footer.astro';
         function playStep1() {
             resetAll();
             document.getElementById('pl-step-1').classList.add('active');
-            
+
+            // keep the terminal alive while the drag animation plays
+            document.getElementById('pl-tab-console').classList.add('active');
+            document.getElementById('pl-view-console').style.display = 'block';
+
             const dragFile = document.getElementById('pl-drag-file');
             const cursor = document.getElementById('pl-cursor');
             const baseImg = document.querySelector('.pl-img');
@@ -408,7 +413,9 @@ import Footer from '../components/Footer.astro';
             
             document.getElementById('pl-tab-settings').classList.add('active');
             document.getElementById('pl-tab-console').classList.remove('active');
-            document.getElementById('pl-view-settings').style.display = 'block';
+            const settingsView = document.getElementById('pl-view-settings');
+            settingsView.classList.remove('hidden'); // .hidden is !important and beats style.display
+            settingsView.style.display = 'block';
             document.getElementById('pl-view-console').style.display = 'none';
             
             const sliderBright = document.getElementById('pl-slide-bright');
@@ -532,6 +539,7 @@ import Footer from '../components/Footer.astro';
                                 setTimeout(() => {
                                     box.classList.add('textured');
                                     btn.innerText = 'RESTART';
+                                    plRunning = false;
                                     btn.classList.remove('active');
                                     setTimeout(() => ready.style.opacity = '1', 300);
                                 }, 3000);
@@ -543,6 +551,8 @@ import Footer from '../components/Footer.astro';
         }
 
         function startPipeline() {
+            if (plRunning) return; // ignore clicks while the sequence is playing
+            plRunning = true;
             playStep1();
         }
         
@@ -957,7 +967,7 @@ import Footer from '../components/Footer.astro';
             opacity: 0; z-index: 100; pointer-events: none;
             display: flex; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
-        .pl-drag-file::before { content: '??'; font-size: 24px; }
+        .pl-drag-file::before { content: '🖼️'; font-size: 24px; }
         
         .pl-cursor {
             position: absolute; left: 200px; top: 380px; width: 24px; height: 24px;

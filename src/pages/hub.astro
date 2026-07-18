@@ -228,14 +228,14 @@ import Footer from '../components/Footer.astro';
                     </div>
                     
                     <div class="terminal-body" id="ai-terminal">
-                        <div><span class="prompt">You ></span> <span class="cmd" id="tw-cmd1" data-vi='Đổi tên tất cả Box thành "Wall_"' data-en='Rename all Boxes to "Wall_"'></span><span id="tw-cursor1" class="cursor">_</span></div>
+                        <div><span class="prompt">You ></span> <span class="cmd" id="tw-cmd1" data-lang-manual data-vi='Đổi tên tất cả Box thành "Wall_"' data-en='Rename all Boxes to "Wall_"'></span><span id="tw-cursor1" class="cursor">_</span></div>
                         <br>
                         <div class="tw-hidden"><span class="prompt">AH3 ></span> <span class="output" data-vi="Đang xử lý..." data-en="Processing...">Đang xử lý...</span></div>
                         <div class="tw-hidden"><span class="output" data-vi="  Tìm thấy 12 Box objects" data-en="  Found 12 Box objects">  Tìm thấy 12 Box objects</span></div>
                         <div class="tw-hidden"><span class="output" data-vi="  Đang rename..." data-en="  Renaming...">  Đang rename...</span></div>
                         <div class="tw-hidden"><span class="success" data-vi="  ✔ Đã đổi tên 12 objects thành công" data-en="  ✔ Successfully renamed 12 objects">  ✔ Đã đổi tên 12 objects thành công</span></div>
                         <br>
-                        <div class="tw-hidden" id="tw-step2"><span class="prompt">You ></span> <span class="cmd" id="tw-cmd2" data-vi="Tạo vật liệu gỗ cho tất cả" data-en="Create wood material for all">Tạo vật liệu gỗ cho tất cả</span><span id="tw-cursor2" class="cursor hidden" >_</span></div>
+                        <div class="tw-hidden" id="tw-step2"><span class="prompt">You ></span> <span class="cmd" id="tw-cmd2" data-lang-manual data-vi="Tạo vật liệu gỗ cho tất cả" data-en="Create wood material for all">Tạo vật liệu gỗ cho tất cả</span><span id="tw-cursor2" class="cursor hidden" >_</span></div>
                     </div>
                 </div>
                 <div class="spotlight-text">
@@ -636,14 +636,17 @@ import Footer from '../components/Footer.astro';
             if (n === currentSlide) return;
             slides[currentSlide].style.opacity = '0';
             slides[currentSlide].style.zIndex = '1';
-            dots[currentSlide].style.background = 'rgba(255,255,255,0.3)';
+            // dots are optional — the current markup renders none
+            if (dots[currentSlide]) dots[currentSlide].style.background = 'rgba(255,255,255,0.3)';
             currentSlide = n;
             slides[currentSlide].style.opacity = '1';
             slides[currentSlide].style.zIndex = '2';
-            dots[currentSlide].style.background = 'rgba(77,182,172,0.9)';
+            if (dots[currentSlide]) dots[currentSlide].style.background = 'rgba(77,182,172,0.9)';
         }
 
         setInterval(function() {
+            // the slideshow markup may be absent — bail out instead of crashing
+            if (slides.length < 2) return;
             goSlide((currentSlide + 1) % slides.length);
         }, 4000);
     </script>
@@ -657,8 +660,9 @@ import Footer from '../components/Footer.astro';
             if(terminal) {
                 const cmd1 = document.getElementById('tw-cmd1');
                 const cmd2 = document.getElementById('tw-cmd2');
-                const text1 = cmd1.getAttribute('data-vi');
-                const text2 = cmd2.getAttribute('data-vi');
+                const twLang = document.documentElement.lang === 'en' ? 'en' : 'vi';
+                const text1 = cmd1.getAttribute('data-' + twLang);
+                const text2 = cmd2.getAttribute('data-' + twLang);
                 const cursor1 = document.getElementById('tw-cursor1');
                 const cursor2 = document.getElementById('tw-cursor2');
                 

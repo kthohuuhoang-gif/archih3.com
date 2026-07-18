@@ -22,8 +22,9 @@ function applyLang(lang) {
         btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
     });
 
-    // Replace text content based on data-attributes
-    document.querySelectorAll('[data-' + lang + ']').forEach(function (el) {
+    // Replace text content based on data-attributes.
+    // [data-lang-manual] elements manage their own text (e.g. typewriter effects).
+    document.querySelectorAll('[data-' + lang + ']:not([data-lang-manual])').forEach(function (el) {
         var text = el.getAttribute('data-' + lang);
         if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
             el.placeholder = text;
