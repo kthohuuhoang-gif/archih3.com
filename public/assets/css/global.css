@@ -1184,6 +1184,74 @@ input, textarea { user-select: auto; -webkit-user-select: auto; }
 
     
 
+
+/* =========================================
+   MARQUEE MINI-SIM AMBIENT ANIMATIONS
+   Wireframe -> flat shading -> "neural render" reveal, looping.
+   Base states keep everything but the wireframe invisible so the
+   static frame (reduced motion / old browsers) stays clean.
+========================================= */
+.marquee-item .colored-view { opacity: 0; }
+.marquee-item .scan-line { opacity: 0; }
+.marquee-item .camera-frustum,
+.marquee-item .house-interior,
+.marquee-item .clip-plane { opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+    /* AH3 Hub: render pipeline loop */
+    .marquee-item .wf-lines { animation: mq-wf 10s linear infinite; }
+    .marquee-item .colored-view { animation: mq-colored 10s linear infinite; }
+    .marquee-item .rendered-view { animation: mq-rendered 10s linear infinite; }
+    .marquee-item .scan-line { animation: mq-scan 10s linear infinite; }
+    #hub-clip-rect-1, #hub-clip-rect-2 { animation: mq-clip 10s linear infinite; }
+
+    /* Magic Tree: stronger sway than the default breeze */
+    .marquee-item .mini-tree-wrapper { --wind-strength: 6deg; animation-duration: 2.4s; }
+
+    /* Magic Material: slow tumble of the textured box */
+    .marquee-item .mini-box { animation: mq-box-spin 12s linear infinite; }
+
+    /* Magic Camera: frustum / interior / clip plane pulse */
+    .marquee-item .camera-frustum { animation: mq-pulse 6s ease-in-out infinite; }
+    .marquee-item .house-interior { animation: mq-pulse 6s ease-in-out infinite 0.5s; }
+    .marquee-item .clip-plane { animation: mq-pulse 6s ease-in-out infinite 1s; }
+}
+
+@keyframes mq-wf {
+    0%, 20% { opacity: 1; }
+    30%, 88% { opacity: 0.25; }
+    100% { opacity: 1; }
+}
+@keyframes mq-colored {
+    0%, 20% { opacity: 0; }
+    30%, 85% { opacity: 1; }
+    95%, 100% { opacity: 0; }
+}
+@keyframes mq-rendered {
+    0%, 88% { opacity: 1; }
+    96%, 100% { opacity: 0; }
+}
+@keyframes mq-clip {
+    0%, 35% { width: 0px; }
+    60%, 97% { width: 200px; }
+    100% { width: 0px; }
+}
+@keyframes mq-scan {
+    0%, 35% { transform: translateX(0); opacity: 0; }
+    36% { opacity: 1; }
+    59% { opacity: 1; }
+    60%, 100% { transform: translateX(200px); opacity: 0; }
+}
+@keyframes mq-box-spin {
+    from { transform: rotateX(-20deg) rotateY(30deg); }
+    to { transform: rotateX(-20deg) rotateY(390deg); }
+}
+@keyframes mq-pulse {
+    0%, 12% { opacity: 0; }
+    35%, 70% { opacity: 1; }
+    92%, 100% { opacity: 0; }
+}
+
 /* =========================================
    UTILITY CLASSES (Auto-generated)
 ========================================= */

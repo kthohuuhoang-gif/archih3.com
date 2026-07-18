@@ -43,7 +43,7 @@ import Footer from '../components/Footer.astro';
 
                 <!-- Preview Box -->
                 <div class="pl-preview-box" id="pl-preview-box">
-                    <img src="https://img.youtube.com/vi/sfenH9d4h8I/maxresdefault.jpg" alt="Model Preview">
+                    <img src="/merger-preview.jpg" alt="Model Preview">
                 </div>
 
                 <!-- Shield Scan Box -->
@@ -275,6 +275,7 @@ import Footer from '../components/Footer.astro';
 
         // --- INTERACTIVE PIPELINE DEMO TIMELINE LOGIC ---
         let animTimeout;
+        let plRunning = false;
 
         function playStep1() {
             if (animTimeout) clearTimeout(animTimeout);
@@ -465,6 +466,7 @@ import Footer from '../components/Footer.astro';
                         setTimeout(() => {
                             ready.style.opacity = '1';
                             btn.innerText = 'RESTART';
+                            plRunning = false;
                             btn.classList.remove('active');
                         }, 500);
                     }
@@ -473,6 +475,8 @@ import Footer from '../components/Footer.astro';
         }
 
         function startPipeline() {
+            if (plRunning) return; // ignore clicks while the sequence is playing
+            plRunning = true;
             playStep1();
         }
 
