@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
+import Showcase from '../components/Showcase.astro';
 import Footer from '../components/Footer.astro';
 ---
 <Layout title="AH3 Tools — Plugin AI & Tự động hóa 3ds Max | ArchiH3" description="Bộ công cụ plugin 3ds Max chuyên nghiệp: AH3 Hub, Magic Material, Magic Merger, Magic Tree và hơn thế. Phát triển bởi HKD Dịch vụ Kiến Trúc ArchiH3." ogImage="/og/og-default.jpg">
@@ -25,8 +26,8 @@ import Footer from '../components/Footer.astro';
         <div class="orb-wrapper orb-wrapper-2" id="orb-w-2"><div class="orb orb-2"></div></div>
         <div class="hero-content" data-aos="zoom-in" data-aos-duration="1000">
             <div class="hero-badge" data-vi="AI & TỰ ĐỘNG HÓA KIẾN TRÚC" data-en="AI & ARCHITECTURE AUTOMATION">AI & TỰ ĐỘNG HÓA KIẾN TRÚC</div>
-            <h1 data-vi="Chào mừng tới <span class='teal'>AH3 Tools</span>" data-en="Welcome to <span class='teal'>AH3 Tools</span>">Chào mừng tới <span class='teal'>AH3 Tools</span></h1>
-            <p class="hero-sub" data-vi="Cổng thông tin và các sản phẩm plugin tối ưu quy trình thiết kế 3ds Max được phát triển bởi Kiến trúc sư Hồ Hữu Hoàng." data-en="Architecture design optimization plugins & tools for 3ds Max developed by Architect Ho Huu Hoang.">Cổng thông tin và các sản phẩm plugin tối ưu quy trình thiết kế 3ds Max được phát triển bởi Kiến trúc sư Hồ Hữu Hoàng.</p>
+            <h1 data-vi="Bạn thiết kế.<br><span class='teal'>AH3 lo phần còn lại.</span>" data-en="You design.<br><span class='teal'>AH3 does the rest.</span>">Bạn thiết kế.<br><span class='teal'>AH3 lo phần còn lại.</span></h1>
+            <p class="hero-sub" data-vi="Bộ plugin AI & tự động hóa cho 3ds Max — viết bởi một kiến trúc sư đang hành nghề, cho chính những việc lặp lại đang ăn mòn giờ thiết kế của bạn." data-en="AI & automation plugins for 3ds Max — built by a practicing architect, for the repetitive work that eats your design hours.">Bộ plugin AI & tự động hóa cho 3ds Max — viết bởi một kiến trúc sư đang hành nghề, cho chính những việc lặp lại đang ăn mòn giờ thiết kế của bạn.</p>
             <div class="hero-cta-group">
                 <div class="cta-wrapper relative"  style="display: inline-flex; margin-top: 0;">
                     <a href="#products" class="hero-cta-btn hero-cta-primary" data-vi="Khám phá bộ công cụ" data-en="Explore the toolkit">Khám phá bộ công cụ</a>
@@ -327,6 +328,9 @@ import Footer from '../components/Footer.astro';
         </div>
     </div>
 
+    <!-- INTERACTIVE PLAYGROUND -->
+    <Showcase />
+
     <!-- PRODUCTS GRID -->
     <section class="products-section" id="products">
         <!-- FLAGSHIP PRODUCTS -->
@@ -462,6 +466,69 @@ import Footer from '../components/Footer.astro';
                 if (orb1) orb1.style.transform = 'translate(0, 0)';
                 if (orb2) orb2.style.transform = 'translate(0, 0)';
             });
+        }
+
+        // --- MICRO-INTERACTIONS ---
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        // Count-up stats when the stats bar scrolls into view
+        var statEls = document.querySelectorAll('.stat-number');
+        if (statEls.length && 'IntersectionObserver' in window && !reduceMotion) {
+            var statObs = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    statObs.unobserve(entry.target);
+                    var el = entry.target;
+                    var m = el.textContent.trim().match(/^(\d+)(.*)$/);
+                    if (!m) return;
+                    var target = parseInt(m[1], 10);
+                    var suffix = m[2];
+                    var t0 = null;
+                    function tick(t) {
+                        if (!t0) t0 = t;
+                        var p = Math.min((t - t0) / 1200, 1);
+                        var eased = 1 - Math.pow(1 - p, 3);
+                        el.textContent = Math.round(target * eased) + suffix;
+                        if (p < 1) requestAnimationFrame(tick);
+                    }
+                    requestAnimationFrame(tick);
+                });
+            }, { threshold: 0.6 });
+            statEls.forEach(function (el) { statObs.observe(el); });
+        }
+
+        if (finePointer && !reduceMotion) {
+            // 3D tilt on product cards
+            document.querySelectorAll('.product-card').forEach(function (card) {
+                card.addEventListener('mousemove', function (e) {
+                    var r = card.getBoundingClientRect();
+                    var x = (e.clientX - r.left) / r.width - 0.5;
+                    var y = (e.clientY - r.top) / r.height - 0.5;
+                    card.style.transition = 'transform 0.08s linear';
+                    card.style.transform = 'perspective(700px) rotateY(' + (x * 8).toFixed(2) + 'deg) rotateX(' + (y * -8).toFixed(2) + 'deg)';
+                });
+                card.addEventListener('mouseleave', function () {
+                    card.style.transition = 'transform 0.4s ease-out';
+                    card.style.transform = 'perspective(700px) rotateY(0deg) rotateX(0deg)';
+                });
+            });
+
+            // Magnetic pull on the primary hero CTA
+            var magneticCta = document.querySelector('.hero-cta-primary');
+            if (magneticCta) {
+                magneticCta.addEventListener('mousemove', function (e) {
+                    var r = magneticCta.getBoundingClientRect();
+                    var dx = e.clientX - (r.left + r.width / 2);
+                    var dy = e.clientY - (r.top + r.height / 2);
+                    magneticCta.style.transform = 'translate(' + (dx * 0.18).toFixed(1) + 'px, ' + (dy * 0.3).toFixed(1) + 'px)';
+                });
+                magneticCta.addEventListener('mouseleave', function () {
+                    magneticCta.style.transition = 'transform 0.3s ease-out';
+                    magneticCta.style.transform = 'translate(0, 0)';
+                    setTimeout(function () { magneticCta.style.transition = ''; }, 300);
+                });
+            }
         }
 
         });
