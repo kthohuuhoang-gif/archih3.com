@@ -987,7 +987,9 @@ import Footer from '../components/Footer.astro';
         .step-item:hover { opacity: 0.8 !important; transform: translateY(-2px); }
 
         /* PIPELINE ANIMATION */
-        .pipeline-wrapper { width: 100%; display: flex; overflow: hidden; padding: 20px 0; }
+        /* justify-content:center keeps the fixed 900px demo centered when it
+           overflows small viewports, so the scaled-down copy stays on screen */
+        .pipeline-wrapper { width: 100%; display: flex; justify-content: center; overflow: hidden; padding: 20px 0; }
         .pipeline-demo {
             width: 900px; height: 450px; position: relative; flex-shrink: 0; min-width: 900px;
             background: #0a0a0a; border-radius: 12px;

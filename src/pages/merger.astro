@@ -888,7 +888,10 @@ import Footer from '../components/Footer.astro';
     
         /* PIPELINE DRAG & CURSOR & INTERACTIVE DETAILS */
         .pipeline-wrapper {
-            width: 100%; display: flex; margin-bottom: 40px;
+            /* justify-content:center keeps the fixed 900px demo centered when it
+               overflows small viewports, so the scaled-down copy stays on screen */
+            width: 100%; display: flex; justify-content: center; margin-bottom: 40px;
+            overflow: hidden;
         }
         .pipeline-demo {
             width: 900px; height: 450px; position: relative; flex-shrink: 0; min-width: 900px;
