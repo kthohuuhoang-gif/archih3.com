@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
-<Layout title="Magic Camera — Smart Camera Manager 3ds Max | ArchiH3" description="Plugin quản lý camera chuyên nghiệp. Composition guides, perspective correction, batch render. Sắp ra mắt.">
+<Layout title="Magic Camera — Smart Camera Manager 3ds Max | ArchiH3" description="Plugin quản lý camera chuyên nghiệp. Composition guides, perspective correction, batch render. Sắp ra mắt." ogImage="/og/og-camera.jpg">
 <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Magic Camera", "operatingSystem": "Windows", "applicationCategory": "DesignApplication", "applicationSubCategory": "3ds Max Plugin", "description": "Plugin quản lý camera chuyên nghiệp cho 3ds Max. Sắp ra mắt.", "url": "https://archih3.com/camera/", "image": "https://archih3.com/og/og-camera.jpg", "author": {"@type": "Person", "name": "Hồ Hữu Hoàng", "jobTitle": "Architect · 3ds Max Plugin Developer"}, "publisher": {"@type": "Organization", "name": "HKD Dịch vụ Kiến Trúc ArchiH3", "url": "https://archih3.com"}}</script>
 
 </Fragment>
 
@@ -97,7 +98,7 @@ import Footer from '../components/Footer.astro';
                     <li data-vi="Chụp nhanh và quản lý an toàn viewport" data-en="Batch viewport grabbing &amp; rendering">Chụp nhanh và quản lý an toàn viewport</li>
                     <li data-vi="Cập nhật miễn phí tính năng AI trợ lý bố cục" data-en="Free update to upcoming AI composition assistant">Cập nhật miễn phí tính năng AI trợ lý bố cục</li>
                 </ul>
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" onclick="alert('Hãy liên tục check web, ngày mở bán sẽ có giá 200k cho chỉ 3 ngày đầu tiên!');" class="btn-primary" data-vi="Liên hệ DEV qua Facebook" data-en="Contact DEV via Facebook">Liên hệ DEV qua Facebook</a>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-primary" data-vi="Liên hệ DEV qua Facebook" data-en="Contact DEV via Facebook">Liên hệ DEV qua Facebook</a>
             </div>
         </div>
     </section>
@@ -127,27 +128,6 @@ import Footer from '../components/Footer.astro';
     <Footer />
 
     <script is:inline>
-        let currentLang = 'vi';
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-            });
-            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = text;
-                } else {
-                    el.innerHTML = text;
-                }
-            });
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            setLang('vi');
-        });
     
         // Mobile navigation dropdown toggle
         document.addEventListener('DOMContentLoaded', () => {

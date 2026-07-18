@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
-<Layout title="Magic ReBake — Retopology & Bake Map 3ds Max | ArchiH3" description="Plugin tối ưu lưới Quad tự động và bake map vật liệu. Trải UV tự động, sửa biên mép, 1-Click pipeline.">
+<Layout title="Magic ReBake — Retopology & Bake Map 3ds Max | ArchiH3" description="Plugin tối ưu lưới Quad tự động và bake map vật liệu. Trải UV tự động, sửa biên mép, 1-Click pipeline." ogImage="/og/og-rebake.jpg">
 <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Magic ReBake", "operatingSystem": "Windows", "applicationCategory": "DesignApplication", "applicationSubCategory": "3ds Max Plugin", "description": "Plugin tối ưu lưới Quad tự động và bake map vật liệu. Trải UV tự động, 1-Click pipeline.", "url": "https://archih3.com/rebake/", "image": "https://archih3.com/og/og-rebake.jpg", "author": {"@type": "Person", "name": "Hồ Hữu Hoàng", "jobTitle": "Architect · 3ds Max Plugin Developer"}, "publisher": {"@type": "Organization", "name": "HKD Dịch vụ Kiến Trúc ArchiH3", "url": "https://archih3.com"}, "offers": {"@type": "Offer", "price": "200000", "priceCurrency": "VND", "availability": "https://schema.org/InStock", "url": "https://archih3.com/rebake/#pricing"}}</script>
 
 </Fragment>
 
@@ -196,27 +197,6 @@ import Footer from '../components/Footer.astro';
 
     <!-- LANGUAGE SWITCH & INTERACTIVE MOCKUP JS -->
         <script is:inline>
-        let currentLang = 'vi';
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-            });
-            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = text;
-                } else {
-                    el.innerHTML = text;
-                }
-            });
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            setLang('vi');
-        });
     
         // Mobile navigation dropdown toggle
         document.addEventListener('DOMContentLoaded', () => {

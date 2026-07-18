@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
-<Layout title="Magic Merger — Batch Import & Smart Relink 3ds Max | ArchiH3" description="Gộp file 3ds Max hàng loạt, tự động relink texture, hỗ trợ ZIP/RAR/7z. Plugin import model chuyên nghiệp.">
+<Layout title="Magic Merger — Batch Import & Smart Relink 3ds Max | ArchiH3" description="Gộp file 3ds Max hàng loạt, tự động relink texture, hỗ trợ ZIP/RAR/7z. Plugin import model chuyên nghiệp." ogImage="/og/og-merger.jpg">
 <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Magic Merger", "operatingSystem": "Windows", "applicationCategory": "DesignApplication", "applicationSubCategory": "3ds Max Plugin", "description": "Gộp file 3ds Max hàng loạt, tự động relink texture, hỗ trợ ZIP/RAR/7z.", "url": "https://archih3.com/merger/", "image": "https://archih3.com/og/og-merger.jpg", "author": {"@type": "Person", "name": "Hồ Hữu Hoàng", "jobTitle": "Architect · 3ds Max Plugin Developer"}, "publisher": {"@type": "Organization", "name": "HKD Dịch vụ Kiến Trúc ArchiH3", "url": "https://archih3.com"}, "offers": {"@type": "Offer", "price": "300000", "priceCurrency": "VND", "availability": "https://schema.org/InStock", "url": "https://archih3.com/merger/#pricing"}}</script>
 
 </Fragment>
 
@@ -23,7 +24,7 @@ import Footer from '../components/Footer.astro';
         <p class="hero-sub" data-vi="Plugin 3ds Max chuyên nghiệp để kéo thả file .max, file nén (.zip/.rar/.7z), thư mục hay ảnh preview vào scene. Tự động merge, tự động gán layer, tự động xếp lưới và smart-relink texture tức thì." data-en="Professional 3ds Max plugin to drag and drop .max files, compressed archives (.zip/.rar/.7z), folders, or preview images into your scene. Automatically merges, assigns layers, arranges in a grid, and relinks textures instantly.">Plugin 3ds Max chuyên nghiệp để kéo thả file .max, file nén (.zip/.rar/.7z), thư mục hay ảnh preview vào scene. Tự động merge, tự động gán layer, tự động xếp lưới và smart-relink texture tức thì.</p>
         <div class="hero-cta">
             <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 300k" data-en="Get Lifetime — $12">Mua bản quyền — 300k</a>
-            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" onclick="alert('Vui lòng liên hệ DEV qua Facebook để mua hoặc tải bộ cài bản quyền!');" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-outline" data-vi="Liên hệ mua qua Facebook" data-en="Buy via Facebook">Liên hệ mua qua Facebook</a>
         </div>
     </section>
 
@@ -271,27 +272,6 @@ import Footer from '../components/Footer.astro';
 
     <!-- LANGUAGE SWITCH & INTERACTIVE MOCKUP JS -->
         <script is:inline>
-        let currentLang = 'vi';
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-            });
-            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = text;
-                } else {
-                    el.innerHTML = text;
-                }
-            });
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            setLang('vi');
-        });
 
         // --- INTERACTIVE PIPELINE DEMO TIMELINE LOGIC ---
         let animTimeout;

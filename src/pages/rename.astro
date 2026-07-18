@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
-<Layout title="Magic Rename — Batch Rename & UE5 Pipeline | ArchiH3" description="Plugin đổi tên hàng loạt objects, materials, maps. Chuẩn hóa tài nguyên cho Unreal Engine 5. Miễn phí.">
+<Layout title="Magic Rename — Batch Rename & UE5 Pipeline | ArchiH3" description="Plugin đổi tên hàng loạt objects, materials, maps. Chuẩn hóa tài nguyên cho Unreal Engine 5. Miễn phí." ogImage="/og/og-rename.jpg">
 <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Magic Rename", "operatingSystem": "Windows", "applicationCategory": "DesignApplication", "applicationSubCategory": "3ds Max Plugin", "description": "Plugin đổi tên hàng loạt objects, materials, maps. Chuẩn hóa tài nguyên cho Unreal Engine 5. Miễn phí.", "url": "https://archih3.com/rename/", "image": "https://archih3.com/og/og-rename.jpg", "author": {"@type": "Person", "name": "Hồ Hữu Hoàng", "jobTitle": "Architect · 3ds Max Plugin Developer"}, "publisher": {"@type": "Organization", "name": "HKD Dịch vụ Kiến Trúc ArchiH3", "url": "https://archih3.com"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "VND", "availability": "https://schema.org/InStock", "url": "https://archih3.com/rename/#pricing"}}</script>
 
 </Fragment>
 
@@ -168,27 +169,6 @@ import Footer from '../components/Footer.astro';
 
     <!-- JS -->
         <script is:inline>
-        let currentLang = 'vi';
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-            });
-            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = text;
-                } else {
-                    el.innerHTML = text;
-                }
-            });
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            setLang('vi');
-        });
     
         // Mobile navigation dropdown toggle
         document.addEventListener('DOMContentLoaded', () => {

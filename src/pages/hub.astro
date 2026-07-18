@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
-<Layout title="AH3 Hub — Siêu ứng dụng AI cho 3ds Max | ArchiH3" description="Trung tâm AI tích hợp 3ds Max: Text-to-Image, Image-to-3D, Material Generator, Quick Render và 10+ công nghệ AI.">
+<Layout title="AH3 Hub — Siêu ứng dụng AI cho 3ds Max | ArchiH3" description="Trung tâm AI tích hợp 3ds Max: Text-to-Image, Image-to-3D, Material Generator, Quick Render và 10+ công nghệ AI." ogImage="/og/og-hub.jpg">
 <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "AH3 Hub", "operatingSystem": "Windows", "applicationCategory": "DesignApplication", "applicationSubCategory": "3ds Max Plugin", "description": "Trung tâm AI tích hợp 3ds Max: Text-to-Image, Image-to-3D, Material Generator, Quick Render.", "url": "https://archih3.com/hub/", "image": "https://archih3.com/og/og-hub.jpg", "author": {"@type": "Person", "name": "Hồ Hữu Hoàng", "jobTitle": "Architect · 3ds Max Plugin Developer"}, "publisher": {"@type": "Organization", "name": "HKD Dịch vụ Kiến Trúc ArchiH3", "url": "https://archih3.com"}, "offers": {"@type": "Offer", "price": "9999999", "priceCurrency": "VND", "availability": "https://schema.org/InStock", "url": "https://archih3.com/hub/#pricing", "description": "Thuê bao năm, bao gồm mọi chi phí"}}</script>
 
 </Fragment>
 
@@ -614,27 +615,6 @@ import Footer from '../components/Footer.astro';
 
     <!-- FOOTER -->
     <Footer />
-
-    <!-- LANGUAGE SWITCH -->
-    <script is:inline>
-        let currentLang = 'vi';
-        function setLang(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-            });
-            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = text;
-                } else {
-                    el.innerHTML = text;
-                }
-            });
-        }
-        window.addEventListener('DOMContentLoaded', () => setLang('vi'));
-    </script>
 
     <!-- SLIDESHOW -->
     <script is:inline>

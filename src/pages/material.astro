@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
-<Layout title="Magic Material — Tạo PBR Map tự động 1-Click | ArchiH3" description="Plugin tạo Normal, Roughness, AO, Displacement map từ ảnh diffuse. 100% offline, V-Ray & Corona.">
+<Layout title="Magic Material — Tạo PBR Map tự động 1-Click | ArchiH3" description="Plugin tạo Normal, Roughness, AO, Displacement map từ ảnh diffuse. 100% offline, V-Ray & Corona." ogImage="/og/og-material.jpg">
 <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Magic Material", "operatingSystem": "Windows", "applicationCategory": "DesignApplication", "applicationSubCategory": "3ds Max Plugin", "description": "Plugin tạo Normal, Roughness, AO, Displacement map từ ảnh diffuse. 100% offline, V-Ray & Corona.", "url": "https://archih3.com/material/", "image": "https://archih3.com/og/og-material.jpg", "author": {"@type": "Person", "name": "Hồ Hữu Hoàng", "jobTitle": "Architect · 3ds Max Plugin Developer"}, "publisher": {"@type": "Organization", "name": "HKD Dịch vụ Kiến Trúc ArchiH3", "url": "https://archih3.com"}, "offers": {"@type": "Offer", "price": "300000", "priceCurrency": "VND", "availability": "https://schema.org/InStock", "url": "https://archih3.com/material/#pricing"}}</script>
 
 </Fragment>
 
@@ -23,7 +24,7 @@ import Footer from '../components/Footer.astro';
         <p class="hero-sub" data-vi="Plugin chuyên biệt tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement) từ ảnh 2D và thiết lập vật liệu thông minh cho 3ds Max. Tương thích sâu với V-Ray và Corona, giúp bạn bỏ qua các bước dựng map thủ công nhàm chán." data-en="Specialized plugin to automatically generate a complete set of PBR maps (Normal, Displacement, Roughness, AO) and set up material networks in 3ds Max. Deeply integrated with V-Ray and Corona to eliminate tedious manual workflows.">Plugin chuyên biệt tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement) từ ảnh 2D và thiết lập vật liệu thông minh cho 3ds Max. Tương thích sâu với V-Ray và Corona, giúp bạn bỏ qua các bước dựng map thủ công nhàm chán.</p>
         <div class="hero-cta">
             <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 300k" data-en="Get Lifetime — $12">Mua bản quyền — 300k</a>
-            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" onclick="alert('Vui lòng liên hệ DEV qua Facebook để mua hoặc tải bộ cài bản quyền!');" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-outline" data-vi="Liên hệ mua qua Facebook" data-en="Buy via Facebook">Liên hệ mua qua Facebook</a>
         </div>
     </section>
 
@@ -290,27 +291,6 @@ import Footer from '../components/Footer.astro';
     <!-- LANGUAGE SWITCH, PIPELINE & INTERACTIVE MOCKUP JS -->
     <script is:inline>
 
-        let currentLang = 'vi';
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-            });
-            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = text;
-                } else {
-                    el.innerHTML = text;
-                }
-            });
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            setLang('vi');
-        });
 
         let animTimeout = null;
 

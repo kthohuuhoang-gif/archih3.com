@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
-<Layout title="Magic Tree — Mô phỏng gió cây cỏ 3ds Max | ArchiH3" description="Plugin mô phỏng gió vật lý 4 lớp cho cây cỏ. Hỗ trợ Maxtree, Globe Plants, Cosmos. Corona & V-Ray proxy.">
+<Layout title="Magic Tree — Mô phỏng gió cây cỏ 3ds Max | ArchiH3" description="Plugin mô phỏng gió vật lý 4 lớp cho cây cỏ. Hỗ trợ Maxtree, Globe Plants, Cosmos. Corona & V-Ray proxy." ogImage="/og/og-tree.jpg">
 <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Magic Tree", "operatingSystem": "Windows", "applicationCategory": "DesignApplication", "applicationSubCategory": "3ds Max Plugin", "description": "Plugin mô phỏng gió vật lý 4 lớp cho cây cỏ. Hỗ trợ Maxtree, Globe Plants, Cosmos.", "url": "https://archih3.com/tree/", "image": "https://archih3.com/og/og-tree.jpg", "author": {"@type": "Person", "name": "Hồ Hữu Hoàng", "jobTitle": "Architect · 3ds Max Plugin Developer"}, "publisher": {"@type": "Organization", "name": "HKD Dịch vụ Kiến Trúc ArchiH3", "url": "https://archih3.com"}, "offers": {"@type": "Offer", "price": "450000", "priceCurrency": "VND", "availability": "https://schema.org/InStock", "url": "https://archih3.com/tree/#pricing"}}</script>
 
 </Fragment>
 
@@ -23,7 +24,7 @@ import Footer from '../components/Footer.astro';
         <p class="hero-sub" data-vi="Plugin chuyên biệt tạo chuyển động gió 4 lớp chân thực và tự động hóa tối ưu cho cây cối trong 3ds Max. Tương thích sâu với Corona/V-Ray Proxy, loại bỏ hoàn toàn lag giật viewport." data-en="Specialized plugin to generate realistic 4-layer wind simulations and automatic optimizations for 3ds Max vegetation. Deeply integrated with Corona/V-Ray proxies to completely eliminate viewport lag.">Plugin chuyên biệt tạo chuyển động gió 4 lớp chân thực và tự động hóa tối ưu cho cây cối trong 3ds Max. Tương thích sâu với Corona/V-Ray Proxy, loại bỏ hoàn toàn lag giật viewport.</p>
         <div class="hero-cta">
             <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 450k" data-en="Get Pro Lifetime — $17">Mua bản quyền — 450k</a>
-            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" onclick="alert('Vui lòng liên hệ DEV qua Facebook để mua hoặc tải bộ cài bản quyền!');" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-outline" data-vi="Liên hệ mua qua Facebook" data-en="Buy via Facebook">Liên hệ mua qua Facebook</a>
         </div>
     </section>
 
@@ -325,27 +326,6 @@ import Footer from '../components/Footer.astro';
 
     <!-- LANGUAGE SWITCH & WIND CHART JS -->
         <script is:inline>
-        let currentLang = 'vi';
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-            });
-            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = text;
-                } else {
-                    el.innerHTML = text;
-                }
-            });
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            setLang('vi');
-        });
     </script>
 
     
