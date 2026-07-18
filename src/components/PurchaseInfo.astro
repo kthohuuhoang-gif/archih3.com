@@ -1,0 +1,116 @@
+---
+// PurchaseInfo.astro — shared "how to buy & license policy" section for paid plugins.
+---
+<section id="purchase" class="purchase-section">
+    <div class="purchase-label" data-vi="MUA HÀNG & BẢN QUYỀN" data-en="PURCHASE & LICENSE">MUA HÀNG & BẢN QUYỀN</div>
+    <h2 class="purchase-title" data-vi="Cách mua và chính sách bản quyền" data-en="How to buy & license policy">Cách mua và chính sách bản quyền</h2>
+
+    <div class="purchase-grid">
+        <div class="purchase-card">
+            <h3 data-vi="3 bước mua hàng" data-en="3 steps to purchase">3 bước mua hàng</h3>
+            <ol class="purchase-steps">
+                <li data-vi="Nhắn tin Facebook hoặc gửi email cho tác giả, ghi rõ tên plugin cần mua." data-en="Message the author on Facebook or by email with the plugin name you want.">Nhắn tin Facebook hoặc gửi email cho tác giả, ghi rõ tên plugin cần mua.</li>
+                <li data-vi="Thanh toán chuyển khoản theo hướng dẫn nhận được." data-en="Pay by bank transfer following the instructions you receive.">Thanh toán chuyển khoản theo hướng dẫn nhận được.</li>
+                <li data-vi="Nhận bộ cài và key kích hoạt qua Facebook / Email." data-en="Receive the installer and activation key via Facebook / Email.">Nhận bộ cài và key kích hoạt qua Facebook / Email.</li>
+            </ol>
+            <div class="purchase-cta">
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="purchase-btn" data-vi="Nhắn Facebook" data-en="Message on Facebook">Nhắn Facebook</a>
+                <a href="mailto:hohuuhoang@archih3.com" class="purchase-btn outline">Email</a>
+            </div>
+        </div>
+        <div class="purchase-card">
+            <h3 data-vi="Chính sách bản quyền" data-en="License policy">Chính sách bản quyền</h3>
+            <ul class="purchase-policy">
+                <li data-vi="License trọn đời, kích hoạt và gắn với 1 máy tính theo mã phần cứng (HWID)." data-en="Lifetime license, activated and bound to one computer via its hardware ID (HWID).">License trọn đời, kích hoạt và gắn với 1 máy tính theo mã phần cứng (HWID).</li>
+                <li data-vi="Key không hỗ trợ đổi máy miễn phí — khi cần chuyển sang máy mới, vui lòng liên hệ tác giả để được hỗ trợ (có phí)." data-en="Keys cannot be moved to a new machine for free — contact the author for paid transfer support.">Key không hỗ trợ đổi máy miễn phí — khi cần chuyển sang máy mới, vui lòng liên hệ tác giả để được hỗ trợ (có phí).</li>
+                <li data-vi="Cập nhật phiên bản mới miễn phí trọn đời." data-en="Free updates for life.">Cập nhật phiên bản mới miễn phí trọn đời.</li>
+                <li data-vi="Hỗ trợ kỹ thuật trực tiếp từ tác giả qua Facebook / Email." data-en="Direct technical support from the author via Facebook / Email.">Hỗ trợ kỹ thuật trực tiếp từ tác giả qua Facebook / Email.</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<style>
+    .purchase-section {
+        padding: 72px 24px;
+        text-align: center;
+        background: var(--bg-page);
+    }
+    .purchase-label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 13px;
+        letter-spacing: 2px;
+        color: var(--primary);
+        margin-bottom: 12px;
+    }
+    .purchase-title {
+        font-size: clamp(24px, 4vw, 34px);
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 40px;
+    }
+    .purchase-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: left;
+    }
+    .purchase-card {
+        background: var(--bg-main);
+        border: 1px solid rgba(77, 182, 172, 0.15);
+        border-radius: 12px;
+        padding: 28px;
+    }
+    .purchase-card h3 {
+        font-size: 17px;
+        color: var(--primary);
+        margin-bottom: 16px;
+    }
+    .purchase-steps { padding-left: 20px; }
+    .purchase-steps li,
+    .purchase-policy li {
+        font-size: 14px;
+        color: var(--text-secondary);
+        line-height: 1.7;
+        margin-bottom: 10px;
+    }
+    .purchase-policy {
+        list-style: none;
+        padding: 0;
+    }
+    .purchase-policy li {
+        padding-left: 22px;
+        position: relative;
+    }
+    .purchase-policy li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+    }
+    .purchase-cta { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+    .purchase-btn {
+        display: inline-block;
+        padding: 10px 22px;
+        background: var(--primary);
+        color: #121212;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+    .purchase-btn:hover { background: var(--primary-hover); }
+    .purchase-btn.outline {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border);
+    }
+    .purchase-btn.outline:hover { border-color: var(--primary); color: var(--primary); }
+    @media (max-width: 768px) {
+        .purchase-grid { grid-template-columns: 1fr; }
+        .purchase-section { padding: 48px 20px; }
+    }
+</style>

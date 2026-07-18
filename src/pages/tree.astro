@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import PurchaseInfo from '../components/PurchaseInfo.astro';
 ---
 <Layout title="Magic Tree — Mô phỏng gió cây cỏ 3ds Max | ArchiH3" description="Plugin mô phỏng gió vật lý 4 lớp cho cây cỏ. Hỗ trợ Maxtree, Globe Plants, Cosmos. Corona & V-Ray proxy." ogImage="/og/og-tree.jpg">
 <Fragment slot="head">
@@ -298,6 +299,8 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- FAQ -->
+    <PurchaseInfo />
+
     <section id="faq"  class="bg-surface">
         <div class="section-label">FAQ</div>
         <h2 class="section-title" data-vi="Giải đáp thắc mắc kỹ thuật" data-en="Technical Frequently Asked Questions">Giải đáp thắc mắc kỹ thuật</h2>

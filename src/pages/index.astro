@@ -29,7 +29,7 @@ import Footer from '../components/Footer.astro';
             <p class="hero-sub" data-vi="Cổng thông tin và các sản phẩm plugin tối ưu quy trình thiết kế 3ds Max được phát triển bởi Kiến trúc sư Hồ Hữu Hoàng." data-en="Architecture design optimization plugins & tools for 3ds Max developed by Architect Ho Huu Hoang.">Cổng thông tin và các sản phẩm plugin tối ưu quy trình thiết kế 3ds Max được phát triển bởi Kiến trúc sư Hồ Hữu Hoàng.</p>
             <div class="hero-cta-group">
                 <div class="cta-wrapper relative"  style="display: inline-flex; margin-top: 0;">
-                    <a href="#products" class="hero-cta-btn hero-cta-primary" data-vi="Trải Nghiệm Hệ Sinh Thái" data-en="Explore Now">Trải Nghiệm Hệ Sinh Thái</a>
+                    <a href="#products" class="hero-cta-btn hero-cta-primary" data-vi="Khám phá bộ công cụ" data-en="Explore the toolkit">Khám phá bộ công cụ</a>
                     <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
                 </div>
                 <a href="https://www.youtube.com/@ArchiH3" target="_blank" rel="noopener" class="hero-cta-btn hero-cta-secondary" data-vi="Xem Demo" data-en="▶ Watch Video"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg> Xem Demo</a>
@@ -45,7 +45,7 @@ import Footer from '../components/Footer.astro';
         </div>
         <div class="stat-divider"></div>
         <div class="stat-item">
-            <span class="stat-number" data-vi="500+" data-en="500+">500+</span>
+            <span class="stat-number" data-vi="100+" data-en="100+">100+</span>
             <span class="stat-label" data-vi="Kiến trúc sư tin dùng" data-en="Architects trust us">Kiến trúc sư tin dùng</span>
         </div>
         <div class="stat-divider"></div>
@@ -362,7 +362,7 @@ import Footer from '../components/Footer.astro';
                 <div class="product-meta">
                     <div class="product-header">
                         <div class="product-icon"><img src="/magictree_icon_48.png" alt="Magic Tree" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
-                        <span class="product-badge" data-vi="THƯƠNG MẠI" data-en="COMMERCIAL" style="background: rgba(102, 187, 106, 0.15); color: var(--green); border: 1px solid rgba(102, 187, 106, 0.3);">THƯƠNG MẠI</span>
+                        <span class="product-badge" data-vi="BÁN CHẠY" data-en="BEST SELLER" style="background: rgba(102, 187, 106, 0.15); color: var(--green); border: 1px solid rgba(102, 187, 106, 0.3);">BÁN CHẠY</span>
                     </div>
                     <h3 class="product-title">Magic Tree</h3>
                     <p class="product-desc" data-vi="Tạo cây xanh động với vật lý gió khí động học. Tối ưu viewport proxy giảm 80% VRAM." data-en="Dynamic vegetation with aerodynamic wind physics. 80% VRAM reduction via viewport proxy.">Tạo cây xanh động với vật lý gió khí động học. Tối ưu viewport proxy giảm 80% VRAM.</p>
@@ -377,7 +377,7 @@ import Footer from '../components/Footer.astro';
             <h3 class="pill-subtitle" data-vi="Thêm công cụ" data-en="More tools">Thêm công cụ</h3>
             <div class="pill-row">
                 <a href="/rebake" class="pill-link">⚡ Magic ReBake</a>
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="pill-link">✂️ Magic Slice <span class='pill-note'>FREE</span></a>
+                <a href="/Download%20Free/AH3_Magic_Slice_v1.2.2.mzp" download class="pill-link">✂️ Magic Slice <span class='pill-note'>FREE</span></a>
                 <a href="/rename" class="pill-link">🏷️ Magic Rename <span class='pill-note'>FREE</span></a>
                 <a href="/Download%20Free/Reset3dsMax.exe" download class="pill-link">🔄 Magic Reset <span class='pill-note'>FREE</span></a>
                 <a href="/Download%20Free/AH3_Magic_CAD_v1.0.5.mzp" download class="pill-link">📐 Magic CAD <span class='pill-note'>FREE</span></a>
@@ -390,7 +390,7 @@ import Footer from '../components/Footer.astro';
             <h3 class="pill-subtitle" data-vi="Sắp ra mắt" data-en="Coming Soon">Sắp ra mắt</h3>
             <div class="pill-row" style="gap: 8px;">
                 <span class="soon-chip">🔍 Magic Search</span>
-                <span class="soon-chip">📷 Magic Camera</span>
+                <a href="/camera" class="soon-chip" style="text-decoration: none;">📷 Magic Camera</a>
                 <span class="soon-chip" style="background: rgba(41, 182, 246, 0.08); border-color: rgba(41, 182, 246, 0.15); color: #29b6f6;">🌧️ Magic Rain</span>
                 <span class="soon-chip">🌊 Magic Ripple</span>
                 <span class="soon-chip" style="background: rgba(236, 64, 122, 0.08); border-color: rgba(236, 64, 122, 0.15); color: #ec407a;">💨 Magic Curtain</span>
@@ -406,7 +406,7 @@ import Footer from '../components/Footer.astro';
             <div class="about-avatar">H</div>
             <h3 class="about-name">Hồ Hữu Hoàng</h3>
             <p class="about-role">Architect · 3ds Max Plugin Developer</p>
-            <p class="about-bio" data-vi="Tôi là kiến trúc sư và tôi dùng 3ds Max hàng ngày. Vì quá bực bội với các công việc lặp đi lặp lại nhàm chán, tôi bắt đầu tự học lập trình và viết công cụ cho chính mình. AH3 Portal là nơi tôi chia sẻ các plugin này với hy vọng giúp quy trình thiết kế của bạn nhanh hơn, mượt mà hơn." data-en="I am an architect and I use 3ds Max daily. Annoyed by repetitive tasks, I self-taught programming to build solutions. AH3 Portal is where I share these plugins, hoping to speed up and smooth out your architectural workflow.">Tôi là kiến trúc sư và tôi dùng 3ds Max hàng ngày. Vì quá bực bội với các công việc lặp đi lặp lại nhàm chán, tôi bắt đầu tự học lập trình và viết công cụ cho chính mình. AH3 Portal là nơi tôi chia sẻ các plugin này với hy vọng giúp quy trình thiết kế của bạn nhanh hơn, mượt mà hơn.</p>
+            <p class="about-bio" data-vi="Tôi là kiến trúc sư và tôi dùng 3ds Max hàng ngày. Vì quá bực bội với các công việc lặp đi lặp lại nhàm chán, tôi bắt đầu tự học lập trình và viết công cụ cho chính mình. AH3 Tools là nơi tôi chia sẻ các plugin này với hy vọng giúp quy trình thiết kế của bạn nhanh hơn, mượt mà hơn." data-en="I am an architect and I use 3ds Max daily. Annoyed by repetitive tasks, I self-taught programming to build solutions. AH3 Tools is where I share these plugins, hoping to speed up and smooth out your architectural workflow.">Tôi là kiến trúc sư và tôi dùng 3ds Max hàng ngày. Vì quá bực bội với các công việc lặp đi lặp lại nhàm chán, tôi bắt đầu tự học lập trình và viết công cụ cho chính mình. AH3 Tools là nơi tôi chia sẻ các plugin này với hy vọng giúp quy trình thiết kế của bạn nhanh hơn, mượt mà hơn.</p>
             <div class="social-links">
                 <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener">Facebook</a>
                 <a href="https://youtube.com/@ArchiH3" target="_blank" rel="noopener">YouTube</a>
