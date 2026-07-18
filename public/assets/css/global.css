@@ -22,6 +22,7 @@
     --bg-light: #3a3a3a;
     --primary: #4db6ac;
     --primary-hover: #5ec4ba;
+    --primary-light: #80cbc4;
     --primary-glow: rgba(77, 182, 172, 0.15);
     --primary-glow-strong: rgba(77, 182, 172, 0.3);
     --text: #e0e0e0;
@@ -1652,6 +1653,28 @@ section { padding: 100px 24px; }
     .marquee-item { scroll-snap-align: center; }
     /* the duplicated loop copy is pointless when scrolling by hand */
     .marquee-item[aria-hidden="true"] { display: none; }
+}
+
+
+/* =========================================
+   SHARED SECTION HEADERS
+   (product pages rely on these; hub keeps its
+   scoped variant which wins by specificity)
+========================================= */
+.section-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: var(--primary); letter-spacing: 2px;
+    text-transform: uppercase; margin-bottom: 12px;
+    text-align: center;
+}
+.section-title {
+    font-size: clamp(28px, 4vw, 44px); font-weight: 700;
+    letter-spacing: -1px; margin-bottom: 16px; text-align: center;
+}
+.section-desc {
+    font-size: 16px; color: var(--text-secondary);
+    max-width: 600px; font-weight: 300; margin: 0 auto 60px;
+    text-align: center;
 }
 
 /* =========================================

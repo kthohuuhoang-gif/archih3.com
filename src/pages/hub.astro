@@ -258,7 +258,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
                     </ul>
                 </div>
 
-                <div class="spotlight-visual"  style="border-radius:12px; overflow:hidden;">
+                <div class="spotlight-visual" >
                     <img src="/i23d.jpg" alt="Image-to-3D Demo" loading="lazy"  class="w-full block" style="border-radius:12px;">
                 </div>
             </div>
@@ -269,7 +269,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
     <section id="t2i-i2i-spotlight"  class="bg-surface">
         <div class="spotlight">
             <div class="spotlight-grid spotlight-grid-3-2">
-                <div class="spotlight-visual relative"  style="border-radius:12px; overflow:hidden;">
+                <div class="spotlight-visual relative" >
                     
                     <div class="before-after-container relative w-full" id="ba-slider"  style="aspect-ratio:16/9; overflow:hidden; border-radius:12px; cursor: ew-resize;">
                         <img src="/demo t-i2i B2.jpg" alt="After"  class="w-full absolute pointer-events-none" style="height:100%; object-fit:cover; top:0; left:0;">
@@ -320,7 +320,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
                     </ul>
                 </div>
 
-                <div class="spotlight-visual"  style="border-radius:12px; overflow:hidden;">
+                <div class="spotlight-visual" >
                     <img src="/demo i2a.jpg" alt="I2A Visual Search Demo" loading="lazy"  class="w-full block" style="border-radius:12px;">
                 </div>
             </div>
@@ -331,7 +331,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
     <section id="quick-render"  class="bg-surface">
         <div class="spotlight">
             <div class="spotlight-grid">
-                <div class="spotlight-visual"  style="border-radius:12px; overflow:hidden;">
+                <div class="spotlight-visual" >
                     <img src="/demo quick render.jpg" alt="Quick Render Demo" loading="lazy"  class="w-full block" style="border-radius:12px 12px 0 0;">
                     <!-- Video demo embed (compact, aspect 16:9) -->
                     <div id="qr-video"  class="relative" style="background:#000; aspect-ratio:16/9; border-top:1px solid rgba(85,85,85,0.4);">
@@ -385,10 +385,10 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
     </section>
 
     <!-- MATERIAL SPOTLIGHT -->
-    <section id="material-spotlight"  class="bg-surface">
+    <section id="material-spotlight">
         <div class="spotlight">
             <div class="spotlight-grid">
-                <div class="spotlight-visual"  style="border-radius:12px; overflow:hidden;">
+                <div class="spotlight-visual" >
                     <img src="/demo i2 material.jpg" alt="Material Generator Demo" loading="lazy"  class="w-full block" style="border-radius:12px;">
                 </div>
 
@@ -409,7 +409,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
     </section>
 
     <!-- AUTHOR -->
-    <section id="author">
+    <section id="author" class="bg-surface">
         <div class="about-section">
             <div class="section-label">AUTHOR</div>
             <h2 class="section-title" data-vi="Đằng sau AH3 Hub" data-en="Behind AH3 Hub">Đằng sau AH3 Hub</h2>
@@ -459,17 +459,17 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
 
             <div class="req-grid-cards"  style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
                 <!-- Minimum card -->
-                <div  style="background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4); border-radius: 12px; padding: 32px;">
+                <div class="hub-card hub-card-lg">
                     <div  class="flex items-center mb-4" style="gap:10px;">
                         <span  class="text-muted" style="font-size:11px; padding:4px 12px; border-radius:12px; background:rgba(85,85,85,0.3); font-family:'JetBrains Mono', monospace; letter-spacing:0.5px;">MIN</span>
                         <h3  data-vi="Tối thiểu" data-en="Minimum" class="font-semibold" style="font-size:18px;">Tối thiểu</h3>
                     </div>
                     <ul  class="p-0" style="list-style:none; margin:0;">
-                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="GPU NVIDIA 8 GB+ VRAM (RTX 3060 / 4060)" data-en="NVIDIA GPU 8 GB+ VRAM (RTX 3060 / 4060)">GPU NVIDIA 8 GB+ VRAM (RTX 3060 / 4060)</span></li>
-                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="RAM 16 GB+" data-en="16 GB+ RAM">RAM 16 GB+</span></li>
-                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="3ds Max 2023-2027+" data-en="3ds Max 2023-2027+">3ds Max 2023-2027+</span></li>
-                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="Windows 10 (64-bit)" data-en="Windows 10 (64-bit)">Windows 10 (64-bit)</span></li>
-                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="Internet (cho AI cloud)" data-en="Internet (for AI cloud)">Internet (cho AI cloud)</span></li>
+                        <li  class="text-muted flex spec-row"><span  class="text-primary">✓</span><span data-vi="GPU NVIDIA 8 GB+ VRAM (RTX 3060 / 4060)" data-en="NVIDIA GPU 8 GB+ VRAM (RTX 3060 / 4060)">GPU NVIDIA 8 GB+ VRAM (RTX 3060 / 4060)</span></li>
+                        <li  class="text-muted flex spec-row"><span  class="text-primary">✓</span><span data-vi="RAM 16 GB+" data-en="16 GB+ RAM">RAM 16 GB+</span></li>
+                        <li  class="text-muted flex spec-row"><span  class="text-primary">✓</span><span data-vi="3ds Max 2023-2027+" data-en="3ds Max 2023-2027+">3ds Max 2023-2027+</span></li>
+                        <li  class="text-muted flex spec-row"><span  class="text-primary">✓</span><span data-vi="Windows 10 (64-bit)" data-en="Windows 10 (64-bit)">Windows 10 (64-bit)</span></li>
+                        <li  class="text-muted flex spec-row"><span  class="text-primary">✓</span><span data-vi="Internet (cho AI cloud)" data-en="Internet (for AI cloud)">Internet (cho AI cloud)</span></li>
                     </ul>
                 </div>
 
@@ -481,11 +481,11 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
                         <h3  data-vi="Khuyến nghị" data-en="Recommended" class="font-semibold" style="font-size:18px;">Khuyến nghị</h3>
                     </div>
                     <ul  class="p-0" style="list-style:none; margin:0;">
-                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="GPU NVIDIA 12 GB VRAM (RTX 3080 / 4070)" data-en="NVIDIA GPU 12 GB VRAM (RTX 3080 / 4070)">GPU NVIDIA 12 GB VRAM (RTX 3080 / 4070)</span></li>
-                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="RAM 32 GB" data-en="32 GB RAM">RAM 32 GB</span></li>
-                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="3ds Max 2024+ (hiệu năng tốt nhất)" data-en="3ds Max 2024+ (best performance)">3ds Max 2024+ (hiệu năng tốt nhất)</span></li>
-                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="Windows 11 (64-bit)" data-en="Windows 11 (64-bit)">Windows 11 (64-bit)</span></li>
-                        <li  class="text-muted flex" style="padding:8px 0; font-size:15px; gap:10px;"><span  class="text-primary">✓</span><span data-vi="Internet ổn định" data-en="Stable internet">Internet ổn định</span></li>
+                        <li  class="text-muted flex spec-row"><span  class="text-primary">✓</span><span data-vi="GPU NVIDIA 12 GB VRAM (RTX 3080 / 4070)" data-en="NVIDIA GPU 12 GB VRAM (RTX 3080 / 4070)">GPU NVIDIA 12 GB VRAM (RTX 3080 / 4070)</span></li>
+                        <li  class="text-muted flex spec-row"><span  class="text-primary">✓</span><span data-vi="RAM 32 GB" data-en="32 GB RAM">RAM 32 GB</span></li>
+                        <li  class="text-muted flex spec-row"><span  class="text-primary">✓</span><span data-vi="3ds Max 2024+ (hiệu năng tốt nhất)" data-en="3ds Max 2024+ (best performance)">3ds Max 2024+ (hiệu năng tốt nhất)</span></li>
+                        <li  class="text-muted flex spec-row"><span  class="text-primary">✓</span><span data-vi="Windows 11 (64-bit)" data-en="Windows 11 (64-bit)">Windows 11 (64-bit)</span></li>
+                        <li  class="text-muted flex spec-row"><span  class="text-primary">✓</span><span data-vi="Internet ổn định" data-en="Stable internet">Internet ổn định</span></li>
                     </ul>
                 </div>
             </div>
@@ -557,39 +557,39 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
 
             <div  style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap:20px;">
                 <!-- Q1 -->
-                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3  data-vi="GPU yếu (4 GB) có chạy được không?" data-en="Will it run on weaker GPU (4 GB)?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;">GPU yếu (4 GB) có chạy được không?</h3>
-                    <p  data-vi="Có. AH3 Hub vẫn cài và chạy bình thường. Module non-AI (YouTube, Games, Tools, Chat) hoạt động đầy đủ. Tính năng AI cục bộ cần GPU 8 GB+ VRAM — bạn có thể dùng cloud features ở Pro tier thay thế." data-en="Yes. AH3 Hub installs and runs fine. Non-AI modules (YouTube, Games, Tools, Chat) work fully. Local AI features need 8 GB+ VRAM — use cloud features in Pro tier as alternative." class="text-muted font-light" style="font-size:14px; line-height:1.7;">Có. AH3 Hub vẫn cài và chạy bình thường. Module non-AI (YouTube, Games, Tools, Chat) hoạt động đầy đủ. Tính năng AI cục bộ cần GPU 8 GB+ VRAM — bạn có thể dùng cloud features ở Pro tier thay thế.</p>
+                <div class="hub-card">
+                    <h3  data-vi="GPU yếu (4 GB) có chạy được không?" data-en="Will it run on weaker GPU (4 GB)?" class="font-semibold text-primary">GPU yếu (4 GB) có chạy được không?</h3>
+                    <p  data-vi="Có. AH3 Hub vẫn cài và chạy bình thường. Module non-AI (YouTube, Games, Tools, Chat) hoạt động đầy đủ. Tính năng AI cục bộ cần GPU 8 GB+ VRAM — bạn có thể dùng cloud features ở Pro tier thay thế." data-en="Yes. AH3 Hub installs and runs fine. Non-AI modules (YouTube, Games, Tools, Chat) work fully. Local AI features need 8 GB+ VRAM — use cloud features in Pro tier as alternative." class="text-muted font-light">Có. AH3 Hub vẫn cài và chạy bình thường. Module non-AI (YouTube, Games, Tools, Chat) hoạt động đầy đủ. Tính năng AI cục bộ cần GPU 8 GB+ VRAM — bạn có thể dùng cloud features ở Pro tier thay thế.</p>
                 </div>
 
                 <!-- Q2 -->
-                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3  data-vi="Có cần internet để dùng AI không?" data-en="Do I need internet for AI?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;">Có cần internet để dùng AI không?</h3>
-                    <p  data-vi="Không bắt buộc. AI cục bộ chạy hoàn toàn offline trên máy bạn. Internet chỉ cần khi tải AI model lần đầu (~5-15 GB tùy tier) và khi dùng cloud features ở Pro tier." data-en="Not required. Local AI runs fully offline on your machine. Internet is only needed for initial model download (~5-15 GB depending on tier) and Pro cloud features." class="text-muted font-light" style="font-size:14px; line-height:1.7;">Không bắt buộc. AI cục bộ chạy hoàn toàn offline trên máy bạn. Internet chỉ cần khi tải AI model lần đầu (~5-15 GB tùy tier) và khi dùng cloud features ở Pro tier.</p>
+                <div class="hub-card">
+                    <h3  data-vi="Có cần internet để dùng AI không?" data-en="Do I need internet for AI?" class="font-semibold text-primary">Có cần internet để dùng AI không?</h3>
+                    <p  data-vi="Không bắt buộc. AI cục bộ chạy hoàn toàn offline trên máy bạn. Internet chỉ cần khi tải AI model lần đầu (~5-15 GB tùy tier) và khi dùng cloud features ở Pro tier." data-en="Not required. Local AI runs fully offline on your machine. Internet is only needed for initial model download (~5-15 GB depending on tier) and Pro cloud features." class="text-muted font-light">Không bắt buộc. AI cục bộ chạy hoàn toàn offline trên máy bạn. Internet chỉ cần khi tải AI model lần đầu (~5-15 GB tùy tier) và khi dùng cloud features ở Pro tier.</p>
                 </div>
 
                 <!-- Q3 -->
-                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3  data-vi="Pro hủy được không? Có hoàn tiền?" data-en="Can I cancel Pro? Refund?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;">Pro hủy được không? Có hoàn tiền?</h3>
-                    <p  data-vi="Có. Hủy bất cứ lúc nào — Pro vẫn dùng đến hết chu kỳ thanh toán. Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro nào." data-en="Yes. Cancel anytime — Pro stays active until end of billing cycle. 100% refund within 7 days if no Pro feature has been used." class="text-muted font-light" style="font-size:14px; line-height:1.7;">Có. Hủy bất cứ lúc nào — Pro vẫn dùng đến hết chu kỳ thanh toán. Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro nào.</p>
+                <div class="hub-card">
+                    <h3  data-vi="Pro hủy được không? Có hoàn tiền?" data-en="Can I cancel Pro? Refund?" class="font-semibold text-primary">Pro hủy được không? Có hoàn tiền?</h3>
+                    <p  data-vi="Có. Hủy bất cứ lúc nào — Pro vẫn dùng đến hết chu kỳ thanh toán. Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro nào." data-en="Yes. Cancel anytime — Pro stays active until end of billing cycle. 100% refund within 7 days if no Pro feature has been used." class="text-muted font-light">Có. Hủy bất cứ lúc nào — Pro vẫn dùng đến hết chu kỳ thanh toán. Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro nào.</p>
                 </div>
 
                 <!-- Q6 -->
-                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3  data-vi="Output AI có vi phạm bản quyền không?" data-en="Does AI output infringe copyright?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;">Output AI có vi phạm bản quyền không?</h3>
-                    <p  data-vi="Output thuộc về bạn theo điều khoản model. Tuy nhiên bạn có trách nhiệm rà soát kết quả trước khi sử dụng — AI có thể vô tình tạo nội dung tương tự bản quyền hiện có. Khuyến nghị review trước khi publish." data-en="Output belongs to you per model terms. However, you are responsible for reviewing results before use — AI may inadvertently produce content similar to existing copyrighted works. Review before publishing is recommended." class="text-muted font-light" style="font-size:14px; line-height:1.7;">Output thuộc về bạn theo điều khoản model. Tuy nhiên bạn có trách nhiệm rà soát kết quả trước khi sử dụng — AI có thể vô tình tạo nội dung tương tự bản quyền hiện có. Khuyến nghị review trước khi publish.</p>
+                <div class="hub-card">
+                    <h3  data-vi="Output AI có vi phạm bản quyền không?" data-en="Does AI output infringe copyright?" class="font-semibold text-primary">Output AI có vi phạm bản quyền không?</h3>
+                    <p  data-vi="Output thuộc về bạn theo điều khoản model. Tuy nhiên bạn có trách nhiệm rà soát kết quả trước khi sử dụng — AI có thể vô tình tạo nội dung tương tự bản quyền hiện có. Khuyến nghị review trước khi publish." data-en="Output belongs to you per model terms. However, you are responsible for reviewing results before use — AI may inadvertently produce content similar to existing copyrighted works. Review before publishing is recommended." class="text-muted font-light">Output thuộc về bạn theo điều khoản model. Tuy nhiên bạn có trách nhiệm rà soát kết quả trước khi sử dụng — AI có thể vô tình tạo nội dung tương tự bản quyền hiện có. Khuyến nghị review trước khi publish.</p>
                 </div>
 
                 <!-- Q7 -->
-                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3  data-vi="Update version mới có mất data không?" data-en="Will updates erase my data?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;">Update version mới có mất data không?</h3>
-                    <p  data-vi="Không. Hub có hệ thống auto-update không xóa data người dùng. Settings, prompt history, cache, license đều giữ nguyên qua các bản update." data-en="No. Hub's auto-update system never erases user data. Settings, prompt history, cache, license all persist across updates." class="text-muted font-light" style="font-size:14px; line-height:1.7;">Không. Hub có hệ thống auto-update không xóa data người dùng. Settings, prompt history, cache, license đều giữ nguyên qua các bản update.</p>
+                <div class="hub-card">
+                    <h3  data-vi="Update version mới có mất data không?" data-en="Will updates erase my data?" class="font-semibold text-primary">Update version mới có mất data không?</h3>
+                    <p  data-vi="Không. Hub có hệ thống auto-update không xóa data người dùng. Settings, prompt history, cache, license đều giữ nguyên qua các bản update." data-en="No. Hub's auto-update system never erases user data. Settings, prompt history, cache, license all persist across updates." class="text-muted font-light">Không. Hub có hệ thống auto-update không xóa data người dùng. Settings, prompt history, cache, license đều giữ nguyên qua các bản update.</p>
                 </div>
 
                 <!-- Q8 -->
-                <div  style="background:var(--bg-main); border:1px solid rgba(85,85,85,0.4); border-radius:12px; padding:24px;">
-                    <h3  data-vi="Hỗ trợ Hệ điều hành & Render Engine nào?" data-en="Which OS & Render Engines supported?" class="font-semibold text-primary" style="font-size:16px; margin-bottom:10px;">Hỗ trợ Hệ điều hành & Render Engine nào?</h3>
-                    <p  data-vi="Chỉ hỗ trợ Windows 10/11 (do 3ds Max không chạy trên Mac). Tương thích hoàn toàn với Corona Renderer và V-Ray cho 3ds Max 2023-2027+." data-en="Windows 10/11 only (3ds Max doesn't run on Mac). Fully compatible with Corona Renderer and V-Ray for 3ds Max 2023-2027+." class="text-muted font-light" style="font-size:14px; line-height:1.7;">Chỉ hỗ trợ Windows 10/11 (do 3ds Max không chạy trên Mac). Tương thích hoàn toàn với Corona Renderer và V-Ray cho 3ds Max 2023-2027+.</p>
+                <div class="hub-card">
+                    <h3  data-vi="Hỗ trợ Hệ điều hành & Render Engine nào?" data-en="Which OS & Render Engines supported?" class="font-semibold text-primary">Hỗ trợ Hệ điều hành & Render Engine nào?</h3>
+                    <p  data-vi="Chỉ hỗ trợ Windows 10/11 (do 3ds Max không chạy trên Mac). Tương thích hoàn toàn với Corona Renderer và V-Ray cho 3ds Max 2023-2027+." data-en="Windows 10/11 only (3ds Max doesn't run on Mac). Fully compatible with Corona Renderer and V-Ray for 3ds Max 2023-2027+." class="text-muted font-light">Chỉ hỗ trợ Windows 10/11 (do 3ds Max không chạy trên Mac). Tương thích hoàn toàn với Corona Renderer và V-Ray cho 3ds Max 2023-2027+.</p>
                 </div>
             </div>
 
@@ -801,43 +801,9 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
 
 <style>
 
-        :root {
-            --bg-dark: #323232;
-            --bg-main: #3c3c3c;
-            --bg-light: #5a5a5a;
-            --bg-surface: #2a2a2a;
-            --bg-page: #1e1e1e;
-            --primary: #4db6ac;
-            --primary-hover: #5ec4ba;
-            --primary-light: #80cbc4;
-            --primary-glow: rgba(77, 182, 172, 0.15);
-            --primary-glow-strong: rgba(77, 182, 172, 0.3);
-            --text: #e0e0e0;
-            --text-secondary: #a0a0a0;
-            --text-muted: #707070;
-            --border: #555555;
-            --destructive: #6a5050;
-            --warning: #b48232;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html {
-            scroll-behavior: smooth;
-            /* FIX (2026-05-17): scroll-padding-top compensate fixed nav (~58px desktop, ~50px mobile).
-               Anchor links jump cách top viewport 80px, để section title không bị che.
-               Best practice: dùng scroll-padding-top trên html (root scroll container), gọn hơn
-               scroll-margin-top trên từng section. (CSS-Tricks, getpublii 2025) */
-            scroll-padding-top: 80px;
-        }
         /* FIX (2026-05-17): Đảm bảo section có id (anchor targets) cũng có scroll-margin-top
            riêng (fallback cho browser không support scroll-padding-top). */
         section[id] { scroll-margin-top: 80px; }
-        body {
-            font-family: 'Outfit', sans-serif;
-            background: var(--bg-page);
-            color: var(--text);
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
 
         
         .nav-links .btn-primary { color: #1a1a1a; }
@@ -951,7 +917,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         }
 
         /* SECTIONS */
-        section { padding: 100px 24px; }
+        section { padding: 80px 24px; }
         .section-label {
             font-family: 'JetBrains Mono', monospace; font-size: 12px;
             color: var(--primary); letter-spacing: 2px;
@@ -1012,6 +978,16 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
             display: grid; grid-template-columns: 1fr 1fr;
             gap: 60px; align-items: center;
         }
+        /* Cards & rows extracted from repeated inline styles */
+        .hub-card {
+            background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4);
+            border-radius: 12px; padding: 24px;
+        }
+        .hub-card-lg { padding: 32px; }
+        .hub-card h3 { font-size: 16px; margin-bottom: 10px; }
+        .hub-card p { font-size: 14px; line-height: 1.7; }
+        .spec-row { padding: 8px 0; font-size: 15px; gap: 10px; }
+
         .spotlight-visual {
             background: var(--bg-main); border: 1px solid var(--border);
             border-radius: 12px; overflow: hidden;
