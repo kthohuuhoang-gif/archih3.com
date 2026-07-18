@@ -8,8 +8,6 @@ import Footer from '../components/Footer.astro';
 
 </Fragment>
 
-    <!-- AOS CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 
     <div class="bg-glow"></div>
@@ -32,7 +30,7 @@ import Footer from '../components/Footer.astro';
                     <a href="#products" class="hero-cta-btn hero-cta-primary" data-vi="Trải Nghiệm Hệ Sinh Thái" data-en="Explore Now">Trải Nghiệm Hệ Sinh Thái</a>
                     <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
                 </div>
-                <a href="https://www.youtube.com/@ArchiH3" target="_blank" class="hero-cta-btn hero-cta-secondary" data-vi="Xem Demo" data-en="▶ Watch Video"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg> Xem Demo</a>
+                <a href="https://www.youtube.com/@ArchiH3" target="_blank" rel="noopener" class="hero-cta-btn hero-cta-secondary" data-vi="Xem Demo" data-en="▶ Watch Video"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg> Xem Demo</a>
             </div>
         </div>
     </section>
@@ -184,9 +182,9 @@ import Footer from '../components/Footer.astro';
                     </div>
                 </div>
             </a>
-            <a href="/hub" class="marquee-item">
+            <a href="/hub" class="marquee-item" aria-hidden="true" tabindex="-1">
                 <div class="marquee-title">AH3 Hub<span class="detail-link-btn">Xem chi tiết</span></div>
-                <div class="mini-sim-box" id="hub-sim-mq1">
+                <div class="mini-sim-box" id="hub-sim-mq2">
                     <div class="sim-viewport">
                                 <svg class="sim-svg" viewBox="0 0 200 112.5">
                                     <!-- 1. Wireframe Sketch (Base) -->
@@ -217,7 +215,7 @@ import Footer from '../components/Footer.astro';
                                     </g>
 
                                     <!-- 3. Final Neural Render (ClipPath controlled) -->
-                                    <g class="rendered-view pointer-events-none" clip-path="url(#hub-clip-1)" >
+                                    <g class="rendered-view pointer-events-none" clip-path="url(#hub-clip-2)" >
                                         <!-- Sky -->
                                         <rect x="0" y="0" width="200" height="112.5" fill="url(#hub-sky-grad)" />
                                         <!-- Distant stars -->
@@ -240,15 +238,15 @@ import Footer from '../components/Footer.astro';
                                         <circle cx="155" cy="75" r="18" fill="url(#hub-gold-sphere)" />
                                     </g>
                                     <line class="scan-line hidden" x1="0" y1="0" x2="0" y2="112.5" stroke="var(--primary)" stroke-width="1.5"   />
-                                    <clipPath id="hub-clip-1"><rect id="hub-clip-rect-1" x="0" y="0" width="0" height="112.5" /></clipPath>
+                                    <clipPath id="hub-clip-2"><rect id="hub-clip-rect-2" x="0" y="0" width="0" height="112.5" /></clipPath>
                                 </svg>
                             
                     </div>
                 </div>
             </a>
-            <a href="/tree" class="marquee-item">
+            <a href="/tree" class="marquee-item" aria-hidden="true" tabindex="-1">
                 <div class="marquee-title">Magic Tree<span class="detail-link-btn">Xem chi tiết</span></div>
-                <div class="mini-sim-box" id="tree-sim-mq1">
+                <div class="mini-sim-box" id="tree-sim-mq2">
                     <div class="sim-viewport">
                         <svg class="sim-svg" viewBox="0 0 200 120">
                                     <g class="mini-tree-wrapper"  style="transform-origin: 100px 110px; --wind-factor: 1;">
@@ -261,9 +259,9 @@ import Footer from '../components/Footer.astro';
                     </div>
                 </div>
             </a>
-            <a href="/material" class="marquee-item">
+            <a href="/material" class="marquee-item" aria-hidden="true" tabindex="-1">
                 <div class="marquee-title">Magic Material<span class="detail-link-btn">Xem chi tiết</span></div>
-                <div class="mini-sim-box" id="material-sim-mq1">
+                <div class="mini-sim-box" id="material-sim-mq2">
                     <div class="sim-viewport">
                         <div  class="flex justify-center items-center" style="gap:20px; height: 100%;">
                                   <div class="mini-file">diffuse</div>
@@ -272,7 +270,7 @@ import Footer from '../components/Footer.astro';
                                       <div class="mini-map-tile rgh">RGH</div>
                                   </div>
                                   <div class="mini-scene"  style="perspective:400px;">
-                                      <div class="mini-box" id="min-box-element-mq1">
+                                      <div class="mini-box" id="min-box-element-mq2">
                                           <div class="mini-face f-front"></div>
                                           <div class="mini-face f-top"></div>
                                           <div class="mini-face f-right"></div>
@@ -282,9 +280,9 @@ import Footer from '../components/Footer.astro';
                     </div>
                 </div>
             </a>
-            <a href="/camera" class="marquee-item">
+            <a href="/camera" class="marquee-item" aria-hidden="true" tabindex="-1">
                 <div class="marquee-title">Magic Camera<span class="detail-link-btn">Xem chi tiết</span></div>
-                <div class="mini-sim-box" id="camera-sim-mq1">
+                <div class="mini-sim-box" id="camera-sim-mq2">
                     <div class="sim-viewport">
                         <svg class="sim-svg" viewBox="0 0 200 120">
                                     <polygon points="120,95 120,65 150,45 180,65 180,95" fill="none" stroke="#666" stroke-width="1.5" />
@@ -340,7 +338,7 @@ import Footer from '../components/Footer.astro';
             <div class="product-card" data-aos="fade-up" style="--glow-color: rgba(102, 187, 106, 0.15); --hover-border: var(--green);">
                 <div class="product-meta">
                     <div class="product-header">
-                        <div class="product-icon"><img src="/magicsree_icon_48.png" alt="Magic Tree" onerror="this.src='magictree_icon_48.png'" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
+                        <div class="product-icon"><img src="/magictree_icon_48.png" alt="Magic Tree" style="width:32px; height:32px; object-fit:contain; opacity:0.9;"></div>
                         <span class="product-badge" data-vi="THƯƠNG MẠI" data-en="COMMERCIAL" style="background: rgba(102, 187, 106, 0.15); color: var(--green); border: 1px solid rgba(102, 187, 106, 0.3);">THƯƠNG MẠI</span>
                     </div>
                     <h3 class="product-title">Magic Tree</h3>
@@ -356,10 +354,10 @@ import Footer from '../components/Footer.astro';
             <h3 style="font-size: 14px; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; font-family: 'JetBrains Mono', monospace; margin-bottom: 20px;" data-vi="Thêm công cụ" data-en="More tools">Thêm công cụ</h3>
             <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
                 <a href="/rebake" style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">⚡ Magic ReBake</a>
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">✂️ Magic Slice <span style='font-size:10px; opacity:0.6;'>FREE</span></a>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">✂️ Magic Slice <span style='font-size:10px; opacity:0.6;'>FREE</span></a>
                 <a href="/rename" style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">🏷️ Magic Rename <span style='font-size:10px; opacity:0.6;'>FREE</span></a>
-                <a href="Download%20Free/Reset3dsMax.exe" download style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">🔄 Magic Reset <span style='font-size:10px; opacity:0.6;'>FREE</span></a>
-                <a href="Download%20Free/AH3_Magic_CAD_v1.0.5.mzp" download style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">📐 Magic CAD <span style='font-size:10px; opacity:0.6;'>FREE</span></a>
+                <a href="/Download%20Free/Reset3dsMax.exe" download style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">🔄 Magic Reset <span style='font-size:10px; opacity:0.6;'>FREE</span></a>
+                <a href="/Download%20Free/AH3_Magic_CAD_v1.0.5.mzp" download style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">📐 Magic CAD <span style='font-size:10px; opacity:0.6;'>FREE</span></a>
                 <a href="/hub" style="padding: 8px 20px; background: rgba(77, 182, 172, 0.06); border: 1px solid rgba(77, 182, 172, 0.15); border-radius: 24px; font-size: 13px; color: var(--text-secondary); font-family: 'Outfit', sans-serif; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)';this.style.color='var(--primary)'" onmouseout="this.style.borderColor='rgba(77,182,172,0.15)';this.style.color='var(--text-secondary)'">🧰 AH3 Hub <span style='font-size:10px; opacity:0.6;' data-vi='đang nâng cấp v2' data-en='upgrading to v2'>đang nâng cấp v2</span></a>
             </div>
         </div>
@@ -376,7 +374,7 @@ import Footer from '../components/Footer.astro';
                 <span style="padding: 6px 16px; background: rgba(171, 71, 188, 0.08); border: 1px solid rgba(171, 71, 188, 0.15); border-radius: 20px; font-size: 12px; color: #ab47bc;">🚶 Magic Anima</span>
                 <span style="padding: 6px 16px; background: rgba(255, 167, 38, 0.08); border: 1px solid rgba(255, 167, 38, 0.15); border-radius: 20px; font-size: 12px; color: #ffa726;">🐈 Magic Cat</span>
             </div>
-            <a href="https://youtube.com/@ArchiH3" target="_blank" style="display: inline-block; margin-top: 16px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 2px;" data-vi="Theo dõi YouTube để cập nhật →" data-en="Follow YouTube for updates →">Theo dõi YouTube để cập nhật →</a>
+            <a href="https://youtube.com/@ArchiH3" target="_blank" rel="noopener" style="display: inline-block; margin-top: 16px; font-size: 12px; color: var(--text-muted); text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 2px;" data-vi="Theo dõi YouTube để cập nhật →" data-en="Follow YouTube for updates →">Theo dõi YouTube để cập nhật →</a>
         </div>
     </section>
     <!-- AUTHOR -->
@@ -387,8 +385,8 @@ import Footer from '../components/Footer.astro';
             <p class="about-role">Architect · 3ds Max Plugin Developer</p>
             <p class="about-bio" data-vi="Tôi là kiến trúc sư và tôi dùng 3ds Max hàng ngày. Vì quá bực bội với các công việc lặp đi lặp lại nhàm chán, tôi bắt đầu tự học lập trình và viết công cụ cho chính mình. AH3 Portal là nơi tôi chia sẻ các plugin này với hy vọng giúp quy trình thiết kế của bạn nhanh hơn, mượt mà hơn." data-en="I am an architect and I use 3ds Max daily. Annoyed by repetitive tasks, I self-taught programming to build solutions. AH3 Portal is where I share these plugins, hoping to speed up and smooth out your architectural workflow.">Tôi là kiến trúc sư và tôi dùng 3ds Max hàng ngày. Vì quá bực bội với các công việc lặp đi lặp lại nhàm chán, tôi bắt đầu tự học lập trình và viết công cụ cho chính mình. AH3 Portal là nơi tôi chia sẻ các plugin này với hy vọng giúp quy trình thiết kế của bạn nhanh hơn, mượt mà hơn.</p>
             <div class="social-links">
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank">Facebook</a>
-                <a href="https://youtube.com/@ArchiH3" target="_blank">YouTube</a>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener">Facebook</a>
+                <a href="https://youtube.com/@ArchiH3" target="_blank" rel="noopener">YouTube</a>
                 <a href="mailto:hohuuhoang@archih3.com">Email</a>
             </div>
         </div>
@@ -403,23 +401,6 @@ import Footer from '../components/Footer.astro';
     
     <script is:inline>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            if (typeof AOS !== 'undefined') {
-                AOS.init({
-                    duration: 800,
-                    once: true,
-                    offset: 100
-                });
-            } else {
-                console.warn("AOS library failed to load. Fallback to making elements visible.");
-                document.querySelectorAll('[data-aos]').forEach(el => {
-                    el.style.opacity = '1';
-                    el.style.transform = 'none';
-                });
-            }
-    
-        
-        
             // Fix Anchor Scrolling on file:// protocol for Chrome/Brave
             const exploreBtn = document.querySelector('a[href="#products"]');
             if (exploreBtn) {
@@ -462,340 +443,7 @@ import Footer from '../components/Footer.astro';
 
         });
     </script>
-<script is:inline>
 
-        // --- MINI SIMULATIONS LOGIC ---
-        function runHubSim(btn) {
-            if (btn.classList.contains('active')) return;
-            btn.classList.add('active');
-            const originalText = btn.innerHTML;
-            
-            const box = btn.closest('.mini-sim-box');
-            const scanLine = box.querySelector('.scan-line');
-            const clipRect = box.querySelector('clipPath rect');
-            const wfLines = box.querySelector('.wf-lines');
-            const coloredView = box.querySelector('.colored-view');
-            
-            // Step 1: Wireframe Sketching
-            btn.innerHTML = 'SKETCHING WIREFRAME...';
-            btn.style.background = 'rgba(77, 182, 172, 0.15)';
-            
-            // Step 2: Shading Flat Colors
-            setTimeout(() => {
-                btn.innerHTML = 'SHADING FLAT COLORS...';
-                if (coloredView) coloredView.style.opacity = '1';
-                if (wfLines) wfLines.style.opacity = '0.3';
-            }, 800);
-            
-            // Step 3: Neural AI Rendering
-            setTimeout(() => {
-                btn.innerHTML = 'NEURAL RENDERING...';
-                btn.style.background = '';
-                
-                if (scanLine) {
-                    scanLine.style.display = 'block';
-                    scanLine.style.transition = 'transform 2s linear';
-                    setTimeout(() => scanLine.style.transform = 'translateX(200px)', 50);
-                }
-                if (clipRect) {
-                    clipRect.style.transition = 'width 2s linear';
-                    setTimeout(() => clipRect.setAttribute('width', '200'), 50);
-                }
-            }, 1600);
-            
-            // Step 4: Render Complete
-            setTimeout(() => {
-                btn.innerHTML = 'RENDER SUCCESSFUL';
-                btn.style.background = 'var(--primary)';
-                btn.style.color = '#111';
-                
-                // Keep it on screen for 3 seconds then reset
-                setTimeout(() => {
-                    btn.classList.remove('active');
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                    btn.style.color = '';
-                    
-                    if (coloredView) coloredView.style.opacity = '0';
-                    if (wfLines) wfLines.style.opacity = '1';
-                    
-                    if (scanLine) {
-                        scanLine.style.transition = 'none';
-                        scanLine.style.transform = 'translateX(0)';
-                        scanLine.style.display = 'none';
-                    }
-                    if (clipRect) {
-                        clipRect.style.transition = 'none';
-                        clipRect.setAttribute('width', '0');
-                    }
-                }, 3000);
-            }, 3650);
-        }
-
-        function adjustTreeWind(slider) {
-            const box = slider.closest('.mini-sim-box');
-            const label = box.querySelector('.wind-label');
-            const val = parseInt(slider.value);
-            
-            let speed = '0s';
-            let strength = '0deg';
-            let text = 'None';
-            let color = '#888';
-            
-            if (val === 1) {
-                speed = '3s';
-                strength = '2deg';
-                text = 'Breeze';
-                color = 'var(--green)';
-            } else if (val === 2) {
-                speed = '1.5s';
-                strength = '6deg';
-                text = 'Windy';
-                color = '#ffa726';
-            } else if (val === 3) {
-                speed = '0.6s';
-                strength = '12deg';
-                text = 'Storm';
-                color = '#e57373';
-            }
-            
-            const wrapper = box.querySelector('.mini-tree-wrapper');
-            if (wrapper) {
-                if (val === 0) {
-                    wrapper.style.animation = 'none';
-                } else {
-                    wrapper.style.animation = `tree-sway ${speed} ease-in-out infinite`;
-                    wrapper.style.setProperty('--wind-strength', strength);
-                }
-            }
-            if (label) {
-                label.innerHTML = text;
-                label.style.color = color;
-            }
-        }
-
-        function runMaterialSim(btn) {
-            if (btn.classList.contains('active')) return;
-            btn.classList.add('active');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = 'GENERATING PBR...';
-            const box = btn.closest('.mini-sim-box');
-            const file = box.querySelector('.mini-file');
-            const grid = box.querySelector('.mini-maps-grid');
-            const scene = box.querySelector('.mini-scene');
-            const box3d = box.querySelector('.mini-box');
-            
-            if (file) file.style.opacity = '0.3';
-            
-            setTimeout(() => {
-                btn.innerHTML = 'NORMAL MAP...';
-                if (grid) grid.style.display = 'grid';
-            }, 800);
-            
-            setTimeout(() => {
-                btn.innerHTML = 'DISPLACEMENT...';
-                if (scene) scene.style.transform = 'scale(1.2)';
-            }, 1600);
-            
-            setTimeout(() => {
-                btn.innerHTML = 'PBR COMPLETE';
-                btn.style.background = 'var(--primary)';
-                btn.style.color = '#111';
-                if (box3d) {
-                    box3d.style.transform = 'rotateX(-20deg) rotateY(210deg)';
-                }
-                setTimeout(() => {
-                    btn.classList.remove('active');
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                    btn.style.color = '';
-                    if (file) file.style.opacity = '1';
-                    if (grid) grid.style.display = 'none';
-                    if (scene) scene.style.transform = '';
-                    if (box3d) box3d.style.transform = 'rotateX(-20deg) rotateY(30deg)';
-                }, 3000);
-            }, 2400);
-        }
-
-        function runMergerSim(btn) {
-            if (btn.classList.contains('active')) return;
-            btn.classList.add('active');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = 'MERGING...';
-            const box = btn.closest('.mini-sim-box');
-            const assets = box.querySelector('.merger-assets');
-            const group = box.querySelector('.merger-group');
-            
-            if (assets) assets.style.opacity = '0';
-            
-            setTimeout(() => {
-                btn.innerHTML = 'RELINKING PATHS...';
-            }, 800);
-            
-            setTimeout(() => {
-                if (assets) assets.style.display = 'none';
-                if (group) group.style.display = 'block';
-                btn.innerHTML = 'MERGE COMPLETE';
-                btn.style.background = 'var(--primary)';
-                btn.style.color = '#111';
-                setTimeout(() => {
-                    btn.classList.remove('active');
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                    btn.style.color = '';
-                    if (assets) {
-                        assets.style.display = 'block';
-                        assets.style.opacity = '1';
-                    }
-                    if (group) group.style.display = 'none';
-                }, 3000);
-            }, 1800);
-        }
-
-        function runRebakeSim(btn) {
-            if (btn.classList.contains('active')) return;
-            btn.classList.add('active');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = 'DECIMATING MESH...';
-            const box = btn.closest('.mini-sim-box');
-            const mesh = box.querySelector('.rebake-mesh');
-            const laser = box.querySelector('.rebake-laser');
-            
-            if (laser) {
-                laser.style.display = 'block';
-                laser.style.transform = 'translateY(0)';
-                setTimeout(() => laser.style.transform = 'translateY(75px)', 50);
-            }
-            
-            setTimeout(() => {
-                btn.innerHTML = 'BAKING 4K PBR MAPS...';
-                if (mesh) {
-                    mesh.setAttribute('points', '100,30 130,50 115,85 85,85 70,50'); // Smoother shape
-                    mesh.setAttribute('stroke', 'var(--primary)');
-                    mesh.setAttribute('fill', 'rgba(77, 182, 172, 0.1)');
-                }
-            }, 1200);
-            
-            setTimeout(() => {
-                btn.innerHTML = 'BAKE SUCCESSFUL';
-                btn.style.background = 'var(--primary)';
-                btn.style.color = '#111';
-                setTimeout(() => {
-                    btn.classList.remove('active');
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                    btn.style.color = '';
-                    if (laser) {
-                        laser.style.transition = 'none';
-                        laser.style.transform = 'translateY(0)';
-                        laser.style.display = 'none';
-                        // Restore transition after reset
-                        setTimeout(() => laser.style.transition = 'transform 1.5s linear', 50);
-                    }
-                    if (mesh) {
-                        mesh.setAttribute('points', '100,20 140,50 120,95 80,95 60,50');
-                        mesh.setAttribute('stroke', '#e57373');
-                        mesh.setAttribute('fill', 'none');
-                    }
-                }, 3000);
-            }, 2200);
-        }
-
-        function runCameraSim(btn) {
-            if (btn.classList.contains('active')) return;
-            btn.classList.add('active');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = 'ALIGNING...';
-            const box = btn.closest('.mini-sim-box');
-            const cam = box.querySelector('.mini-camera');
-            const frustum = box.querySelector('.camera-frustum');
-            const clipPlane = box.querySelector('.clip-plane');
-            const interior = box.querySelector('.house-interior');
-            
-            if (cam) cam.style.transform = 'translateY(-5px) rotate(5deg)';
-            
-            setTimeout(() => {
-                btn.innerHTML = 'CLIPPING...';
-                if (frustum) frustum.style.opacity = '1';
-                if (clipPlane) clipPlane.style.opacity = '1';
-            }, 1000);
-            
-            setTimeout(() => {
-                if (interior) interior.style.opacity = '1';
-                btn.innerHTML = 'ALIGNED & CLIPPED';
-                btn.style.background = 'var(--primary)';
-                btn.style.color = '#111';
-                setTimeout(() => {
-                    btn.classList.remove('active');
-                    btn.innerHTML = originalText;
-                    btn.style.background = '';
-                    btn.style.color = '';
-                    if (cam) cam.style.transform = '';
-                    if (frustum) frustum.style.opacity = '0';
-                    if (clipPlane) clipPlane.style.opacity = '0';
-                    if (interior) interior.style.opacity = '0';
-                }, 3000);
-            }, 2000);
-        }
-
-        // --- AUTOPLAY AND SCROLL DETECT LOGIC FOR VIEWPORT SIMULATIONS ---
-        document.addEventListener('DOMContentLoaded', () => {
-            function isElementPartiallyInViewport(el) {
-                const rect = el.getBoundingClientRect();
-                const windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-                const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
-                
-                const vertInView = (rect.top <= windowHeight) && ((rect.top + rect.height) >= 0);
-                const horInView = (rect.left <= windowWidth) && ((rect.left + rect.width) >= 0);
-                
-                return (vertInView && horInView);
-            }
-
-            const simBoxes = document.querySelectorAll('.mini-sim-box');
-            
-            // Loop checking every 15 seconds to auto-play idle simulations in the viewport
-            setInterval(() => {
-                simBoxes.forEach((box) => {
-                    const btn = box.querySelector('.sim-action-btn');
-                    if (btn && !btn.classList.contains('active') && isElementPartiallyInViewport(box)) {
-                        // Stagger the triggers slightly so they don't all start at the exact same millisecond
-                        const staggerDelay = Math.random() * 2000;
-                        setTimeout(() => {
-                            if (!btn.classList.contains('active') && isElementPartiallyInViewport(box)) {
-                                btn.click();
-                            }
-                        }, staggerDelay);
-                    }
-                });
-            }, 15000);
-
-            // Trigger immediately on scroll/load if visible to catch first-impression
-            let scrollTimeout;
-            function triggerVisibleSims() {
-                if (scrollTimeout) clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    simBoxes.forEach((box, index) => {
-                        const btn = box.querySelector('.sim-action-btn');
-                        if (btn && !btn.classList.contains('active') && !btn.dataset.firstTriggered && isElementPartiallyInViewport(box)) {
-                            btn.dataset.firstTriggered = 'true';
-                            setTimeout(() => {
-                                if (!btn.classList.contains('active') && isElementPartiallyInViewport(box)) {
-                                    btn.click();
-                                }
-                            }, 500 + index * 600); // Staggered launch on first view
-                        }
-                    });
-                }, 100);
-            }
-
-            window.addEventListener('scroll', triggerVisibleSims);
-            window.addEventListener('resize', triggerVisibleSims);
-            
-            // Initial trigger delay after page loads and transitions complete
-            setTimeout(triggerVisibleSims, 1500);
-        });
-
-</script>
 
     <script is:inline>
         // Mobile navigation dropdown toggle

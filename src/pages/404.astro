@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+<Layout title="404 — Không tìm thấy trang | AH3 Tools" description="Trang bạn tìm không tồn tại. Quay về trang chủ AH3 Tools để khám phá các plugin 3ds Max.">
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+
+    <Navbar />
+
+    <section class="hero" style="min-height: 70vh;">
+        <div class="hero-content">
+            <div class="hero-badge">404</div>
+            <h1 data-vi="Không tìm thấy <span class='teal'>trang này</span>" data-en="Page <span class='teal'>not found</span>">Không tìm thấy <span class='teal'>trang này</span></h1>
+            <p class="hero-sub" data-vi="Trang bạn tìm không tồn tại hoặc đã được di chuyển. Hãy quay về trang chủ để khám phá bộ công cụ AH3." data-en="The page you are looking for does not exist or has been moved. Head back home to explore the AH3 toolkit.">Trang bạn tìm không tồn tại hoặc đã được di chuyển. Hãy quay về trang chủ để khám phá bộ công cụ AH3.</p>
+            <div class="hero-cta-group">
+                <a href="/" class="hero-cta-btn hero-cta-primary" data-vi="Về trang chủ" data-en="Back to home">Về trang chủ</a>
+                <a href="/#products" class="hero-cta-btn hero-cta-secondary" data-vi="Xem sản phẩm" data-en="View products">Xem sản phẩm</a>
+            </div>
+        </div>
+    </section>
+
+    <Footer />
+</Layout>

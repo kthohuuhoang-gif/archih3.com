@@ -8,8 +8,6 @@ import Footer from '../components/Footer.astro';
 
 </Fragment>
 
-    <!-- AOS CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 
 
@@ -23,7 +21,7 @@ import Footer from '../components/Footer.astro';
             <h1 data-vi="Bạn thiết kế.<br><span class='teal'>AI</span> lo phần còn lại." data-en="You design.<br><span class='teal'>AI</span> handles the rest.">Bạn thiết kế.<br><span class='teal'>AI</span> lo phần còn lại.</h1>
             <p class="hero-sub" data-vi="Tôi từng mất hàng giờ mỗi ngày chỉ để chuyển tab, copy-paste và lặn ngụp tìm thư viện. AH3 Hub ra đời để chấm dứt vòng lặp nhàm chán đó — mang 10+ công cụ AI đặt thẳng vào không gian làm việc 3ds Max của bạn." data-en="I used to spend hours every day just switching tabs, copy-pasting, and diving through asset libraries. AH3 Hub was born to end that tedious loop — putting 10+ AI tools right inside your 3ds Max workspace.">Tôi từng mất hàng giờ mỗi ngày chỉ để chuyển tab, copy-paste và lặn ngụp tìm thư viện. AH3 Hub ra đời để chấm dứt vòng lặp nhàm chán đó — mang 10+ công cụ AI đặt thẳng vào không gian làm việc 3ds Max của bạn.</p>
             <div class="hero-cta">
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary" data-vi="↓ Tải AH3 Hub" data-en="↓ Download AH3 Hub">↓ Tải AH3 Hub</a>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-primary" data-vi="↓ Tải AH3 Hub" data-en="↓ Download AH3 Hub">↓ Tải AH3 Hub</a>
                 <a href="#ai-studio" class="btn-outline" data-vi="Xem AI Studio →" data-en="See AI Studio →">Xem AI Studio →</a>
             </div>
             <div class="hero-version">v1.8.x · 3ds Max 2023-2027+ · Windows 10/11</div>
@@ -42,7 +40,7 @@ import Footer from '../components/Footer.astro';
             <!-- Iframe (works on hosted web) -->
             <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/a3VRXUJ6n9Y?rel=0&modestbranding=1&color=white" title="AI i2Asset — AH3 Hub Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  class="absolute inset-0"></iframe>
             <!-- Thumbnail fallback (shown if iframe fails on local file://) -->
-            <a id="yt-fallback" href="https://youtu.be/a3VRXUJ6n9Y" target="_blank"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer;">
+            <a id="yt-fallback" href="https://youtu.be/a3VRXUJ6n9Y" target="_blank" rel="noopener"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer;">
                 <img loading="lazy" src="https://img.youtube.com/vi/a3VRXUJ6n9Y/maxresdefault.jpg" alt="AI i2Asset Demo"  onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'" class="w-full" style="height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;">
                 <div  class="absolute inset-0 flex items-center justify-center">
                     <div  class="flex items-center justify-center" style="width:72px; height:72px; border-radius:50%; background:rgba(77,182,172,0.9); box-shadow:0 4px 20px rgba(0,0,0,0.4);">
@@ -351,7 +349,7 @@ import Footer from '../components/Footer.astro';
                     <div id="qr-video"  class="relative" style="background:#000; aspect-ratio:16/9; border-top:1px solid rgba(85,85,85,0.4);">
                         <iframe id="qr-yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/sfenH9d4h8I?rel=0&modestbranding=1&color=white" title="Quick Render Demo — AH3 Hub" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  class="absolute inset-0" style="border-radius:0 0 12px 12px;"></iframe>
                         <!-- Thumbnail fallback (shown if iframe fails on local file://) -->
-                        <a id="qr-yt-fallback" href="https://youtu.be/sfenH9d4h8I" target="_blank"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer; border-radius:0 0 12px 12px; overflow:hidden;">
+                        <a id="qr-yt-fallback" href="https://youtu.be/sfenH9d4h8I" target="_blank" rel="noopener"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer; border-radius:0 0 12px 12px; overflow:hidden;">
                             <img src="https://img.youtube.com/vi/sfenH9d4h8I/maxresdefault.jpg" alt="Quick Render Demo"  onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'" class="w-full" style="height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;">
                             <div  class="absolute inset-0 flex items-center justify-center">
                                 <div  class="flex items-center justify-center" style="width:56px; height:56px; border-radius:50%; background:rgba(77,182,172,0.9); box-shadow:0 4px 20px rgba(0,0,0,0.4);">
@@ -434,8 +432,8 @@ import Footer from '../components/Footer.astro';
                 <p class="about-role">Architect · 3ds Max Plugin Developer</p>
                 <p class="about-bio" data-vi="Tôi là kiến trúc sư, và tôi dùng 3ds Max mỗi ngày. AH3 Hub không phải dự án khởi nghiệp — nó bắt đầu từ sự bực bội khi phải làm quá nhiều việc lặp đi lặp lại. 9 tháng, 2000+ giờ code, 100+ bản cập nhật sau, nó trở thành công cụ tôi không thể thiếu — và tôi muốn chia sẻ nó." data-en="I'm an architect, and I use 3ds Max every day. AH3 Hub isn't a startup — it started from the frustration of too many repetitive tasks. 9 months, 2000+ hours of code, 100+ updates later, it became the tool I can't live without — and I want to share it.">Tôi là kiến trúc sư, và tôi dùng 3ds Max mỗi ngày. AH3 Hub không phải dự án khởi nghiệp — nó bắt đầu từ sự bực bội khi phải làm quá nhiều việc lặp đi lặp lại. 9 tháng, 2000+ giờ code, 100+ bản cập nhật sau, nó trở thành công cụ tôi không thể thiếu — và tôi muốn chia sẻ nó.</p>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="if(/Mobi|Android|iPhone/i.test(navigator.userAgent)){window.location='fb://profile/ktshuuhoang';var t=setTimeout(function(){window.location='https://www.facebook.com/ktshuuhoang'},800);window.addEventListener('blur',function(){clearTimeout(t)},{once:true});return false}">Facebook</a>
-                    <a href="https://youtube.com/@ArchiH3" target="_blank">YouTube</a>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" onclick="if(/Mobi|Android|iPhone/i.test(navigator.userAgent)){window.location='fb://profile/ktshuuhoang';var t=setTimeout(function(){window.location='https://www.facebook.com/ktshuuhoang'},800);window.addEventListener('blur',function(){clearTimeout(t)},{once:true});return false}">Facebook</a>
+                    <a href="https://youtube.com/@ArchiH3" target="_blank" rel="noopener">YouTube</a>
                     <a href="javascript:void(0)" onclick="if(/Mobi|Android|iPhone/i.test(navigator.userAgent)){window.location='mailto:hohuuhoang@archih3.com'}else{this.textContent='hohuuhoang@archih3.com';navigator.clipboard.writeText('hohuuhoang@archih3.com');var el=this;var tip=document.createElement('span');tip.textContent=' ✓ Đã copy!';tip.style.cssText='color:var(--primary);font-size:12px;';el.after(tip);setTimeout(()=>tip.remove(),2000)}return false">Email</a>
                 </div>
             </div>
@@ -532,7 +530,7 @@ import Footer from '../components/Footer.astro';
                         <li data-vi="Cập nhật suốt đời khi còn subscription" data-en="Lifetime updates while subscribed">Cập nhật suốt đời khi còn subscription</li>
                     </ul>
                     <p data-vi="ℹ️ <strong class='mt-4 text-muted' style='padding:12px 14px; background:rgba(77,182,172,0.08); border-left:2px solid var(--primary); border-radius:4px; font-size:12px; line-height:1.6;'>Phí Pro</strong> chi trả AI-Assist và cloud features. Tính năng AI cục bộ giữ giới hạn phi thương mại — Free và Pro đều như nhau.<br>↩ Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro." data-en="ℹ️ <strong>Pro fee</strong> covers AI-Assist and cloud features. Local AI keeps non-commercial limits — same for Free and Pro.<br>↩ 100% refund within 7 days if no Pro feature used.">ℹ️ <strong class='mt-4 text-muted' style='padding:12px 14px; background:rgba(77,182,172,0.08); border-left:2px solid var(--primary); border-radius:4px; font-size:12px; line-height:1.6;'>Phí Pro</strong> chi trả AI-Assist và cloud features. Tính năng AI cục bộ giữ giới hạn phi thương mại — Free và Pro đều như nhau.<br>↩ Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro.</p>
-                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="price-cta pro-btn" data-vi="Liên hệ mua Pro" data-en="Contact for Pro">Liên hệ mua Pro</a>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="price-cta pro-btn" data-vi="Liên hệ mua Pro" data-en="Contact for Pro">Liên hệ mua Pro</a>
                 </div>
             </div>
         </div>
@@ -597,7 +595,7 @@ import Footer from '../components/Footer.astro';
                 <h2 data-vi="Câu chuyện tiếp theo là của bạn" data-en="The next chapter is yours">Câu chuyện tiếp theo là của bạn</h2>
                 <p data-vi="AH3 Hub miễn phí cho hầu hết tính năng. Cài đặt trong 2 phút và bắt đầu trải nghiệm AI ngay trong 3ds Max. Muốn nhiều hơn? Nâng cấp Pro bất cứ lúc nào." data-en="AH3 Hub is free for most features. Install in 2 minutes and start experiencing AI inside 3ds Max. Want more? Upgrade to Pro anytime.">AH3 Hub miễn phí cho hầu hết tính năng. Cài đặt trong 2 phút và bắt đầu trải nghiệm AI ngay trong 3ds Max. Muốn nhiều hơn? Nâng cấp Pro bất cứ lúc nào.</p>
                 <div class="cta-actions" style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 24px;">
-                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary"  data-vi="↓ Liên hệ tải v1.8.x" data-en="↓ Contact to Download v1.8.x" style="font-size:16px; padding:14px 32px; margin: 0;">↓ Liên hệ tải v1.8.x</a>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-primary"  data-vi="↓ Liên hệ tải v1.8.x" data-en="↓ Contact to Download v1.8.x" style="font-size:16px; padding:14px 32px; margin: 0;">↓ Liên hệ tải v1.8.x</a>
                     <div class="install-cmd" style="margin: 0;">
                         <span>$</span> <span data-vi="Chạy AH3_Hub_Setup.exe → Chọn phiên bản Max → Done" data-en="Run AH3_Hub_Setup.exe → Select Max version → Done">Chạy AH3_Hub_Setup.exe → Chọn phiên bản Max → Done</span>
                     </div>

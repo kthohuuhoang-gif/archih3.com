@@ -26,7 +26,7 @@
     --primary-glow-strong: rgba(77, 182, 172, 0.3);
     --text: #e0e0e0;
     --text-secondary: #a0a0a0;
-    --text-muted: #666666;
+    --text-muted: #8a8a8a; /* was #666 — raised for WCAG AA contrast on dark bg */
     --border: #444444;
     --destructive: #c62828;
     --warning: #ef6c00;

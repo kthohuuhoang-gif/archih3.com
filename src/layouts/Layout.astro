@@ -32,8 +32,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:title" content={title}>
     <meta name="twitter:description" content={description}>
     
-    <link rel="stylesheet" href="/assets/css/global.css?v=3">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/assets/css/global.css?v=4">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <slot name="head" />
@@ -50,6 +53,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
                     duration: 800,
                     once: true,
                     offset: 100
+                });
+            } else {
+                // CDN failed: make [data-aos] elements visible instead of leaving them hidden
+                document.querySelectorAll('[data-aos]').forEach(function(el) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'none';
                 });
             }
 
