@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
-<Layout title="Magic Merger — Batch Import & Smart Relink 3ds Max | ArchiH3" description="Gộp file 3ds Max hàng loạt, tự động relink texture, hỗ trợ ZIP/RAR/7z. Plugin import model chuyên nghiệp.">
+<Layout title="Magic Merger — Batch Import & Smart Relink 3ds Max | ArchiH3" description="Gộp file 3ds Max hàng loạt, tự động relink texture, hỗ trợ ZIP/RAR/7z. Plugin import model chuyên nghiệp." ogImage="/og/og-merger.jpg">
 <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Magic Merger", "operatingSystem": "Windows", "applicationCategory": "DesignApplication", "applicationSubCategory": "3ds Max Plugin", "description": "Gộp file 3ds Max hàng loạt, tự động relink texture, hỗ trợ ZIP/RAR/7z.", "url": "https://archih3.com/merger/", "image": "https://archih3.com/og/og-merger.jpg", "author": {"@type": "Person", "name": "Hồ Hữu Hoàng", "jobTitle": "Architect · 3ds Max Plugin Developer"}, "publisher": {"@type": "Organization", "name": "HKD Dịch vụ Kiến Trúc ArchiH3", "url": "https://archih3.com"}, "offers": {"@type": "Offer", "price": "300000", "priceCurrency": "VND", "availability": "https://schema.org/InStock", "url": "https://archih3.com/merger/#pricing"}}</script>
 
 </Fragment>
 
@@ -19,11 +20,11 @@ import Footer from '../components/Footer.astro';
     <!-- HERO -->
     <section class="hero">
         <div class="hero-badge" data-vi="BATCH 3D MODEL IMPORTER &amp; SMART RELINKER" data-en="BATCH 3D MODEL IMPORTER &amp; SMART RELINKER">BATCH 3D MODEL IMPORTER &amp; SMART RELINKER</div>
-        <h1 data-vi="Nhập model hàng loạt.<br><span class='teal'>Tự động sửa map theo lô.</span>" data-en="Batch import models.<br><span class='teal'>Auto-relink textures.</span>"></h1>
-        <p class="hero-sub" data-vi="Plugin 3ds Max chuyên nghiệp để kéo thả file .max, file nén (.zip/.rar/.7z), thư mục hay ảnh preview vào scene. Tự động merge, tự động gán layer, tự động xếp lưới và smart-relink texture tức thì." data-en="Professional 3ds Max plugin to drag and drop .max files, compressed archives (.zip/.rar/.7z), folders, or preview images into your scene. Automatically merges, assigns layers, arranges in a grid, and relinks textures instantly."></p>
+        <h1 data-vi="Nhập model hàng loạt.<br><span class='teal'>Tự động sửa map theo lô.</span>" data-en="Batch import models.<br><span class='teal'>Auto-relink textures.</span>">Nhập model hàng loạt.<br><span class='teal'>Tự động sửa map theo lô.</span></h1>
+        <p class="hero-sub" data-vi="Plugin 3ds Max chuyên nghiệp để kéo thả file .max, file nén (.zip/.rar/.7z), thư mục hay ảnh preview vào scene. Tự động merge, tự động gán layer, tự động xếp lưới và smart-relink texture tức thì." data-en="Professional 3ds Max plugin to drag and drop .max files, compressed archives (.zip/.rar/.7z), folders, or preview images into your scene. Automatically merges, assigns layers, arranges in a grid, and relinks textures instantly.">Plugin 3ds Max chuyên nghiệp để kéo thả file .max, file nén (.zip/.rar/.7z), thư mục hay ảnh preview vào scene. Tự động merge, tự động gán layer, tự động xếp lưới và smart-relink texture tức thì.</p>
         <div class="hero-cta">
             <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 300k" data-en="Get Lifetime — $12">Mua bản quyền — 300k</a>
-            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Vui lòng liên hệ DEV qua Facebook để mua hoặc tải bộ cài bản quyền!');" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-outline" data-vi="Liên hệ mua qua Facebook" data-en="Buy via Facebook">Liên hệ mua qua Facebook</a>
         </div>
     </section>
 
@@ -31,8 +32,8 @@ import Footer from '../components/Footer.astro';
         <!-- INTERFACE SHOWCASE -->
     <section id="interface"  class="bg-surface">
         <div class="section-label" data-vi="QUY TRÌNH TỰ ĐỘNG" data-en="AUTOMATED WORKFLOW">QUY TRÌNH TỰ ĐỘNG</div>
-        <h2 class="section-title" data-vi="Trải nghiệm Kéo Thả &amp; Merge thông minh" data-en="Interactive Drag &amp; Merge Pipeline"></h2>
-        <p class="section-desc" data-vi="Nhấp &quot;PROCESS MERGE&quot; để trải nghiệm toàn bộ quy trình: Giải nén, Tải ảnh PRV, Quét virus, Sửa đường dẫn map và Merge model." data-en="Click &quot;PROCESS MERGE&quot; to witness the magic: extraction, preview load, virus clean, relink, and grid-merging."></p>
+        <h2 class="section-title" data-vi="Trải nghiệm Kéo Thả &amp; Merge thông minh" data-en="Interactive Drag &amp; Merge Pipeline">Trải nghiệm Kéo Thả &amp; Merge thông minh</h2>
+        <p class="section-desc" data-vi="Nhấp &quot;PROCESS MERGE&quot; để trải nghiệm toàn bộ quy trình: Giải nén, Tải ảnh PRV, Quét virus, Sửa đường dẫn map và Merge model." data-en="Click &quot;PROCESS MERGE&quot; to witness the magic: extraction, preview load, virus clean, relink, and grid-merging.">Nhấp &quot;PROCESS MERGE&quot; để trải nghiệm toàn bộ quy trình: Giải nén, Tải ảnh PRV, Quét virus, Sửa đường dẫn map và Merge model.</p>
         
         <div class="pipeline-wrapper">
             <div class="pipeline-demo" id="magic-pipeline">
@@ -90,17 +91,17 @@ import Footer from '../components/Footer.astro';
             <div class="step-item" id="pl-step-1" onclick="playStep1()"  style="cursor:pointer;">
                 <div class="step-num">01</div>
                 <h3 data-vi="Kéo Thả File Nén" data-en="Drag &amp; Drop Zip">Kéo Thả File Nén</h3>
-                <p data-vi="Kéo tệp .max hoặc .zip/.rar chứa model thả trực tiếp vào plugin. Hệ thống tự động giải nén và nạp tệp." data-en="Drop your .max file or archive package directly. The system auto-extracts it instantly."></p>
+                <p data-vi="Kéo tệp .max hoặc .zip/.rar chứa model thả trực tiếp vào plugin. Hệ thống tự động giải nén và nạp tệp." data-en="Drop your .max file or archive package directly. The system auto-extracts it instantly.">Kéo tệp .max hoặc .zip/.rar chứa model thả trực tiếp vào plugin. Hệ thống tự động giải nén và nạp tệp.</p>
             </div>
             <div class="step-item" id="pl-step-2" onclick="playStep2()"  style="cursor:pointer;">
                 <div class="step-num">02</div>
                 <h3 data-vi="Tạo PRV &amp; Diệt Virus" data-en="Preview &amp; Scan">Tạo PRV &amp; Diệt Virus</h3>
-                <p data-vi="Plugin tự động tải ảnh xem trước PRV, quét sạch mọi script virus độc hại và tối ưu hóa tệp trước khi nạp." data-en="Companion finder locates the preview image, script virus cleaner scans code, and geometry is optimized."></p>
+                <p data-vi="Plugin tự động tải ảnh xem trước PRV, quét sạch mọi script virus độc hại và tối ưu hóa tệp trước khi nạp." data-en="Companion finder locates the preview image, script virus cleaner scans code, and geometry is optimized.">Plugin tự động tải ảnh xem trước PRV, quét sạch mọi script virus độc hại và tối ưu hóa tệp trước khi nạp.</p>
             </div>
             <div class="step-item" id="pl-step-3" onclick="playStep3()"  style="cursor:pointer;">
                 <div class="step-num">03</div>
                 <h3 data-vi="Relink Map &amp; Merge" data-en="Relink &amp; Merge">Relink Map &amp; Merge</h3>
-                <p data-vi="Thuật toán Smart Relink tự sửa đường dẫn map bị thiếu, sau đó merge model đặt vào lưới tọa độ Max." data-en="Smart Relinker auto-resolves missing map paths and imports the clean model into 3ds Max layout."></p>
+                <p data-vi="Thuật toán Smart Relink tự sửa đường dẫn map bị thiếu, sau đó merge model đặt vào lưới tọa độ Max." data-en="Smart Relinker auto-resolves missing map paths and imports the clean model into 3ds Max layout.">Thuật toán Smart Relink tự sửa đường dẫn map bị thiếu, sau đó merge model đặt vào lưới tọa độ Max.</p>
             </div>
         </div>
     </section>
@@ -110,8 +111,8 @@ import Footer from '../components/Footer.astro';
         <div class="interface-grid">
             <div class="interface-text">
                 <div class="section-label" data-vi="GIAO DIỆN THỰC TẾ" data-en="UI SCREENSHOT">GIAO DIỆN THỰC TẾ</div>
-                <h2 class="section-title" data-vi="Trực quan hóa công cụ" data-en="Real UI Representation"></h2>
-                <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
+                <h2 class="section-title" data-vi="Trực quan hóa công cụ" data-en="Real UI Representation">Trực quan hóa công cụ</h2>
+                <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max.">Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max.</p>
             </div>
             <div class="interface-visual">
                 <img src="/interface_magicmerger.png" alt="Plugin Interface"  class="w-full block" style="height: auto; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
@@ -122,45 +123,45 @@ import Footer from '../components/Footer.astro';
     <!-- FEATURES -->
     <section id="features">
         <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="KEY FEATURES">TÍNH NĂNG NỔI BẬT</div>
-        <h2 class="section-title" data-vi="Tối ưu hóa quy trình nhập thư viện 3D" data-en="Streamline your 3D Asset Imports"></h2>
-        <p class="section-desc" data-vi="Magic Merger giải quyết triệt để vấn đề mất mát đường dẫn map, tốn thời gian giải nén và bố trí mô hình thủ công." data-en="Magic Merger solves missing texture paths, manual zip extractions, and tedious model positioning."></p>
+        <h2 class="section-title" data-vi="Tối ưu hóa quy trình nhập thư viện 3D" data-en="Streamline your 3D Asset Imports">Tối ưu hóa quy trình nhập thư viện 3D</h2>
+        <p class="section-desc" data-vi="Magic Merger giải quyết triệt để vấn đề mất mát đường dẫn map, tốn thời gian giải nén và bố trí mô hình thủ công." data-en="Magic Merger solves missing texture paths, manual zip extractions, and tedious model positioning.">Magic Merger giải quyết triệt để vấn đề mất mát đường dẫn map, tốn thời gian giải nén và bố trí mô hình thủ công.</p>
         
         <div class="features-grid">
             <!-- Feature 1 -->
             <div class="feature-card">
                 <div class="feature-icon">📦</div>
                 <h3 data-vi="Nhập file nén hàng loạt" data-en="Batch Zip/Rar/7z Merging">Nhập file nén hàng loạt</h3>
-                <p data-vi="Không cần giải nén thủ công từng file. Chỉ cần kéo thả hàng loạt file nén .zip, .rar, .7z hay folder chứa model vào hàng đợi, plugin tự giải nén và nhập model vào cảnh." data-en="No manual zip extractions needed. Drag-drop multiple .zip, .rar, or .7z archives or asset folders directly into the queue, and watch them auto-merge into 3ds Max."></p>
+                <p data-vi="Không cần giải nén thủ công từng file. Chỉ cần kéo thả hàng loạt file nén .zip, .rar, .7z hay folder chứa model vào hàng đợi, plugin tự giải nén và nhập model vào cảnh." data-en="No manual zip extractions needed. Drag-drop multiple .zip, .rar, or .7z archives or asset folders directly into the queue, and watch them auto-merge into 3ds Max.">Không cần giải nén thủ công từng file. Chỉ cần kéo thả hàng loạt file nén .zip, .rar, .7z hay folder chứa model vào hàng đợi, plugin tự giải nén và nhập model vào cảnh.</p>
             </div>
             <!-- Feature 2 -->
             <div class="feature-card">
                 <div class="feature-icon">🔗</div>
                 <h3 data-vi="Smart Relink thông minh" data-en="Batch Smart Relinker">Smart Relink thông minh</h3>
-                <p data-vi="Thuật toán tự động tìm và sửa đường dẫn bitmap bị mất của mô hình vừa nhập (hỗ trợ lưu trữ lên tới 50.000 file index). Dọn dẹp cấu trúc map, sửa lỗi đường dẫn quá dài." data-en="Automatically scans, matches, and relinks missing bitmap texture paths for all merged models (supports up to 50k file index storage). Corrects vendor folder layouts and fixes long paths."></p>
+                <p data-vi="Thuật toán tự động tìm và sửa đường dẫn bitmap bị mất của mô hình vừa nhập (hỗ trợ lưu trữ lên tới 50.000 file index). Dọn dẹp cấu trúc map, sửa lỗi đường dẫn quá dài." data-en="Automatically scans, matches, and relinks missing bitmap texture paths for all merged models (supports up to 50k file index storage). Corrects vendor folder layouts and fixes long paths.">Thuật toán tự động tìm và sửa đường dẫn bitmap bị mất của mô hình vừa nhập (hỗ trợ lưu trữ lên tới 50.000 file index). Dọn dẹp cấu trúc map, sửa lỗi đường dẫn quá dài.</p>
             </div>
             <!-- Feature 3 -->
             <div class="feature-card">
                 <div class="feature-icon">📐</div>
                 <h3 data-vi="Xếp lưới tự động (Auto Grid)" data-en="Auto Grid Layout">Xếp lưới tự động (Auto Grid)</h3>
-                <p data-vi="Tự động sắp xếp các mô hình được merge vào cảnh theo dạng lưới (Grid) ngăn nắp với khoảng cách tùy chỉnh linh hoạt, tránh tình trạng các model bị đè chồng lấn lên nhau." data-en="Automatically arranges imported models into a clean matrix grid with adjustable spacing, preventing assets from spawning directly on top of each other at origin."></p>
+                <p data-vi="Tự động sắp xếp các mô hình được merge vào cảnh theo dạng lưới (Grid) ngăn nắp với khoảng cách tùy chỉnh linh hoạt, tránh tình trạng các model bị đè chồng lấn lên nhau." data-en="Automatically arranges imported models into a clean matrix grid with adjustable spacing, preventing assets from spawning directly on top of each other at origin.">Tự động sắp xếp các mô hình được merge vào cảnh theo dạng lưới (Grid) ngăn nắp với khoảng cách tùy chỉnh linh hoạt, tránh tình trạng các model bị đè chồng lấn lên nhau.</p>
             </div>
             <!-- Feature 4 -->
             <div class="feature-card">
                 <div class="feature-icon">🏷️</div>
                 <h3 data-vi="Tự động phân lớp Layer" data-en="Auto Layer Categorization">Tự động phân lớp Layer</h3>
-                <p data-vi="Phân tích cấu trúc thư mục và từ khóa mô hình để tự động gán layer tương ứng (ví dụ: Furniture, Lighting, Vegetation), giữ cho quản lý scene của bạn luôn gọn gàng sạch sẽ." data-en="Analyzes asset names and folders to automatically group models into corresponding 3ds Max layers (e.g. Furniture, Lighting, Plants) to keep your project hierarchy organized."></p>
+                <p data-vi="Phân tích cấu trúc thư mục và từ khóa mô hình để tự động gán layer tương ứng (ví dụ: Furniture, Lighting, Vegetation), giữ cho quản lý scene của bạn luôn gọn gàng sạch sẽ." data-en="Analyzes asset names and folders to automatically group models into corresponding 3ds Max layers (e.g. Furniture, Lighting, Plants) to keep your project hierarchy organized.">Phân tích cấu trúc thư mục và từ khóa mô hình để tự động gán layer tương ứng (ví dụ: Furniture, Lighting, Vegetation), giữ cho quản lý scene của bạn luôn gọn gàng sạch sẽ.</p>
             </div>
             <!-- Feature 5 -->
             <div class="feature-card">
                 <div class="feature-icon">📂</div>
                 <h3 data-vi="Quét ảnh preview thông minh" data-en="Companion Model Finder">Quét ảnh preview thông minh</h3>
-                <p data-vi="Kéo thả duy nhất ảnh preview (.jpg/.png) từ web hay folder vào — thuật toán tự động quét tìm tệp tin .max hoặc file nén tương ứng trong thư mục để đưa vào hàng đợi." data-en="Drag a preview image (.jpg/.png) in — the plugin auto-scans nearby folders to locate the companion .max file or archive, adding the model directly into the queue."></p>
+                <p data-vi="Kéo thả duy nhất ảnh preview (.jpg/.png) từ web hay folder vào — thuật toán tự động quét tìm tệp tin .max hoặc file nén tương ứng trong thư mục để đưa vào hàng đợi." data-en="Drag a preview image (.jpg/.png) in — the plugin auto-scans nearby folders to locate the companion .max file or archive, adding the model directly into the queue.">Kéo thả duy nhất ảnh preview (.jpg/.png) từ web hay folder vào — thuật toán tự động quét tìm tệp tin .max hoặc file nén tương ứng trong thư mục để đưa vào hàng đợi.</p>
             </div>
             <!-- Feature 6 -->
             <div class="feature-card">
                 <div class="feature-icon">📐</div>
                 <h3 data-vi="Xuất CAD 2D tự động" data-en="3D to 2D CAD Export">Xuất CAD 2D tự động</h3>
-                <p data-vi="Tích hợp tiện ích bổ trợ tự tạo hình chiếu CAD 2D từ khối 3D vừa merge, giúp bạn nhanh chóng triển khai bản vẽ mặt bằng kỹ thuật mà không cần vẽ lại." data-en="Includes a companion utility script to auto-generate 2D CAD projection block lines from your merged 3D geometry for rapid construction drawing generation."></p>
+                <p data-vi="Tích hợp tiện ích bổ trợ tự tạo hình chiếu CAD 2D từ khối 3D vừa merge, giúp bạn nhanh chóng triển khai bản vẽ mặt bằng kỹ thuật mà không cần vẽ lại." data-en="Includes a companion utility script to auto-generate 2D CAD projection block lines from your merged 3D geometry for rapid construction drawing generation.">Tích hợp tiện ích bổ trợ tự tạo hình chiếu CAD 2D từ khối 3D vừa merge, giúp bạn nhanh chóng triển khai bản vẽ mặt bằng kỹ thuật mà không cần vẽ lại.</p>
             </div>
         </div>
     </section>
@@ -168,24 +169,24 @@ import Footer from '../components/Footer.astro';
     <!-- STEPS / WORKFLOW -->
     <section class="steps-section" id="workflow">
         <div class="section-label" data-vi="QUY TRÌNH" data-en="STEPS">QUY TRÌNH</div>
-        <h2 class="section-title" data-vi="Quy trình 3 bước siêu tốc" data-en="Simple 3-Step Import Flow"></h2>
-        <p class="section-desc" data-vi="Đơn giản hóa việc quản lý và nhập hàng tá mô hình phức tạp vào 3ds Max." data-en="Simplifies the process of managing and importing dozens of heavy assets into 3ds Max."></p>
+        <h2 class="section-title" data-vi="Quy trình 3 bước siêu tốc" data-en="Simple 3-Step Import Flow">Quy trình 3 bước siêu tốc</h2>
+        <p class="section-desc" data-vi="Đơn giản hóa việc quản lý và nhập hàng tá mô hình phức tạp vào 3ds Max." data-en="Simplifies the process of managing and importing dozens of heavy assets into 3ds Max.">Đơn giản hóa việc quản lý và nhập hàng tá mô hình phức tạp vào 3ds Max.</p>
 
         <div class="steps-grid">
             <div class="step-item">
                 <div class="step-num">01</div>
                 <h3 data-vi="Kéo Thả Tài Nguyên" data-en="Drag &amp; Drop Assets">Kéo Thả Tài Nguyên</h3>
-                <p data-vi="Thả nhiều file .max, file nén hoặc thư mục chứa thư viện 3D vào hàng đợi hiển thị." data-en="Drop multiple .max files, zip archives, or vegetation/furniture folders directly into the queue view."></p>
+                <p data-vi="Thả nhiều file .max, file nén hoặc thư mục chứa thư viện 3D vào hàng đợi hiển thị." data-en="Drop multiple .max files, zip archives, or vegetation/furniture folders directly into the queue view.">Thả nhiều file .max, file nén hoặc thư mục chứa thư viện 3D vào hàng đợi hiển thị.</p>
             </div>
             <div class="step-item">
                 <div class="step-num">02</div>
                 <h3 data-vi="Cấu hình tùy chọn" data-en="Configure Settings">Cấu hình tùy chọn</h3>
-                <p data-vi="Bật Auto Grid, chọn khoảng cách lưới, gán danh mục layer và tùy chọn thu gom maps." data-en="Enable Auto Grid, adjust spacing, choose layer naming patterns, and select texture collect folders."></p>
+                <p data-vi="Bật Auto Grid, chọn khoảng cách lưới, gán danh mục layer và tùy chọn thu gom maps." data-en="Enable Auto Grid, adjust spacing, choose layer naming patterns, and select texture collect folders.">Bật Auto Grid, chọn khoảng cách lưới, gán danh mục layer và tùy chọn thu gom maps.</p>
             </div>
             <div class="step-item">
                 <div class="step-num">03</div>
                 <h3 data-vi="Bấm Merge / Batch" data-en="Batch Merge &amp; Relink">Bấm Merge / Batch</h3>
-                <p data-vi="Nhấp Merge, hệ thống tự động import từng tệp và chạy thuật toán Smart Relink map ngầm." data-en="Click Batch Merge, the system automatically processes all entries and smart-relinks all assets in the background."></p>
+                <p data-vi="Nhấp Merge, hệ thống tự động import từng tệp và chạy thuật toán Smart Relink map ngầm." data-en="Click Batch Merge, the system automatically processes all entries and smart-relinks all assets in the background.">Nhấp Merge, hệ thống tự động import từng tệp và chạy thuật toán Smart Relink map ngầm.</p>
             </div>
         </div>
     </section>
@@ -193,8 +194,8 @@ import Footer from '../components/Footer.astro';
     <!-- PRICING -->
     <section id="pricing">
         <div class="section-label" data-vi="BẢNG GIÁ KHUYẾN MÃI" data-en="INTRODUCTORY PRICE">BẢNG GIÁ KHUYẾN MÃI</div>
-        <h2 class="section-title" data-vi="Sở hữu vĩnh viễn. Không phí gia hạn." data-en="Pay once. Use forever."></h2>
-        <p class="section-desc" data-vi="Giấy phép trọn đời kích hoạt theo ID phần cứng máy tính (HWID), sử dụng không giới hạn." data-en="Introductory launch pricing for a perpetual license tied to your HWID."></p>
+        <h2 class="section-title" data-vi="Sở hữu vĩnh viễn. Không phí gia hạn." data-en="Pay once. Use forever.">Sở hữu vĩnh viễn. Không phí gia hạn.</h2>
+        <p class="section-desc" data-vi="Giấy phép trọn đời kích hoạt theo ID phần cứng máy tính (HWID), sử dụng không giới hạn." data-en="Introductory launch pricing for a perpetual license tied to your HWID.">Giấy phép trọn đời kích hoạt theo ID phần cứng máy tính (HWID), sử dụng không giới hạn.</p>
 
         <div class="pricing-section">
             <div class="pricing-grid">
@@ -203,18 +204,18 @@ import Footer from '../components/Footer.astro';
                     <div>
                         <div class="price-badge">LIFETIME KEY</div>
                         <h3 data-vi="Magic Merger Standalone" data-en="Magic Merger Standalone">Magic Merger Standalone</h3>
-                        <div class="price-amount" data-vi="<del>999.000đ</del> 300.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $12 <span>/ lifetime</span>"></div>
+                        <div class="price-amount" data-vi="<del>999.000đ</del> 300.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $12 <span>/ lifetime</span>"><del>999.000đ</del> 300.000đ <span>/ vĩnh viễn</span></div>
                         <div class="price-period" data-vi="Khuyến mãi đặc biệt nhân dịp mở bán" data-en="Special introductory discount">Khuyến mãi đặc biệt nhân dịp mở bán</div>
                         
                         <ul class="price-features">
-                            <li data-vi="Merge hàng loạt tệp tin .max và file nén .zip/.rar/.7z" data-en="Batch merge multiple .max files and .zip/.rar/.7z archives"></li>
-                            <li data-vi="Smart Relink tự tìm map thất lạc theo lô (lên tới 50.000 file index)" data-en="Smart Relinker auto-locates missing maps (up to 50k file indices)"></li>
-                            <li data-vi="Tự động phân bố vị trí dạng lưới (Grid Layout) và gán Layer" data-en="Auto Grid Layout positioning and automatic layer grouping"></li>
-                            <li data-vi="Xử lý đường dẫn map quá dài và thu gom map thông minh" data-en="Fixes long file paths and consolidates textures into project folders"></li>
-                            <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật phiên bản mới miễn phí trọn đời" data-en="Perpetual license with lifetime free updates"></li>
+                            <li data-vi="Merge hàng loạt tệp tin .max và file nén .zip/.rar/.7z" data-en="Batch merge multiple .max files and .zip/.rar/.7z archives">Merge hàng loạt tệp tin .max và file nén .zip/.rar/.7z</li>
+                            <li data-vi="Smart Relink tự tìm map thất lạc theo lô (lên tới 50.000 file index)" data-en="Smart Relinker auto-locates missing maps (up to 50k file indices)">Smart Relink tự tìm map thất lạc theo lô (lên tới 50.000 file index)</li>
+                            <li data-vi="Tự động phân bố vị trí dạng lưới (Grid Layout) và gán Layer" data-en="Auto Grid Layout positioning and automatic layer grouping">Tự động phân bố vị trí dạng lưới (Grid Layout) và gán Layer</li>
+                            <li data-vi="Xử lý đường dẫn map quá dài và thu gom map thông minh" data-en="Fixes long file paths and consolidates textures into project folders">Xử lý đường dẫn map quá dài và thu gom map thông minh</li>
+                            <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật phiên bản mới miễn phí trọn đời" data-en="Perpetual license with lifetime free updates">Bản quyền sử dụng vĩnh viễn, cập nhật phiên bản mới miễn phí trọn đời</li>
                         </ul>
                     </div>
-                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase" style="margin-top:20px;">Liên hệ mua bản quyền</a>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase" style="margin-top:20px;">Liên hệ mua bản quyền</a>
                 </div>
 
                 <!-- Card 2: Combo -->
@@ -222,19 +223,19 @@ import Footer from '../components/Footer.astro';
                     <div>
                         <div class="price-badge text-primary"  style="background:var(--primary-glow);">COMBO OFFER</div>
                         <h3 data-vi="Combo Material &amp; Merger" data-en="Combo Material &amp; Merger">Combo Material &amp; Merger</h3>
-                        <div class="price-amount" data-vi="<del>1.998.000đ</del> 500.000đ <span>/ vĩnh viễn</span>" data-en="<del>$78</del> $20 <span>/ lifetime</span>"></div>
+                        <div class="price-amount" data-vi="<del>1.998.000đ</del> 500.000đ <span>/ vĩnh viễn</span>" data-en="<del>$78</del> $20 <span>/ lifetime</span>"><del>1.998.000đ</del> 500.000đ <span>/ vĩnh viễn</span></div>
                         <div class="price-period" data-vi="Gói combo tiết kiệm đặc biệt lên đến 75%" data-en="Special bundle discount - Save up to 75%">Gói combo tiết kiệm đặc biệt lên đến 75%</div>
                         
                         <ul class="price-features">
-                            <li data-vi="Giấy phép trọn đời cho <b>CẢ HAI</b> plugin độc lập" data-en="Lifetime keys for <b>BOTH</b> standalone plugins"></li>
-                            <li data-vi="Magic Material — tạo map PBR offline 1-click" data-en="Magic Material — 1-click offline PBR generator"></li>
-                            <li data-vi="Magic Merger — batch merge và smart-relink texture" data-en="Magic Merger — batch merge &amp; smart texture relinker"></li>
-                            <li data-vi="Tương thích 3ds Max 2023-2027+, render Corona / V-Ray" data-en="Supports 3ds Max 2023-2027+, Corona / V-Ray renderers"></li>
-                            <li data-vi="Cập nhật miễn phí trọn đời và hỗ trợ ưu tiên" data-en="Lifetime free updates &amp; priority developer support"></li>
+                            <li data-vi="Giấy phép trọn đời cho <b>CẢ HAI</b> plugin độc lập" data-en="Lifetime keys for <b>BOTH</b> standalone plugins">Giấy phép trọn đời cho <b>CẢ HAI</b> plugin độc lập</li>
+                            <li data-vi="Magic Material — tạo map PBR offline 1-click" data-en="Magic Material — 1-click offline PBR generator">Magic Material — tạo map PBR offline 1-click</li>
+                            <li data-vi="Magic Merger — batch merge và smart-relink texture" data-en="Magic Merger — batch merge &amp; smart texture relinker">Magic Merger — batch merge và smart-relink texture</li>
+                            <li data-vi="Tương thích 3ds Max 2023-2027+, render Corona / V-Ray" data-en="Supports 3ds Max 2023-2027+, Corona / V-Ray renderers">Tương thích 3ds Max 2023-2027+, render Corona / V-Ray</li>
+                            <li data-vi="Cập nhật miễn phí trọn đời và hỗ trợ ưu tiên" data-en="Lifetime free updates &amp; priority developer support">Cập nhật miễn phí trọn đời và hỗ trợ ưu tiên</li>
                         </ul>
                     </div>
                     <div class="cta-wrapper relative block w-full"  style="margin-top: 20px;">
-                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
+                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
                         <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
                     </div>
                 </div>
@@ -245,22 +246,22 @@ import Footer from '../components/Footer.astro';
     <!-- FAQ -->
     <section id="faq"  style="background: var(--bg-dark);">
         <div class="section-label">FAQ</div>
-        <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions"></h2>
-        <p class="section-desc" data-vi="Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Merger." data-en="Core technical aspects about how Magic Merger functions under the hood."></p>
+        <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions">Giải đáp câu hỏi kỹ thuật</h2>
+        <p class="section-desc" data-vi="Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Merger." data-en="Core technical aspects about how Magic Merger functions under the hood.">Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Merger.</p>
 
         <div class="faq-section">
             <div class="faq-grid">
                 <div class="faq-item">
-                    <h3 data-vi="Plugin hoạt động như thế nào khi kéo thả ảnh preview?" data-en="How does the plugin handle preview image drag-and-drops?"></h3>
-                    <p data-vi="Khi bạn kéo một tệp ảnh preview (.jpg/.png) vào plugin, thuật toán 'Companion Finder' sẽ tự động quét thư mục chứa ảnh đó để tìm các tệp tin model đi kèm (file .max, hoặc archive nén chứa .max) có cùng tên gốc. Sau đó, nó tự động đưa model tìm được vào hàng đợi để merge." data-en="When you drop a preview image (.jpg/.png) into the plugin, the 'Companion Finder' algorithm scans the folder to locate matching model files (.max, or archives containing .max) sharing the same root filename, automatically queuing them for import."></p>
+                    <h3 data-vi="Plugin hoạt động như thế nào khi kéo thả ảnh preview?" data-en="How does the plugin handle preview image drag-and-drops?">Plugin hoạt động như thế nào khi kéo thả ảnh preview?</h3>
+                    <p data-vi="Khi bạn kéo một tệp ảnh preview (.jpg/.png) vào plugin, thuật toán 'Companion Finder' sẽ tự động quét thư mục chứa ảnh đó để tìm các tệp tin model đi kèm (file .max, hoặc archive nén chứa .max) có cùng tên gốc. Sau đó, nó tự động đưa model tìm được vào hàng đợi để merge." data-en="When you drop a preview image (.jpg/.png) into the plugin, the 'Companion Finder' algorithm scans the folder to locate matching model files (.max, or archives containing .max) sharing the same root filename, automatically queuing them for import.">Khi bạn kéo một tệp ảnh preview (.jpg/.png) vào plugin, thuật toán 'Companion Finder' sẽ tự động quét thư mục chứa ảnh đó để tìm các tệp tin model đi kèm (file .max, hoặc archive nén chứa .max) có cùng tên gốc. Sau đó, nó tự động đưa model tìm được vào hàng đợi để merge.</p>
                 </div>
                 <div class="faq-item">
-                    <h3 data-vi="Làm thế nào để tính năng Smart Relink tìm thấy map bị thiếu?" data-en="How does Smart Relink locate missing texture maps?"></h3>
-                    <p data-vi="Magic Merger tự động lưu trữ cơ sở dữ liệu đường dẫn map trong thư viện của bạn (chỉ số index tối đa 50k file). Khi merge model mới, plugin sẽ phân tích cấu trúc vendor gốc (như Maxtree, Poliigon, Chaos Cosmos...) và đối chiếu với cơ sở dữ liệu để tự động thiết lập lại đường dẫn map chính xác mà không cần người dùng thao tác." data-en="Magic Merger maintains a local path index database (up to 50k files). When merging a model, it automatically parses major vendor folder conventions and redirects missing paths to correct files, restoring V-Ray/Corona material textures instantly."></p>
+                    <h3 data-vi="Làm thế nào để tính năng Smart Relink tìm thấy map bị thiếu?" data-en="How does Smart Relink locate missing texture maps?">Làm thế nào để tính năng Smart Relink tìm thấy map bị thiếu?</h3>
+                    <p data-vi="Magic Merger tự động lưu trữ cơ sở dữ liệu đường dẫn map trong thư viện của bạn (chỉ số index tối đa 50k file). Khi merge model mới, plugin sẽ phân tích cấu trúc vendor gốc (như Maxtree, Poliigon, Chaos Cosmos...) và đối chiếu với cơ sở dữ liệu để tự động thiết lập lại đường dẫn map chính xác mà không cần người dùng thao tác." data-en="Magic Merger maintains a local path index database (up to 50k files). When merging a model, it automatically parses major vendor folder conventions and redirects missing paths to correct files, restoring V-Ray/Corona material textures instantly.">Magic Merger tự động lưu trữ cơ sở dữ liệu đường dẫn map trong thư viện của bạn (chỉ số index tối đa 50k file). Khi merge model mới, plugin sẽ phân tích cấu trúc vendor gốc (như Maxtree, Poliigon, Chaos Cosmos...) và đối chiếu với cơ sở dữ liệu để tự động thiết lập lại đường dẫn map chính xác mà không cần người dùng thao tác.</p>
                 </div>
                 <div class="faq-item">
-                    <h3 data-vi="Tính năng gán Layer và xếp lưới (Grid Layout) hoạt động như thế nào?" data-en="How does the Grid Layout and layer grouping work?"></h3>
-                    <p data-vi="Tính năng Auto Grid xếp các model merge theo hàng lối ngăn nắp trên mặt phẳng tọa độ dựa theo khoảng cách được thiết lập trên thanh trượt. Auto Layer phân tích từ khóa và phân bổ các mô hình vừa nhập vào các layer được thiết lập sẵn trong Max để bạn dễ quản lý ẩn/hiện." data-en="Auto Grid places imported assets sequentially in a matrix layout on the ground plane using the spacing defined on the slider. Auto Layer assigns models to preset 3ds Max layer channels by analyzing file names and keywords."></p>
+                    <h3 data-vi="Tính năng gán Layer và xếp lưới (Grid Layout) hoạt động như thế nào?" data-en="How does the Grid Layout and layer grouping work?">Tính năng gán Layer và xếp lưới (Grid Layout) hoạt động như thế nào?</h3>
+                    <p data-vi="Tính năng Auto Grid xếp các model merge theo hàng lối ngăn nắp trên mặt phẳng tọa độ dựa theo khoảng cách được thiết lập trên thanh trượt. Auto Layer phân tích từ khóa và phân bổ các mô hình vừa nhập vào các layer được thiết lập sẵn trong Max để bạn dễ quản lý ẩn/hiện." data-en="Auto Grid places imported assets sequentially in a matrix layout on the ground plane using the spacing defined on the slider. Auto Layer assigns models to preset 3ds Max layer channels by analyzing file names and keywords.">Tính năng Auto Grid xếp các model merge theo hàng lối ngăn nắp trên mặt phẳng tọa độ dựa theo khoảng cách được thiết lập trên thanh trượt. Auto Layer phân tích từ khóa và phân bổ các mô hình vừa nhập vào các layer được thiết lập sẵn trong Max để bạn dễ quản lý ẩn/hiện.</p>
                 </div>
             </div>
         </div>
@@ -271,27 +272,6 @@ import Footer from '../components/Footer.astro';
 
     <!-- LANGUAGE SWITCH & INTERACTIVE MOCKUP JS -->
         <script is:inline>
-        let currentLang = 'vi';
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-            });
-            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = text;
-                } else {
-                    el.innerHTML = text;
-                }
-            });
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            setLang('vi');
-        });
 
         // --- INTERACTIVE PIPELINE DEMO TIMELINE LOGIC ---
         let animTimeout;

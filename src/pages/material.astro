@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
-<Layout title="Magic Material — Tạo PBR Map tự động 1-Click | ArchiH3" description="Plugin tạo Normal, Roughness, AO, Displacement map từ ảnh diffuse. 100% offline, V-Ray & Corona.">
+<Layout title="Magic Material — Tạo PBR Map tự động 1-Click | ArchiH3" description="Plugin tạo Normal, Roughness, AO, Displacement map từ ảnh diffuse. 100% offline, V-Ray & Corona." ogImage="/og/og-material.jpg">
 <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Magic Material", "operatingSystem": "Windows", "applicationCategory": "DesignApplication", "applicationSubCategory": "3ds Max Plugin", "description": "Plugin tạo Normal, Roughness, AO, Displacement map từ ảnh diffuse. 100% offline, V-Ray & Corona.", "url": "https://archih3.com/material/", "image": "https://archih3.com/og/og-material.jpg", "author": {"@type": "Person", "name": "Hồ Hữu Hoàng", "jobTitle": "Architect · 3ds Max Plugin Developer"}, "publisher": {"@type": "Organization", "name": "HKD Dịch vụ Kiến Trúc ArchiH3", "url": "https://archih3.com"}, "offers": {"@type": "Offer", "price": "300000", "priceCurrency": "VND", "availability": "https://schema.org/InStock", "url": "https://archih3.com/material/#pricing"}}</script>
 
 </Fragment>
 
@@ -19,11 +20,11 @@ import Footer from '../components/Footer.astro';
     <!-- HERO -->
     <section class="hero">
         <div class="hero-badge" data-vi="100% OFFLINE PBR MATERIAL CREATOR" data-en="100% OFFLINE PBR MATERIAL CREATOR">100% OFFLINE PBR MATERIAL CREATOR</div>
-        <h1 data-vi="Khơi nguồn chất liệu.<br><span class='teal'>Tạo map siêu tốc.</span>" data-en="Unleash materials.<br><span class='teal'>Instant PBR setup.</span>"></h1>
-        <p class="hero-sub" data-vi="Plugin chuyên biệt tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement) từ ảnh 2D và thiết lập vật liệu thông minh cho 3ds Max. Tương thích sâu với V-Ray và Corona, giúp bạn bỏ qua các bước dựng map thủ công nhàm chán." data-en="Specialized plugin to automatically generate a complete set of PBR maps (Normal, Displacement, Roughness, AO) and set up material networks in 3ds Max. Deeply integrated with V-Ray and Corona to eliminate tedious manual workflows."></p>
+        <h1 data-vi="Khơi nguồn chất liệu.<br><span class='teal'>Tạo map siêu tốc.</span>" data-en="Unleash materials.<br><span class='teal'>Instant PBR setup.</span>">Khơi nguồn chất liệu.<br><span class='teal'>Tạo map siêu tốc.</span></h1>
+        <p class="hero-sub" data-vi="Plugin chuyên biệt tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement) từ ảnh 2D và thiết lập vật liệu thông minh cho 3ds Max. Tương thích sâu với V-Ray và Corona, giúp bạn bỏ qua các bước dựng map thủ công nhàm chán." data-en="Specialized plugin to automatically generate a complete set of PBR maps (Normal, Displacement, Roughness, AO) and set up material networks in 3ds Max. Deeply integrated with V-Ray and Corona to eliminate tedious manual workflows.">Plugin chuyên biệt tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement) từ ảnh 2D và thiết lập vật liệu thông minh cho 3ds Max. Tương thích sâu với V-Ray và Corona, giúp bạn bỏ qua các bước dựng map thủ công nhàm chán.</p>
         <div class="hero-cta">
             <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 300k" data-en="Get Lifetime — $12">Mua bản quyền — 300k</a>
-            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Vui lòng liên hệ DEV qua Facebook để mua hoặc tải bộ cài bản quyền!');" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-outline" data-vi="Liên hệ mua qua Facebook" data-en="Buy via Facebook">Liên hệ mua qua Facebook</a>
         </div>
     </section>
 
@@ -31,8 +32,8 @@ import Footer from '../components/Footer.astro';
         <!-- INTERFACE SHOWCASE -->
     <section id="interface"  class="bg-surface">
         <div class="section-label" data-vi="GIAO DIỆN CÔNG CỤ" data-en="INTERFACE SHOWCASE">GIAO DIỆN CÔNG CỤ</div>
-        <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI"></h2>
-        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
+        <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI">Trực quan, dễ sử dụng</h2>
+        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max.">Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max.</p>
         
         
         <div class="pipeline-wrapper">
@@ -119,17 +120,17 @@ import Footer from '../components/Footer.astro';
             <div class="step-item" id="pl-step-1" onclick="playStep1()">
                 <div class="step-num">01</div>
                 <h3 data-vi="Kéo &amp; Thả Ảnh" data-en="Drag &amp; Drop Image">Kéo &amp; Thả Ảnh</h3>
-                <p data-vi="Kéo ảnh diffuse hoặc file nén zip/rar của vật liệu thả thẳng vào giao diện plugin." data-en="Drag your diffuse texture or a compressed zip/rar archive directly into the plugin window."></p>
+                <p data-vi="Kéo ảnh diffuse hoặc file nén zip/rar của vật liệu thả thẳng vào giao diện plugin." data-en="Drag your diffuse texture or a compressed zip/rar archive directly into the plugin window.">Kéo ảnh diffuse hoặc file nén zip/rar của vật liệu thả thẳng vào giao diện plugin.</p>
             </div>
             <div class="step-item" id="pl-step-2" onclick="playStep2()">
                 <div class="step-num">02</div>
                 <h3 data-vi="Tinh Chỉnh Cài Đặt" data-en="Adjust Parameters">Tinh Chỉnh Cài Đặt</h3>
-                <p data-vi="Bật/tắt chế độ Seamless Gaussian, Auto UVW, chọn loại vật liệu Render và tỉ lệ Tiling mong muốn." data-en="Toggle Seamless Gaussian, Auto UVW, select the rendering target, and adjust your tiling scale."></p>
+                <p data-vi="Bật/tắt chế độ Seamless Gaussian, Auto UVW, chọn loại vật liệu Render và tỉ lệ Tiling mong muốn." data-en="Toggle Seamless Gaussian, Auto UVW, select the rendering target, and adjust your tiling scale.">Bật/tắt chế độ Seamless Gaussian, Auto UVW, chọn loại vật liệu Render và tỉ lệ Tiling mong muốn.</p>
             </div>
             <div class="step-item" id="pl-step-3" onclick="playStep3()">
                 <div class="step-num">03</div>
                 <h3 data-vi="Áp dụng 1-Click" data-en="Apply Material">Áp dụng 1-Click</h3>
-                <p data-vi="Nhấn nút Generate &amp; Apply. Vật liệu được tự động tạo và gán thẳng lên đối tượng đang chọn." data-en="Click Generate &amp; Apply. The material is instantly built and assigned to the selected 3D object."></p>
+                <p data-vi="Nhấn nút Generate &amp; Apply. Vật liệu được tự động tạo và gán thẳng lên đối tượng đang chọn." data-en="Click Generate &amp; Apply. The material is instantly built and assigned to the selected 3D object.">Nhấn nút Generate &amp; Apply. Vật liệu được tự động tạo và gán thẳng lên đối tượng đang chọn.</p>
             </div>
         </div>
     
@@ -139,45 +140,45 @@ import Footer from '../components/Footer.astro';
     <!-- FEATURES -->
     <section id="features">
         <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="KEY FEATURES">TÍNH NĂNG NỔI BẬT</div>
-        <h2 class="section-title" data-vi="Tạo vật liệu PBR tự động chỉ với 1-Click" data-en="1-Click Automatic PBR Material Setup"></h2>
-        <p class="section-desc" data-vi="Biến bất kỳ ảnh texture đơn lẻ nào thành bộ vật liệu PBR hoàn chỉnh với đầy đủ các kênh phản xạ, độ gồ ghề và chiều sâu chỉ trong vài giây." data-en="Turn any single texture image into a complete PBR material set with reflections, roughness, and depth maps in seconds."></p>
+        <h2 class="section-title" data-vi="Tạo vật liệu PBR tự động chỉ với 1-Click" data-en="1-Click Automatic PBR Material Setup">Tạo vật liệu PBR tự động chỉ với 1-Click</h2>
+        <p class="section-desc" data-vi="Biến bất kỳ ảnh texture đơn lẻ nào thành bộ vật liệu PBR hoàn chỉnh với đầy đủ các kênh phản xạ, độ gồ ghề và chiều sâu chỉ trong vài giây." data-en="Turn any single texture image into a complete PBR material set with reflections, roughness, and depth maps in seconds.">Biến bất kỳ ảnh texture đơn lẻ nào thành bộ vật liệu PBR hoàn chỉnh với đầy đủ các kênh phản xạ, độ gồ ghề và chiều sâu chỉ trong vài giây.</p>
         
         <div class="features-grid">
             <!-- Feature 1 -->
             <div class="feature-card">
                 <div class="feature-icon">🧱</div>
                 <h3 data-vi="Tự động hóa 1-Click PBR" data-en="1-Click PBR Automation">Tự động hóa 1-Click PBR</h3>
-                <p data-vi="Kéo thả 1 ảnh diffuse duy nhất vào. Hệ thống tự động phân tích độ tương phản, sắc độ màu để dựng trọn bộ 4 bản đồ map chất lượng cao: Normal, Displacement, Roughness, AO." data-en="Drag and drop a single diffuse image. The system automatically analyzes contrast and chromatic ranges to generate 4 high-quality maps: Normal, Displacement, Roughness, and AO."></p>
+                <p data-vi="Kéo thả 1 ảnh diffuse duy nhất vào. Hệ thống tự động phân tích độ tương phản, sắc độ màu để dựng trọn bộ 4 bản đồ map chất lượng cao: Normal, Displacement, Roughness, AO." data-en="Drag and drop a single diffuse image. The system automatically analyzes contrast and chromatic ranges to generate 4 high-quality maps: Normal, Displacement, Roughness, and AO.">Kéo thả 1 ảnh diffuse duy nhất vào. Hệ thống tự động phân tích độ tương phản, sắc độ màu để dựng trọn bộ 4 bản đồ map chất lượng cao: Normal, Displacement, Roughness, AO.</p>
             </div>
             <!-- Feature 2 -->
             <div class="feature-card">
                 <div class="feature-icon">🛡️</div>
                 <h3 data-vi="Xử lý 100% Offline" data-en="100% Offline Engine">Xử lý 100% Offline</h3>
-                <p data-vi="Tốc độ xử lý siêu tốc ngay trên máy tính của bạn mà không cần kết nối internet hay máy chủ bên thứ ba. Bảo mật dữ liệu tuyệt đối, không tải ảnh lên đám mây." data-en="Unmatched processing speed running natively on your hardware without any internet or cloud servers. Keeps your project files completely private, zero cloud uploads."></p>
+                <p data-vi="Tốc độ xử lý siêu tốc ngay trên máy tính của bạn mà không cần kết nối internet hay máy chủ bên thứ ba. Bảo mật dữ liệu tuyệt đối, không tải ảnh lên đám mây." data-en="Unmatched processing speed running natively on your hardware without any internet or cloud servers. Keeps your project files completely private, zero cloud uploads.">Tốc độ xử lý siêu tốc ngay trên máy tính của bạn mà không cần kết nối internet hay máy chủ bên thứ ba. Bảo mật dữ liệu tuyệt đối, không tải ảnh lên đám mây.</p>
             </div>
             <!-- Feature 3 -->
             <div class="feature-card">
                 <div class="feature-icon">🔍</div>
                 <h3 data-vi="Nhận diện thư viện thông minh" data-en="Smart Library Detector">Nhận diện thư viện thông minh</h3>
-                <p data-vi="Tự động nhận diện cấu trúc tên của các nhà cung cấp texture lớn (CGAxis, Poliigon, Megascans, ambientCG, Poly Haven). Chỉ tự sinh những bản đồ map còn thiếu để tối ưu hóa thời gian." data-en="Auto-detects naming conventions of major texture vendors (CGAxis, Poliigon, Megascans, ambientCG, Poly Haven). Only generates missing maps to save processing time."></p>
+                <p data-vi="Tự động nhận diện cấu trúc tên của các nhà cung cấp texture lớn (CGAxis, Poliigon, Megascans, ambientCG, Poly Haven). Chỉ tự sinh những bản đồ map còn thiếu để tối ưu hóa thời gian." data-en="Auto-detects naming conventions of major texture vendors (CGAxis, Poliigon, Megascans, ambientCG, Poly Haven). Only generates missing maps to save processing time.">Tự động nhận diện cấu trúc tên của các nhà cung cấp texture lớn (CGAxis, Poliigon, Megascans, ambientCG, Poly Haven). Chỉ tự sinh những bản đồ map còn thiếu để tối ưu hóa thời gian.</p>
             </div>
             <!-- Feature 4 -->
             <div class="feature-card">
                 <div class="feature-icon">🎛️</div>
                 <h3 data-vi="Khử vết ghép Seamless" data-en="Seamless Texture Blending">Khử vết ghép Seamless</h3>
-                <p data-vi="Xóa bỏ các đường phân tách phân mảnh lộ vân gạch, gỗ bằng bộ lọc mượt mà thông minh. Giúp bạn tạo ra những vật liệu lặp vô hạn (tileable) tự nhiên, chân thực nhất." data-en="Remove visible pattern seam lines using smart blending filters. Helps you create organic, highly realistic tileable materials with ease."></p>
+                <p data-vi="Xóa bỏ các đường phân tách phân mảnh lộ vân gạch, gỗ bằng bộ lọc mượt mà thông minh. Giúp bạn tạo ra những vật liệu lặp vô hạn (tileable) tự nhiên, chân thực nhất." data-en="Remove visible pattern seam lines using smart blending filters. Helps you create organic, highly realistic tileable materials with ease.">Xóa bỏ các đường phân tách phân mảnh lộ vân gạch, gỗ bằng bộ lọc mượt mà thông minh. Giúp bạn tạo ra những vật liệu lặp vô hạn (tileable) tự nhiên, chân thực nhất.</p>
             </div>
             <!-- Feature 5 -->
             <div class="feature-card">
                 <div class="feature-icon">⚙️</div>
                 <h3 data-vi="Tự động dựng node V-Ray &amp; Corona" data-en="Auto V-Ray &amp; Corona Networks">Tự động dựng node V-Ray &amp; Corona</h3>
-                <p data-vi="Tự động nhận diện trình render hiện hành để thiết lập và kết nối mạng lưới node vật liệu vật lý tương ứng chuẩn xác chỉ trong nháy mắt, gán trực tiếp lên đối tượng." data-en="Automatically detects the active renderer to set up and connect physical material node networks accurately, assigning them directly to objects in viewport."></p>
+                <p data-vi="Tự động nhận diện trình render hiện hành để thiết lập và kết nối mạng lưới node vật liệu vật lý tương ứng chuẩn xác chỉ trong nháy mắt, gán trực tiếp lên đối tượng." data-en="Automatically detects the active renderer to set up and connect physical material node networks accurately, assigning them directly to objects in viewport.">Tự động nhận diện trình render hiện hành để thiết lập và kết nối mạng lưới node vật liệu vật lý tương ứng chuẩn xác chỉ trong nháy mắt, gán trực tiếp lên đối tượng.</p>
             </div>
             <!-- Feature 6 -->
             <div class="feature-card">
                 <div class="feature-icon">📐</div>
                 <h3 data-vi="Auto UVW &amp; Điều khiển trực quan" data-en="Auto UVW &amp; Tiling Control">Auto UVW &amp; Điều khiển trực quan</h3>
-                <p data-vi="Tích hợp bộ áp nhanh tọa độ UVW Map và tinh chỉnh tỉ lệ lặp (tiling), xoay góc (rotation) vật liệu trực quan trực tiếp trên giao diện plugin mà không cần mở bảng Material Editor." data-en="Integrated quick UVW mapping and controls for tiling and rotation directly in the plugin window, bypassing the need to open the 3ds Max Material Editor."></p>
+                <p data-vi="Tích hợp bộ áp nhanh tọa độ UVW Map và tinh chỉnh tỉ lệ lặp (tiling), xoay góc (rotation) vật liệu trực quan trực tiếp trên giao diện plugin mà không cần mở bảng Material Editor." data-en="Integrated quick UVW mapping and controls for tiling and rotation directly in the plugin window, bypassing the need to open the 3ds Max Material Editor.">Tích hợp bộ áp nhanh tọa độ UVW Map và tinh chỉnh tỉ lệ lặp (tiling), xoay góc (rotation) vật liệu trực quan trực tiếp trên giao diện plugin mà không cần mở bảng Material Editor.</p>
             </div>
         </div>
     </section>
@@ -187,8 +188,8 @@ import Footer from '../components/Footer.astro';
     <!-- PRICING -->
     <section id="pricing">
         <div class="section-label" data-vi="BẢNG GIÁ KHUYẾN MÃI" data-en="LAUNCH PRICE">BẢNG GIÁ KHUYẾN MÃI</div>
-        <h2 class="section-title" data-vi="Sở hữu vĩnh viễn. Mua một lần." data-en="Perpetual Pro License. Pay once."></h2>
-        <p class="section-desc" data-vi="Cơ hội sở hữu bản quyền Magic Material vĩnh viễn với giá ưu đãi cực lớn nhân dịp mở bán." data-en="Special introductory pricing to own a perpetual license of Magic Material."></p>
+        <h2 class="section-title" data-vi="Sở hữu vĩnh viễn. Mua một lần." data-en="Perpetual Pro License. Pay once.">Sở hữu vĩnh viễn. Mua một lần.</h2>
+        <p class="section-desc" data-vi="Cơ hội sở hữu bản quyền Magic Material vĩnh viễn với giá ưu đãi cực lớn nhân dịp mở bán." data-en="Special introductory pricing to own a perpetual license of Magic Material.">Cơ hội sở hữu bản quyền Magic Material vĩnh viễn với giá ưu đãi cực lớn nhân dịp mở bán.</p>
 
         <div class="pricing-section">
             <div class="pricing-grid">
@@ -197,18 +198,18 @@ import Footer from '../components/Footer.astro';
                     <div>
                         <div class="price-badge">LIFETIME KEY</div>
                         <h3 data-vi="Magic Material Standalone" data-en="Magic Material Standalone">Magic Material Standalone</h3>
-                        <div class="price-amount" data-vi="<del>999.000đ</del> 300.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $12 <span>/ lifetime</span>"></div>
+                        <div class="price-amount" data-vi="<del>999.000đ</del> 300.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $12 <span>/ lifetime</span>"><del>999.000đ</del> 300.000đ <span>/ vĩnh viễn</span></div>
                         <div class="price-period" data-vi="Khuyến mãi đặc biệt nhân dịp mở bán" data-en="Special introductory discount">Khuyến mãi đặc biệt nhân dịp mở bán</div>
                         
                         <ul class="price-features">
-                            <li data-vi="Tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement)" data-en="Auto generate full set of PBR maps (Normal, Roughness, AO, Displacement)"></li>
-                            <li data-vi="Nhận diện tự động thông minh các loại map có sẵn từ thư viện" data-en="Smart automatic detection of existing maps from vendor libraries"></li>
-                            <li data-vi="Thiết lập mạng lưới vật liệu Corona &amp; V-Ray tự động" data-en="Automatic Corona &amp; V-Ray material network setup"></li>
-                            <li data-vi="Xử lý khuyết tật phân tách hoa văn (Seamless) nhanh chóng chỉ 1-Click" data-en="1-click seamless texture edge blending"></li>
-                            <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật miễn phí trọn đời" data-en="Perpetual license with lifetime free updates"></li>
+                            <li data-vi="Tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement)" data-en="Auto generate full set of PBR maps (Normal, Roughness, AO, Displacement)">Tự động tạo trọn bộ bản đồ map PBR (Normal, Roughness, AO, Displacement)</li>
+                            <li data-vi="Nhận diện tự động thông minh các loại map có sẵn từ thư viện" data-en="Smart automatic detection of existing maps from vendor libraries">Nhận diện tự động thông minh các loại map có sẵn từ thư viện</li>
+                            <li data-vi="Thiết lập mạng lưới vật liệu Corona &amp; V-Ray tự động" data-en="Automatic Corona &amp; V-Ray material network setup">Thiết lập mạng lưới vật liệu Corona &amp; V-Ray tự động</li>
+                            <li data-vi="Xử lý khuyết tật phân tách hoa văn (Seamless) nhanh chóng chỉ 1-Click" data-en="1-click seamless texture edge blending">Xử lý khuyết tật phân tách hoa văn (Seamless) nhanh chóng chỉ 1-Click</li>
+                            <li data-vi="Bản quyền sử dụng vĩnh viễn, cập nhật miễn phí trọn đời" data-en="Perpetual license with lifetime free updates">Bản quyền sử dụng vĩnh viễn, cập nhật miễn phí trọn đời</li>
                         </ul>
                     </div>
-                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase" style="margin-top:20px;">Liên hệ mua bản quyền</a>
+                    <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase" style="margin-top:20px;">Liên hệ mua bản quyền</a>
                 </div>
 
                 <!-- Card 2: Combo -->
@@ -216,19 +217,19 @@ import Footer from '../components/Footer.astro';
                     <div>
                         <div class="price-badge text-primary"  style="background:var(--primary-glow);">COMBO OFFER</div>
                         <h3 data-vi="Combo Material &amp; Merger" data-en="Combo Material &amp; Merger">Combo Material &amp; Merger</h3>
-                        <div class="price-amount" data-vi="<del>1.998.000đ</del> 500.000đ <span>/ vĩnh viễn</span>" data-en="<del>$78</del> $20 <span>/ lifetime</span>"></div>
+                        <div class="price-amount" data-vi="<del>1.998.000đ</del> 500.000đ <span>/ vĩnh viễn</span>" data-en="<del>$78</del> $20 <span>/ lifetime</span>"><del>1.998.000đ</del> 500.000đ <span>/ vĩnh viễn</span></div>
                         <div class="price-period" data-vi="Gói combo tiết kiệm đặc biệt lên đến 75%" data-en="Special bundle discount - Save up to 75%">Gói combo tiết kiệm đặc biệt lên đến 75%</div>
                         
                         <ul class="price-features">
-                            <li data-vi="Giấy phép trọn đời cho <b>CẢ HAI</b> plugin độc lập" data-en="Lifetime keys for <b>BOTH</b> standalone plugins"></li>
-                            <li data-vi="Magic Material — tạo map PBR offline 1-click" data-en="Magic Material — 1-click offline PBR generator"></li>
-                            <li data-vi="Magic Merger — batch merge và smart-relink texture" data-en="Magic Merger — batch merge &amp; smart texture relinker"></li>
-                            <li data-vi="Tương thích 3ds Max 2023-2027+, render Corona / V-Ray" data-en="Supports 3ds Max 2023-2027+, Corona / V-Ray renderers"></li>
-                            <li data-vi="Cập nhật miễn phí trọn đời và hỗ trợ ưu tiên" data-en="Lifetime free updates &amp; priority developer support"></li>
+                            <li data-vi="Giấy phép trọn đời cho <b>CẢ HAI</b> plugin độc lập" data-en="Lifetime keys for <b>BOTH</b> standalone plugins">Giấy phép trọn đời cho <b>CẢ HAI</b> plugin độc lập</li>
+                            <li data-vi="Magic Material — tạo map PBR offline 1-click" data-en="Magic Material — 1-click offline PBR generator">Magic Material — tạo map PBR offline 1-click</li>
+                            <li data-vi="Magic Merger — batch merge và smart-relink texture" data-en="Magic Merger — batch merge &amp; smart texture relinker">Magic Merger — batch merge và smart-relink texture</li>
+                            <li data-vi="Tương thích 3ds Max 2023-2027+, render Corona / V-Ray" data-en="Supports 3ds Max 2023-2027+, Corona / V-Ray renderers">Tương thích 3ds Max 2023-2027+, render Corona / V-Ray</li>
+                            <li data-vi="Cập nhật miễn phí trọn đời và hỗ trợ ưu tiên" data-en="Lifetime free updates &amp; priority developer support">Cập nhật miễn phí trọn đời và hỗ trợ ưu tiên</li>
                         </ul>
                     </div>
                     <div class="cta-wrapper relative block w-full"  style="margin-top: 20px;">
-                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
+                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua Combo" data-en="Contact for Combo">Liên hệ mua Combo</a>
                         <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
                     </div>
                 </div>
@@ -240,13 +241,13 @@ import Footer from '../components/Footer.astro';
     <!-- TUTORIAL / VIDEO -->
     <section id="workflow"  class="bg-surface">
         <div class="section-label" data-vi="HƯỚNG DẪN SỬ DỤNG" data-en="TUTORIAL">HƯỚNG DẪN SỬ DỤNG</div>
-        <h2 class="section-title" data-vi="Chi tiết cách dùng Magic Material" data-en="How to use Magic Material"></h2>
-        <p class="section-desc" data-vi="Video hướng dẫn chi tiết cách tạo và gán vật liệu tự động trong 3ds Max." data-en="Detailed video tutorial on generating and assigning PBR materials automatically in 3ds Max."></p>
+        <h2 class="section-title" data-vi="Chi tiết cách dùng Magic Material" data-en="How to use Magic Material">Chi tiết cách dùng Magic Material</h2>
+        <p class="section-desc" data-vi="Video hướng dẫn chi tiết cách tạo và gán vật liệu tự động trong 3ds Max." data-en="Detailed video tutorial on generating and assigning PBR materials automatically in 3ds Max.">Video hướng dẫn chi tiết cách tạo và gán vật liệu tự động trong 3ds Max.</p>
         
         <div class="video-section relative"  style="margin-top: 40px; border-radius: 12px; overflow: hidden; max-width: 1000px; margin-left: auto; margin-right: auto;">
             <div class="video-box" id="featured-video">
             <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/oa2y-5QDA7A?rel=0&modestbranding=1&color=white" title="AH3 Magic Material Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  class="absolute inset-0"></iframe>
-            <a id="yt-fallback" href="https://www.youtube.com/watch?v=oa2y-5QDA7A" target="_blank"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer;">
+            <a id="yt-fallback" href="https://www.youtube.com/watch?v=oa2y-5QDA7A" target="_blank" rel="noopener"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer;">
                 <img loading="lazy" src="https://img.youtube.com/vi/oa2y-5QDA7A/maxresdefault.jpg" alt="AH3 Magic Material Demo"  onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'" class="w-full" style="height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;">
                 <div  class="absolute inset-0 flex items-center justify-center">
                     <div  class="flex items-center justify-center" style="width:72px; height:72px; border-radius:50%; background:rgba(77, 182, 172, 0.9); box-shadow:0 4px 20px rgba(0,0,0,0.4);">
@@ -263,22 +264,22 @@ import Footer from '../components/Footer.astro';
     <!-- FAQ -->
     <section id="faq"  style="background: var(--bg-dark);">
         <div class="section-label">FAQ</div>
-        <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions"></h2>
-        <p class="section-desc" data-vi="Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Material." data-en="Core technical aspects about how Magic Material functions under the hood."></p>
+        <h2 class="section-title" data-vi="Giải đáp câu hỏi kỹ thuật" data-en="Frequently Asked Questions">Giải đáp câu hỏi kỹ thuật</h2>
+        <p class="section-desc" data-vi="Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Material." data-en="Core technical aspects about how Magic Material functions under the hood.">Các chi tiết kỹ thuật cốt lõi giúp bạn hiểu rõ về cơ chế hoạt động của Magic Material.</p>
 
         <div class="faq-section">
             <div class="faq-grid">
                 <div class="faq-item">
-                    <h3 data-vi="Plugin tương thích với những trình render và phiên bản 3ds Max nào?" data-en="Which 3ds Max versions and renderers are supported?"></h3>
-                    <p data-vi="Magic Material được tối ưu hóa và tương thích hoàn toàn với các phiên bản 3ds Max từ 2023 đến 2027+. Plugin tự động cấu hình và thiết lập mạng lưới node vật liệu chuẩn xác cho cả Corona Renderer (CoronaPhysicalMtl) và V-Ray (VRayMtl) dựa trên thiết lập render hiện tại của bạn." data-en="Magic Material is fully compatible with 3ds Max 2023 up to 2027+. The plugin auto-detects and sets up material networks for both Corona Renderer (CoronaPhysicalMtl) and V-Ray (VRayMtl) based on your active renderer."></p>
+                    <h3 data-vi="Plugin tương thích với những trình render và phiên bản 3ds Max nào?" data-en="Which 3ds Max versions and renderers are supported?">Plugin tương thích với những trình render và phiên bản 3ds Max nào?</h3>
+                    <p data-vi="Magic Material được tối ưu hóa và tương thích hoàn toàn với các phiên bản 3ds Max từ 2023 đến 2027+. Plugin tự động cấu hình và thiết lập mạng lưới node vật liệu chuẩn xác cho cả Corona Renderer (CoronaPhysicalMtl) và V-Ray (VRayMtl) dựa trên thiết lập render hiện tại của bạn." data-en="Magic Material is fully compatible with 3ds Max 2023 up to 2027+. The plugin auto-detects and sets up material networks for both Corona Renderer (CoronaPhysicalMtl) and V-Ray (VRayMtl) based on your active renderer.">Magic Material được tối ưu hóa và tương thích hoàn toàn với các phiên bản 3ds Max từ 2023 đến 2027+. Plugin tự động cấu hình và thiết lập mạng lưới node vật liệu chuẩn xác cho cả Corona Renderer (CoronaPhysicalMtl) và V-Ray (VRayMtl) dựa trên thiết lập render hiện tại của bạn.</p>
                 </div>
                 <div class="faq-item">
-                    <h3 data-vi="Tôi có thể kéo thả những loại file nào vào plugin?" data-en="What files can I drag and drop into the plugin?"></h3>
-                    <p data-vi="Bạn có thể kéo thả trực tiếp các định dạng ảnh đơn lẻ (JPG, PNG, TGA), toàn bộ thư mục chứa map của dự án, hoặc thậm chí là các tệp nén (.zip, .rar, .7z). Plugin sẽ tự động phân tích cấu trúc, nhận dạng map có sẵn và trích xuất tài nguyên phù hợp." data-en="You can drag and drop single image formats (JPG, PNG, TGA), entire texture folders, or compressed archives (.zip, .rar, .7z) directly. The plugin automatically parses the files, reads existing maps, and extracts them."></p>
+                    <h3 data-vi="Tôi có thể kéo thả những loại file nào vào plugin?" data-en="What files can I drag and drop into the plugin?">Tôi có thể kéo thả những loại file nào vào plugin?</h3>
+                    <p data-vi="Bạn có thể kéo thả trực tiếp các định dạng ảnh đơn lẻ (JPG, PNG, TGA), toàn bộ thư mục chứa map của dự án, hoặc thậm chí là các tệp nén (.zip, .rar, .7z). Plugin sẽ tự động phân tích cấu trúc, nhận dạng map có sẵn và trích xuất tài nguyên phù hợp." data-en="You can drag and drop single image formats (JPG, PNG, TGA), entire texture folders, or compressed archives (.zip, .rar, .7z) directly. The plugin automatically parses the files, reads existing maps, and extracts them.">Bạn có thể kéo thả trực tiếp các định dạng ảnh đơn lẻ (JPG, PNG, TGA), toàn bộ thư mục chứa map của dự án, hoặc thậm chí là các tệp nén (.zip, .rar, .7z). Plugin sẽ tự động phân tích cấu trúc, nhận dạng map có sẵn và trích xuất tài nguyên phù hợp.</p>
                 </div>
                 <div class="faq-item">
-                    <h3 data-vi="Việc tạo và gán vật liệu có làm thay đổi hay làm hỏng mô hình gốc không?" data-en="Does applying materials risk modifying or ruining the original model?"></h3>
-                    <p data-vi="Hoàn toàn không. Magic Material hoạt động theo nguyên tắc an toàn tuyệt đối: bảo toàn nguyên vẹn tọa độ map (UVW coordinates) và cấu trúc lưới gốc của mô hình. Mọi thao tác gán vật liệu đều hỗ trợ hoàn tác 100% bằng phím Ctrl+Z để bạn yên tâm thiết kế." data-en="Not at all. Magic Material works with a strict safety-first approach: original mapping coordinates (UVW) and mesh geometry are 100% preserved. All material application actions support standard Ctrl+Z undo keys to keep your scene completely safe."></p>
+                    <h3 data-vi="Việc tạo và gán vật liệu có làm thay đổi hay làm hỏng mô hình gốc không?" data-en="Does applying materials risk modifying or ruining the original model?">Việc tạo và gán vật liệu có làm thay đổi hay làm hỏng mô hình gốc không?</h3>
+                    <p data-vi="Hoàn toàn không. Magic Material hoạt động theo nguyên tắc an toàn tuyệt đối: bảo toàn nguyên vẹn tọa độ map (UVW coordinates) và cấu trúc lưới gốc của mô hình. Mọi thao tác gán vật liệu đều hỗ trợ hoàn tác 100% bằng phím Ctrl+Z để bạn yên tâm thiết kế." data-en="Not at all. Magic Material works with a strict safety-first approach: original mapping coordinates (UVW) and mesh geometry are 100% preserved. All material application actions support standard Ctrl+Z undo keys to keep your scene completely safe.">Hoàn toàn không. Magic Material hoạt động theo nguyên tắc an toàn tuyệt đối: bảo toàn nguyên vẹn tọa độ map (UVW coordinates) và cấu trúc lưới gốc của mô hình. Mọi thao tác gán vật liệu đều hỗ trợ hoàn tác 100% bằng phím Ctrl+Z để bạn yên tâm thiết kế.</p>
                 </div>
             </div>
         </div>
@@ -290,27 +291,6 @@ import Footer from '../components/Footer.astro';
     <!-- LANGUAGE SWITCH, PIPELINE & INTERACTIVE MOCKUP JS -->
     <script is:inline>
 
-        let currentLang = 'vi';
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-            });
-            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = text;
-                } else {
-                    el.innerHTML = text;
-                }
-            });
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            setLang('vi');
-        });
 
         let animTimeout = null;
 

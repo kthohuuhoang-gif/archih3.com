@@ -3,8 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
-<Layout title="Magic Tree — Mô phỏng gió cây cỏ 3ds Max | ArchiH3" description="Plugin mô phỏng gió vật lý 4 lớp cho cây cỏ. Hỗ trợ Maxtree, Globe Plants, Cosmos. Corona & V-Ray proxy.">
+<Layout title="Magic Tree — Mô phỏng gió cây cỏ 3ds Max | ArchiH3" description="Plugin mô phỏng gió vật lý 4 lớp cho cây cỏ. Hỗ trợ Maxtree, Globe Plants, Cosmos. Corona & V-Ray proxy." ogImage="/og/og-tree.jpg">
 <Fragment slot="head">
+    <script type="application/ld+json" is:inline>{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Magic Tree", "operatingSystem": "Windows", "applicationCategory": "DesignApplication", "applicationSubCategory": "3ds Max Plugin", "description": "Plugin mô phỏng gió vật lý 4 lớp cho cây cỏ. Hỗ trợ Maxtree, Globe Plants, Cosmos.", "url": "https://archih3.com/tree/", "image": "https://archih3.com/og/og-tree.jpg", "author": {"@type": "Person", "name": "Hồ Hữu Hoàng", "jobTitle": "Architect · 3ds Max Plugin Developer"}, "publisher": {"@type": "Organization", "name": "HKD Dịch vụ Kiến Trúc ArchiH3", "url": "https://archih3.com"}, "offers": {"@type": "Offer", "price": "450000", "priceCurrency": "VND", "availability": "https://schema.org/InStock", "url": "https://archih3.com/tree/#pricing"}}</script>
 
 </Fragment>
 
@@ -19,19 +20,19 @@ import Footer from '../components/Footer.astro';
     <!-- HERO -->
     <section class="hero">
         <div class="hero-badge" data-vi="PHYSICS-BASED WIND SIMULATION FOR 3DS MAX" data-en="PHYSICS-BASED WIND SIMULATION FOR 3DS MAX">PHYSICS-BASED WIND SIMULATION FOR 3DS MAX</div>
-        <h1 data-vi="Thổi hồn vào cây cỏ.<br><span class='green'>Render nhẹ tênh.</span>" data-en="Breeze in your viewports.<br><span class='green'>Lightweight renders.</span>"></h1>
-        <p class="hero-sub" data-vi="Plugin chuyên biệt tạo chuyển động gió 4 lớp chân thực và tự động hóa tối ưu cho cây cối trong 3ds Max. Tương thích sâu với Corona/V-Ray Proxy, loại bỏ hoàn toàn lag giật viewport." data-en="Specialized plugin to generate realistic 4-layer wind simulations and automatic optimizations for 3ds Max vegetation. Deeply integrated with Corona/V-Ray proxies to completely eliminate viewport lag."></p>
+        <h1 data-vi="Thổi hồn vào cây cỏ.<br><span class='green'>Render nhẹ tênh.</span>" data-en="Breeze in your viewports.<br><span class='green'>Lightweight renders.</span>">Thổi hồn vào cây cỏ.<br><span class='green'>Render nhẹ tênh.</span></h1>
+        <p class="hero-sub" data-vi="Plugin chuyên biệt tạo chuyển động gió 4 lớp chân thực và tự động hóa tối ưu cho cây cối trong 3ds Max. Tương thích sâu với Corona/V-Ray Proxy, loại bỏ hoàn toàn lag giật viewport." data-en="Specialized plugin to generate realistic 4-layer wind simulations and automatic optimizations for 3ds Max vegetation. Deeply integrated with Corona/V-Ray proxies to completely eliminate viewport lag.">Plugin chuyên biệt tạo chuyển động gió 4 lớp chân thực và tự động hóa tối ưu cho cây cối trong 3ds Max. Tương thích sâu với Corona/V-Ray Proxy, loại bỏ hoàn toàn lag giật viewport.</p>
         <div class="hero-cta">
             <a href="#pricing" class="btn-primary" data-vi="Mua bản quyền — 450k" data-en="Get Pro Lifetime — $17">Mua bản quyền — 450k</a>
-            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" onclick="alert('Vui lòng liên hệ DEV qua Facebook để mua hoặc tải bộ cài bản quyền!');" class="btn-outline" data-vi="Tải về" data-en="Download">Tải về</a>
+            <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-outline" data-vi="Liên hệ mua qua Facebook" data-en="Buy via Facebook">Liên hệ mua qua Facebook</a>
         </div>
     </section>
 
     <!-- STEPS / WORKFLOW -->
     <section class="steps-section" id="workflow">
         <div class="section-label" data-vi="QUY TRÌNH" data-en="STEPS">QUY TRÌNH</div>
-        <h2 class="section-title" data-vi="3 bước biến cây tĩnh thành cây động" data-en="3 steps from static to dynamic"></h2>
-        <p class="section-desc" data-vi="Tự động hóa hoàn toàn các công đoạn phức tạp, tối ưu hóa tối đa thời gian thao tác scene." data-en="Fully automated pipelines to minimize manual tasks and maximize scene productivity."></p>
+        <h2 class="section-title" data-vi="3 bước biến cây tĩnh thành cây động" data-en="3 steps from static to dynamic">3 bước biến cây tĩnh thành cây động</h2>
+        <p class="section-desc" data-vi="Tự động hóa hoàn toàn các công đoạn phức tạp, tối ưu hóa tối đa thời gian thao tác scene." data-en="Fully automated pipelines to minimize manual tasks and maximize scene productivity.">Tự động hóa hoàn toàn các công đoạn phức tạp, tối ưu hóa tối đa thời gian thao tác scene.</p>
 
         
         
@@ -112,17 +113,17 @@ import Footer from '../components/Footer.astro';
             <div class="step-item" id="step-desc-1">
                 <div class="step-num">01</div>
                 <h3 data-vi="Chọn cây hoặc Proxy" data-en="Select Foliage/Proxy">Chọn cây hoặc Proxy</h3>
-                <p data-vi="Chọn các mô hình cây 3D hoặc file Proxy của Corona/V-Ray trực tiếp trong scene 3ds Max." data-en="Select any 3D plant models or V-Ray/Corona proxy objects directly in your 3ds Max viewports."></p>
+                <p data-vi="Chọn các mô hình cây 3D hoặc file Proxy của Corona/V-Ray trực tiếp trong scene 3ds Max." data-en="Select any 3D plant models or V-Ray/Corona proxy objects directly in your 3ds Max viewports.">Chọn các mô hình cây 3D hoặc file Proxy của Corona/V-Ray trực tiếp trong scene 3ds Max.</p>
             </div>
             <div class="step-item" id="step-desc-2">
                 <div class="step-num">02</div>
                 <h3 data-vi="Bake gió 1-Click" data-en="1-Click Wind Bake">Bake gió 1-Click</h3>
-                <p data-vi="Nhấn nút gán gió. Magic Tree tự động phân tích cấu trúc, nhận diện chiều cao và áp dụng cấu hình chuyển động tối ưu cho từng loại cây." data-en="Click apply. Magic Tree automatically analyzes the structure, detects plant height, and applies the most optimized wind behavior."></p>
+                <p data-vi="Nhấn nút gán gió. Magic Tree tự động phân tích cấu trúc, nhận diện chiều cao và áp dụng cấu hình chuyển động tối ưu cho từng loại cây." data-en="Click apply. Magic Tree automatically analyzes the structure, detects plant height, and applies the most optimized wind behavior.">Nhấn nút gán gió. Magic Tree tự động phân tích cấu trúc, nhận diện chiều cao và áp dụng cấu hình chuyển động tối ưu cho từng loại cây.</p>
             </div>
             <div class="step-item" id="step-desc-3">
                 <div class="step-num">03</div>
                 <h3 data-vi="Realtime Tweak & Render" data-en="Realtime Tweak & Render">Realtime Tweak & Render</h3>
-                <p data-vi="Tinh chỉnh hướng gió, chu kỳ lặp và 13 thông số gió trực tiếp thời gian thực, sau đó render chuỗi ảnh động." data-en="Fine-tune wind directions, loops, and 13 detailed parameters with realtime updates, then render your wind-swayed animations."></p>
+                <p data-vi="Tinh chỉnh hướng gió, chu kỳ lặp và 13 thông số gió trực tiếp thời gian thực, sau đó render chuỗi ảnh động." data-en="Fine-tune wind directions, loops, and 13 detailed parameters with realtime updates, then render your wind-swayed animations.">Tinh chỉnh hướng gió, chu kỳ lặp và 13 thông số gió trực tiếp thời gian thực, sau đó render chuỗi ảnh động.</p>
             </div>
         </div>
     </section>
@@ -131,45 +132,45 @@ import Footer from '../components/Footer.astro';
     <!-- FEATURES -->
     <section id="features">
         <div class="section-label" data-vi="TÍNH NĂNG NỔI BẬT" data-en="KEY FEATURES">TÍNH NĂNG NỔI BẬT</div>
-        <h2 class="section-title" data-vi="Mô phỏng gió tự nhiên chỉ với 1-Click" data-en="1-Click Natural Wind Simulation"></h2>
-        <p class="section-desc" data-vi="Biến rừng cây tĩnh lặng thành chuyển động tự nhiên trong gió chỉ với vài cú click chuột, siêu nhẹ và cực kỳ nhanh chóng." data-en="Turn static forests into natural sways with just a few clicks, lightweight and extremely fast."></p>
+        <h2 class="section-title" data-vi="Mô phỏng gió tự nhiên chỉ với 1-Click" data-en="1-Click Natural Wind Simulation">Mô phỏng gió tự nhiên chỉ với 1-Click</h2>
+        <p class="section-desc" data-vi="Biến rừng cây tĩnh lặng thành chuyển động tự nhiên trong gió chỉ với vài cú click chuột, siêu nhẹ và cực kỳ nhanh chóng." data-en="Turn static forests into natural sways with just a few clicks, lightweight and extremely fast.">Biến rừng cây tĩnh lặng thành chuyển động tự nhiên trong gió chỉ với vài cú click chuột, siêu nhẹ và cực kỳ nhanh chóng.</p>
         
         <div class="features-grid">
             <!-- Feature 1 -->
             <div class="feature-card">
                 <div class="feature-icon">🍃</div>
                 <h3 data-vi="Mô phỏng chuyển động gió 4 lớp" data-en="4-Layer Dynamic Sway">Mô phỏng gió 4 lớp</h3>
-                <p data-vi="Tác động đồng thời lên 4 cấp độ cành lá: chuyển động rung lá, độ xoắn tự nhiên của tán, độ uốn cong chân thực của thân cây và độ đung đưa nhẹ của hoa/quả giúp tạo cảm giác chuyển động đa chiều chân thực nhất." data-en="Simulates movements on 4 levels: leaf flutter, natural canopy twist, realistic trunk bending, and gentle fruit/flower swaying for the most realistic multi-dimensional motion."></p>
+                <p data-vi="Tác động đồng thời lên 4 cấp độ cành lá: chuyển động rung lá, độ xoắn tự nhiên của tán, độ uốn cong chân thực của thân cây và độ đung đưa nhẹ của hoa/quả giúp tạo cảm giác chuyển động đa chiều chân thực nhất." data-en="Simulates movements on 4 levels: leaf flutter, natural canopy twist, realistic trunk bending, and gentle fruit/flower swaying for the most realistic multi-dimensional motion.">Tác động đồng thời lên 4 cấp độ cành lá: chuyển động rung lá, độ xoắn tự nhiên của tán, độ uốn cong chân thực của thân cây và độ đung đưa nhẹ của hoa/quả giúp tạo cảm giác chuyển động đa chiều chân thực nhất.</p>
             </div>
             <!-- Feature 2 -->
             <div class="feature-card">
                 <div class="feature-icon">🌿</div>
                 <h3 data-vi="Hỗ trợ mọi thư viện cây lớn" data-en="Full Library Support">Hỗ trợ mọi thư viện cây lớn</h3>
-                <p data-vi="Tương thích hoàn hảo với các thư viện cây phổ biến nhất như Maxtree, Globe Plants, Chaos Cosmos và bất kỳ file Proxy nào của V-Ray, Corona, giúp bạn làm việc trực tiếp và nhanh chóng." data-en="Perfectly compatible with the most popular vegetation libraries such as Maxtree, Globe Plants, Chaos Cosmos, and any V-Ray or Corona proxies, allowing direct and fast workflows."></p>
+                <p data-vi="Tương thích hoàn hảo với các thư viện cây phổ biến nhất như Maxtree, Globe Plants, Chaos Cosmos và bất kỳ file Proxy nào của V-Ray, Corona, giúp bạn làm việc trực tiếp và nhanh chóng." data-en="Perfectly compatible with the most popular vegetation libraries such as Maxtree, Globe Plants, Chaos Cosmos, and any V-Ray or Corona proxies, allowing direct and fast workflows.">Tương thích hoàn hảo với các thư viện cây phổ biến nhất như Maxtree, Globe Plants, Chaos Cosmos và bất kỳ file Proxy nào của V-Ray, Corona, giúp bạn làm việc trực tiếp và nhanh chóng.</p>
             </div>
             <!-- Feature 3 -->
             <div class="feature-card">
                 <div class="feature-icon">⚡</div>
                 <h3 data-vi="Tự động hóa & Thao tác cực nhanh" data-en="1-Click Auto Pipeline">Tự động hóa & Thao tác cực nhanh</h3>
-                <p data-vi="Không cần thiết lập thủ công tốn thời gian. Magic Tree tự động nhận diện chiều cao, tối ưu hóa proxy và gán các thông số gió phù hợp giúp bạn hoàn thành công việc chỉ trong vài giây." data-en="Zero manual setups required. Magic Tree automatically detects plant heights, optimizes proxies, and applies wind presets in seconds."></p>
+                <p data-vi="Không cần thiết lập thủ công tốn thời gian. Magic Tree tự động nhận diện chiều cao, tối ưu hóa proxy và gán các thông số gió phù hợp giúp bạn hoàn thành công việc chỉ trong vài giây." data-en="Zero manual setups required. Magic Tree automatically detects plant heights, optimizes proxies, and applies wind presets in seconds.">Không cần thiết lập thủ công tốn thời gian. Magic Tree tự động nhận diện chiều cao, tối ưu hóa proxy và gán các thông số gió phù hợp giúp bạn hoàn thành công việc chỉ trong vài giây.</p>
             </div>
             <!-- Feature 4 -->
             <div class="feature-card">
                 <div class="feature-icon">🎲</div>
                 <h3 data-vi="Lệch pha tự nhiên & An toàn tuyệt đối" data-en="Randomized Phase & Safe Undo">Lệch pha tự nhiên & An toàn tuyệt đối</h3>
-                <p data-vi="Mỗi cây tự động lệch pha ngẫu nhiên để khi rải rừng cây lớn (Forest Pack, Chaos Scatter) không bị đồng điệu máy móc. Hỗ trợ Ctrl+Z hoàn tác 100% cực kỳ an tâm khi thiết kế." data-en="Generates unique random phase offsets per tree to avoid repetitive patterns in scattered forests. Fully supports clean Ctrl+Z undo actions to keep your scene completely safe."></p>
+                <p data-vi="Mỗi cây tự động lệch pha ngẫu nhiên để khi rải rừng cây lớn (Forest Pack, Chaos Scatter) không bị đồng điệu máy móc. Hỗ trợ Ctrl+Z hoàn tác 100% cực kỳ an tâm khi thiết kế." data-en="Generates unique random phase offsets per tree to avoid repetitive patterns in scattered forests. Fully supports clean Ctrl+Z undo actions to keep your scene completely safe.">Mỗi cây tự động lệch pha ngẫu nhiên để khi rải rừng cây lớn (Forest Pack, Chaos Scatter) không bị đồng điệu máy móc. Hỗ trợ Ctrl+Z hoàn tác 100% cực kỳ an tâm khi thiết kế.</p>
             </div>
             <!-- Feature 5 -->
             <div class="feature-card">
                 <div class="feature-icon">⚙️</div>
                 <h3 data-vi="Tối ưu Render & Dung lượng" data-en="Optimized File Size & Render">Tối ưu Render & Dung lượng</h3>
-                <p data-vi="Cơ chế bake keyframe thông minh tự động tối ưu hóa số lượng keyframe của modifier, giữ cho file scene 3ds Max cực nhẹ và không làm tăng thời gian render khi chạy camera." data-en="Smart keyframe baking automatically optimizes modifier keyframes, keeping 3ds Max file sizes lightweight and maintaining fast render times."></p>
+                <p data-vi="Cơ chế bake keyframe thông minh tự động tối ưu hóa số lượng keyframe của modifier, giữ cho file scene 3ds Max cực nhẹ và không làm tăng thời gian render khi chạy camera." data-en="Smart keyframe baking automatically optimizes modifier keyframes, keeping 3ds Max file sizes lightweight and maintaining fast render times.">Cơ chế bake keyframe thông minh tự động tối ưu hóa số lượng keyframe của modifier, giữ cho file scene 3ds Max cực nhẹ và không làm tăng thời gian render khi chạy camera.</p>
             </div>
             <!-- Feature 6 -->
             <div class="feature-card">
                 <div class="feature-icon">🎛️</div>
                 <h3 data-vi="Hệ thống Preset & Tùy biến" data-en="Wind Presets & Customization">Hệ thống Preset & Tùy biến</h3>
-                <p data-vi="Cung cấp sẵn các mẫu preset gió chuẩn (Nhẹ, Vừa, Bão) và hơn 13 thanh slider tinh chỉnh chuyên sâu giúp bạn dễ dàng lưu trữ, quản lý cấu hình gió cho từng loại dự án." data-en="Comes with built-in wind presets (Breeze, Medium, Storm) and 13+ advanced sliders to easily adjust, save, and manage custom wind behaviors."></p>
+                <p data-vi="Cung cấp sẵn các mẫu preset gió chuẩn (Nhẹ, Vừa, Bão) và hơn 13 thanh slider tinh chỉnh chuyên sâu giúp bạn dễ dàng lưu trữ, quản lý cấu hình gió cho từng loại dự án." data-en="Comes with built-in wind presets (Breeze, Medium, Storm) and 13+ advanced sliders to easily adjust, save, and manage custom wind behaviors.">Cung cấp sẵn các mẫu preset gió chuẩn (Nhẹ, Vừa, Bão) và hơn 13 thanh slider tinh chỉnh chuyên sâu giúp bạn dễ dàng lưu trữ, quản lý cấu hình gió cho từng loại dự án.</p>
             </div>
         </div>
     </section>
@@ -180,8 +181,8 @@ import Footer from '../components/Footer.astro';
         <div class="interface-grid">
             <div class="interface-text">
                 <div class="section-label" data-vi="GIAO DIỆN CÔNG CỤ" data-en="INTERFACE SHOWCASE">GIAO DIỆN CÔNG CỤ</div>
-        <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI"></h2>
-        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max."></p>
+        <h2 class="section-title" data-vi="Trực quan, dễ sử dụng" data-en="Visual & Intuitive UI">Trực quan, dễ sử dụng</h2>
+        <p class="section-desc" data-vi="Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max." data-en="Real screenshot of the plugin user interface running natively inside 3ds Max.">Hình ảnh thực tế giao diện của plugin chạy trực tiếp trong môi trường 3ds Max.</p>
             </div>
             <div class="interface-visual">
                 <img src="/interface_magictree.png" alt="Plugin Interface"  class="w-full block" style="height: auto; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
@@ -192,8 +193,8 @@ import Footer from '../components/Footer.astro';
     <!-- TREE CATEGORIES -->
     <section id="categories"  class="bg-surface">
         <div class="section-label" data-vi="NHẬN DẠNG SINH HỌC" data-en="BIO-STRUCTURE DETECTION">NHẬN DẠNG SINH HỌC</div>
-        <h2 class="section-title" data-vi="Tự động nhận dạng 6 nhóm thực vật" data-en="Automatic detection of 6 plant types"></h2>
-        <p class="section-desc" data-vi="Hệ thống tự động phân tích cấu trúc cây và từ khóa vật liệu để áp dụng các thiết lập mô phỏng gió phù hợp nhất cho từng nhóm thực vật." data-en="Magic Tree automatically analyzes plant structures and materials to apply the most natural wind behavior for each category."></p>
+        <h2 class="section-title" data-vi="Tự động nhận dạng 6 nhóm thực vật" data-en="Automatic detection of 6 plant types">Tự động nhận dạng 6 nhóm thực vật</h2>
+        <p class="section-desc" data-vi="Hệ thống tự động phân tích cấu trúc cây và từ khóa vật liệu để áp dụng các thiết lập mô phỏng gió phù hợp nhất cho từng nhóm thực vật." data-en="Magic Tree automatically analyzes plant structures and materials to apply the most natural wind behavior for each category.">Hệ thống tự động phân tích cấu trúc cây và từ khóa vật liệu để áp dụng các thiết lập mô phỏng gió phù hợp nhất cho từng nhóm thực vật.</p>
 
         <div class="cat-table-container">
             <table>
@@ -208,32 +209,32 @@ import Footer from '../components/Footer.astro';
                     <tr>
                         <td><span class="cat-badge">SMALL</span></td>
                         <td data-vi="Cỏ nền, rêu bụi, hoa dại thấp sát đất" data-en="Lawn grass, moss, low groundcover wildflowers">Cỏ nền, rêu bụi, hoa dại thấp sát đất</td>
-                        <td data-vi="Dao động tần số cao cành lá sát đất, thân cỏ uốn cong mềm dẻo theo làn gió mặt đất." data-en="High-frequency leaf flutter close to ground, flexible grass blade bending."></td>
+                        <td data-vi="Dao động tần số cao cành lá sát đất, thân cỏ uốn cong mềm dẻo theo làn gió mặt đất." data-en="High-frequency leaf flutter close to ground, flexible grass blade bending.">Dao động tần số cao cành lá sát đất, thân cỏ uốn cong mềm dẻo theo làn gió mặt đất.</td>
                     </tr>
                     <tr>
                         <td><span class="cat-badge">SHRUB</span></td>
                         <td data-vi="Cây bụi tầm thấp, hoa hồng bụi, cây trang trí" data-en="Low shrubs, garden roses, ornamental low plants">Cây bụi tầm thấp, hoa hồng bụi, cây trang trí</td>
-                        <td data-vi="Rung lắc nhẹ nhàng phần cành ngọn tán bụi, neo giữ ổn định phần gốc gỗ sát mặt đất." data-en="Gentle upper branch sways, sturdy root anchoring near the soil line."></td>
+                        <td data-vi="Rung lắc nhẹ nhàng phần cành ngọn tán bụi, neo giữ ổn định phần gốc gỗ sát mặt đất." data-en="Gentle upper branch sways, sturdy root anchoring near the soil line.">Rung lắc nhẹ nhàng phần cành ngọn tán bụi, neo giữ ổn định phần gốc gỗ sát mặt đất.</td>
                     </tr>
                     <tr>
                         <td><span class="cat-badge">TREE</span></td>
                         <td data-vi="Cây đô thị tầm trung, cây bóng mát công cộng" data-en="Medium urban trees, public park shade trees">Cây đô thị tầm trung, cây bóng mát công cộng</td>
-                        <td data-vi="Cân bằng tự nhiên giữa độ uốn cong của thân chính và nhịp rung lắc của các tầng tán lá." data-en="Balanced natural sway between main trunk deflection and foliage vibration."></td>
+                        <td data-vi="Cân bằng tự nhiên giữa độ uốn cong của thân chính và nhịp rung lắc của các tầng tán lá." data-en="Balanced natural sway between main trunk deflection and foliage vibration.">Cân bằng tự nhiên giữa độ uốn cong của thân chính và nhịp rung lắc của các tầng tán lá.</td>
                     </tr>
                     <tr>
                         <td><span class="cat-badge">BIG</span></td>
                         <td data-vi="Cây cổ thụ lớn, xà cừ, bàng, đa cổ thụ" data-en="Large heritage trees, giant banyans, ancient maples">Cây cổ thụ lớn, xà cừ, bàng, đa cổ thụ</td>
-                        <td data-vi="Dao động chậm rãi và uy nghi của thân gỗ lớn, các cành nhánh nặng trĩu lay động biên độ lớn." data-en="Slow, majestic sways of heavy timber trunks, large branches waving."></td>
+                        <td data-vi="Dao động chậm rãi và uy nghi của thân gỗ lớn, các cành nhánh nặng trĩu lay động biên độ lớn." data-en="Slow, majestic sways of heavy timber trunks, large branches waving.">Dao động chậm rãi và uy nghi của thân gỗ lớn, các cành nhánh nặng trĩu lay động biên độ lớn.</td>
                     </tr>
                     <tr>
                         <td><span class="cat-badge">PALM</span></td>
                         <td data-vi="Cọ cảnh, cau vua, các loài cây họ cau cảnh" data-en="Landscape palms, royal palms, cycads">Cọ cảnh, cau vua, các loài cây họ cau cảnh</td>
-                        <td data-vi="Thân sơ dẻo dai uốn nhẹ từ ngọn, lá tàu cọ vẩy động mạnh theo luồng khí nhưng cản xoắn thấp." data-en="Flexible fibrous trunk bending near the crown, long fronds whipping with low twisting."></td>
+                        <td data-vi="Thân sơ dẻo dai uốn nhẹ từ ngọn, lá tàu cọ vẩy động mạnh theo luồng khí nhưng cản xoắn thấp." data-en="Flexible fibrous trunk bending near the crown, long fronds whipping with low twisting.">Thân sơ dẻo dai uốn nhẹ từ ngọn, lá tàu cọ vẩy động mạnh theo luồng khí nhưng cản xoắn thấp.</td>
                     </tr>
                     <tr>
                         <td><span class="cat-badge">COCONUT</span></td>
                         <td data-vi="Dừa xiêm, dừa cảnh cao, cọ dầu thân gỗ cao" data-en="Coconut palms, tall oil palms, coastal palms">Dừa xiêm, dừa cảnh cao, cọ dầu thân gỗ cao</td>
-                        <td data-vi="Thân dừa uốn gập gợn sóng đặc trưng dưới sức gió mạnh, các tàu lá dừa vẩy nhịp nhàng biên độ cao." data-en="Wavy trunk bending under heavy wind speeds, large palm fronds swaying rhythmically."></td>
+                        <td data-vi="Thân dừa uốn gập gợn sóng đặc trưng dưới sức gió mạnh, các tàu lá dừa vẩy nhịp nhàng biên độ cao." data-en="Wavy trunk bending under heavy wind speeds, large palm fronds swaying rhythmically.">Thân dừa uốn gập gợn sóng đặc trưng dưới sức gió mạnh, các tàu lá dừa vẩy nhịp nhàng biên độ cao.</td>
                     </tr>
                 </tbody>
             </table>
@@ -247,14 +248,14 @@ import Footer from '../components/Footer.astro';
             <div class="section-header text-center"  style="margin-bottom: 48px;">
                 <div class="section-label text-primary"  data-vi="HƯỚNG DẪN" data-en="TUTORIAL" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 1px; margin-bottom: 12px;">HƯỚNG DẪN</div>
                 <h2 class="section-title font-semibold mb-4"  data-vi="Video Hướng dẫn sử dụng" data-en="Video Tutorial" >Video Hướng dẫn sử dụng</h2>
-                <p class="section-desc"  data-vi="Xem chi tiết cách cài đặt và sử dụng Magic Tree để tạo gió động cho scene của bạn." data-en="Watch the detailed guide on installing and using Magic Tree to animate your scenes." style="font-size: 16px; color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto;"></p>
+                <p class="section-desc"  data-vi="Xem chi tiết cách cài đặt và sử dụng Magic Tree để tạo gió động cho scene của bạn." data-en="Watch the detailed guide on installing and using Magic Tree to animate your scenes." style="font-size: 16px; color: rgba(255,255,255,0.6); max-width: 600px; margin: 0 auto;">Xem chi tiết cách cài đặt và sử dụng Magic Tree để tạo gió động cho scene của bạn.</p>
             </div>
             <div class="video-section">
         <div class="video-box" id="featured-video">
             <!-- Iframe (works on hosted web) -->
             <iframe loading="lazy" id="yt-iframe" width="100%" height="100%" src="https://www.youtube.com/embed/aMThqiNNoBQ?rel=0&modestbranding=1&color=white" title="AH3 Magic Tree Demo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen  class="absolute inset-0"></iframe>
             <!-- Thumbnail fallback (shown if iframe fails on local file://) -->
-            <a id="yt-fallback" href="https://www.youtube.com/watch?v=aMThqiNNoBQ" target="_blank"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer;">
+            <a id="yt-fallback" href="https://www.youtube.com/watch?v=aMThqiNNoBQ" target="_blank" rel="noopener"  class="hidden absolute inset-0" style="text-decoration:none; cursor:pointer;">
                 <img loading="lazy" src="https://img.youtube.com/vi/aMThqiNNoBQ/maxresdefault.jpg" alt="AH3 Magic Tree Demo"  onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='0.75'" class="w-full" style="height:100%; object-fit:cover; opacity:0.75; transition:opacity 0.3s;">
                 <div  class="absolute inset-0 flex items-center justify-center">
                     <div  class="flex items-center justify-center" style="width:72px; height:72px; border-radius:50%; background:rgba(102, 187, 106, 0.9); box-shadow:0 4px 20px rgba(0,0,0,0.4);">
@@ -273,25 +274,25 @@ import Footer from '../components/Footer.astro';
     <!-- PRICING -->
     <section id="pricing">
         <div class="section-label" data-vi="BẢNG GIÁ" data-en="PRICING">BẢNG GIÁ</div>
-        <h2 class="section-title" data-vi="Mua một lần. Dùng trọn đời." data-en="Pay once. Use forever."></h2>
-        <p class="section-desc" data-vi="Một giấy phép kích hoạt duy nhất theo mã ID phần cứng máy tính (HWID), sử dụng không giới hạn." data-en="A single perpetual license tied securely to your computer hardware ID, providing unlimited usage."></p>
+        <h2 class="section-title" data-vi="Mua một lần. Dùng trọn đời." data-en="Pay once. Use forever.">Mua một lần. Dùng trọn đời.</h2>
+        <p class="section-desc" data-vi="Một giấy phép kích hoạt duy nhất theo mã ID phần cứng máy tính (HWID), sử dụng không giới hạn." data-en="A single perpetual license tied securely to your computer hardware ID, providing unlimited usage.">Một giấy phép kích hoạt duy nhất theo mã ID phần cứng máy tính (HWID), sử dụng không giới hạn.</p>
 
         <div class="pricing-section">
             <div class="price-card">
                 <div class="price-badge">LIFETIME LICENSE</div>
                 <h3 data-vi="Magic Tree Pro" data-en="Magic Tree Pro">Magic Tree Pro</h3>
-                <div class="price-amount" data-vi="<del>999.000đ</del> 450.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $17 <span>/ lifetime</span>"></div>
-                <div class="price-period" data-vi="Giảm giá đặc biệt · Không phí định kỳ thuê bao" data-en="Special offer · No subscription or recurring fees"></div>
+                <div class="price-amount" data-vi="<del>999.000đ</del> 450.000đ <span>/ vĩnh viễn</span>" data-en="<del>$39</del> $17 <span>/ lifetime</span>"><del>999.000đ</del> 450.000đ <span>/ vĩnh viễn</span></div>
+                <div class="price-period" data-vi="Giảm giá đặc biệt · Không phí định kỳ thuê bao" data-en="Special offer · No subscription or recurring fees">Giảm giá đặc biệt · Không phí định kỳ thuê bao</div>
                 
                 <ul class="price-features">
-                    <li data-vi="Mô phỏng gió chuyển động 4 lớp tự nhiên và siêu mượt" data-en="Natural and ultra-smooth 4-layer wind simulations"></li>
-                    <li data-vi="Tương thích hoàn toàn Chaos Cosmos, Proxy, Maxtree, Globe Plants" data-en="Fully supports Chaos Cosmos, proxies, Maxtree, and Globe Plants"></li>
-                    <li data-vi="Thao tác cực nhanh 1-Click, không lag giật viewport" data-en="1-Click fast workflow, zero viewport lag"></li>
-                    <li data-vi="Cập nhật phiên bản mới miễn phí trọn đời" data-en="Lifetime free updates (Supports Max 2023-2027+)"></li>
-                    <li data-vi="Hỗ trợ kỹ thuật trực tiếp 1-1 từ tác giả" data-en="Direct 1-on-1 developer support from the author"></li>
+                    <li data-vi="Mô phỏng gió chuyển động 4 lớp tự nhiên và siêu mượt" data-en="Natural and ultra-smooth 4-layer wind simulations">Mô phỏng gió chuyển động 4 lớp tự nhiên và siêu mượt</li>
+                    <li data-vi="Tương thích hoàn toàn Chaos Cosmos, Proxy, Maxtree, Globe Plants" data-en="Fully supports Chaos Cosmos, proxies, Maxtree, and Globe Plants">Tương thích hoàn toàn Chaos Cosmos, Proxy, Maxtree, Globe Plants</li>
+                    <li data-vi="Thao tác cực nhanh 1-Click, không lag giật viewport" data-en="1-Click fast workflow, zero viewport lag">Thao tác cực nhanh 1-Click, không lag giật viewport</li>
+                    <li data-vi="Cập nhật phiên bản mới miễn phí trọn đời" data-en="Lifetime free updates (Supports Max 2023-2027+)">Cập nhật phiên bản mới miễn phí trọn đời</li>
+                    <li data-vi="Hỗ trợ kỹ thuật trực tiếp 1-1 từ tác giả" data-en="Direct 1-on-1 developer support from the author">Hỗ trợ kỹ thuật trực tiếp 1-1 từ tác giả</li>
                 </ul>
 
-                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
+                <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-primary block w-full text-center"  data-vi="Liên hệ mua bản quyền" data-en="Contact to Purchase">Liên hệ mua bản quyền</a>
             </div>
         </div>
     </section>
@@ -299,22 +300,22 @@ import Footer from '../components/Footer.astro';
     <!-- FAQ -->
     <section id="faq"  class="bg-surface">
         <div class="section-label">FAQ</div>
-        <h2 class="section-title" data-vi="Giải đáp thắc mắc kỹ thuật" data-en="Technical Frequently Asked Questions"></h2>
-        <p class="section-desc" data-vi="Các thông tin kỹ thuật quan trọng giúp bạn an tâm sử dụng trong dự án thương mại." data-en="Essential technical details for implementing the tool in commercial production."></p>
+        <h2 class="section-title" data-vi="Giải đáp thắc mắc kỹ thuật" data-en="Technical Frequently Asked Questions">Giải đáp thắc mắc kỹ thuật</h2>
+        <p class="section-desc" data-vi="Các thông tin kỹ thuật quan trọng giúp bạn an tâm sử dụng trong dự án thương mại." data-en="Essential technical details for implementing the tool in commercial production.">Các thông tin kỹ thuật quan trọng giúp bạn an tâm sử dụng trong dự án thương mại.</p>
 
         <div class="faq-section">
             <div class="faq-grid">
                 <div class="faq-item">
-                    <h3 data-vi="Plugin chạy trên những phiên bản 3ds Max và môi trường nào?" data-en="Which 3ds Max versions and runtimes are supported?"></h3>
-                    <p data-vi="Magic Tree hỗ trợ 3ds Max từ phiên bản 2023 đến 2027+. Plugin tự động biên dịch và tương thích đa nền tảng: chạy trên .NET Framework 4.8 (Max 2023-2025) và chuyển đổi sang .NET 8 mới nhất (cho Max 2026+)." data-en="The plugin supports 3ds Max 2023 up to 2027+. It automatically compiles and routes calls between .NET Framework 4.8 (for 3ds Max 2023-2025) and .NET 8 (for 3ds Max 2026+) based on host architecture."></p>
+                    <h3 data-vi="Plugin chạy trên những phiên bản 3ds Max và môi trường nào?" data-en="Which 3ds Max versions and runtimes are supported?">Plugin chạy trên những phiên bản 3ds Max và môi trường nào?</h3>
+                    <p data-vi="Magic Tree hỗ trợ 3ds Max từ phiên bản 2023 đến 2027+. Plugin tự động biên dịch và tương thích đa nền tảng: chạy trên .NET Framework 4.8 (Max 2023-2025) và chuyển đổi sang .NET 8 mới nhất (cho Max 2026+)." data-en="The plugin supports 3ds Max 2023 up to 2027+. It automatically compiles and routes calls between .NET Framework 4.8 (for 3ds Max 2023-2025) and .NET 8 (for 3ds Max 2026+) based on host architecture.">Magic Tree hỗ trợ 3ds Max từ phiên bản 2023 đến 2027+. Plugin tự động biên dịch và tương thích đa nền tảng: chạy trên .NET Framework 4.8 (Max 2023-2025) và chuyển đổi sang .NET 8 mới nhất (cho Max 2026+).</p>
                 </div>
                 <div class="faq-item">
-                    <h3 data-vi="Tôi dùng Chaos Scatter, Forest Pack để rải rừng cây có bị đập chuyển động giống nhau không?" data-en="If I use Chaos Scatter or Forest Pack, will the scattered trees look identical?"></h3>
-                    <p data-vi="Không. Magic Tree tự động áp dụng độ lệch pha ngẫu nhiên (Phase Offset) cho từng cây đơn lẻ trong cảnh. Khi bạn rải hàng ngàn cây bằng Forest Pack hay Chaos Scatter, chúng sẽ tự động lay động sole nhịp nhàng cực kỳ tự nhiên thay vì chuyển động đồng điệu cơ học." data-en="No. Magic Tree automatically applies unique random phase offsets to each individual tree in the scene. Even if you scatter thousands of plants using Forest Pack or Chaos Scatter, they will sway out-of-phase dynamically instead of looking synchronized."></p>
+                    <h3 data-vi="Tôi dùng Chaos Scatter, Forest Pack để rải rừng cây có bị đập chuyển động giống nhau không?" data-en="If I use Chaos Scatter or Forest Pack, will the scattered trees look identical?">Tôi dùng Chaos Scatter, Forest Pack để rải rừng cây có bị đập chuyển động giống nhau không?</h3>
+                    <p data-vi="Không. Magic Tree tự động áp dụng độ lệch pha ngẫu nhiên (Phase Offset) cho từng cây đơn lẻ trong cảnh. Khi bạn rải hàng ngàn cây bằng Forest Pack hay Chaos Scatter, chúng sẽ tự động lay động sole nhịp nhàng cực kỳ tự nhiên thay vì chuyển động đồng điệu cơ học." data-en="No. Magic Tree automatically applies unique random phase offsets to each individual tree in the scene. Even if you scatter thousands of plants using Forest Pack or Chaos Scatter, they will sway out-of-phase dynamically instead of looking synchronized.">Không. Magic Tree tự động áp dụng độ lệch pha ngẫu nhiên (Phase Offset) cho từng cây đơn lẻ trong cảnh. Khi bạn rải hàng ngàn cây bằng Forest Pack hay Chaos Scatter, chúng sẽ tự động lay động sole nhịp nhàng cực kỳ tự nhiên thay vì chuyển động đồng điệu cơ học.</p>
                 </div>
                 <div class="faq-item">
-                    <h3 data-vi="Việc gán gió lên các đối tượng Proxy có làm mất file hay hỏng vật liệu gốc không?" data-en="Does applying wind to Proxy objects risk losing files or ruining materials?"></h3>
-                    <p data-vi="Hoàn toàn không. Magic Tree sử dụng cơ chế bảo toàn thông tin gốc: vật liệu Multi-Material và tọa độ tham chiếu của Proxy được giữ nguyên vẹn 100%. Mọi thao tác gán gió đều hỗ trợ phím Ctrl+Z hoàn tác cực kỳ an toàn, trả lại đúng trạng thái Proxy nguyên bản mà không làm thay đổi hay phân tách file gốc." data-en="Not at all. Magic Tree features a strict safety layer: Multi-Materials and original coordinates of the proxies are 100% preserved. All actions support standard Ctrl+Z undo keys, returning the objects to their original proxy state without modifying the source files."></p>
+                    <h3 data-vi="Việc gán gió lên các đối tượng Proxy có làm mất file hay hỏng vật liệu gốc không?" data-en="Does applying wind to Proxy objects risk losing files or ruining materials?">Việc gán gió lên các đối tượng Proxy có làm mất file hay hỏng vật liệu gốc không?</h3>
+                    <p data-vi="Hoàn toàn không. Magic Tree sử dụng cơ chế bảo toàn thông tin gốc: vật liệu Multi-Material và tọa độ tham chiếu của Proxy được giữ nguyên vẹn 100%. Mọi thao tác gán gió đều hỗ trợ phím Ctrl+Z hoàn tác cực kỳ an toàn, trả lại đúng trạng thái Proxy nguyên bản mà không làm thay đổi hay phân tách file gốc." data-en="Not at all. Magic Tree features a strict safety layer: Multi-Materials and original coordinates of the proxies are 100% preserved. All actions support standard Ctrl+Z undo keys, returning the objects to their original proxy state without modifying the source files.">Hoàn toàn không. Magic Tree sử dụng cơ chế bảo toàn thông tin gốc: vật liệu Multi-Material và tọa độ tham chiếu của Proxy được giữ nguyên vẹn 100%. Mọi thao tác gán gió đều hỗ trợ phím Ctrl+Z hoàn tác cực kỳ an toàn, trả lại đúng trạng thái Proxy nguyên bản mà không làm thay đổi hay phân tách file gốc.</p>
                 </div>
             </div>
         </div>
@@ -325,27 +326,6 @@ import Footer from '../components/Footer.astro';
 
     <!-- LANGUAGE SWITCH & WIND CHART JS -->
         <script is:inline>
-        let currentLang = 'vi';
-
-        function setLang(lang) {
-            currentLang = lang;
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.textContent === lang.toUpperCase());
-            });
-            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
-                const text = el.getAttribute('data-' + lang);
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = text;
-                } else {
-                    el.innerHTML = text;
-                }
-            });
-        }
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            setLang('vi');
-        });
     </script>
 
     
