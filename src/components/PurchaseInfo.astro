@@ -4,8 +4,9 @@
 export interface Props {
 	name?: string;
 	price?: string;
+	mode?: 'lifetime' | 'subscription';
 }
-const { name, price } = Astro.props;
+const { name, price, mode = 'lifetime' } = Astro.props;
 ---
 <section id="purchase" class="purchase-section">
     <div class="purchase-label" data-vi="MUA HÀNG & BẢN QUYỀN" data-en="PURCHASE & LICENSE">MUA HÀNG & BẢN QUYỀN</div>
@@ -26,12 +27,21 @@ const { name, price } = Astro.props;
         </div>
         <div class="purchase-card">
             <h3 data-vi="Chính sách bản quyền" data-en="License policy">Chính sách bản quyền</h3>
+            {mode === 'lifetime' ? (
             <ul class="purchase-policy">
                 <li data-vi="License trọn đời, kích hoạt và gắn với 1 máy tính theo mã phần cứng (HWID)." data-en="Lifetime license, activated and bound to one computer via its hardware ID (HWID).">License trọn đời, kích hoạt và gắn với 1 máy tính theo mã phần cứng (HWID).</li>
                 <li data-vi="Key không hỗ trợ đổi máy miễn phí — khi cần chuyển sang máy mới, vui lòng liên hệ tác giả để được hỗ trợ (có phí)." data-en="Keys cannot be moved to a new machine for free — contact the author for paid transfer support.">Key không hỗ trợ đổi máy miễn phí — khi cần chuyển sang máy mới, vui lòng liên hệ tác giả để được hỗ trợ (có phí).</li>
                 <li data-vi="Cập nhật phiên bản mới miễn phí trọn đời." data-en="Free updates for life.">Cập nhật phiên bản mới miễn phí trọn đời.</li>
                 <li data-vi="Hỗ trợ kỹ thuật trực tiếp từ tác giả qua Facebook / Email." data-en="Direct technical support from the author via Facebook / Email.">Hỗ trợ kỹ thuật trực tiếp từ tác giả qua Facebook / Email.</li>
             </ul>
+            ) : (
+            <ul class="purchase-policy">
+                <li data-vi="Thuê bao theo năm — đã bao gồm mọi chi phí AI cloud, không phụ phí phát sinh." data-en="Annual subscription — all AI cloud costs included, no hidden fees.">Thuê bao theo năm — đã bao gồm mọi chi phí AI cloud, không phụ phí phát sinh.</li>
+                <li data-vi="Hủy bất cứ lúc nào — vẫn dùng đến hết chu kỳ đã thanh toán." data-en="Cancel anytime — access continues until the end of the paid period.">Hủy bất cứ lúc nào — vẫn dùng đến hết chu kỳ đã thanh toán.</li>
+                <li data-vi="Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro." data-en="100% refund within 7 days if no Pro feature has been used.">Hoàn tiền 100% trong 7 ngày nếu chưa sử dụng tính năng Pro.</li>
+                <li data-vi="Cập nhật và hỗ trợ trực tiếp từ tác giả trong suốt thời gian thuê bao." data-en="Updates and direct author support for the whole subscription period.">Cập nhật và hỗ trợ trực tiếp từ tác giả trong suốt thời gian thuê bao.</li>
+            </ul>
+            )}
         </div>
     </div>
 </section>
