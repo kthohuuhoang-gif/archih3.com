@@ -147,7 +147,7 @@ const { name, price, mode = 'lifetime' } = Astro.props;
         transition: transform 0.3s ease-out;
     }
     .buy-bar.visible { transform: translateY(0); }
-    .buy-bar-info { min-width: 0; }
+    .buy-bar-info { min-width: 0; text-decoration: none; color: inherit; }
     .buy-bar-name {
         display: block;
         font-size: 12px; color: var(--text-secondary);
