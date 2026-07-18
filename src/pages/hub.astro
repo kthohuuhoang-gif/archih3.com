@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import PurchaseInfo from '../components/PurchaseInfo.astro';
 ---
 <Layout title="AH3 Hub — Siêu ứng dụng AI cho 3ds Max | ArchiH3" description="Trung tâm AI tích hợp 3ds Max: Text-to-Image, Image-to-3D, Material Generator, Quick Render và 10+ công nghệ AI." ogImage="/og/og-hub.jpg">
 <Fragment slot="head">
@@ -67,26 +68,6 @@ import Footer from '../components/Footer.astro';
                 }
             })();
         </script>
-    </div>
-
-    <!-- STATS -->
-    <div class="stats-section">
-        <div class="stat-card" data-aos="fade-up">
-            <div class="stat-number">200K+</div>
-            <div class="stat-label" data-vi="Dòng code" data-en="Lines of code">Dòng code</div>
-        </div>
-        <div class="stat-card" data-aos="fade-up">
-            <div class="stat-number">2000+</div>
-            <div class="stat-label" data-vi="Giờ phát triển" data-en="Hours of development">Giờ phát triển</div>
-        </div>
-        <div class="stat-card" data-aos="fade-up">
-            <div class="stat-number">10+</div>
-            <div class="stat-label" data-vi="Công nghệ AI tích hợp" data-en="AI technologies integrated">Công nghệ AI tích hợp</div>
-        </div>
-        <div class="stat-card" data-aos="fade-up">
-            <div class="stat-number">100+</div>
-            <div class="stat-label" data-vi="Bản cập nhật" data-en="Updates released">Bản cập nhật</div>
-        </div>
     </div>
 
     <!-- WHY AH3 HUB -->
@@ -184,32 +165,38 @@ import Footer from '../components/Footer.astro';
                 <div class="feature-card highlight" data-aos="fade-up">
                     <div class="feature-icon">🤖</div>
                     <h3>AI-Assist</h3>
-                    <p data-vi="Chỉ cần nói hoặc gõ — bằng tiếng Việt. AI hiểu ý bạn và tự xử lý mọi thứ: vẽ mặt bằng, dựng khối 3D, điều chỉnh vật liệu, thay đổi ánh sáng, tìm và đề xuất thư viện bằng hình ảnh. Gặp lỗi? AI tự sửa và thử lại cho đến khi hoàn thành." data-en="Just speak or type — in Vietnamese. AI understands and handles everything: draw floor plans, build 3D forms, adjust materials, change lighting, find and suggest assets by image. Hit an error? AI self-corrects and retries until the job is done.">Chỉ cần nói hoặc gõ — bằng tiếng Việt. AI hiểu ý bạn và tự xử lý mọi thứ: vẽ mặt bằng, dựng khối 3D, điều chỉnh vật liệu, thay đổi ánh sáng, tìm và đề xuất thư viện bằng hình ảnh. Gặp lỗi? AI tự sửa và thử lại cho đến khi hoàn thành.</p>
+                    <p data-vi="Nói hoặc gõ tiếng Việt — AI viết lệnh, chạy thử và tự sửa đến khi đúng." data-en="Speak or type — AI writes the command, runs it and self-corrects until done.">Nói hoặc gõ tiếng Việt — AI viết lệnh, chạy thử và tự sửa đến khi đúng.</p>
+                    <a class="feature-more" href="#ai-studio" data-vi="Chi tiết ↓" data-en="Details ↓">Chi tiết ↓</a>
                 </div>
                 <div class="feature-card" data-aos="fade-up">
                     <div class="feature-icon">🎨</div>
                     <h3>Text-to-Image</h3>
-                    <p data-vi="Bạn mô tả bằng text — AI vẽ cho bạn. Tạo concept art, texture kiến trúc, phối cảnh nội thất chỉ trong vài giây. Tinh chỉnh bằng negative prompt, giữ lại kết quả ưng ý bằng seed, phóng to lên 4x khi cần in." data-en="Describe in text — AI draws for you. Create concept art, architectural textures, interior perspectives in seconds. Fine-tune with negative prompts, keep favorites with seeds, upscale to 4x for print.">Bạn mô tả bằng text — AI vẽ cho bạn. Tạo concept art, texture kiến trúc, phối cảnh nội thất chỉ trong vài giây. Tinh chỉnh bằng negative prompt, giữ lại kết quả ưng ý bằng seed, phóng to lên 4x khi cần in.</p>
+                    <p data-vi="Mô tả bằng text — AI tạo concept art, texture, phối cảnh trong vài giây." data-en="Describe in text — AI creates concept art, textures and perspectives in seconds.">Mô tả bằng text — AI tạo concept art, texture, phối cảnh trong vài giây.</p>
+                    <a class="feature-more" href="#t2i-i2i-spotlight" data-vi="Chi tiết ↓" data-en="Details ↓">Chi tiết ↓</a>
                 </div>
                 <div class="feature-card" data-aos="fade-up">
                     <div class="feature-icon">✨</div>
                     <h3>Image-to-Image</h3>
-                    <p data-vi="Có ảnh render chưa ưng? Đưa vào và nói AI biến đổi — thay style, thêm cây xanh, đổi trời chiều. Nguồn ảnh linh hoạt: chọn file, chụp viewport, hoặc paste từ clipboard." data-en="Have a render that's not quite right? Feed it in and let AI transform — change style, add greenery, swap to sunset sky. Flexible sources: pick a file, capture viewport, or paste from clipboard.">Có ảnh render chưa ưng? Đưa vào và nói AI biến đổi — thay style, thêm cây xanh, đổi trời chiều. Nguồn ảnh linh hoạt: chọn file, chụp viewport, hoặc paste từ clipboard.</p>
+                    <p data-vi="Đưa ảnh render vào, nói AI biến đổi — style, cây xanh, ánh sáng." data-en="Feed a render in and tell AI to transform it — style, greenery, lighting.">Đưa ảnh render vào, nói AI biến đổi — style, cây xanh, ánh sáng.</p>
+                    <a class="feature-more" href="#t2i-i2i-spotlight" data-vi="Chi tiết ↓" data-en="Details ↓">Chi tiết ↓</a>
                 </div>
                 <div class="feature-card" data-aos="fade-up">
                     <div class="feature-icon">🧊</div>
                     <h3>Image-to-3D</h3>
-                    <p data-vi="Khách gửi ảnh tham khảo một chiếc ghế và bắt bạn phải làm giống hệt? Thay vì cặm cụi dựng hình hoặc căng mắt tìm thư viện, hãy đưa ảnh cho AH3 Hub — AI sẽ dựng lại model 3D và đặt thẳng vào scene cho bạn." data-en="Client sends a reference photo of a chair and wants it exactly? Instead of painstakingly modeling or squinting through asset libraries, just feed the photo to AH3 Hub — AI rebuilds the 3D model and places it right into your scene.">Khách gửi ảnh tham khảo một chiếc ghế và bắt bạn phải làm giống hệt? Thay vì cặm cụi dựng hình hoặc căng mắt tìm thư viện, hãy đưa ảnh cho AH3 Hub — AI sẽ dựng lại model 3D và đặt thẳng vào scene cho bạn.</p>
+                    <p data-vi="Từ một tấm ảnh tham khảo thành model 3D đặt thẳng vào scene." data-en="From a single reference photo to a 3D model placed right in your scene.">Từ một tấm ảnh tham khảo thành model 3D đặt thẳng vào scene.</p>
+                    <a class="feature-more" href="#i23d-spotlight" data-vi="Chi tiết ↓" data-en="Details ↓">Chi tiết ↓</a>
                 </div>
                 <div class="feature-card" data-aos="fade-up">
                     <div class="feature-icon">🪨</div>
                     <h3>Material Generator</h3>
-                    <p data-vi="Chỉ cần một tấm ảnh chụp bề mặt — gỗ, đá, gạch, bê tông — AI tạo ngay bộ PBR hoàn chỉnh: Normal, Displacement, AO, Roughness. Vật liệu chân thực chưa bao giờ dễ đến vậy." data-en="Just one photo of a surface — wood, stone, brick, concrete — AI instantly generates a full PBR set: Normal, Displacement, AO, Roughness. Realistic materials have never been this easy.">Chỉ cần một tấm ảnh chụp bề mặt — gỗ, đá, gạch, bê tông — AI tạo ngay bộ PBR hoàn chỉnh: Normal, Displacement, AO, Roughness. Vật liệu chân thực chưa bao giờ dễ đến vậy.</p>
+                    <p data-vi="Chụp một bề mặt bất kỳ — nhận trọn bộ PBR gán sẵn cho object." data-en="Photograph any surface — get a full PBR set assigned to your object.">Chụp một bề mặt bất kỳ — nhận trọn bộ PBR gán sẵn cho object.</p>
+                    <a class="feature-more" href="#material-spotlight" data-vi="Chi tiết ↓" data-en="Details ↓">Chi tiết ↓</a>
                 </div>
                 <div class="feature-card highlight" data-aos="fade-up">
                     <div class="feature-icon">🔍</div>
                     <h3>Image-to-Asset</h3>
-                    <p data-vi="Kéo ảnh vào — AI tìm texture, model, HDRI tương tự trong thư viện cá nhân + 15,500 Cosmos assets online. Tìm bằng mắt, merge thẳng vào scene, tự relink texture. Không cần nhớ tên file hay lục từng folder." data-en="Drop an image in — AI finds similar textures, models, HDRI across your personal library + 15,500 Cosmos assets online. Search by sight, merge directly into your scene with auto texture relink. No filenames or folder digging needed.">Kéo ảnh vào — AI tìm texture, model, HDRI tương tự trong thư viện cá nhân + 15,500 Cosmos assets online. Tìm bằng mắt, merge thẳng vào scene, tự relink texture. Không cần nhớ tên file hay lục từng folder.</p>
+                    <p data-vi="Tìm texture, model, HDRI bằng hình ảnh — thư viện của bạn + 15.500 Cosmos." data-en="Find textures, models and HDRIs by image — your library + 15,500 Cosmos assets.">Tìm texture, model, HDRI bằng hình ảnh — thư viện của bạn + 15.500 Cosmos.</p>
+                    <a class="feature-more" href="#i2a-spotlight" data-vi="Chi tiết ↓" data-en="Details ↓">Chi tiết ↓</a>
                 </div>
             </div>
         </div>
@@ -442,6 +429,26 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- SYSTEM REQUIREMENTS -->
+    <!-- STATS -->
+    <div class="stats-section">
+        <div class="stat-card" data-aos="fade-up">
+            <div class="stat-number">200K+</div>
+            <div class="stat-label" data-vi="Dòng code" data-en="Lines of code">Dòng code</div>
+        </div>
+        <div class="stat-card" data-aos="fade-up">
+            <div class="stat-number">2000+</div>
+            <div class="stat-label" data-vi="Giờ phát triển" data-en="Hours of development">Giờ phát triển</div>
+        </div>
+        <div class="stat-card" data-aos="fade-up">
+            <div class="stat-number">10+</div>
+            <div class="stat-label" data-vi="Công nghệ AI tích hợp" data-en="AI technologies integrated">Công nghệ AI tích hợp</div>
+        </div>
+        <div class="stat-card" data-aos="fade-up">
+            <div class="stat-number">100+</div>
+            <div class="stat-label" data-vi="Bản cập nhật" data-en="Updates released">Bản cập nhật</div>
+        </div>
+    </div>
+
     <section id="system-req">
         <div  style="max-width:900px; margin:0 auto;">
             <div  class="text-center">
@@ -491,15 +498,15 @@ import Footer from '../components/Footer.astro';
     <section id="pricing"  class="bg-surface">
         <div class="pricing-section">
             <div class="section-label">PRICING</div>
-            <h2 class="section-title" data-vi="Bắt đầu miễn phí. Mở khóa khi sẵn sàng." data-en="Start free. Unlock when ready.">Bắt đầu miễn phí. Mở khóa khi sẵn sàng.</h2>
-            <p class="section-desc"  data-vi="Để đảm bảo tài nguyên hệ thống và duy trì chất lượng dịch vụ, AH3 Hub hiện không còn cung cấp phiên bản Free. Mọi tính năng cao cấp đều được tích hợp đầy đủ trong bản Pro." data-en="To guarantee system resources and maintain service quality, AH3 Hub no longer offers a Free version. All premium features are fully integrated into the Pro version." style="margin: 0 auto 0;">Để đảm bảo tài nguyên hệ thống và duy trì chất lượng dịch vụ, AH3 Hub hiện không còn cung cấp phiên bản Free. Mọi tính năng cao cấp đều được tích hợp đầy đủ trong bản Pro.</p>
+            <h2 class="section-title" data-vi="Một gói Pro — đầy đủ mọi thứ." data-en="One Pro plan — everything included.">Một gói Pro — đầy đủ mọi thứ.</h2>
+            <p class="section-desc"  data-vi="Bản Free đang tạm dừng đăng ký để chuẩn bị cho v2.0 (dự kiến tháng 9/2026). Hiện tại: tải v1.8 qua liên hệ với tác giả, hoặc dùng đầy đủ mọi tính năng ngay với gói Pro." data-en="The Free tier is paused while v2.0 is in the works (expected September 2026). For now: get v1.8 by contacting the author, or unlock everything right away with Pro." style="margin: 0 auto 0;">Bản Free đang tạm dừng đăng ký để chuẩn bị cho v2.0 (dự kiến tháng 9/2026). Hiện tại: tải v1.8 qua liên hệ với tác giả, hoặc dùng đầy đủ mọi tính năng ngay với gói Pro.</p>
 
             <div class="pricing-grid">
                 <div class="price-card relative" data-aos="fade-up"  style="opacity: 0.7;">
                     <div class="price-badge free text-primary"  style="background: rgba(77, 182, 172, 0.15); border: 1px solid rgba(77, 182, 172, 0.3);">V2.0 COMING</div>
                     <h3 data-vi="AH3 Hub v2.0" data-en="AH3 Hub v2.0">AH3 Hub v2.0</h3>
                     <div class="price-amount text-primary"  data-vi="Đang nâng cấp..." data-en="Upgrading...">Đang nâng cấp...</div>
-                    <div class="price-period text-primary font-semibold"  data-vi="Dự kiến phát hành: Tháng 9" data-en="Expected Release: September">Dự kiến phát hành: Tháng 9</div>
+                    <div class="price-period text-primary font-semibold"  data-vi="Dự kiến phát hành: Tháng 9/2026" data-en="Expected release: September 2026">Dự kiến phát hành: Tháng 9/2026</div>
                     <ul class="price-features"  style="text-decoration: line-through; opacity: 0.6;">
                         <li data-vi="Text-to-Image — tạo ảnh từ text" data-en="Text-to-Image — generate from text">Text-to-Image — tạo ảnh từ text</li>
                         <li data-vi="Image-to-Image — biến đổi ảnh" data-en="Image-to-Image — transform images">Image-to-Image — biến đổi ảnh</li>
@@ -510,7 +517,7 @@ import Footer from '../components/Footer.astro';
                         <li class="disabled" data-vi="AI-Assist (giới hạn)" data-en="AI-Assist (limited)">AI-Assist (giới hạn)</li>
                         <li class="disabled" data-vi="Model Nano Banana (Google Gemini) mới nhất" data-en="Latest Nano Banana model (Google Gemini)">Model Nano Banana (Google Gemini) mới nhất</li>
                     </ul>
-                    <p data-vi="ℹ️ <strong class='mt-4 text-muted' style='padding:12px 14px; background:rgba(77,182,172,0.08); border-left:2px solid var(--primary); border-radius:4px; font-size:12px; line-height:1.6;'>Đang nâng cấp hệ thống:</strong> Bản Free hiện tạm dừng đăng ký để chuẩn bị cho siêu nâng cấp v2.0 vào tháng 9 với động cơ AI thế hệ mới đột phá và tốc độ xử lý vượt trội. Hãy cùng chờ đợi!" data-en="ℹ️ <strong>System Upgrading:</strong> Free registration is paused to prepare for the massive v2.0 upgrade this September. Featuring a next-gen breakthrough AI engine and ultra-fast speed. Stay tuned!">ℹ️ <strong class='mt-4 text-muted' style='padding:12px 14px; background:rgba(77,182,172,0.08); border-left:2px solid var(--primary); border-radius:4px; font-size:12px; line-height:1.6;'>Đang nâng cấp hệ thống:</strong> Bản Free hiện tạm dừng đăng ký để chuẩn bị cho siêu nâng cấp v2.0 vào tháng 9 với động cơ AI thế hệ mới đột phá và tốc độ xử lý vượt trội. Hãy cùng chờ đợi!</p>
+                    <p data-vi="ℹ️ <strong class='mt-4 text-muted' style='padding:12px 14px; background:rgba(77,182,172,0.08); border-left:2px solid var(--primary); border-radius:4px; font-size:12px; line-height:1.6;'>Đang nâng cấp hệ thống:</strong> Bản Free tạm dừng đăng ký để chuẩn bị cho v2.0 (tháng 9/2026) với engine AI thế hệ mới. Theo dõi Facebook hoặc YouTube để nhận thông báo phát hành." data-en="ℹ️ <strong>System upgrading:</strong> Free registration is paused while v2.0 (September 2026) with a new-generation AI engine is in the works. Follow Facebook or YouTube to be notified at release.">ℹ️ <strong class='mt-4 text-muted' style='padding:12px 14px; background:rgba(77,182,172,0.08); border-left:2px solid var(--primary); border-radius:4px; font-size:12px; line-height:1.6;'>Đang nâng cấp hệ thống:</strong> Bản Free tạm dừng đăng ký để chuẩn bị cho v2.0 (tháng 9/2026) với engine AI thế hệ mới. Theo dõi Facebook hoặc YouTube để nhận thông báo phát hành.</p>
                     <a href="#" class="price-cta free-btn text-primary"  data-vi="Đón chờ v2.0" data-en="Teaser v2.0" style="background: rgba(77,182,172,0.1); border-color: rgba(77,182,172,0.3); cursor: pointer;">Đón chờ v2.0</a>
                 </div>
 
@@ -538,6 +545,8 @@ import Footer from '../components/Footer.astro';
     </section>
 
     <!-- FAQ -->
+    <PurchaseInfo mode="subscription" name="AH3 Hub Pro" price="9.999.999đ/năm" />
+
     <section id="faq">
         <div  style="max-width:1000px; margin:0 auto;">
             <div  class="text-center">
@@ -594,14 +603,14 @@ import Footer from '../components/Footer.astro';
             <div class="cta-box">
                 <div class="section-label">GET STARTED</div>
                 <h2 data-vi="Câu chuyện tiếp theo là của bạn" data-en="The next chapter is yours">Câu chuyện tiếp theo là của bạn</h2>
-                <p data-vi="AH3 Hub miễn phí cho hầu hết tính năng. Cài đặt trong 2 phút và bắt đầu trải nghiệm AI ngay trong 3ds Max. Muốn nhiều hơn? Nâng cấp Pro bất cứ lúc nào." data-en="AH3 Hub is free for most features. Install in 2 minutes and start experiencing AI inside 3ds Max. Want more? Upgrade to Pro anytime.">AH3 Hub miễn phí cho hầu hết tính năng. Cài đặt trong 2 phút và bắt đầu trải nghiệm AI ngay trong 3ds Max. Muốn nhiều hơn? Nâng cấp Pro bất cứ lúc nào.</p>
+                <p data-vi="Cài đặt trong 2 phút. Tải bản v1.8 qua liên hệ với tác giả, hoặc mở khóa toàn bộ tính năng AI với gói Pro — nâng cấp lúc nào cũng được." data-en="Installs in 2 minutes. Get v1.8 by contacting the author, or unlock every AI feature with Pro — upgrade anytime.">Cài đặt trong 2 phút. Tải bản v1.8 qua liên hệ với tác giả, hoặc mở khóa toàn bộ tính năng AI với gói Pro — nâng cấp lúc nào cũng được.</p>
                 <div class="cta-actions" style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-top: 24px;">
                     <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-primary"  data-vi="↓ Liên hệ tải v1.8.x" data-en="↓ Contact to Download v1.8.x" style="font-size:16px; padding:14px 32px; margin: 0;">↓ Liên hệ tải v1.8.x</a>
                     <div class="install-cmd" style="margin: 0;">
                         <span>$</span> <span data-vi="Chạy AH3_Hub_Setup.exe → Chọn phiên bản Max → Done" data-en="Run AH3_Hub_Setup.exe → Select Max version → Done">Chạy AH3_Hub_Setup.exe → Chọn phiên bản Max → Done</span>
                     </div>
                 </div>
-                <p  data-vi="⚠️ Windows cảnh báo? Nhấn More info → Run anyway" data-en="⚠️ Windows warning? Click More info → Run anyway" style="margin-top:12px; font-size:13px; color:var(--text-muted); font-family:'JetBrains Mono', monospace;">⚠️ Windows cảnh báo? Nhấn More info → Run anyway</p>
+                <p  data-vi="⚠️ Windows có thể cảnh báo vì bộ cài chưa đăng ký chứng chỉ ký số — file an toàn, bạn có thể quét virus trước khi chạy. Nhấn More info → Run anyway" data-en="⚠️ Windows may warn because the installer is not code-signed yet — the file is safe, feel free to scan it first. Click More info → Run anyway" style="margin-top:12px; font-size:13px; color:var(--text-muted); font-family:'JetBrains Mono', monospace;">⚠️ Windows có thể cảnh báo vì bộ cài chưa đăng ký chứng chỉ ký số — file an toàn, bạn có thể quét virus trước khi chạy. Nhấn More info → Run anyway</p>
 
                 <div class="req-grid">
                     <span class="req-item" data-vi="3ds Max 2023-2027+" data-en="3ds Max 2023-2027+">3ds Max 2023-2027+</span>
@@ -963,6 +972,11 @@ import Footer from '../components/Footer.astro';
             display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
         }
+        .feature-more {
+            display: inline-block; margin-top: 10px;
+            font-size: 13px; color: var(--primary); text-decoration: none;
+        }
+        .feature-more:hover { text-decoration: underline; }
         .feature-card {
             background: var(--bg-main); border: 1px solid rgba(85,85,85,0.4);
             border-radius: 12px; padding: 32px;
