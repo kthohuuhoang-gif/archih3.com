@@ -385,7 +385,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
     </section>
 
     <!-- MATERIAL SPOTLIGHT -->
-    <section id="material-spotlight"  class="bg-surface">
+    <section id="material-spotlight">
         <div class="spotlight">
             <div class="spotlight-grid">
                 <div class="spotlight-visual"  style="border-radius:12px; overflow:hidden;">
@@ -409,7 +409,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
     </section>
 
     <!-- AUTHOR -->
-    <section id="author">
+    <section id="author" class="bg-surface">
         <div class="about-section">
             <div class="section-label">AUTHOR</div>
             <h2 class="section-title" data-vi="Đằng sau AH3 Hub" data-en="Behind AH3 Hub">Đằng sau AH3 Hub</h2>
@@ -801,24 +801,6 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
 
 <style>
 
-        :root {
-            --bg-dark: #323232;
-            --bg-main: #3c3c3c;
-            --bg-light: #5a5a5a;
-            --bg-surface: #2a2a2a;
-            --bg-page: #1e1e1e;
-            --primary: #4db6ac;
-            --primary-hover: #5ec4ba;
-            --primary-light: #80cbc4;
-            --primary-glow: rgba(77, 182, 172, 0.15);
-            --primary-glow-strong: rgba(77, 182, 172, 0.3);
-            --text: #e0e0e0;
-            --text-secondary: #a0a0a0;
-            --text-muted: #707070;
-            --border: #555555;
-            --destructive: #6a5050;
-            --warning: #b48232;
-        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html {
             scroll-behavior: smooth;
@@ -951,7 +933,7 @@ import PurchaseInfo from '../components/PurchaseInfo.astro';
         }
 
         /* SECTIONS */
-        section { padding: 100px 24px; }
+        section { padding: 80px 24px; }
         .section-label {
             font-family: 'JetBrains Mono', monospace; font-size: 12px;
             color: var(--primary); letter-spacing: 2px;
