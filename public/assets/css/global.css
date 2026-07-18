@@ -1639,12 +1639,44 @@ section { padding: 100px 24px; }
 
 @media (max-width: 768px) {
     .orb { filter: none !important; opacity: 0.15; animation: none !important; }
+    /* On phones the marquee becomes a hand-swipeable snap carousel
+       (display:flex overrides an earlier mobile rule that hides it) */
     .marquee-container {
         display: flex !important;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
         padding-bottom: 10px;
     }
-    .marquee-content { animation: none !important; }
-    .marquee-content > * { scroll-snap-align: start; }
+    .marquee-track { animation: none !important; }
+    .marquee-item { scroll-snap-align: center; }
+    /* the duplicated loop copy is pointless when scrolling by hand */
+    .marquee-item[aria-hidden="true"] { display: none; }
+}
+
+/* =========================================
+   MOBILE UX PACK
+========================================= */
+/* Tactile press feedback on touch devices (visual companion to haptics;
+   iOS has no Vibration API so this is its only feedback channel) */
+@media (hover: none) {
+    .btn-primary:active, .btn-outline:active, .hero-cta-btn:active,
+    .pill-link:active, .product-cta:active, .soon-chip:active,
+    .mobile-fab:active, .lang-toggle button:active {
+        transform: scale(0.95);
+        transition: transform 0.08s ease-out;
+    }
+    .product-card:active, .marquee-item:active .mini-sim-box {
+        transform: scale(0.985);
+        transition: transform 0.12s ease-out;
+    }
+}
+
+/* Small-viewport units: keep the hero stable while the mobile URL bar
+   collapses/expands (vh jumps, svh does not) */
+@supports (min-height: 100svh) {
+    .hero { min-height: 80svh; }
+    @media (max-width: 768px) {
+        .hero { min-height: 62svh; }
+    }
 }

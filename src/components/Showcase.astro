@@ -244,10 +244,14 @@
         var baAfter = document.getElementById('ba-after');
         var baDivider = document.getElementById('ba-divider');
         if (baRange && baAfter && baDivider) {
+            var lastQuarter = 2;
             baRange.addEventListener('input', function () {
                 var v = baRange.value;
                 baAfter.style.clipPath = 'inset(0 0 0 ' + v + '%)';
                 baDivider.style.left = v + '%';
+                // haptic tick each time the divider crosses a quarter mark
+                var q = Math.round(v / 25);
+                if (q !== lastQuarter && window.haptic) { window.haptic(6); lastQuarter = q; }
             });
         }
 
@@ -279,7 +283,12 @@
             }
         }
         if (windRange) {
-            windRange.addEventListener('input', function () { applyWind(parseInt(windRange.value, 10)); });
+            var HAPTIC_BY_LEVEL = [4, 8, 14, 22];
+            windRange.addEventListener('input', function () {
+                var level = parseInt(windRange.value, 10);
+                applyWind(level);
+                if (window.haptic) window.haptic(HAPTIC_BY_LEVEL[level]);
+            });
             applyWind(parseInt(windRange.value, 10));
         }
     });

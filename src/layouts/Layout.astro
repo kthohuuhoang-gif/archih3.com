@@ -43,7 +43,7 @@ const enURL = new URL(Astro.url.pathname === '/' ? '/en/' : `/en${Astro.url.path
     
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="/assets/css/global.css?v=5">
+    <link rel="stylesheet" href="/assets/css/global.css?v=6">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -56,7 +56,24 @@ const enURL = new URL(Astro.url.pathname === '/' ? '/en/' : `/en${Astro.url.path
     <script is:inline src="/assets/js/lang.js?v=3"></script>
     <script is:inline src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script is:inline>
+        // Haptic feedback helper — Android Chrome/Firefox only; iOS Safari has no
+        // Vibration API, so it silently no-ops there (visual :active states cover iOS).
+        window.haptic = function (pattern) {
+            if ('vibrate' in navigator) {
+                try { navigator.vibrate(pattern); } catch (e) { /* ignore */ }
+            }
+        };
+
         document.addEventListener("DOMContentLoaded", function() {
+            // Light tick on tappable elements (touch devices only)
+            if (window.matchMedia('(pointer: coarse)').matches) {
+                document.addEventListener('click', function (e) {
+                    if (e.target.closest('a.btn-primary, a.btn-outline, .hero-cta-btn, .purchase-btn, .product-cta, .pill-link, .mobile-fab, .lang-toggle button')) {
+                        window.haptic(8);
+                    }
+                }, { passive: true });
+            }
+
             if (typeof AOS !== 'undefined') {
                 AOS.init({
                     duration: 800,
