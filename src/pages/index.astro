@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Showcase from '../components/Showcase.astro';
 import Footer from '../components/Footer.astro';
+import AssetTiles from '../components/AssetTiles.astro';
 ---
 <Layout title="AH3 Tools — Plugin AI & Tự động hóa 3ds Max | ArchiH3" description="Bộ công cụ plugin 3ds Max chuyên nghiệp: AH3 Hub, Magic Material, Magic Merger, Magic Tree và hơn thế. Phát triển bởi HKD Dịch vụ Kiến Trúc ArchiH3." ogImage="/og/og-default.jpg">
 <Fragment slot="head">
@@ -336,6 +337,31 @@ import Footer from '../components/Footer.astro';
         <!-- FLAGSHIP PRODUCTS -->
         <h2 class="products-group-title" data-vi="Công cụ <span class='teal'>đột phá</span> cho 3ds Max" data-en="<span class='teal'>Breakthrough</span> tools for 3ds Max">Công cụ <span class='teal'>đột phá</span> cho 3ds Max</h2>
         <p class="products-group-subtitle" data-vi="Tự động hóa. Tối ưu hóa. Tập trung sáng tạo." data-en="Automate. Optimize. Focus on creativity.">Tự động hóa. Tối ưu hóa. Tập trung sáng tạo.</p>
+
+        <!-- FLAGSHIP: Magic Search -->
+        <div class="flagship-hero" data-aos="fade-up">
+            <div class="fh-left">
+                <div class="fh-titlerow">
+                    <div class="fh-icon"><img src="/magicsearch_icon_48.png" alt="Magic Search"></div>
+                    <h3>Magic Search</h3>
+                    <span class="fh-badge" data-vi="CHỦ LỰC" data-en="FLAGSHIP">CHỦ LỰC</span>
+                    <span class="fh-free" data-vi="APP MIỄN PHÍ" data-en="FREE APP">APP MIỄN PHÍ</span>
+                </div>
+                <p class="fh-desc" data-vi="Tìm asset 3D bằng hình ảnh trong chính thư viện của bạn — chạy 100% offline, rồi một click đưa thẳng vào 3ds Max." data-en="Find 3D assets by image inside your own library — 100% offline, then send them into 3ds Max in one click.">Tìm asset 3D bằng hình ảnh trong chính thư viện của bạn — chạy 100% offline, rồi một click đưa thẳng vào 3ds Max.</p>
+                <div class="fh-cta">
+                    <a href="/search" class="btn-primary" data-vi="Khám phá →" data-en="Explore →">Khám phá →</a>
+                    <a href="https://github.com/kthohuuhoang-gif/magic-search-update/releases/download/app-latest-update/MagicSearchApp_v1.0.0_PerUser.zip" class="btn-outline" data-vi="Tải app miễn phí" data-en="Download free app">Tải app miễn phí</a>
+                </div>
+            </div>
+            <div class="fh-right" aria-hidden="true">
+                <div class="fh-mock">
+                    <div class="fh-mockbar"><span class="fh-mchip"></span><span class="fh-mline"></span><span class="fh-mgo">↵</span></div>
+                    <AssetTiles mini />
+                    <div class="fh-send" data-vi="→ 3ds Max" data-en="→ 3ds Max">→ 3ds Max</div>
+                </div>
+            </div>
+        </div>
+
         <div class="products-grid">
             
             <div class="product-card" data-aos="fade-up" style="--glow-color: rgba(77, 182, 172, 0.15); --hover-border: var(--primary);">
@@ -393,7 +419,6 @@ import Footer from '../components/Footer.astro';
         <div style="text-align: center; padding: 32px 24px 8px;">
             <h3 class="pill-subtitle" data-vi="Sắp ra mắt" data-en="Coming Soon">Sắp ra mắt</h3>
             <div class="pill-row" style="gap: 8px;">
-                <span class="soon-chip">🔍 Magic Search</span>
                 <a href="/camera" class="soon-chip" style="text-decoration: none;">📷 Magic Camera</a>
                 <span class="soon-chip" style="background: rgba(41, 182, 246, 0.08); border-color: rgba(41, 182, 246, 0.15); color: #29b6f6;">🌧️ Magic Rain</span>
                 <span class="soon-chip">🌊 Magic Ripple</span>

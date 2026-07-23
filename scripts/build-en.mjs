@@ -18,6 +18,10 @@ const PAGES = {
     title: 'AH3 Hub — AI Super-app for 3ds Max | ArchiH3',
     desc: 'Integrated AI hub for 3ds Max: Text-to-Image, Image-to-3D, Material Generator, Quick Render and 10+ AI technologies.',
   },
+  'search': {
+    title: 'Magic Search — Find 3D Assets by Image for archviz | ArchiH3',
+    desc: 'Find models, textures and HDRIs in your own library by image, 100% offline, sent straight into 3ds Max in one click. Free app download.',
+  },
   'material': {
     title: 'Magic Material — 1-Click PBR Map Generator | ArchiH3',
     desc: 'Generate Normal, Roughness, AO and Displacement maps from a diffuse image. 100% offline, V-Ray & Corona compatible.',

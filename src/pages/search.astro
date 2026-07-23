@@ -1,0 +1,411 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import PurchaseInfo from '../components/PurchaseInfo.astro';
+import AssetTiles from '../components/AssetTiles.astro';
+
+// Single source of truth for the free App installer (GitHub release, fixed tag).
+const APP_INSTALLER = 'https://github.com/kthohuuhoang-gif/magic-search-update/releases/download/app-latest-update/MagicSearchApp_v1.0.0_PerUser.zip';
+---
+<Layout
+  title="Magic Search — Tìm asset 3D bằng ảnh cho archviz | ArchiH3"
+  description="Tìm model, texture, HDRI trong thư viện của bạn bằng hình ảnh, chạy 100% offline, đưa asset thẳng vào 3ds Max chỉ 1 click. Tải app miễn phí."
+  ogImage="/og/og-default.jpg">
+<Fragment slot="head">
+    <script type="application/ld+json" is:inline>{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Magic Search", "operatingSystem": "Windows", "applicationCategory": "DesignApplication", "applicationSubCategory": "3ds Max Plugin", "description": "Tìm model, texture, HDRI trong thư viện của bạn bằng hình ảnh, chạy 100% offline, đưa asset thẳng vào 3ds Max chỉ 1 click.", "url": "https://archih3.com/search/", "image": "https://archih3.com/og/og-default.jpg", "author": {"@type": "Person", "name": "Hồ Hữu Hoàng", "jobTitle": "Architect · 3ds Max Plugin Developer"}, "publisher": {"@type": "Organization", "name": "HKD Dịch vụ Kiến Trúc ArchiH3", "url": "https://archih3.com"}, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "VND", "availability": "https://schema.org/InStock", "url": "https://archih3.com/search/#pricing"}}</script>
+</Fragment>
+
+    <div class="bg-glow"></div>
+    <div class="bg-grid"></div>
+
+    <!-- NAV -->
+    <Navbar />
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge" data-vi="TÌM ASSET BẰNG HÌNH ẢNH · 100% OFFLINE" data-en="SEARCH ASSETS BY IMAGE · 100% OFFLINE">TÌM ASSET BẰNG HÌNH ẢNH · 100% OFFLINE</div>
+        <h1 data-vi="Nhớ mặt, không nhớ tên.<br><span class='teal'>Tìm asset bằng ảnh.</span>" data-en="Find it by sight,<br><span class='teal'>not by filename.</span>">Nhớ mặt, không nhớ tên.<br><span class='teal'>Tìm asset bằng ảnh.</span></h1>
+        <p class="hero-sub" data-vi="Magic Search quét toàn bộ thư viện model, texture, HDRI của bạn ngay trên máy. Thả một tấm ảnh tham chiếu, tìm ra đúng thứ cần trong giây lát — rồi một click đưa thẳng vào 3ds Max." data-en="Magic Search scans your entire model, texture and HDRI library right on your machine. Drop a reference image, find the right asset in seconds — then send it straight into 3ds Max with one click.">Magic Search quét toàn bộ thư viện model, texture, HDRI của bạn ngay trên máy. Thả một tấm ảnh tham chiếu, tìm ra đúng thứ cần trong giây lát — rồi một click đưa thẳng vào 3ds Max.</p>
+        <div class="hero-cta">
+            <a href={APP_INSTALLER} class="btn-primary" data-vi="Tải miễn phí" data-en="Download free">Tải miễn phí</a>
+            <a href="#pricing" class="btn-outline" data-vi="Mở khóa Pro — 200k" data-en="Unlock Pro — 200k">Mở khóa Pro — 200k</a>
+        </div>
+        <p class="hero-note" data-vi="Windows · Miễn phí · không cần tài khoản" data-en="Windows · Free · no account needed">Windows · Miễn phí · không cần tài khoản</p>
+    </section>
+
+    <!-- SHOWCASE (interface mockup) -->
+    <section id="showcase" class="bg-surface">
+        <div class="section-label" data-vi="GIAO DIỆN" data-en="INTERFACE">GIAO DIỆN</div>
+        <h2 class="section-title" data-vi="Thấy là tìm ra" data-en="See it, find it">Thấy là tìm ra</h2>
+        <p class="section-desc" data-vi="Thả một tấm ảnh, Magic Search xếp hạng những asset giống nhất trong thư viện của bạn theo độ tương đồng — chọn và đưa thẳng vào 3ds Max." data-en="Drop an image and Magic Search ranks the closest matches from your library by similarity — pick one and send it straight into 3ds Max.">Thả một tấm ảnh, Magic Search xếp hạng những asset giống nhất trong thư viện của bạn theo độ tương đồng — chọn và đưa thẳng vào 3ds Max.</p>
+
+        <div class="ms-mock" data-aos="fade-up">
+            <div class="ms-head">
+                <span class="ms-arch">ARCHIH3</span>
+                <span class="ms-title">Magic <b>Search</b></span>
+                <span class="ms-dots"><i></i><i></i><i></i></span>
+            </div>
+            <div class="ms-body">
+                <div class="ms-query">
+                    <div class="ms-qthumb"></div>
+                    <div class="ms-qmeta">
+                        <div class="ms-qlabel" data-vi="Ảnh tham chiếu" data-en="Reference image">Ảnh tham chiếu</div>
+                        <div class="ms-pills">
+                            <span class="on">Model</span><span>HDRI</span><span>Texture</span><span>Material</span>
+                        </div>
+                    </div>
+                    <div class="ms-qbtn" data-vi="Tìm" data-en="Search">Tìm</div>
+                </div>
+                <AssetTiles />
+                <div class="ms-action">
+                    <span class="ms-selname" data-vi="Đã chọn: armchair_oak_01.max" data-en="Selected: armchair_oak_01.max">Đã chọn: armchair_oak_01.max</span>
+                    <span class="ms-send">
+                        <span data-vi="Đưa vào 3ds Max" data-en="Send to 3ds Max">Đưa vào 3ds Max</span>
+                        <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="bg-surface">
+        <div class="section-label" data-vi="TÍNH NĂNG" data-en="KEY FEATURES">TÍNH NĂNG</div>
+        <h2 class="section-title" data-vi="Tìm bằng mắt, không phải bằng trí nhớ" data-en="Search by sight, not by memory">Tìm bằng mắt, không phải bằng trí nhớ</h2>
+        <p class="section-desc" data-vi="Đừng lục tung ổ cứng để nhớ xem cái ghế đó nằm ở thư mục nào. Thả một tấm ảnh, Magic Search tìm ra ngay — rồi đưa thẳng vào cảnh của bạn." data-en="Stop digging through folders to remember where that chair lives. Drop an image and Magic Search finds it instantly — then drops it into your scene.">Đừng lục tung ổ cứng để nhớ xem cái ghế đó nằm ở thư mục nào. Thả một tấm ảnh, Magic Search tìm ra ngay — rồi đưa thẳng vào cảnh của bạn.</p>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🖼️</div>
+                <h3 data-vi="Tìm bằng hình ảnh" data-en="Search by image">Tìm bằng hình ảnh</h3>
+                <p data-vi="Kéo, dán hoặc chọn một tấm ảnh tham chiếu. Magic Search tìm theo hình dáng, chất liệu và bố cục — bạn không cần nhớ tên file. Lọc nhanh theo Loại, Nguồn và độ giống." data-en="Drag, paste or pick a reference image. Magic Search matches by shape, material and composition — no filename to remember. Filter quickly by Type, Source and similarity."></p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🗂️</div>
+                <h3 data-vi="Quét thư viện của chính bạn" data-en="Index your own library">Quét thư viện của chính bạn</h3>
+                <p data-vi="Model .max, texture/PBR, HDRI và vật liệu — Magic Search lập chỉ mục và tìm ngay trong kho asset của riêng bạn, ngay trên máy, không phụ thuộc thư viện bên thứ ba." data-en="Models (.max), textures/PBR, HDRIs and materials — Magic Search indexes and searches your own asset library, locally, with no third-party library required."></p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3 data-vi="Chạy 100% offline" data-en="100% offline">Chạy 100% offline</h3>
+                <p data-vi="Mọi xử lý diễn ra ngay trên máy tính của bạn. Không upload ảnh lên cloud, không lộ dự án, không phụ thuộc internet để tìm kiếm." data-en="Everything runs on your own machine. No images uploaded to the cloud, no project leaks, no internet needed to search."></p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 data-vi="Một click vào 3ds Max <span class='pro-tag'>PRO</span>" data-en="One click into 3ds Max <span class='pro-tag'>PRO</span>">Một click vào 3ds Max <span class="pro-tag">PRO</span></h3>
+                <p data-vi="Chọn một kết quả để tạo vật liệu (Corona &amp; V-Ray), merge model/scene .max, hoặc gán HDRI &amp; Bitmap — đưa asset thẳng vào cảnh mà không rời khỏi app." data-en="Pick a result to build a material (Corona &amp; V-Ray), merge a model/scene (.max), or attach HDRI &amp; Bitmap — assets land in your scene without leaving the app."></p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧭</div>
+                <h3 data-vi="Sơ đồ &amp; quản lý thư viện" data-en="System Map &amp; Library Manager">Sơ đồ &amp; quản lý thư viện</h3>
+                <p data-vi="Nhìn tổng quan toàn bộ kho asset, thêm hoặc gỡ thư mục, và theo dõi trạng thái lập chỉ mục một cách trực quan." data-en="See your whole asset library at a glance, add or remove folders, and track indexing status visually."></p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3 data-vi="Tự cập nhật" data-en="Automatic updates">Tự cập nhật</h3>
+                <p data-vi="Nhận bản mới ngay trong app — không phải tải lại thủ công. Cài một lần, luôn có phiên bản mới nhất." data-en="Get new versions right inside the app — no manual re-downloads. Install once, always stay current."></p>
+            </div>
+        </div>
+
+        <p class="features-foot" data-vi="Nay hỗ trợ 3ds Max 2023–2027 · SketchUp &amp; Blender sắp có" data-en="3ds Max 2023–2027 now · SketchUp &amp; Blender coming"></p>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="workflow">
+        <div class="section-label" data-vi="CÁCH DÙNG" data-en="HOW IT WORKS">CÁCH DÙNG</div>
+        <h2 class="section-title" data-vi="Ba bước, vài giây" data-en="Three steps, a few seconds">Ba bước, vài giây</h2>
+        <p class="section-desc" data-vi="Từ tấm ảnh trong đầu tới asset trong cảnh — không cần nhớ đường dẫn." data-en="From an image in your head to an asset in your scene — no file path to remember.">Từ tấm ảnh trong đầu tới asset trong cảnh — không cần nhớ đường dẫn.</p>
+
+        <div class="steps-grid">
+            <div class="step-item">
+                <div class="step-num">01</div>
+                <h3 data-vi="Thả ảnh tham chiếu" data-en="Drop a reference">Thả ảnh tham chiếu</h3>
+                <p data-vi="Kéo, dán hoặc chọn một tấm ảnh của thứ bạn đang cần tìm." data-en="Drag, paste or pick an image of what you are looking for."></p>
+            </div>
+            <div class="step-item">
+                <div class="step-num">02</div>
+                <h3 data-vi="Chọn kết quả" data-en="Pick a result">Chọn kết quả</h3>
+                <p data-vi="Duyệt các asset giống nhất từ thư viện của bạn; lọc theo Loại, Nguồn, độ giống." data-en="Browse the closest matches from your library; filter by Type, Source, similarity."></p>
+            </div>
+            <div class="step-item">
+                <div class="step-num">03</div>
+                <h3 data-vi="Đưa vào phần mềm 3D" data-en="Send to your 3D app">Đưa vào phần mềm 3D</h3>
+                <p data-vi="Một click tạo vật liệu, merge model/scene hoặc gán HDRI/Bitmap vào 3ds Max (Pro)." data-en="One click to build a material, merge a model/scene or attach HDRI/Bitmap into 3ds Max (Pro)."></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing" class="bg-surface">
+        <div class="section-label" data-vi="BẢNG GIÁ MỞ BÁN" data-en="LAUNCH PRICE">BẢNG GIÁ MỞ BÁN</div>
+        <h2 class="section-title" data-vi="Search miễn phí. Trả phí để đưa vào Max." data-en="Search for free. Pay to send into Max.">Search miễn phí. Trả phí để đưa vào Max.</h2>
+        <p class="section-desc" data-vi="Tải app và tìm asset thoải mái không mất phí. Chỉ trả phí một lần để mở khóa việc đưa asset thẳng vào 3ds Max." data-en="Download the app and search freely, at no cost. Pay once to unlock sending assets straight into 3ds Max.">Tải app và tìm asset thoải mái không mất phí. Chỉ trả phí một lần để mở khóa việc đưa asset thẳng vào 3ds Max.</p>
+
+        <div class="pricing-section">
+            <div class="pricing-grid">
+                <!-- Free App -->
+                <div class="price-card">
+                    <div>
+                        <div class="price-badge" data-vi="MIỄN PHÍ" data-en="FREE">MIỄN PHÍ</div>
+                        <h3 data-vi="Magic Search App" data-en="Magic Search App">Magic Search App</h3>
+                        <div class="price-amount" data-vi="0đ <span>/ mãi mãi</span>" data-en="Free <span>/ forever</span>">0đ <span>/ mãi mãi</span></div>
+                        <div class="price-period" data-vi="Tải về và dùng ngay" data-en="Download and use right away" style="color: var(--text-secondary);">Tải về và dùng ngay</div>
+
+                        <ul class="price-features">
+                            <li data-vi="Tìm asset bằng ảnh — không giới hạn số lần" data-en="Search assets by image — unlimited"></li>
+                            <li data-vi="Lập chỉ mục tới 9.999 asset trong thư viện của bạn" data-en="Index up to 9,999 assets from your library"></li>
+                            <li data-vi="Chạy 100% offline, không cần tài khoản" data-en="Runs 100% offline, no account needed"></li>
+                            <li data-vi="Sơ đồ &amp; Quản lý thư viện, tự cập nhật" data-en="System Map &amp; Library Manager, auto-updates"></li>
+                        </ul>
+                    </div>
+                    <a href={APP_INSTALLER} class="btn-primary block w-full text-center" data-vi="Tải miễn phí" data-en="Download free" style="margin-top:20px;">Tải miễn phí</a>
+                </div>
+
+                <!-- Pro -->
+                <div class="price-card featured">
+                    <div>
+                        <div class="price-badge" data-vi="FLASH −90% · 3 NGÀY ĐẦU" data-en="FLASH −90% · FIRST 3 DAYS">FLASH −90% · 3 NGÀY ĐẦU</div>
+                        <h3 data-vi="Magic Search Pro" data-en="Magic Search Pro">Magic Search Pro</h3>
+                        <div class="price-amount" data-vi="<del>1.999.000đ</del> 200.000đ <span>/ vĩnh viễn</span>" data-en="<del>1,999,000₫</del> 200,000₫ <span>/ lifetime</span>"><del>1.999.000đ</del> 200.000đ <span>/ vĩnh viễn</span></div>
+                        <div class="price-period" data-vi="Giá mở bán chỉ trong 3 ngày đầu — sau đó 1.999.000đ vĩnh viễn" data-en="Launch price for the first 3 days only — then 1,999,000₫ lifetime">Giá mở bán chỉ trong 3 ngày đầu — sau đó 1.999.000đ vĩnh viễn</div>
+
+                        <ul class="price-features">
+                            <li data-vi="<b>Lập chỉ mục KHÔNG giới hạn</b> (bỏ trần 9.999)" data-en="<b>Unlimited indexing</b> (removes the 9,999 cap)"></li>
+                            <li data-vi="Một click đưa asset vào 3ds Max" data-en="One-click send assets into 3ds Max"></li>
+                            <li data-vi="Tạo vật liệu Corona &amp; V-Ray · merge model/scene .max" data-en="Build Corona &amp; V-Ray materials · merge model/scene (.max)"></li>
+                            <li data-vi="Gán HDRI (environment &amp; dome) và Bitmap" data-en="Attach HDRI (environment &amp; dome) and Bitmap"></li>
+                            <li data-vi="License vĩnh viễn theo máy · cập nhật trọn đời" data-en="Perpetual per-machine license · lifetime updates"></li>
+                        </ul>
+                    </div>
+                    <div class="cta-wrapper relative block w-full" style="margin-top: 20px;">
+                        <a href="https://www.facebook.com/ktshuuhoang" target="_blank" rel="noopener" class="btn-primary block w-full text-center" data-vi="Liên hệ mua Pro" data-en="Contact to buy Pro">Liên hệ mua Pro</a>
+                        <span class="bp-dot tl"></span><span class="bp-dot tr"></span><span class="bp-dot bl"></span><span class="bp-dot br"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PURCHASE & LICENSE (shared) -->
+    <PurchaseInfo name="Magic Search Pro" price="200.000đ" mode="lifetime" />
+
+    <!-- FAQ -->
+    <section id="faq" style="background: var(--bg-dark);">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title" data-vi="Câu hỏi thường gặp" data-en="Frequently Asked Questions">Câu hỏi thường gặp</h2>
+        <p class="section-desc" data-vi="Những điều cần biết trước khi tải và mua Magic Search." data-en="What to know before you download and buy Magic Search.">Những điều cần biết trước khi tải và mua Magic Search.</p>
+
+        <div class="faq-section">
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 data-vi="Bản miễn phí làm được gì, bản Pro thêm gì?" data-en="What does the free app do, and what does Pro add?"></h3>
+                    <p data-vi="Bản miễn phí giúp bạn tìm asset bằng ảnh không giới hạn số lần và lập chỉ mục tới 9.999 asset. Bản Pro bỏ trần chỉ mục (không giới hạn) và mở khóa việc đưa asset thẳng vào 3ds Max: tạo vật liệu, merge model/scene, gán HDRI và Bitmap." data-en="The free app lets you search assets by image without limits and index up to 9,999 assets. Pro removes the index cap (unlimited) and unlocks sending assets straight into 3ds Max: building materials, merging models/scenes, attaching HDRI and Bitmap."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Có cần kết nối internet không?" data-en="Do I need an internet connection?"></h3>
+                    <p data-vi="Không. Việc tìm kiếm chạy hoàn toàn trên máy của bạn — không upload ảnh, không lộ dự án. App chỉ kết nối mạng để kiểm tra cập nhật khi khởi động." data-en="No. Search runs entirely on your machine — no image uploads, no project leaks. The app only goes online to check for updates at startup."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="Hỗ trợ phần mềm và phiên bản nào?" data-en="Which software and versions are supported?"></h3>
+                    <p data-vi="App tìm kiếm chạy độc lập trên Windows. Tính năng đưa asset vào scene hỗ trợ 3ds Max 2023–2027 (V-Ray &amp; Corona). Hỗ trợ SketchUp và Blender đang được phát triển." data-en="The search app runs standalone on Windows. Sending assets into your scene supports 3ds Max 2023–2027 (V-Ray &amp; Corona). SketchUp and Blender support is in development."></p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-vi="License hoạt động thế nào?" data-en="How does licensing work?"></h3>
+                    <p data-vi="License Pro là vĩnh viễn, khóa theo máy (HWID) — không thuê bao, không hết hạn. Mua một lần, dùng mãi mãi và cập nhật miễn phí trọn đời trên máy đó." data-en="The Pro license is perpetual and bound to your machine (HWID) — no subscription, no expiry. Buy once, use forever with lifetime free updates on that machine."></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <Footer />
+
+    <!-- MOBILE NAV DROPDOWN (lang toggle handled globally by lang.js) -->
+    <script is:inline>
+        document.addEventListener('DOMContentLoaded', () => {
+            const trigger = document.querySelector('.dropdown-trigger');
+            if (trigger) {
+                trigger.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        const wrapper = trigger.closest('.nav-dropdown-wrapper');
+                        if (wrapper) wrapper.classList.toggle('open');
+                    }
+                });
+            }
+        });
+    </script>
+</Layout>
+
+<style>
+    /* Page-specific bits not covered by global.css */
+    .hero-note {
+        margin-top: 18px; font-size: 13px; color: var(--text-muted);
+        font-family: 'JetBrains Mono', monospace; letter-spacing: 0.3px;
+    }
+    .pro-tag {
+        font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+        color: var(--primary); background: var(--primary-glow);
+        border: 1px solid rgba(77,182,172,0.3); border-radius: 6px;
+        padding: 1px 6px; margin-left: 6px; vertical-align: middle; letter-spacing: 0.5px;
+    }
+    .features-foot {
+        text-align: center; margin-top: 36px; font-size: 13px; color: var(--text-secondary);
+        font-family: 'JetBrains Mono', monospace;
+    }
+    .features-foot::before { content: '↗ '; color: var(--primary); }
+
+    /* SHOWCASE MOCKUP */
+    .ms-mock {
+        max-width: 860px; margin: 8px auto 0; border-radius: 14px; overflow: hidden;
+        background: #0e0e0e; border: 1px solid rgba(77,182,172,0.25);
+        box-shadow: 0 24px 70px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,0,0,0.4);
+    }
+    .ms-head {
+        display: flex; align-items: center; gap: 12px; padding: 14px 20px;
+        background: linear-gradient(135deg,#242424,#191919); border-bottom: 1px solid var(--border);
+    }
+    .ms-head .ms-arch { font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:800; letter-spacing:3px; color:var(--primary); }
+    .ms-head .ms-title { font-size:18px; font-weight:300; }
+    .ms-head .ms-title b { font-weight:700; }
+    .ms-head .ms-dots { margin-left:auto; display:flex; gap:6px; }
+    .ms-head .ms-dots i { width:10px; height:10px; border-radius:50%; background:#3a3a3a; }
+    .ms-body { padding: 20px; }
+    .ms-query {
+        display:flex; align-items:center; gap:14px; padding:12px; border-radius:10px;
+        background:rgba(255,255,255,0.02); border:var(--border-dash); margin-bottom:16px;
+    }
+    .ms-qthumb {
+        width:54px; height:54px; border-radius:8px; flex-shrink:0; border:1px solid #444;
+        background:
+            radial-gradient(circle at 35% 30%, #d9c3a5, transparent 45%),
+            linear-gradient(135deg,#7a5b3a,#3a2b1a);
+    }
+    .ms-qmeta { flex:1; min-width:0; text-align:left; }
+    .ms-qlabel { font-size:12px; color:var(--text-secondary); margin-bottom:8px; }
+    .ms-pills { display:flex; gap:6px; flex-wrap:wrap; }
+    .ms-pills span {
+        font-size:11px; padding:3px 10px; border-radius:12px; color:var(--text-secondary);
+        background:var(--bg-surface); border:var(--border-dash);
+    }
+    .ms-pills span.on { color:var(--primary); border-color:rgba(77,182,172,0.4); background:var(--primary-glow); }
+    .ms-qbtn {
+        flex-shrink:0; padding:9px 20px; border-radius:8px; font-size:13px; font-weight:600;
+        color:#10312d; background:var(--primary);
+    }
+    .ms-results { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .ms-cell {
+        position:relative; border-radius:10px; overflow:hidden; border:2px solid transparent;
+        background:var(--bg-surface); transition:transform .15s;
+    }
+    .ms-cell:hover { transform:translateY(-2px); }
+    .ms-cell.sel { border-color:var(--primary); box-shadow:0 0 0 1px var(--primary), 0 8px 24px rgba(77,182,172,0.15); }
+    .ms-sw { height:96px; position:relative; }
+    .ms-sw::after { content:''; position:absolute; inset:0; pointer-events:none;
+        box-shadow: inset 0 0 26px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.08); }
+    .ms-sw.sw1 { background: radial-gradient(circle at 38% 28%, #e3c79c, transparent 55%), linear-gradient(135deg,#7d5a34,#2e2013); }
+    .ms-sw.sw2 { background: radial-gradient(circle at 50% 38%, #9fb6d6, transparent 55%), linear-gradient(135deg,#3f5a78,#1b2430); }
+    .ms-sw.sw3 { background: radial-gradient(circle at 42% 32%, #9ccf7e, transparent 55%), linear-gradient(135deg,#3e6b3a,#16260f); }
+    .ms-sw.sw4 { background: radial-gradient(circle at 46% 30%, #ede2cf, transparent 58%), linear-gradient(135deg,#8a7d63,#2f2a1e); }
+    .ms-sw.sw5 { background: linear-gradient(180deg,#8fd2e8 0%,#6fb6d6 45%,#c9a878 46%,#8a6a44 100%); }
+    .ms-sw.sw6 { background: radial-gradient(circle at 44% 30%, #f0b48a, transparent 55%), linear-gradient(135deg,#a8542f,#3a1c10); }
+    .ms-mock { animation: msFloat 5.5s ease-in-out infinite; }
+    @keyframes msFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    .ms-cell.sel { animation: msPulse 2.4s ease-in-out infinite; }
+    @keyframes msPulse {
+        0%,100% { box-shadow: 0 0 0 1px var(--primary), 0 8px 24px rgba(77,182,172,0.12); }
+        50%     { box-shadow: 0 0 0 1px var(--primary), 0 8px 30px rgba(77,182,172,0.35); }
+    }
+    @media (prefers-reduced-motion: reduce) { .ms-mock, .ms-cell.sel { animation: none; } }
+    .ms-match {
+        position:absolute; top:6px; right:6px; font-family:'JetBrains Mono',monospace; font-size:10px;
+        font-weight:700; color:#10312d; background:var(--primary); padding:1px 6px; border-radius:5px;
+    }
+    .ms-cell.sel .ms-match { box-shadow:0 0 10px rgba(77,182,172,0.6); }
+    .ms-cap {
+        display:block; font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--text-secondary);
+        padding:6px 8px; text-align:left; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .ms-action {
+        display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+        margin-top:16px; padding-top:16px; border-top:1px solid var(--border);
+    }
+    .ms-selname { font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--text-secondary); }
+    .ms-send {
+        position:relative; padding:11px 24px; border-radius:8px; font-size:14px; font-weight:700;
+        color:#10312d; background:linear-gradient(135deg,var(--primary),var(--primary-hover));
+        box-shadow:0 4px 18px rgba(77,182,172,0.25);
+    }
+    @media (max-width:600px) {
+        .ms-results { grid-template-columns:repeat(2,1fr); }
+        .ms-query { flex-wrap:wrap; }
+        .ms-action { justify-content:center; }
+    }
+
+    /* PRICING (match other product pages: dashed border + blueprint dots) */
+    .pricing-section { max-width: 900px; margin: 0 auto; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+    .price-card {
+        background: var(--bg-main); border: var(--border-dash) !important;
+        border-radius: 12px !important; padding: 48px 32px;
+        text-align: center; position: relative;
+        display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .price-card.featured {
+        border-color: var(--primary) !important;
+        background: linear-gradient(135deg, var(--bg-main), rgba(77, 182, 172, 0.05));
+    }
+    .price-badge {
+        display: inline-block; font-family: 'JetBrains Mono', monospace;
+        font-size: 11px; padding: 4px 12px; border-radius: 12px;
+        margin-bottom: 20px; letter-spacing: 0.5px;
+        background: var(--primary-glow); color: var(--primary); font-weight: 600;
+    }
+    .price-card h3 { font-size: 24px; font-weight: 600; margin-bottom: 16px; }
+    .price-amount {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 36px; font-weight: 600; color: var(--primary);
+        margin-bottom: 4px; display: flex; align-items: center; gap: 10px;
+        justify-content: center; flex-wrap: wrap;
+    }
+    .price-amount del { font-size: 18px; color: var(--text-secondary); font-weight: 400; }
+    .price-amount span { font-size: 14px; font-weight: 400; color: var(--text-secondary); }
+    .price-period { font-size: 13px; color: var(--warning); margin-bottom: 32px; font-weight: 600; }
+    .price-features { list-style: none; text-align: left; max-width: 350px; margin: 0 auto 32px; padding: 0; }
+    .price-features li {
+        padding: 8px 0; font-size: 15px; color: var(--text-secondary);
+        display: flex; align-items: flex-start; gap: 10px;
+    }
+    .price-features li::before { content: '✓'; color: var(--primary); font-weight: 600; flex-shrink: 0; }
+    @media (max-width: 768px) {
+        .pricing-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+        .pricing-section { padding: 0 8px; }
+        .price-card { padding: 28px 16px; }
+        .price-amount { font-size: 22px; gap: 6px; }
+        .price-card h3 { font-size: 18px; }
+    }
+
+    /* STEPS */
+    .steps-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 32px; max-width: 900px; margin: 0 auto;
+    }
+    .step-item { text-align: center; position: relative; }
+    .step-num {
+        font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 700;
+        color: var(--primary); margin-bottom: 12px; opacity: 0.8;
+    }
+    .step-item h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+    .step-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; }
+
+    /* FAQ */
+    .faq-section { max-width: 800px; margin: 0 auto; }
+    .faq-grid { display: flex; flex-direction: column; gap: 16px; }
+    .faq-item {
+        background: var(--bg-main); border: 1px dashed rgba(255,255,255,0.15) !important;
+        border-radius: 8px; padding: 24px;
+    }
+    .faq-item h3 { font-size: 16px; font-weight: 600; color: var(--primary); margin-bottom: 8px; }
+    .faq-item p { font-size: 14px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+</style>

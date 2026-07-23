@@ -1,0 +1,92 @@
+---
+// AssetTiles.astro — flat "search result" tiles that mirror the real Magic
+// Search app UI (light product thumbnail + % badge top-left + LOCAL badge
+// top-right + filename). Reused by the homepage hero mockup and /search
+// showcase. `mini` = compact (no captions) for the small homepage card.
+export interface Props { mini?: boolean; }
+const { mini = false } = Astro.props;
+
+// One flat tower-speaker illustration on a light "studio" background,
+// matching the audio assets shown in the app demo.
+function speaker(cab: string, drv: string, opts: { pair?: boolean; wood?: boolean } = {}) {
+  const bg =
+    '<rect width="120" height="90" fill="#efedea"/>' +
+    '<rect width="120" height="90" fill="#ffffff" opacity="0.35"/>' +
+    '<ellipse cx="60" cy="83" rx="40" ry="4" fill="#000000" opacity="0.10"/>';
+  const one = (cx: number, w: number) => {
+    const x = cx - w / 2, top = 16, h = 62;
+    let d = `<rect x="${x}" y="${top}" width="${w}" height="${h}" rx="3" fill="${cab}"/>`;
+    d += `<rect x="${x}" y="${top}" width="${w}" height="${h}" rx="3" fill="url(#g)" opacity="0.0"/>`;
+    d += `<rect x="${cx - 4}" y="${top + h}" width="8" height="4" fill="${cab}"/>`;
+    const cys = [top + 12, top + 30, top + 46, top + 62 - 6];
+    cys.forEach((cy, i) => {
+      const r = i === 0 ? 2.6 : (i === 3 ? 5.6 : 4.4);
+      d += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${drv}"/>`;
+      d += `<circle cx="${cx}" cy="${cy}" r="${r * 0.55}" fill="#6a6a6a"/>`;
+      d += `<circle cx="${cx - r * 0.28}" cy="${cy - r * 0.28}" r="${r * 0.18}" fill="#cfcfcf" opacity="0.8"/>`;
+    });
+    return d;
+  };
+  const body = opts.pair ? one(45, 22) + one(78, 22) : one(60, 26);
+  return `<svg viewBox="0 0 120 90" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">${bg}${body}</svg>`;
+}
+
+const tiles = [
+  { m: '98%', cap: '12070938.zip', sel: true, svg: speaker('#232323', '#101010', { pair: true }) },
+  { m: '95%', cap: '10001593.zip', svg: speaker('#2c2c2c', '#141414') },
+  { m: '92%', cap: '12069019.zip', svg: speaker('#6b4a2c', '#2a1c10', { wood: true }) },
+  { m: '90%', cap: '11824508.zip', svg: speaker('#d7d7d3', '#333333') },
+  { m: '88%', cap: '11820693.zip', svg: speaker('#1b1b1b', '#0b0b0b', { pair: true }) },
+  { m: '85%', cap: '12016916.rar', svg: speaker('#3a3f45', '#15181c') },
+];
+---
+<div class={`at-grid${mini ? ' mini' : ''}`}>
+  {tiles.map((t) => (
+    <div class={`at-tile${t.sel ? ' sel' : ''}`}>
+      <div class="at-art" set:html={t.svg}></div>
+      <span class="at-match">{t.m}</span>
+      <span class="at-src">LOCAL</span>
+      {!mini && <span class="at-cap">{t.cap}</span>}
+    </div>
+  ))}
+</div>
+
+<style>
+    .at-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .at-grid.mini { gap: 7px; }
+    .at-tile {
+        position: relative; border-radius: 10px; overflow: hidden;
+        border: 2px solid transparent; background: #2a2a2a; transition: transform 0.15s;
+    }
+    .at-grid.mini .at-tile { border-radius: 7px; }
+    .at-tile:hover { transform: translateY(-2px); }
+    .at-tile.sel {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 1px var(--primary), 0 8px 24px rgba(77,182,172,0.15);
+        animation: atPulse 2.4s ease-in-out infinite;
+    }
+    .at-art { aspect-ratio: 4 / 3; position: relative; }
+    .at-art :global(svg) { width: 100%; height: 100%; display: block; }
+    .at-match {
+        position: absolute; top: 6px; left: 6px; font-family: 'JetBrains Mono', monospace;
+        font-size: 10px; font-weight: 700; color: #fff; background: rgba(0,0,0,0.62);
+        padding: 1px 6px; border-radius: 5px;
+    }
+    .at-src {
+        position: absolute; top: 6px; right: 6px; font-family: 'JetBrains Mono', monospace;
+        font-size: 9px; font-weight: 700; letter-spacing: 0.5px; color: #10312d;
+        background: var(--primary); padding: 1px 6px; border-radius: 5px;
+    }
+    .at-grid.mini .at-match { top: 4px; left: 4px; font-size: 8.5px; padding: 0 4px; border-radius: 3px; }
+    .at-grid.mini .at-src { top: 4px; right: 4px; font-size: 7.5px; padding: 0 4px; border-radius: 3px; }
+    .at-cap {
+        display: block; font-family: 'JetBrains Mono', monospace; font-size: 10.5px;
+        color: var(--text-secondary); padding: 6px 8px; text-align: left; background: var(--bg-surface);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    @keyframes atPulse {
+        0%,100% { box-shadow: 0 0 0 1px var(--primary), 0 8px 24px rgba(77,182,172,0.12); }
+        50%     { box-shadow: 0 0 0 1px var(--primary), 0 8px 30px rgba(77,182,172,0.35); }
+    }
+    @media (prefers-reduced-motion: reduce) { .at-tile.sel { animation: none; } }
+</style>

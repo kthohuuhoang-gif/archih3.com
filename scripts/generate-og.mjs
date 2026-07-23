@@ -14,6 +14,7 @@ mkdirSync(OUT, { recursive: true });
 const PRODUCTS = [
   { slug: 'default',  name: 'AH3 Tools',      tag: 'Plugin AI & Tự động hóa cho 3ds Max', badge: 'ARCHIH3.COM', shot: 'i23d.jpg', icon: 'logo.png' },
   { slug: 'hub',      name: 'AH3 Hub',        tag: 'Siêu ứng dụng AI cho 3ds Max', badge: 'AI SUPER-APP', shot: 'demo quick render.jpg', icon: 'ArchiH3-Icon_40.png' },
+  { slug: 'search',   name: 'Magic Search',   tag: 'Tìm asset 3D bằng hình ảnh · 100% Offline', badge: 'VISUAL SEARCH', shot: null, icon: 'magicsearch_icon_48.png' },
   { slug: 'material', name: 'Magic Material', tag: 'Tạo trọn bộ map PBR 1-Click · 100% Offline', badge: 'PBR GENERATOR', shot: 'interface_magicmaterial.png', icon: 'magicmat_icon_48.png' },
   { slug: 'merger',   name: 'Magic Merger',   tag: 'Import hàng loạt & Smart Relink texture', badge: 'BATCH IMPORT', shot: 'interface_magicmerger.png', icon: 'magicmerger_icon_48.png' },
   { slug: 'tree',     name: 'Magic Tree',     tag: 'Mô phỏng gió vật lý cho cây cỏ', badge: 'WIND SIMULATOR', shot: 'interface_magictree.png', icon: 'magictree_icon_48.png' },
